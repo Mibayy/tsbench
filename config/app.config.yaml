@@ -1,0 +1,13 @@
+app:
+  name: tsbench
+  version: 0.1.0
+features:
+  billing: true
+  exports: true
+  audit: true
+pagination:
+  default: 20
+  max: 100
+timeouts:
+  db: 5000
+  http: 30000

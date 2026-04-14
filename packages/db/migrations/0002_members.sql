@@ -1,0 +1,2 @@
+-- Migration 0002_members
+CREATE TABLE IF NOT EXISTS members (id SERIAL PRIMARY KEY, name TEXT NOT NULL);

@@ -1,0 +1,6 @@
+"""Caller 6 of hub_util."""
+from packages.utils.targeted import hub_util
+
+def do_it_6(payload: dict) -> dict:
+    """Invoke hub_util."""
+    return hub_util(payload)

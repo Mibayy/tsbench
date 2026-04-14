@@ -1,0 +1,2 @@
+-- Migration 0001_init
+CREATE TABLE IF NOT EXISTS init (id SERIAL PRIMARY KEY, name TEXT NOT NULL);

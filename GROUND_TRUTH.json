@@ -1,0 +1,771 @@
+{
+  "seed": 42,
+  "generator_version": "0.1.0",
+  "summary": {
+    "files_generated": 290,
+    "loc_total": 19146,
+    "artifacts_count": 50
+  },
+  "artifacts": [
+    {
+      "id": "AMBIG-001",
+      "category": "ambiguous_symbol",
+      "symbol": "create_user",
+      "locations": [
+        {
+          "file": "apps/api/ambig/mod1.py",
+          "signature": "create_user(email: str, role: str)"
+        },
+        {
+          "file": "apps/api/ambig/mod2.py",
+          "signature": "create_user(tenant_id: int, email: str)"
+        }
+      ],
+      "description": "Symbol 'create_user' defined in two modules with different signatures",
+      "expected_answer": {
+        "symbol": "create_user",
+        "definitions": 2
+      }
+    },
+    {
+      "id": "AMBIG-002",
+      "category": "ambiguous_symbol",
+      "symbol": "process_event",
+      "locations": [
+        {
+          "file": "apps/api/ambig/mod1.py",
+          "signature": "process_event(event: dict)"
+        },
+        {
+          "file": "apps/api/ambig/mod2.py",
+          "signature": "process_event(kind: str, payload: dict)"
+        }
+      ],
+      "description": "Symbol 'process_event' defined in two modules with different signatures",
+      "expected_answer": {
+        "symbol": "process_event",
+        "definitions": 2
+      }
+    },
+    {
+      "id": "BREAK-001",
+      "category": "breaking_change",
+      "file": "apps/api/services/billing.py",
+      "kind": "rename_function",
+      "before": "compute_invoice",
+      "after": "calculate_invoice",
+      "description": "Rename compute_invoice -> calculate_invoice"
+    },
+    {
+      "id": "BREAK-002",
+      "category": "breaking_change",
+      "file": "apps/api/services/auth.py",
+      "kind": "signature_change",
+      "symbol": "authenticate_user",
+      "before": "authenticate_user(payload: dict, user_id: int = 0)",
+      "after": "authenticate_user(credentials: dict)",
+      "description": "Drop user_id param, rename payload->credentials"
+    },
+    {
+      "id": "BREAK-003",
+      "category": "breaking_change",
+      "file": "apps/api/services/members.py",
+      "kind": "remove_function",
+      "symbol": "bulk_import_members",
+      "description": "Remove bulk_import_members \u2014 consumers must migrate"
+    },
+    {
+      "id": "BREAK-004",
+      "category": "breaking_change",
+      "file": "packages/shared-types/members.ts",
+      "kind": "type_change",
+      "before": "MembersStatus = 'active' | 'pending' | 'archived'",
+      "after": "MembersStatus = 'active' | 'archived'",
+      "description": "Remove 'pending' from MembersStatus union"
+    },
+    {
+      "id": "BREAK-005",
+      "category": "breaking_change",
+      "file": "apps/api/routers/webhooks.py",
+      "kind": "route_removed",
+      "before": "DELETE /api/webhooks/{id}",
+      "description": "Remove DELETE route"
+    },
+    {
+      "id": "BREAK-006",
+      "category": "breaking_change",
+      "file": "apps/api/utils/pagination.py",
+      "kind": "default_change",
+      "before": "page_size default 20",
+      "after": "page_size default 50",
+      "description": "Change default page size from 20 to 50"
+    },
+    {
+      "id": "BUG-001",
+      "category": "planted_bug",
+      "file": "apps/api/utils/buggy_pagination.py",
+      "symbol": "buggy_paginate",
+      "description": "Off-by-one in end index: returns 11 items instead of 10",
+      "expected_answer": {
+        "file": "apps/api/utils/buggy_pagination.py",
+        "symbol": "buggy_paginate",
+        "bug_line_hint": "end = start + page_size + 1"
+      }
+    },
+    {
+      "id": "BUG-002",
+      "category": "planted_bug",
+      "file": "apps/api/utils/buggy_auth.py",
+      "symbol": "buggy_verify_password",
+      "description": "Returns True when credentials are empty",
+      "expected_answer": {
+        "file": "apps/api/utils/buggy_auth.py",
+        "symbol": "buggy_verify_password",
+        "bug_line_hint": "return True"
+      }
+    },
+    {
+      "id": "CALLER-001",
+      "category": "callers",
+      "target_symbol": "lonely_util",
+      "target_file": "packages/utils/targeted.py",
+      "target_line": 3,
+      "caller_count": 1,
+      "caller_files": [
+        "apps/api/callers/caller_lonely_util_00.py"
+      ],
+      "description": "Symbol lonely_util has exactly 1 caller(s)",
+      "expected_answer": {
+        "symbol": "lonely_util",
+        "count": 1,
+        "files": [
+          "apps/api/callers/caller_lonely_util_00.py"
+        ]
+      }
+    },
+    {
+      "id": "CALLER-002",
+      "category": "callers",
+      "target_symbol": "small_util",
+      "target_file": "packages/utils/targeted.py",
+      "target_line": 7,
+      "caller_count": 3,
+      "caller_files": [
+        "apps/api/callers/caller_small_util_00.py",
+        "apps/api/callers/caller_small_util_01.py",
+        "apps/api/callers/caller_small_util_02.py"
+      ],
+      "description": "Symbol small_util has exactly 3 caller(s)",
+      "expected_answer": {
+        "symbol": "small_util",
+        "count": 3,
+        "files": [
+          "apps/api/callers/caller_small_util_00.py",
+          "apps/api/callers/caller_small_util_01.py",
+          "apps/api/callers/caller_small_util_02.py"
+        ]
+      }
+    },
+    {
+      "id": "CALLER-003",
+      "category": "callers",
+      "target_symbol": "medium_util",
+      "target_file": "packages/utils/targeted.py",
+      "target_line": 11,
+      "caller_count": 8,
+      "caller_files": [
+        "apps/api/callers/caller_medium_util_00.py",
+        "apps/api/callers/caller_medium_util_01.py",
+        "apps/api/callers/caller_medium_util_02.py",
+        "apps/api/callers/caller_medium_util_03.py",
+        "apps/api/callers/caller_medium_util_04.py",
+        "apps/api/callers/caller_medium_util_05.py",
+        "apps/api/callers/caller_medium_util_06.py",
+        "apps/api/callers/caller_medium_util_07.py"
+      ],
+      "description": "Symbol medium_util has exactly 8 caller(s)",
+      "expected_answer": {
+        "symbol": "medium_util",
+        "count": 8,
+        "files": [
+          "apps/api/callers/caller_medium_util_00.py",
+          "apps/api/callers/caller_medium_util_01.py",
+          "apps/api/callers/caller_medium_util_02.py",
+          "apps/api/callers/caller_medium_util_03.py",
+          "apps/api/callers/caller_medium_util_04.py",
+          "apps/api/callers/caller_medium_util_05.py",
+          "apps/api/callers/caller_medium_util_06.py",
+          "apps/api/callers/caller_medium_util_07.py"
+        ]
+      }
+    },
+    {
+      "id": "CALLER-004",
+      "category": "callers",
+      "target_symbol": "hub_util",
+      "target_file": "packages/utils/targeted.py",
+      "target_line": 15,
+      "caller_count": 20,
+      "caller_files": [
+        "apps/api/callers/caller_hub_util_00.py",
+        "apps/api/callers/caller_hub_util_01.py",
+        "apps/api/callers/caller_hub_util_02.py",
+        "apps/api/callers/caller_hub_util_03.py",
+        "apps/api/callers/caller_hub_util_04.py",
+        "apps/api/callers/caller_hub_util_05.py",
+        "apps/api/callers/caller_hub_util_06.py",
+        "apps/api/callers/caller_hub_util_07.py",
+        "apps/api/callers/caller_hub_util_08.py",
+        "apps/api/callers/caller_hub_util_09.py",
+        "apps/api/callers/caller_hub_util_10.py",
+        "apps/api/callers/caller_hub_util_11.py",
+        "apps/api/callers/caller_hub_util_12.py",
+        "apps/api/callers/caller_hub_util_13.py",
+        "apps/api/callers/caller_hub_util_14.py",
+        "apps/api/callers/caller_hub_util_15.py",
+        "apps/api/callers/caller_hub_util_16.py",
+        "apps/api/callers/caller_hub_util_17.py",
+        "apps/api/callers/caller_hub_util_18.py",
+        "apps/api/callers/caller_hub_util_19.py"
+      ],
+      "description": "Symbol hub_util has exactly 20 caller(s)",
+      "expected_answer": {
+        "symbol": "hub_util",
+        "count": 20,
+        "files": [
+          "apps/api/callers/caller_hub_util_00.py",
+          "apps/api/callers/caller_hub_util_01.py",
+          "apps/api/callers/caller_hub_util_02.py",
+          "apps/api/callers/caller_hub_util_03.py",
+          "apps/api/callers/caller_hub_util_04.py",
+          "apps/api/callers/caller_hub_util_05.py",
+          "apps/api/callers/caller_hub_util_06.py",
+          "apps/api/callers/caller_hub_util_07.py",
+          "apps/api/callers/caller_hub_util_08.py",
+          "apps/api/callers/caller_hub_util_09.py",
+          "apps/api/callers/caller_hub_util_10.py",
+          "apps/api/callers/caller_hub_util_11.py",
+          "apps/api/callers/caller_hub_util_12.py",
+          "apps/api/callers/caller_hub_util_13.py",
+          "apps/api/callers/caller_hub_util_14.py",
+          "apps/api/callers/caller_hub_util_15.py",
+          "apps/api/callers/caller_hub_util_16.py",
+          "apps/api/callers/caller_hub_util_17.py",
+          "apps/api/callers/caller_hub_util_18.py",
+          "apps/api/callers/caller_hub_util_19.py"
+        ]
+      }
+    },
+    {
+      "id": "CHAIN-001",
+      "category": "call_chain",
+      "file": "apps/api/chains/alpha.py",
+      "chain": [
+        "alpha_entry",
+        "alpha_middle",
+        "alpha_inner",
+        "alpha_leaf"
+      ],
+      "description": "Call chain: alpha_entry -> alpha_middle -> alpha_inner -> alpha_leaf",
+      "expected_answer": {
+        "chain": [
+          "alpha_entry",
+          "alpha_middle",
+          "alpha_inner",
+          "alpha_leaf"
+        ],
+        "file": "apps/api/chains/alpha.py"
+      }
+    },
+    {
+      "id": "CHAIN-002",
+      "category": "call_chain",
+      "file": "apps/api/chains/beta.py",
+      "chain": [
+        "beta_entry",
+        "beta_middle",
+        "beta_inner",
+        "beta_leaf"
+      ],
+      "description": "Call chain: beta_entry -> beta_middle -> beta_inner -> beta_leaf",
+      "expected_answer": {
+        "chain": [
+          "beta_entry",
+          "beta_middle",
+          "beta_inner",
+          "beta_leaf"
+        ],
+        "file": "apps/api/chains/beta.py"
+      }
+    },
+    {
+      "id": "CHAIN-003",
+      "category": "call_chain",
+      "file": "apps/api/chains/gamma.py",
+      "chain": [
+        "gamma_entry",
+        "gamma_middle",
+        "gamma_inner",
+        "gamma_leaf"
+      ],
+      "description": "Call chain: gamma_entry -> gamma_middle -> gamma_inner -> gamma_leaf",
+      "expected_answer": {
+        "chain": [
+          "gamma_entry",
+          "gamma_middle",
+          "gamma_inner",
+          "gamma_leaf"
+        ],
+        "file": "apps/api/chains/gamma.py"
+      }
+    },
+    {
+      "id": "CYCLE-001",
+      "category": "circular_dependency",
+      "files": [
+        "apps/api/cycles/mod_a.py",
+        "apps/api/cycles/mod_b.py"
+      ],
+      "description": "Import cycle between mod_a and mod_b",
+      "expected_answer": {
+        "cycle": [
+          "apps/api/cycles/mod_a.py",
+          "apps/api/cycles/mod_b.py"
+        ]
+      }
+    },
+    {
+      "id": "CYCLE-002",
+      "category": "circular_dependency",
+      "files": [
+        "apps/api/cycles/mod_x.py",
+        "apps/api/cycles/mod_y.py",
+        "apps/api/cycles/mod_z.py"
+      ],
+      "description": "3-node import cycle X \u2192 Y \u2192 Z \u2192 X",
+      "expected_answer": {
+        "cycle": [
+          "apps/api/cycles/mod_x.py",
+          "apps/api/cycles/mod_y.py",
+          "apps/api/cycles/mod_z.py"
+        ]
+      }
+    },
+    {
+      "id": "DEAD-001",
+      "category": "dead_code",
+      "file": "apps/api/utils/legacy_helpers.py",
+      "symbol": "calculate_legacy_discount",
+      "line": 7,
+      "description": "Exported function never called: calculate_legacy_discount",
+      "expected_answer": {
+        "file": "apps/api/utils/legacy_helpers.py",
+        "symbol": "calculate_legacy_discount"
+      }
+    },
+    {
+      "id": "DEAD-002",
+      "category": "dead_code",
+      "file": "apps/api/utils/legacy_helpers.py",
+      "symbol": "compute_legacy_tax",
+      "line": 12,
+      "description": "Exported function never called: compute_legacy_tax",
+      "expected_answer": {
+        "file": "apps/api/utils/legacy_helpers.py",
+        "symbol": "compute_legacy_tax"
+      }
+    },
+    {
+      "id": "DEAD-003",
+      "category": "dead_code",
+      "file": "apps/api/utils/legacy_helpers.py",
+      "symbol": "format_legacy_invoice_id",
+      "line": 17,
+      "description": "Exported function never called: format_legacy_invoice_id",
+      "expected_answer": {
+        "file": "apps/api/utils/legacy_helpers.py",
+        "symbol": "format_legacy_invoice_id"
+      }
+    },
+    {
+      "id": "DEAD-004",
+      "category": "dead_code",
+      "file": "apps/api/utils/obsolete.py",
+      "symbol": "migrate_v1_session",
+      "line": 7,
+      "description": "Exported function never called: migrate_v1_session",
+      "expected_answer": {
+        "file": "apps/api/utils/obsolete.py",
+        "symbol": "migrate_v1_session"
+      }
+    },
+    {
+      "id": "DEAD-005",
+      "category": "dead_code",
+      "file": "apps/api/utils/obsolete.py",
+      "symbol": "deprecated_webhook_signer",
+      "line": 12,
+      "description": "Exported function never called: deprecated_webhook_signer",
+      "expected_answer": {
+        "file": "apps/api/utils/obsolete.py",
+        "symbol": "deprecated_webhook_signer"
+      }
+    },
+    {
+      "id": "DEAD-006",
+      "category": "dead_code",
+      "file": "apps/api/utils/obsolete.py",
+      "symbol": "old_csv_exporter",
+      "line": 17,
+      "description": "Exported function never called: old_csv_exporter",
+      "expected_answer": {
+        "file": "apps/api/utils/obsolete.py",
+        "symbol": "old_csv_exporter"
+      }
+    },
+    {
+      "id": "DEAD-007",
+      "category": "dead_code",
+      "file": "packages/utils/orphaned.py",
+      "symbol": "unused_hash_helper",
+      "line": 7,
+      "description": "Exported function never called: unused_hash_helper",
+      "expected_answer": {
+        "file": "packages/utils/orphaned.py",
+        "symbol": "unused_hash_helper"
+      }
+    },
+    {
+      "id": "DEAD-008",
+      "category": "dead_code",
+      "file": "packages/utils/orphaned.py",
+      "symbol": "unused_validator",
+      "line": 12,
+      "description": "Exported function never called: unused_validator",
+      "expected_answer": {
+        "file": "packages/utils/orphaned.py",
+        "symbol": "unused_validator"
+      }
+    },
+    {
+      "id": "DEAD-009",
+      "category": "dead_code",
+      "file": "packages/utils/orphaned.py",
+      "symbol": "unused_formatter",
+      "line": 17,
+      "description": "Exported function never called: unused_formatter",
+      "expected_answer": {
+        "file": "packages/utils/orphaned.py",
+        "symbol": "unused_formatter"
+      }
+    },
+    {
+      "id": "DEAD-010",
+      "category": "dead_code",
+      "file": "apps/worker/tasks/dead_tasks.py",
+      "symbol": "legacy_reaper",
+      "line": 7,
+      "description": "Exported function never called: legacy_reaper",
+      "expected_answer": {
+        "file": "apps/worker/tasks/dead_tasks.py",
+        "symbol": "legacy_reaper"
+      }
+    },
+    {
+      "id": "DEAD-011",
+      "category": "dead_code",
+      "file": "apps/worker/tasks/dead_tasks.py",
+      "symbol": "orphan_cleaner",
+      "line": 12,
+      "description": "Exported function never called: orphan_cleaner",
+      "expected_answer": {
+        "file": "apps/worker/tasks/dead_tasks.py",
+        "symbol": "orphan_cleaner"
+      }
+    },
+    {
+      "id": "DEAD-012",
+      "category": "dead_code",
+      "file": "apps/worker/tasks/dead_tasks.py",
+      "symbol": "stale_cache_purger",
+      "line": 17,
+      "description": "Exported function never called: stale_cache_purger",
+      "expected_answer": {
+        "file": "apps/worker/tasks/dead_tasks.py",
+        "symbol": "stale_cache_purger"
+      }
+    },
+    {
+      "id": "DOCKER-001",
+      "category": "docker_issue",
+      "file": "infra/docker/worker.Dockerfile",
+      "issue": "uses python:latest base image",
+      "description": "Dockerfile uses :latest tag (non-reproducible)",
+      "expected_answer": {
+        "file": "infra/docker/worker.Dockerfile",
+        "issue": "latest_tag"
+      }
+    },
+    {
+      "id": "DOCKER-002",
+      "category": "docker_issue",
+      "file": "infra/docker/web.Dockerfile",
+      "issue": "exposes unnecessary ports 9229 and 6666",
+      "description": "Dockerfile exposes debug/unused ports 9229 and 6666",
+      "expected_answer": {
+        "file": "infra/docker/web.Dockerfile",
+        "ports": [
+          9229,
+          6666
+        ]
+      }
+    },
+    {
+      "id": "DUP-001",
+      "category": "semantic_duplicate",
+      "pair": [
+        {
+          "file": "apps/api/utils/pagination.py",
+          "symbol": "paginate"
+        },
+        {
+          "file": "packages/utils/paginate_copy.py",
+          "symbol": "paginate_also"
+        }
+      ],
+      "description": "Semantic duplicate pair: paginate \u2261 paginate_also",
+      "expected_answer": {
+        "pair": [
+          [
+            "apps/api/utils/pagination.py",
+            "paginate"
+          ],
+          [
+            "packages/utils/paginate_copy.py",
+            "paginate_also"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "DUP-002",
+      "category": "semantic_duplicate",
+      "pair": [
+        {
+          "file": "apps/api/utils/strings.py",
+          "symbol": "slugify"
+        },
+        {
+          "file": "packages/utils/slug_copy.py",
+          "symbol": "to_slug"
+        }
+      ],
+      "description": "Semantic duplicate pair: slugify \u2261 to_slug",
+      "expected_answer": {
+        "pair": [
+          [
+            "apps/api/utils/strings.py",
+            "slugify"
+          ],
+          [
+            "packages/utils/slug_copy.py",
+            "to_slug"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "DUP-003",
+      "category": "semantic_duplicate",
+      "pair": [
+        {
+          "file": "apps/api/utils/dates.py",
+          "symbol": "start_of_day"
+        },
+        {
+          "file": "packages/utils/date_copy.py",
+          "symbol": "day_start"
+        }
+      ],
+      "description": "Semantic duplicate pair: start_of_day \u2261 day_start",
+      "expected_answer": {
+        "pair": [
+          [
+            "apps/api/utils/dates.py",
+            "start_of_day"
+          ],
+          [
+            "packages/utils/date_copy.py",
+            "day_start"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "HOTSPOT-001",
+      "category": "hotspot",
+      "file": "apps/api/services/complex_billing.py",
+      "symbol": "reconcile_payments",
+      "line": 3,
+      "cyclomatic_complexity": 14,
+      "description": "Function with cyclomatic complexity 14",
+      "expected_answer": {
+        "file": "apps/api/services/complex_billing.py",
+        "symbol": "reconcile_payments",
+        "cyclomatic": 14
+      }
+    },
+    {
+      "id": "HOTSPOT-002",
+      "category": "hotspot",
+      "file": "apps/api/services/complex_auth.py",
+      "symbol": "authenticate_multi_factor",
+      "line": 3,
+      "cyclomatic_complexity": 13,
+      "description": "Function with cyclomatic complexity 13",
+      "expected_answer": {
+        "file": "apps/api/services/complex_auth.py",
+        "symbol": "authenticate_multi_factor",
+        "cyclomatic": 13
+      }
+    },
+    {
+      "id": "HOTSPOT-003",
+      "category": "hotspot",
+      "file": "apps/worker/tasks/complex_pipeline.py",
+      "symbol": "orchestrate_nightly_job",
+      "line": 3,
+      "cyclomatic_complexity": 15,
+      "description": "Function with cyclomatic complexity 15",
+      "expected_answer": {
+        "file": "apps/worker/tasks/complex_pipeline.py",
+        "symbol": "orchestrate_nightly_job",
+        "cyclomatic": 15
+      }
+    },
+    {
+      "id": "HOTSPOT-004",
+      "category": "hotspot",
+      "file": "apps/api/utils/complex_validation.py",
+      "symbol": "validate_contract",
+      "line": 3,
+      "cyclomatic_complexity": 12,
+      "description": "Function with cyclomatic complexity 12",
+      "expected_answer": {
+        "file": "apps/api/utils/complex_validation.py",
+        "symbol": "validate_contract",
+        "cyclomatic": 12
+      }
+    },
+    {
+      "id": "HOTSPOT-005",
+      "category": "hotspot",
+      "file": "apps/api/services/complex_routing.py",
+      "symbol": "route_webhook_event",
+      "line": 3,
+      "cyclomatic_complexity": 14,
+      "description": "Function with cyclomatic complexity 14",
+      "expected_answer": {
+        "file": "apps/api/services/complex_routing.py",
+        "symbol": "route_webhook_event",
+        "cyclomatic": 14
+      }
+    },
+    {
+      "id": "ORPHAN-001",
+      "category": "orphan_env",
+      "file": "config/.env.example",
+      "env_var": "LEGACY_SMTP_HOST",
+      "description": "Env var declared in .env.example but never read in code",
+      "expected_answer": {
+        "env_var": "LEGACY_SMTP_HOST"
+      }
+    },
+    {
+      "id": "ORPHAN-002",
+      "category": "orphan_env",
+      "file": "config/.env.example",
+      "env_var": "LEGACY_SMTP_PORT",
+      "description": "Env var declared in .env.example but never read in code",
+      "expected_answer": {
+        "env_var": "LEGACY_SMTP_PORT"
+      }
+    },
+    {
+      "id": "ORPHAN-003",
+      "category": "orphan_env",
+      "file": "config/.env.example",
+      "env_var": "UNUSED_FEATURE_FLAG",
+      "description": "Env var declared in .env.example but never read in code",
+      "expected_answer": {
+        "env_var": "UNUSED_FEATURE_FLAG"
+      }
+    },
+    {
+      "id": "ORPHAN-004",
+      "category": "orphan_env",
+      "file": "config/.env.example",
+      "env_var": "OLD_ANALYTICS_TOKEN",
+      "description": "Env var declared in .env.example but never read in code",
+      "expected_answer": {
+        "env_var": "OLD_ANALYTICS_TOKEN"
+      }
+    },
+    {
+      "id": "SECRET-001",
+      "category": "leaked_secret",
+      "file": "config/.env.staging",
+      "env_var": "STRIPE_API_KEY",
+      "value_prefix": "tsbench_plac",
+      "description": "Fake secret planted in .env.staging: STRIPE_API_KEY",
+      "expected_answer": {
+        "env_var": "STRIPE_API_KEY",
+        "file": "config/.env.staging"
+      }
+    },
+    {
+      "id": "SECRET-002",
+      "category": "leaked_secret",
+      "file": "config/.env.staging",
+      "env_var": "STRIPE_WEBHOOK_SECRET",
+      "value_prefix": "tsbench_plac",
+      "description": "Fake secret planted in .env.staging: STRIPE_WEBHOOK_SECRET",
+      "expected_answer": {
+        "env_var": "STRIPE_WEBHOOK_SECRET",
+        "file": "config/.env.staging"
+      }
+    },
+    {
+      "id": "SECRET-003",
+      "category": "leaked_secret",
+      "file": "config/.env.staging",
+      "env_var": "AWS_SECRET_ACCESS_KEY",
+      "value_prefix": "tsbench_plac",
+      "description": "Fake secret planted in .env.staging: AWS_SECRET_ACCESS_KEY",
+      "expected_answer": {
+        "env_var": "AWS_SECRET_ACCESS_KEY",
+        "file": "config/.env.staging"
+      }
+    },
+    {
+      "id": "UNDECL-001",
+      "category": "undeclared_env",
+      "file": "apps/api/utils/secret_reader.py",
+      "env_var": "SECRET_UNDECLARED_TOKEN",
+      "description": "Env var read in code but not in .env.example",
+      "expected_answer": {
+        "env_var": "SECRET_UNDECLARED_TOKEN"
+      }
+    },
+    {
+      "id": "UNDECL-002",
+      "category": "undeclared_env",
+      "file": "apps/api/utils/secret_reader.py",
+      "env_var": "TSBENCH_HIDDEN_REGION",
+      "description": "Env var read in code but not in .env.example",
+      "expected_answer": {
+        "env_var": "TSBENCH_HIDDEN_REGION"
+      }
+    }
+  ]
+}

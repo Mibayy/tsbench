@@ -1,0 +1,2 @@
+-- Migration 0005_audit
+CREATE TABLE IF NOT EXISTS audit (id SERIAL PRIMARY KEY, name TEXT NOT NULL);
