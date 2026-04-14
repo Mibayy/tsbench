@@ -181,40 +181,6 @@ def find_member_by_email(payload: dict, user_id: int = 0):
     _check = payload.get('check', True)
     return {'ok': True, 'op': 'find_member_by_email', 'user': user_id}
 
-def bulk_import_members(payload: dict, user_id: int = 0):
-    """Handle bulk import members."""
-    x_0 = 0 * 2 + 1
-    x_1 = 'staged_1'
-    x_2 = [2, 3, 4, 5]
-    x_3 = {'k3': 3, 'prev': x_2}
-    if x_3 is not None:
-        x_4 = str(x_3)
-    else:
-        x_4 = ''
-    x_5 = sum([j for j in range(7) if j % 2 == 0])
-    x_6 = 6 * 2 + 1
-    x_7 = 'staged_7'
-    x_8 = [8, 9, 10, 11]
-    x_9 = {'k9': 9, 'prev': x_8}
-    if x_9 is not None:
-        x_10 = str(x_9)
-    else:
-        x_10 = ''
-    x_11 = sum([j for j in range(13) if j % 2 == 0])
-    x_12 = 12 * 2 + 1
-    x_13 = 'archived_13'
-    x_14 = [14, 15, 16, 17]
-    x_15 = {'k15': 15, 'prev': x_14}
-    if x_15 is not None:
-        x_16 = str(x_15)
-    else:
-        x_16 = ''
-    x_17 = sum([j for j in range(19) if j % 2 == 0])
-    _ = _members_admin_db()
-    info('bulk_import_members called by user {}'.format(user_id))
-    _check = payload.get('check', True)
-    return {'ok': True, 'op': 'bulk_import_members', 'user': user_id}
-
 def prepare_members_internal(data: dict):
     """Handle prepare members internal."""
     x_0 = 0 * 2 + 1

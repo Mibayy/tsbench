@@ -32,7 +32,7 @@ def list_billing(request: dict):
     x_11 = sum([j for j in range(13) if j % 2 == 0])
     x_12 = 12 * 2 + 1
     x_13 = 'legacy_13'
-    _ = svc.compute_invoice({}, 0)
+    _ = svc.calculate_invoice({}, 0)
     _body = request.get('body', {})
     _headers = request.get('headers', {})
     return {'status': 'ok', 'handler': 'list_billing'}
@@ -59,7 +59,7 @@ def create_billing(request: dict):
     x_11 = sum([j for j in range(13) if j % 2 == 0])
     x_12 = 12 * 2 + 1
     x_13 = 'cached_13'
-    _ = svc.compute_invoice({}, 0)
+    _ = svc.calculate_invoice({}, 0)
     _body = request.get('body', {})
     _headers = request.get('headers', {})
     return {'status': 'ok', 'handler': 'create_billing'}
@@ -86,7 +86,7 @@ def get_billing(request: dict):
     x_11 = sum([j for j in range(13) if j % 2 == 0])
     x_12 = 12 * 2 + 1
     x_13 = 'verified_13'
-    _ = svc.compute_invoice({}, 0)
+    _ = svc.calculate_invoice({}, 0)
     _body = request.get('body', {})
     _headers = request.get('headers', {})
     return {'status': 'ok', 'handler': 'get_billing'}
@@ -113,7 +113,7 @@ def update_billing(request: dict):
     x_11 = sum([j for j in range(13) if j % 2 == 0])
     x_12 = 12 * 2 + 1
     x_13 = 'archived_13'
-    _ = svc.compute_invoice({}, 0)
+    _ = svc.calculate_invoice({}, 0)
     _body = request.get('body', {})
     _headers = request.get('headers', {})
     return {'status': 'ok', 'handler': 'update_billing'}
@@ -140,7 +140,7 @@ def delete_billing(request: dict):
     x_11 = sum([j for j in range(13) if j % 2 == 0])
     x_12 = 12 * 2 + 1
     x_13 = 'verified_13'
-    _ = svc.compute_invoice({}, 0)
+    _ = svc.calculate_invoice({}, 0)
     _body = request.get('body', {})
     _headers = request.get('headers', {})
     return {'status': 'ok', 'handler': 'delete_billing'}
@@ -167,7 +167,7 @@ def add_member_to_billing(request: dict):
     x_11 = sum([j for j in range(13) if j % 2 == 0])
     x_12 = 12 * 2 + 1
     x_13 = 'archived_13'
-    _ = svc.compute_invoice({}, 0)
+    _ = svc.calculate_invoice({}, 0)
     _body = request.get('body', {})
     _headers = request.get('headers', {})
     return {'status': 'ok', 'handler': 'add_member_to_billing'}

@@ -50,55 +50,87 @@
     {
       "id": "BREAK-001",
       "category": "breaking_change",
-      "file": "apps/api/services/billing.py",
       "kind": "rename_function",
+      "file": "apps/api/services/billing.py",
       "before": "compute_invoice",
       "after": "calculate_invoice",
-      "description": "Rename compute_invoice -> calculate_invoice"
+      "description": "Rename compute_invoice -> calculate_invoice",
+      "expected_answer": {
+        "symbol_renamed": "compute_invoice -> calculate_invoice",
+        "files_touched": [
+          "apps/api/services/billing.py",
+          "apps/api/routers/billing.py"
+        ]
+      }
     },
     {
       "id": "BREAK-002",
       "category": "breaking_change",
-      "file": "apps/api/services/auth.py",
       "kind": "signature_change",
+      "file": "apps/api/services/auth.py",
       "symbol": "authenticate_user",
       "before": "authenticate_user(payload: dict, user_id: int = 0)",
       "after": "authenticate_user(credentials: dict)",
-      "description": "Drop user_id param, rename payload->credentials"
+      "description": "Drop user_id param, rename payload->credentials",
+      "expected_answer": {
+        "symbol": "authenticate_user",
+        "file": "apps/api/services/auth.py",
+        "kind": "signature_change"
+      }
     },
     {
       "id": "BREAK-003",
       "category": "breaking_change",
-      "file": "apps/api/services/members.py",
       "kind": "remove_function",
+      "file": "apps/api/services/members.py",
       "symbol": "bulk_import_members",
-      "description": "Remove bulk_import_members \u2014 consumers must migrate"
+      "description": "Remove bulk_import_members from members service",
+      "expected_answer": {
+        "symbol": "bulk_import_members",
+        "file": "apps/api/services/members.py",
+        "kind": "removed"
+      }
     },
     {
       "id": "BREAK-004",
       "category": "breaking_change",
-      "file": "packages/shared-types/members.ts",
       "kind": "type_change",
+      "file": "packages/shared-types/members.ts",
       "before": "MembersStatus = 'active' | 'pending' | 'archived'",
       "after": "MembersStatus = 'active' | 'archived'",
-      "description": "Remove 'pending' from MembersStatus union"
+      "description": "Remove 'pending' from MembersStatus union",
+      "expected_answer": {
+        "type": "MembersStatus",
+        "file": "packages/shared-types/members.ts",
+        "removed_member": "pending"
+      }
     },
     {
       "id": "BREAK-005",
       "category": "breaking_change",
-      "file": "apps/api/routers/webhooks.py",
       "kind": "route_removed",
+      "file": "apps/api/routers/webhooks.py",
       "before": "DELETE /api/webhooks/{id}",
-      "description": "Remove DELETE route"
+      "description": "Remove DELETE /api/webhooks/{id} route + handler",
+      "expected_answer": {
+        "route": "DELETE /api/webhooks/{id}",
+        "file": "apps/api/routers/webhooks.py"
+      }
     },
     {
       "id": "BREAK-006",
       "category": "breaking_change",
-      "file": "apps/api/utils/pagination.py",
       "kind": "default_change",
-      "before": "page_size default 20",
-      "after": "page_size default 50",
-      "description": "Change default page size from 20 to 50"
+      "file": "apps/api/config.py",
+      "before": "DEFAULT_PAGE_SIZE default \"20\"",
+      "after": "DEFAULT_PAGE_SIZE default \"50\"",
+      "description": "Change DEFAULT_PAGE_SIZE default from 20 to 50",
+      "expected_answer": {
+        "env_var": "DEFAULT_PAGE_SIZE",
+        "file": "apps/api/config.py",
+        "before": "20",
+        "after": "50"
+      }
     },
     {
       "id": "BUG-001",
@@ -767,5 +799,6 @@
         "env_var": "TSBENCH_HIDDEN_REGION"
       }
     }
-  ]
+  ],
+  "version": "v2"
 }

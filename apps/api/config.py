@@ -14,7 +14,7 @@ class Settings:
     allowed_origins: str = os.environ.get("ALLOWED_ORIGINS", "*")
     # UNDECL-001 / UNDECL-002 planted later
     max_page_size: int = int(os.environ.get("MAX_PAGE_SIZE", "100"))
-    default_page_size: int = int(os.environ.get("DEFAULT_PAGE_SIZE", "20"))
+    default_page_size: int = int(os.environ.get("DEFAULT_PAGE_SIZE", "50"))
 
 
 settings = Settings()

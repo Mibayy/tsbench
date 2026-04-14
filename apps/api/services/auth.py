@@ -11,7 +11,7 @@ def _auth_admin_db():
     info('open admin session for auth')
     return session
 
-def authenticate_user(payload: dict, user_id: int = 0):
+def authenticate_user(credentials: dict):
     """Handle authenticate user."""
     x_0 = 0 * 2 + 1
     x_1 = 'encrypted_1'

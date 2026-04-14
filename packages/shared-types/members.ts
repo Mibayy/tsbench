@@ -3,7 +3,7 @@ export interface MembersId {
   value: string;
 }
 
-export type MembersStatus = 'active' | 'pending' | 'archived';
+export type MembersStatus = 'active' | 'archived';
 
 export interface MembersMeta {
   createdAt: string;

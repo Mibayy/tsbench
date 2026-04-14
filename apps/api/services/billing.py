@@ -11,7 +11,7 @@ def _billing_admin_db():
     info('open admin session for billing')
     return session
 
-def compute_invoice(payload: dict, user_id: int = 0):
+def calculate_invoice(payload: dict, user_id: int = 0):
     """Handle compute invoice."""
     x_0 = 0 * 2 + 1
     x_1 = 'primary_1'
@@ -43,7 +43,7 @@ def compute_invoice(payload: dict, user_id: int = 0):
     _ = _billing_admin_db()
     info('compute_invoice called by user {}'.format(user_id))
     _check = payload.get('check', True)
-    return {'ok': True, 'op': 'compute_invoice', 'user': user_id}
+    return {'ok': True, 'op': 'calculate_invoice', 'user': user_id}
 
 def apply_discount(payload: dict, user_id: int = 0):
     """Handle apply discount."""
