@@ -1,0 +1,422 @@
+[
+  {
+    "id": "TASK-001",
+    "slug": "find-function",
+    "category": "localisation",
+    "difficulty": "easy",
+    "ground_truth_refs": [
+      "CALLER-001"
+    ],
+    "scoring": "exact_match"
+  },
+  {
+    "id": "TASK-002",
+    "slug": "find-callers",
+    "category": "localisation",
+    "difficulty": "medium",
+    "ground_truth_refs": [
+      "CALLER-002"
+    ],
+    "scoring": "set_match_strict"
+  },
+  {
+    "id": "TASK-003",
+    "slug": "find-env-usage",
+    "category": "localisation",
+    "difficulty": "easy",
+    "ground_truth_refs": [
+      "UNDECL-001"
+    ],
+    "scoring": "exact_match"
+  },
+  {
+    "id": "TASK-004",
+    "slug": "find-route",
+    "category": "localisation",
+    "difficulty": "easy",
+    "ground_truth_refs": [],
+    "scoring": "exact_match"
+  },
+  {
+    "id": "TASK-005",
+    "slug": "find-schema-field",
+    "category": "localisation",
+    "difficulty": "easy",
+    "ground_truth_refs": [],
+    "scoring": "exact_match"
+  },
+  {
+    "id": "TASK-006",
+    "slug": "find-component-usage",
+    "category": "localisation",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "set_match_loose"
+  },
+  {
+    "id": "TASK-007",
+    "slug": "callers-exhaustive-1",
+    "category": "d\u00e9pendants",
+    "difficulty": "easy",
+    "ground_truth_refs": [
+      "CALLER-001"
+    ],
+    "scoring": "set_match_strict"
+  },
+  {
+    "id": "TASK-008",
+    "slug": "callers-exhaustive-3",
+    "category": "d\u00e9pendants",
+    "difficulty": "easy",
+    "ground_truth_refs": [
+      "CALLER-002"
+    ],
+    "scoring": "set_match_strict"
+  },
+  {
+    "id": "TASK-009",
+    "slug": "callers-exhaustive-8",
+    "category": "d\u00e9pendants",
+    "difficulty": "medium",
+    "ground_truth_refs": [
+      "CALLER-003"
+    ],
+    "scoring": "set_match_strict"
+  },
+  {
+    "id": "TASK-010",
+    "slug": "callers-exhaustive-20",
+    "category": "d\u00e9pendants",
+    "difficulty": "hard",
+    "ground_truth_refs": [
+      "CALLER-004"
+    ],
+    "scoring": "set_match_strict"
+  },
+  {
+    "id": "TASK-011",
+    "slug": "chain-alpha",
+    "category": "call_chain",
+    "difficulty": "medium",
+    "ground_truth_refs": [
+      "CHAIN-001"
+    ],
+    "scoring": "chain_match"
+  },
+  {
+    "id": "TASK-012",
+    "slug": "chain-beta",
+    "category": "call_chain",
+    "difficulty": "medium",
+    "ground_truth_refs": [
+      "CHAIN-002"
+    ],
+    "scoring": "chain_match"
+  },
+  {
+    "id": "TASK-013",
+    "slug": "chain-gamma",
+    "category": "call_chain",
+    "difficulty": "medium",
+    "ground_truth_refs": [
+      "CHAIN-003"
+    ],
+    "scoring": "chain_match"
+  },
+  {
+    "id": "TASK-014",
+    "slug": "breaking-signature",
+    "category": "impact",
+    "difficulty": "hard",
+    "ground_truth_refs": [
+      "CALLER-004"
+    ],
+    "scoring": "impact_set"
+  },
+  {
+    "id": "TASK-015",
+    "slug": "file-impact",
+    "category": "impact",
+    "difficulty": "medium",
+    "ground_truth_refs": [
+      "CYCLE-001"
+    ],
+    "scoring": "set_match_loose"
+  },
+  {
+    "id": "TASK-016",
+    "slug": "test-impact",
+    "category": "impact",
+    "difficulty": "medium",
+    "ground_truth_refs": [
+      "BREAK-001"
+    ],
+    "scoring": "set_match_loose"
+  },
+  {
+    "id": "TASK-017",
+    "slug": "rename-symbol",
+    "category": "edit",
+    "difficulty": "hard",
+    "ground_truth_refs": [
+      "AMBIG-001"
+    ],
+    "scoring": "edit_quality"
+  },
+  {
+    "id": "TASK-018",
+    "slug": "add-field",
+    "category": "edit",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "edit_quality"
+  },
+  {
+    "id": "TASK-019",
+    "slug": "extract-constant",
+    "category": "edit",
+    "difficulty": "medium",
+    "ground_truth_refs": [
+      "BREAK-006"
+    ],
+    "scoring": "edit_quality"
+  },
+  {
+    "id": "TASK-020",
+    "slug": "move-module",
+    "category": "edit",
+    "difficulty": "hard",
+    "ground_truth_refs": [
+      "DUP-002"
+    ],
+    "scoring": "edit_quality"
+  },
+  {
+    "id": "TASK-021",
+    "slug": "diff-summary",
+    "category": "review",
+    "difficulty": "medium",
+    "ground_truth_refs": [
+      "BREAK-001",
+      "BREAK-002",
+      "BREAK-003",
+      "BREAK-004",
+      "BREAK-005",
+      "BREAK-006"
+    ],
+    "scoring": "set_match_strict"
+  },
+  {
+    "id": "TASK-022",
+    "slug": "pr-risk",
+    "category": "review",
+    "difficulty": "hard",
+    "ground_truth_refs": [
+      "BREAK-001",
+      "BREAK-002",
+      "BREAK-003",
+      "BREAK-004",
+      "BREAK-005",
+      "BREAK-006"
+    ],
+    "scoring": "set_match_loose"
+  },
+  {
+    "id": "TASK-023",
+    "slug": "breaking-detection",
+    "category": "review",
+    "difficulty": "medium",
+    "ground_truth_refs": [
+      "BREAK-001",
+      "BREAK-002",
+      "BREAK-003",
+      "BREAK-004",
+      "BREAK-005",
+      "BREAK-006"
+    ],
+    "scoring": "set_match_strict"
+  },
+  {
+    "id": "TASK-024",
+    "slug": "dead-code-audit",
+    "category": "audit",
+    "difficulty": "medium",
+    "ground_truth_refs": [
+      "DEAD-001",
+      "DEAD-002",
+      "DEAD-003",
+      "DEAD-004",
+      "DEAD-005",
+      "DEAD-006",
+      "DEAD-007",
+      "DEAD-008",
+      "DEAD-009",
+      "DEAD-010",
+      "DEAD-011",
+      "DEAD-012"
+    ],
+    "scoring": "set_match_loose"
+  },
+  {
+    "id": "TASK-025",
+    "slug": "hotspot-audit",
+    "category": "audit",
+    "difficulty": "medium",
+    "ground_truth_refs": [
+      "HOTSPOT-001",
+      "HOTSPOT-002",
+      "HOTSPOT-003",
+      "HOTSPOT-004",
+      "HOTSPOT-005"
+    ],
+    "scoring": "set_match_strict"
+  },
+  {
+    "id": "TASK-026",
+    "slug": "cycle-detection",
+    "category": "audit",
+    "difficulty": "medium",
+    "ground_truth_refs": [
+      "CYCLE-001",
+      "CYCLE-002"
+    ],
+    "scoring": "set_match_strict"
+  },
+  {
+    "id": "TASK-027",
+    "slug": "orphan-env",
+    "category": "config",
+    "difficulty": "easy",
+    "ground_truth_refs": [
+      "ORPHAN-001",
+      "ORPHAN-002",
+      "ORPHAN-003",
+      "ORPHAN-004"
+    ],
+    "scoring": "set_match_strict"
+  },
+  {
+    "id": "TASK-028",
+    "slug": "undecl-env",
+    "category": "config",
+    "difficulty": "medium",
+    "ground_truth_refs": [
+      "UNDECL-001",
+      "UNDECL-002"
+    ],
+    "scoring": "set_match_strict"
+  },
+  {
+    "id": "TASK-029",
+    "slug": "secret-detection",
+    "category": "config",
+    "difficulty": "medium",
+    "ground_truth_refs": [
+      "SECRET-001",
+      "SECRET-002",
+      "SECRET-003"
+    ],
+    "scoring": "set_match_strict"
+  },
+  {
+    "id": "TASK-030",
+    "slug": "dockerfile-audit",
+    "category": "infra",
+    "difficulty": "easy",
+    "ground_truth_refs": [
+      "DOCKER-001",
+      "DOCKER-002"
+    ],
+    "scoring": "set_match_strict"
+  },
+  {
+    "id": "TASK-031",
+    "slug": "infra-consistency",
+    "category": "infra",
+    "difficulty": "hard",
+    "ground_truth_refs": [],
+    "scoring": "boolean_with_evidence"
+  },
+  {
+    "id": "TASK-032",
+    "slug": "test-selection-unit",
+    "category": "testing",
+    "difficulty": "easy",
+    "ground_truth_refs": [],
+    "scoring": "set_match_strict"
+  },
+  {
+    "id": "TASK-033",
+    "slug": "test-selection-change",
+    "category": "testing",
+    "difficulty": "medium",
+    "ground_truth_refs": [
+      "CHAIN-001"
+    ],
+    "scoring": "free_form_rubric"
+  },
+  {
+    "id": "TASK-034",
+    "slug": "bug-pagination",
+    "category": "debug",
+    "difficulty": "medium",
+    "ground_truth_refs": [
+      "BUG-001"
+    ],
+    "scoring": "exact_match"
+  },
+  {
+    "id": "TASK-035",
+    "slug": "bug-auth",
+    "category": "debug",
+    "difficulty": "medium",
+    "ground_truth_refs": [
+      "BUG-002"
+    ],
+    "scoring": "exact_match"
+  },
+  {
+    "id": "TASK-036",
+    "slug": "dup-detection",
+    "category": "debug",
+    "difficulty": "hard",
+    "ground_truth_refs": [
+      "DUP-001",
+      "DUP-002",
+      "DUP-003"
+    ],
+    "scoring": "set_match_strict"
+  },
+  {
+    "id": "TASK-037",
+    "slug": "project-overview",
+    "category": "onboarding",
+    "difficulty": "easy",
+    "ground_truth_refs": [],
+    "scoring": "free_form_rubric"
+  },
+  {
+    "id": "TASK-038",
+    "slug": "module-overview",
+    "category": "onboarding",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "free_form_rubric"
+  },
+  {
+    "id": "TASK-039",
+    "slug": "ts-py-type-mapping",
+    "category": "cross-language",
+    "difficulty": "hard",
+    "ground_truth_refs": [],
+    "scoring": "exact_match"
+  },
+  {
+    "id": "TASK-040",
+    "slug": "config-consistency",
+    "category": "cross-language",
+    "difficulty": "hard",
+    "ground_truth_refs": [],
+    "scoring": "boolean_with_evidence"
+  }
+]
