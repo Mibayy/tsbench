@@ -55,7 +55,39 @@ MEMORY — At the start of each task:
   memory_search(query="<relevant keywords>", project="/root/projects/tsbench")
   to retrieve observations from previous sessions.
 At the end of each task, if you discovered useful info:
-  memory_save(content="...", type="convention", title="...", project="/root/projects/tsbench")"""
+  memory_save(content="...", type="convention", title="...", project="/root/projects/tsbench")
+
+## Workflow recipes (follow these exact patterns)
+
+LOCATE A SYMBOL:
+switch_project → find_symbol("name") → stop
+Do not use search_codebase if find_symbol suffices.
+
+READ A SYMBOL:
+switch_project → get_function_source("name") → act
+One call only. No reindex before editing.
+
+EDIT A SYMBOL:
+switch_project → get_function_source → replace_symbol_source → stop
+No reindex between read and edit.
+
+CHECKPOINT WORKFLOW:
+switch_project → create_checkpoint → get_function_source → replace_symbol_source → compare_checkpoint_by_symbol → stop
+
+BREAKING CHANGES:
+switch_project → detect_breaking_changes(ref="v1") → stop
+Do not re-read each modified function after detect_breaking_changes.
+
+DUPLICATES:
+switch_project → find_semantic_duplicates() → stop
+Do not verify each duplicate with get_function_source afterwards.
+
+ORPHAN ENV VARS:
+switch_project → analyze_config(checks=["orphans"]) → stop
+
+AFTER AN EMPTY RESULT:
+If find_symbol returns empty → try search_codebase
+If search_codebase returns empty → use Read/Grep (allowed for non-indexed files: .prisma, .sql, .graphql, .proto)"""
 
 # MCP config for Run B: token-savior only, with tsbench in WORKSPACE_ROOTS
 TS_MCP_CONFIG = {
