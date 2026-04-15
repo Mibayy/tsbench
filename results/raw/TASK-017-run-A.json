@@ -1,0 +1,48 @@
+{
+  "task_id": "TASK-017",
+  "run": "A",
+  "baseline": "plain",
+  "input_tokens": 6,
+  "output_tokens": 560,
+  "cache_creation_input_tokens": 33880,
+  "cache_read_input_tokens": 97101,
+  "total_tokens": 131547,
+  "active_tokens": 34446,
+  "turns_count": 8,
+  "tool_calls_count": 4,
+  "tool_calls_breakdown": {
+    "Read": 1,
+    "Grep": 3
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "Read",
+      "result_chars": 367,
+      "is_error": false
+    },
+    {
+      "tool": "Grep",
+      "result_chars": 55,
+      "is_error": false
+    },
+    {
+      "tool": "Grep",
+      "result_chars": 1103,
+      "is_error": false
+    },
+    {
+      "tool": "Grep",
+      "result_chars": 433,
+      "is_error": false
+    }
+  ],
+  "ts_tool_details": [],
+  "total_context_chars_injected": 1958,
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 21.51,
+  "raw_response": "La fonction dans `apps/api/ambig/mod1.py` est **d\u00e9j\u00e0 renomm\u00e9e** en `create_regular_user` (ligne 4). Il n'y a aucun call site restant qui r\u00e9f\u00e9rence encore `create_user` depuis mod1 \u2014 et `apps/api/ambig/mod2.py:create_user` est bien intacte.\n\nAucune modification n\u00e9cessaire : le renommage a d\u00e9j\u00e0 \u00e9t\u00e9 effectu\u00e9.",
+  "error": null,
+  "score": 2,
+  "max_score": 2,
+  "timestamp": "2026-04-15T13:20:10.096069+00:00"
+}

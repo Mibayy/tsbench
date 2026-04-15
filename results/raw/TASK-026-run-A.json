@@ -1,0 +1,309 @@
+{
+  "task_id": "TASK-026",
+  "run": "A",
+  "baseline": "plain",
+  "input_tokens": 4,
+  "output_tokens": 424,
+  "cache_creation_input_tokens": 33204,
+  "cache_read_input_tokens": 32353,
+  "total_tokens": 65985,
+  "active_tokens": 33632,
+  "turns_count": 59,
+  "tool_calls_count": 56,
+  "tool_calls_breakdown": {
+    "Agent": 1,
+    "Bash": 35,
+    "Read": 20
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "Bash",
+      "result_chars": 930,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 1519,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 7535,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 4298,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 9866,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 401,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 201,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 137,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 137,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 137,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 137,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 367,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 393,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 26,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 25,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 14616,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 11,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 574,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 584,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 598,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 584,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 3376,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 6216,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 8214,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 4479,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 6583,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 708,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 12,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 899,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 885,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 887,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 1527,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 297,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 571,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 940,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 270,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 12,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 3693,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 12,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 1709,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 12,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 4167,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 12861,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 551,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 934,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 12,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 349,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 12,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 271,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 555,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 3596,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 502,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 992,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 2135,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 68,
+      "is_error": false
+    },
+    {
+      "tool": "Agent",
+      "result_chars": 1897,
+      "is_error": false
+    }
+  ],
+  "ts_tool_details": [],
+  "total_context_chars_injected": 113280,
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 132.4,
+  "raw_response": "Oui, il y a **2 d\u00e9pendances circulaires**, toutes en Python dans `apps/api/cycles/` :\n\n1. **Cycle direct (2 n\u0153uds)** :\n   `mod_a` \u2192 `mod_b` \u2192 `mod_a`\n\n2. **Cycle transitif (3 n\u0153uds)** :\n   `mod_x` \u2192 `mod_y` \u2192 `mod_z` \u2192 `mod_x`\n\nAucune d\u00e9pendance circulaire c\u00f4t\u00e9 TypeScript/JavaScript. Ces deux cycles sont isol\u00e9s dans le r\u00e9pertoire `cycles/` et ne sont pas import\u00e9s par le reste du projet.",
+  "error": null,
+  "score": 2,
+  "max_score": 2,
+  "timestamp": "2026-04-15T17:11:18.578177+00:00"
+}

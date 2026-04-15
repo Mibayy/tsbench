@@ -1,0 +1,63 @@
+{
+  "task_id": "TASK-031",
+  "run": "A",
+  "baseline": "plain",
+  "input_tokens": 5,
+  "output_tokens": 633,
+  "cache_creation_input_tokens": 9996,
+  "cache_read_input_tokens": 88083,
+  "total_tokens": 98717,
+  "active_tokens": 10634,
+  "turns_count": 10,
+  "tool_calls_count": 7,
+  "tool_calls_breakdown": {
+    "Glob": 2,
+    "Read": 5
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "Glob",
+      "result_chars": 82,
+      "is_error": false
+    },
+    {
+      "tool": "Glob",
+      "result_chars": 19,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 366,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 381,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 366,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 386,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 466,
+      "is_error": false
+    }
+  ],
+  "ts_tool_details": [],
+  "total_context_chars_injected": 2066,
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 25.23,
+  "raw_response": "La question ne se pose pas : **aucun des 4 manifests Kubernetes (`api.yaml`, `worker.yaml`, `web.yaml`, `ingress.yaml`) ne r\u00e9f\u00e9rence de variable d'environnement**. Ils ne contiennent ni bloc `env:`, ni `envFrom:`, ni `configMapRef`, ni `secretRef`.\n\nIl n'y a donc aucun \u00e9cart \u00e0 signaler \u2014 mais c'est aussi un probl\u00e8me potentiel : ces d\u00e9ploiements ne re\u00e7oivent aucune configuration d'environnement, alors que `config/.env.example` d\u00e9clare 12 variables (dont `DATABASE_URL`, `SECRET_KEY`, `STRIPE_API_KEY`, etc.) qui semblent n\u00e9cessaires au fonctionnement de l'application.",
+  "error": null,
+  "score": 0,
+  "max_score": 2,
+  "timestamp": "2026-04-15T13:47:41.099406+00:00"
+}

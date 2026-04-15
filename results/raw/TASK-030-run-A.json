@@ -1,0 +1,54 @@
+{
+  "task_id": "TASK-030",
+  "run": "A",
+  "baseline": "plain",
+  "input_tokens": 6,
+  "output_tokens": 819,
+  "cache_creation_input_tokens": 17366,
+  "cache_read_input_tokens": 112398,
+  "total_tokens": 130589,
+  "active_tokens": 18191,
+  "turns_count": 7,
+  "tool_calls_count": 5,
+  "tool_calls_breakdown": {
+    "Glob": 1,
+    "Bash": 1,
+    "Read": 3
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "Glob",
+      "result_chars": 14,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 320,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 185,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 191,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 130,
+      "is_error": false
+    }
+  ],
+  "ts_tool_details": [],
+  "total_context_chars_injected": 840,
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 88.84,
+  "raw_response": "Voici les probl\u00e8mes identifi\u00e9s :\n\n### `api.Dockerfile`\n- **Tourne en root** \u2014 pas de `USER` non-root, ce qui \u00e9largit la surface d'attaque.\n\n### `web.Dockerfile`\n- **Ports debug expos\u00e9s en prod** \u2014 `EXPOSE 9229` (Node inspector) et `EXPOSE 6666` sont des ports de debug/diagnostic qui ne devraient pas \u00eatre dans l'image de production. `9229` en particulier permet l'ex\u00e9cution de code arbitraire \u00e0 distance.\n- **Pas de multi-stage build** \u2014 les devDependencies et le code source restent dans l'image finale, augmentant sa taille inutilement.\n- **Tourne en root.**\n\n### `worker.Dockerfile`\n- **`python:latest`** \u2014 tag non-\u00e9pingl\u00e9. Les builds ne sont pas reproductibles ; une mise \u00e0 jour de l'image de base peut casser le build sans avertissement. Utiliser un tag pr\u00e9cis (ex: `python:3.12-slim`).\n- **`COPY . .` avant `pip install`** \u2014 le cache Docker des d\u00e9pendances est invalid\u00e9 \u00e0 chaque changement de code. Il faut copier `requirements.txt` d'abord, installer, puis copier le reste (comme dans `api.Dockerfile`).\n- **Image full au lieu de slim** \u2014 `python:latest` est bas\u00e9e sur Debian compl\u00e8te (~900 MB), inutilement lourd.\n- **`pip install` sans `--no-cache-dir`** \u2014 le cache pip reste dans l'image, gaspillant de l'espace.\n- **Tourne en root.**\n\n### Commun aux trois\n- **Aucun `USER` non-root** \u2014 tous les containers tournent en root par d\u00e9faut.",
+  "error": null,
+  "score": 0,
+  "max_score": 2,
+  "timestamp": "2026-04-15T13:47:15.862136+00:00"
+}

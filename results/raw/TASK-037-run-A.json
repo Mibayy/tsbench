@@ -1,0 +1,134 @@
+{
+  "task_id": "TASK-037",
+  "run": "A",
+  "baseline": "plain",
+  "input_tokens": 4,
+  "output_tokens": 712,
+  "cache_creation_input_tokens": 9279,
+  "cache_read_input_tokens": 56204,
+  "total_tokens": 66199,
+  "active_tokens": 9995,
+  "turns_count": 23,
+  "tool_calls_count": 21,
+  "tool_calls_breakdown": {
+    "Agent": 1,
+    "Bash": 15,
+    "Read": 5
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "Bash",
+      "result_chars": 798,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 67,
+      "is_error": true
+    },
+    {
+      "tool": "Read",
+      "result_chars": 2595,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 1508,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 11,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 11,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 496,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 4323,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 272,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 71,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 3121,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 1161,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 2953,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 1463,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 4151,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 85,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 285,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 241,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 1041,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 249,
+      "is_error": false
+    },
+    {
+      "tool": "Agent",
+      "result_chars": 1911,
+      "is_error": false
+    }
+  ],
+  "ts_tool_details": [],
+  "total_context_chars_injected": 26813,
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 59.09,
+  "raw_response": "Voici le r\u00e9sum\u00e9 du projet :\n\n- **Domaine** : benchmark synth\u00e9tique (`tsbench`) pour \u00e9valuer des outils de navigation de code (MCP servers) face \u00e0 un codebase SaaS r\u00e9aliste\n- **Principe** : A/B test comparant Claude Code vanilla (Read/Grep/Glob) vs. un serveur MCP structurel (\"Token Savior\") sur ~40 t\u00e2ches d'ing\u00e9nierie\n- **Codebase synth\u00e9tique** : ~290 fichiers / ~19k LOC g\u00e9n\u00e9r\u00e9s de fa\u00e7on d\u00e9terministe (`generate.py --seed 42`) avec 50 art\u00e9facts plant\u00e9s (bugs, dead code, secrets, cycles, duplicatas\u2026)\n- **Backend Python** : API FastAPI (`apps/api/`) avec 10 services m\u00e9tier (billing, auth, members, sessions, webhooks, audit, notifications, reports, exports, integrations) + worker async (`apps/worker/`)\n- **Frontend TypeScript** : app Next.js 15 / React 19 (`apps/web/`) avec pages et couches API typ\u00e9es\n- **Packages partag\u00e9s** : types TS (`@tsbench/shared-types`), utilitaires (`@tsbench/utils`), sch\u00e9ma DB Prisma (`@tsbench/db`)\n- **Orchestrateur** : `bench.py` lance Claude Code sur chaque t\u00e2che, g\u00e8re les configs MCP, et score les r\u00e9ponses contre `GROUND_TRUTH.json`\n- **V\u00e9rit\u00e9 terrain** : registre JSON des art\u00e9facts plant\u00e9s (12 fonctions mortes, 5 hotspots, cha\u00eenes d'appels, breaking changes, env var mismatches\u2026)\n- **Scoring** : comparaison automatique r\u00e9ponse vs. ground truth avec graders sp\u00e9cialis\u00e9s (set match, cycle detection, etc.)\n- **Infrastructure** : monorepo avec tags git v1/v2 pour simuler des breaking changes, suite pytest pour les services m\u00e9tier",
+  "error": null,
+  "score": 0,
+  "max_score": 2,
+  "timestamp": "2026-04-15T17:13:57.246978+00:00"
+}

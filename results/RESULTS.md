@@ -1,30 +1,17 @@
 # tsbench — RESULTS
 
-_Generated 2026-04-15T13:14:27.248184+00:00_
-
-## 0. Notes sur cette itération
-
-Résultats après implémentation de six améliorations issues de `IMPROVEMENT-SIGNALS.md` :
-
-- **C1** `get_full_context` (source + callers + deps en un appel) — adoption : **9 tasks sur 60** après ajout du hint trailer sur `get_function_source` (C6). Avant C6 : 0 adoption.
-- **C2** hints sur `find_symbol` / `get_functions` / `get_classes` → probable cause de la baisse de retries sur TASK-041 (15→8 au premier rerun).
-- **C3** marker descriptif pour `get_imports` vide — bruit de signal (la plupart des cas "empty" étaient des outputs compressés valides).
-- **C4** résolveur d'imports `from pkg import submod` → désormais pointe vers `pkg/submod.py` au lieu de `pkg/__init__.py`. Rend les cycles visibles dans l'import graph (TASK-026).
-- **C5** grader fix pour `expected_cycles` — TASK-026 passé de 0 à **2/2** (réponse correcte mais clé non reconnue avant).
-- **C6** hint trailer `→ get_full_context(...)` sur `get_function_source` / `get_class_source`.
-
-**TASK-022 reste à 0/2** : c'est un _échec de reasoning_, pas une limitation Token Savior. L'agent a appelé `detect_breaking_changes` (848 chars utiles) puis a choisi d'explorer `billing.py`, `buggy_paginate`, `ambig/` — tous hors ground truth. Les fichiers attendus (`auth.py`, `members.py`, `webhooks.py`) n'ont jamais été visités malgré la donnée disponible. Aucun outil TS ne corrige un agent qui ignore son propre output.
+_Generated 2026-04-15T17:22:10.375648+00:00_
 
 ## 1. Résumé exécutif
 
 _Métrique principale : `active_tokens` = input + output + cache_creation (cache_read exclu — contexte réutilisé, proxy du coût quota abonnement)._
 
-- **Tâches appariées** : 21
-- **Réduction active_tokens A→B** : -15.1% (379,884 → 437,163)
-- **Turns cumulés** : A=102 · B=144
-- **Score global A** : 29/42 (69%)
-- **Score global B** : 32/42 (76%)
-- **Token Savior** : gagne 5, ex æquo 14, perd 2
+- **Tâches appariées** : 60
+- **Réduction active_tokens A→B** : -0.1% (1,030,132 → 1,031,249)
+- **Turns cumulés** : A=733 · B=625
+- **Score global A** : 67/120 (56%)
+- **Score global B** : 73/120 (61%)
+- **Token Savior** : gagne 7, ex æquo 51, perd 2
 
 ## 2. Tableau principal
 
@@ -45,125 +32,214 @@ _Métrique principale : `active_tokens` = input + output + cache_creation (cache
 | TASK-013 | call_chain | 9192 | 13134 | -43% | 1,364 | 1,961 | -44% | 1/2 | 2/2 |
 | TASK-014 | impact | 27232 | 14860 | +45% | 12,668 | 7,893 | +38% | 2/2 | 0/2 |
 | TASK-015 | impact | 9906 | 12698 | -28% | — | 360 | — | 0/2 | 0/2 |
-| TASK-016 | impact | — | 11555 | — | — | 251 | — | — | 0/2 |
-| TASK-017 | edit | — | 16095 | — | — | 4,345 | — | — | 2/2 |
-| TASK-018 | edit | — | 13188 | — | — | 1,357 | — | — | 1/2 |
-| TASK-019 | edit | — | 20044 | — | — | 16,817 | — | — | 2/2 |
-| TASK-020 | edit | — | 17011 | — | — | 4,127 | — | — | 1/2 |
-| TASK-021 | review | — | 14587 | — | — | 8,639 | — | — | 0/2 |
-| TASK-022 | review | — | 22275 | — | — | 13,892 | — | — | 0/2 |
-| TASK-023 | review | — | 6986 | — | — | 5,271 | — | — | 2/2 |
-| TASK-024 | audit | — | 11888 | — | — | 440 | — | — | 0/2 |
-| TASK-025 | audit | — | 5109 | — | — | 382 | — | — | 0/2 |
-| TASK-026 | audit | — | 7075 | — | — | 1,237 | — | — | 2/2 |
-| TASK-027 | config | — | 12058 | — | — | 15,180 | — | — | 0/2 |
-| TASK-028 | config | — | 9811 | — | — | 8,257 | — | — | 0/2 |
-| TASK-029 | config | — | 8619 | — | — | 8,063 | — | — | 0/2 |
-| TASK-030 | infra | — | 5271 | — | — | 339 | — | — | 0/2 |
-| TASK-031 | infra | — | 35519 | — | — | 43,526 | — | — | 0/2 |
-| TASK-032 | testing | — | 4965 | — | — | 140 | — | — | 0/2 |
-| TASK-033 | testing | — | 7783 | — | — | 3,206 | — | — | 0/2 |
-| TASK-034 | debug | — | 8790 | — | — | 3,652 | — | — | 2/2 |
-| TASK-035 | debug | — | 6277 | — | — | 3,847 | — | — | 2/2 |
-| TASK-036 | debug | — | 12346 | — | — | 11,594 | — | — | 0/2 |
-| TASK-037 | onboarding | — | 12335 | — | — | 4,429 | — | — | 0/2 |
-| TASK-038 | onboarding | — | 8112 | — | — | 3,494 | — | — | 0/2 |
-| TASK-039 | cross-language | — | 5765 | — | — | 689 | — | — | 0/2 |
-| TASK-040 | cross-language | — | 13820 | — | — | 17,452 | — | — | 0/2 |
+| TASK-016 | impact | 32995 | 11555 | +65% | 461 | 251 | +46% | 0/2 | 0/2 |
+| TASK-017 | edit | 34446 | 16095 | +53% | 1,958 | 4,345 | -122% | 2/2 | 2/2 |
+| TASK-018 | edit | 10227 | 13188 | -29% | 2,272 | 1,357 | +40% | 1/2 | 1/2 |
+| TASK-019 | edit | 22706 | 20044 | +12% | 18,494 | 16,817 | +9% | 2/2 | 2/2 |
+| TASK-020 | edit | 12059 | 17011 | -41% | 3,711 | 4,127 | -11% | 1/2 | 1/2 |
+| TASK-021 | review | 12707 | 14587 | -15% | 8,426 | 8,639 | -3% | 0/2 | 0/2 |
+| TASK-022 | review | 12347 | 22275 | -80% | 6,295 | 13,892 | -121% | 0/2 | 0/2 |
+| TASK-023 | review | 10140 | 6986 | +31% | 43,584 | 5,271 | +88% | 2/2 | 2/2 |
+| TASK-024 | audit | 34165 | 11888 | +65% | 39,664 | 440 | +99% | 0/2 | 0/2 |
+| TASK-025 | audit | 9957 | 5109 | +49% | 112,703 | 382 | +100% | 0/2 | 0/2 |
+| TASK-026 | audit | 33632 | 7075 | +79% | 113,280 | 1,237 | +99% | 2/2 | 2/2 |
+| TASK-027 | config | 10563 | 12058 | -14% | 937 | 15,180 | -1520% | 0/2 | 0/2 |
+| TASK-028 | config | 10051 | 9811 | +2% | 2,685 | 8,257 | -208% | 0/2 | 0/2 |
+| TASK-029 | config | 9854 | 8619 | +13% | 1,563 | 8,063 | -416% | 0/2 | 0/2 |
+| TASK-030 | infra | 18191 | 5271 | +71% | 840 | 339 | +60% | 0/2 | 0/2 |
+| TASK-031 | infra | 10634 | 35519 | -234% | 2,066 | 43,526 | -2007% | 0/2 | 0/2 |
+| TASK-032 | testing | 9213 | 4965 | +46% | 341 | 140 | +59% | 0/2 | 0/2 |
+| TASK-033 | testing | 10632 | 7783 | +27% | 1,023 | 3,206 | -213% | 0/2 | 0/2 |
+| TASK-034 | debug | 9644 | 8790 | +9% | 1,754 | 3,652 | -108% | 1/2 | 2/2 |
+| TASK-035 | debug | 22599 | 6277 | +72% | 25,359 | 3,847 | +85% | 2/2 | 2/2 |
+| TASK-036 | debug | 11367 | 12346 | -9% | 101,205 | 11,594 | +89% | 0/2 | 0/2 |
+| TASK-037 | onboarding | 9995 | 12335 | -23% | 26,813 | 4,429 | +83% | 0/2 | 0/2 |
+| TASK-038 | onboarding | 19527 | 8112 | +58% | 20,530 | 3,494 | +83% | 0/2 | 0/2 |
+| TASK-039 | cross-language | 8950 | 5765 | +36% | 508 | 689 | -36% | 0/2 | 0/2 |
+| TASK-040 | cross-language | 11222 | 13820 | -23% | 1,450 | 17,452 | -1104% | 0/2 | 0/2 |
 | TASK-041 | heavy_read | 33525 | 10616 | +68% | 23,633 | 9,396 | +60% | 2/2 | 2/2 |
 | TASK-042 | heavy_read | 18667 | 13670 | +27% | 18,895 | 4,618 | +76% | 2/2 | 2/2 |
 | TASK-043 | heavy_read | 19531 | 26573 | -36% | 196,882 | 16,264 | +92% | 1/2 | 2/2 |
 | TASK-044 | heavy_read | 23485 | 16308 | +31% | 30,789 | 9,576 | +69% | 2/2 | 2/2 |
 | TASK-045 | heavy_read | 8497 | 23654 | -178% | 14 | 2,159 | -15321% | 0/2 | 2/2 |
 | TASK-046 | heavy_read | 20525 | 18013 | +12% | 20,258 | 8,762 | +57% | 2/2 | 2/2 |
-| TASK-047 | navigation | — | 11611 | — | — | 180 | — | — | 2/2 |
-| TASK-048 | navigation | — | 11896 | — | — | 631 | — | — | 2/2 |
-| TASK-049 | call_chain | — | 11707 | — | — | 301 | — | — | 2/2 |
-| TASK-050 | navigation | — | 13146 | — | — | 2,047 | — | — | 1/2 |
-| TASK-051 | navigation | — | 13642 | — | — | 4,989 | — | — | 2/2 |
-| TASK-052 | audit | — | 15484 | — | — | 3,709 | — | — | 2/2 |
-| TASK-053 | audit | — | 19676 | — | — | 11,025 | — | — | 2/2 |
-| TASK-054 | edit | — | 48290 | — | — | 2,506 | — | — | 2/2 |
-| TASK-055 | edit | — | 45021 | — | — | 353 | — | — | 2/2 |
-| TASK-056 | edit | — | 52964 | — | — | 7,587 | — | — | 2/2 |
-| TASK-057 | testing | — | 11834 | — | — | 239 | — | — | 2/2 |
-| TASK-058 | audit | — | 15412 | — | — | 6,091 | — | — | 2/2 |
-| TASK-059 | git | — | 12472 | — | — | 1,608 | — | — | 2/2 |
-| TASK-060 | git | — | 13647 | — | — | 4,374 | — | — | 2/2 |
+| TASK-047 | navigation | 42109 | 11611 | +72% | 18,895 | 180 | +99% | 0/2 | 2/2 |
+| TASK-048 | navigation | 9026 | 11896 | -32% | 398 | 631 | -59% | 2/2 | 2/2 |
+| TASK-049 | call_chain | 9402 | 11707 | -25% | 735 | 301 | +59% | 2/2 | 2/2 |
+| TASK-050 | navigation | 9713 | 13146 | -35% | 1,109 | 2,047 | -85% | 1/2 | 1/2 |
+| TASK-051 | navigation | 34877 | 13642 | +61% | 48,374 | 4,989 | +90% | 2/2 | 2/2 |
+| TASK-052 | audit | 17142 | 15484 | +10% | 190,723 | 3,709 | +98% | 2/2 | 2/2 |
+| TASK-053 | audit | 10539 | 19676 | -87% | 77,398 | 11,025 | +86% | 2/2 | 2/2 |
+| TASK-054 | edit | 10769 | 48290 | -348% | 1,027 | 2,506 | -144% | 2/2 | 2/2 |
+| TASK-055 | edit | 19564 | 45021 | -130% | 20,617 | 353 | +98% | 2/2 | 2/2 |
+| TASK-056 | edit | 19813 | 52964 | -167% | 20,540 | 7,587 | +63% | 2/2 | 2/2 |
+| TASK-057 | testing | 35534 | 11834 | +67% | 3,487 | 239 | +93% | 2/2 | 2/2 |
+| TASK-058 | audit | 10397 | 15412 | -48% | 162,108 | 6,091 | +96% | 2/2 | 2/2 |
+| TASK-059 | git | 9162 | 12472 | -36% | 1,058 | 1,608 | -52% | 2/2 | 2/2 |
+| TASK-060 | git | 14378 | 13647 | +5% | 11,110 | 4,374 | +61% | 2/2 | 2/2 |
 
 ## 3. Moyennes par catégorie
 
 | Catégorie | N | Active A moy | Active B moy | Réduction | Turns A moy | Turns B moy | Score A moy | Score B moy |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| call_chain | 3 | 13,424 | 14,513 | -8% | 4.3 | 7.0 | 1.00 | 2.00 |
+| audit | 6 | 19,305 | 12,441 | +36% | 45.3 | 12.0 | 1.33 | 1.33 |
+| call_chain | 4 | 12,418 | 13,812 | -11% | 4.5 | 6.2 | 1.25 | 2.00 |
+| config | 3 | 10,156 | 10,163 | -0% | 8.7 | 12.3 | 0.00 | 0.00 |
+| cross-language | 2 | 10,086 | 9,792 | +3% | 6.5 | 14.0 | 0.00 | 0.00 |
+| debug | 3 | 14,537 | 9,138 | +37% | 16.7 | 13.0 | 1.00 | 1.33 |
 | dépendants | 4 | 23,455 | 12,232 | +48% | 2.0 | 3.8 | 2.00 | 2.00 |
+| edit | 7 | 18,512 | 30,373 | -64% | 13.0 | 19.1 | 1.71 | 1.71 |
+| git | 2 | 11,770 | 13,060 | -11% | 5.0 | 3.5 | 2.00 | 2.00 |
 | heavy_read | 6 | 20,705 | 18,139 | +12% | 6.8 | 9.8 | 1.50 | 2.00 |
-| impact | 2 | 18,569 | 13,779 | +26% | 9.0 | 8.0 | 1.00 | 0.00 |
+| impact | 3 | 23,378 | 13,038 | +44% | 8.0 | 6.7 | 0.67 | 0.00 |
+| infra | 2 | 14,412 | 20,395 | -42% | 8.5 | 28.5 | 0.00 | 0.00 |
 | localisation | 6 | 14,070 | 34,717 | -147% | 3.7 | 5.5 | 1.17 | 1.00 |
+| navigation | 4 | 23,931 | 12,574 | +47% | 15.8 | 4.5 | 1.25 | 1.75 |
+| onboarding | 2 | 14,761 | 10,224 | +31% | 13.0 | 12.0 | 0.00 | 0.00 |
+| review | 3 | 11,731 | 14,616 | -25% | 8.3 | 13.0 | 0.67 | 0.67 |
+| testing | 3 | 18,460 | 8,194 | +56% | 9.0 | 6.0 | 0.67 | 0.67 |
 
 ## 3bis. Analyse chars_injected (ce que TS prétend économiser)
 
-- **Pairs mesurés** : 20
-- **Chars injectés cumulés** : A=336,123 · B=79,598 · Δ=+76%
-- **TS gagne sur chars** : 11/20
-- **TS perd sur chars** : 9/20
-- **Ex æquo** : 0/20
+- **Pairs mesurés** : 59
+- **Chars injectés cumulés** : A=1,431,624 · B=305,864 · Δ=+79%
+- **TS gagne sur chars** : 34/59
+- **TS perd sur chars** : 25/59
+- **Ex æquo** : 0/59
 
 ### Tâches où TS gagne sur chars_injected
 
+- **TASK-052** — chars 190,723→3,709 (-98%) | active 17,142→15,484 (-10%)
 - **TASK-043** — chars 196,882→16,264 (-92%) | active 19,531→26,573 (+36%)
+- **TASK-058** — chars 162,108→6,091 (-96%) | active 10,397→15,412 (+48%)
+- **TASK-025** — chars 112,703→382 (-100%) | active 9,957→5,109 (-49%)
+- **TASK-026** — chars 113,280→1,237 (-99%) | active 33,632→7,075 (-79%)
+- **TASK-036** — chars 101,205→11,594 (-89%) | active 11,367→12,346 (+9%)
+- **TASK-053** — chars 77,398→11,025 (-86%) | active 10,539→19,676 (+87%)
+- **TASK-051** — chars 48,374→4,989 (-90%) | active 34,877→13,642 (-61%)
+- **TASK-024** — chars 39,664→440 (-99%) | active 34,165→11,888 (-65%)
+- **TASK-023** — chars 43,584→5,271 (-88%) | active 10,140→6,986 (-31%)
+- **TASK-037** — chars 26,813→4,429 (-83%) | active 9,995→12,335 (+23%)
+- **TASK-035** — chars 25,359→3,847 (-85%) | active 22,599→6,277 (-72%)
 - **TASK-044** — chars 30,789→9,576 (-69%) | active 23,485→16,308 (-31%)
+- **TASK-055** — chars 20,617→353 (-98%) | active 19,564→45,021 (+130%)
+- **TASK-047** — chars 18,895→180 (-99%) | active 42,109→11,611 (-72%)
+- **TASK-038** — chars 20,530→3,494 (-83%) | active 19,527→8,112 (-58%)
 - **TASK-042** — chars 18,895→4,618 (-76%) | active 18,667→13,670 (-27%)
 - **TASK-041** — chars 23,633→9,396 (-60%) | active 33,525→10,616 (-68%)
+- **TASK-056** — chars 20,540→7,587 (-63%) | active 19,813→52,964 (+167%)
 - **TASK-046** — chars 20,258→8,762 (-57%) | active 20,525→18,013 (-12%)
 - **TASK-010** — chars 12,668→1,786 (-86%) | active 22,492→12,920 (-43%)
+- **TASK-060** — chars 11,110→4,374 (-61%) | active 14,378→13,647 (-5%)
 - **TASK-014** — chars 12,668→7,893 (-38%) | active 27,232→14,860 (-45%)
 - **TASK-009** — chars 5,231→757 (-86%) | active 44,160→11,980 (-73%)
+- **TASK-057** — chars 3,487→239 (-93%) | active 35,534→11,834 (-67%)
 - **TASK-008** — chars 3,227→350 (-89%) | active 18,033→11,543 (-36%)
+- **TASK-019** — chars 18,494→16,817 (-9%) | active 22,706→20,044 (-12%)
 - **TASK-001** — chars 1,761→121 (-93%) | active 9,080→44,767 (+393%)
 - **TASK-002** — chars 1,737→350 (-80%) | active 17,679→11,500 (-35%)
+- **TASK-018** — chars 2,272→1,357 (-40%) | active 10,227→13,188 (+29%)
+- **TASK-030** — chars 840→339 (-60%) | active 18,191→5,271 (-71%)
+- **TASK-049** — chars 735→301 (-59%) | active 9,402→11,707 (+25%)
+- **TASK-016** — chars 461→251 (-46%) | active 32,995→11,555 (-65%)
+- **TASK-032** — chars 341→140 (-59%) | active 9,213→4,965 (-46%)
 
 ### Tâches où TS perd sur chars_injected
 
+- **TASK-031** — chars 2,066→43,526 (+2007%) | active 10,634→35,519 (+234%)
+- **TASK-040** — chars 1,450→17,452 (+1104%) | active 11,222→13,820 (+23%)
+- **TASK-027** — chars 937→15,180 (+1520%) | active 10,563→12,058 (+14%)
+- **TASK-022** — chars 6,295→13,892 (+121%) | active 12,347→22,275 (+80%)
+- **TASK-029** — chars 1,563→8,063 (+416%) | active 9,854→8,619 (-13%)
+- **TASK-028** — chars 2,685→8,257 (+208%) | active 10,051→9,811 (-2%)
 - **TASK-006** — chars 986→3,762 (+282%) | active 21,869→46,529 (+113%)
+- **TASK-017** — chars 1,958→4,345 (+122%) | active 34,446→16,095 (-53%)
+- **TASK-033** — chars 1,023→3,206 (+213%) | active 10,632→7,783 (-27%)
 - **TASK-045** — chars 14→2,159 (+15321%) | active 8,497→23,654 (+178%)
+- **TASK-034** — chars 1,754→3,652 (+108%) | active 9,644→8,790 (-9%)
 - **TASK-003** — chars 280→1,789 (+539%) | active 17,037→45,415 (+167%)
 - **TASK-005** — chars 720→2,203 (+206%) | active 9,331→14,835 (+59%)
+- **TASK-054** — chars 1,027→2,506 (+144%) | active 10,769→48,290 (+348%)
+- **TASK-050** — chars 1,109→2,047 (+85%) | active 9,713→13,146 (+35%)
 - **TASK-007** — chars 1,761→2,672 (+52%) | active 9,136→12,487 (+37%)
 - **TASK-004** — chars 558→1,296 (+132%) | active 9,427→45,256 (+380%)
 - **TASK-011** — chars 1,364→1,961 (+44%) | active 9,220→12,902 (+40%)
 - **TASK-013** — chars 1,364→1,961 (+44%) | active 9,192→13,134 (+43%)
 - **TASK-012** — chars 1,327→1,922 (+45%) | active 21,860→17,503 (-20%)
+- **TASK-059** — chars 1,058→1,608 (+52%) | active 9,162→12,472 (+36%)
+- **TASK-020** — chars 3,711→4,127 (+11%) | active 12,059→17,011 (+41%)
+- **TASK-048** — chars 398→631 (+59%) | active 9,026→11,896 (+32%)
+- **TASK-021** — chars 8,426→8,639 (+3%) | active 12,707→14,587 (+15%)
+- **TASK-039** — chars 508→689 (+36%) | active 8,950→5,765 (-36%)
 
 ### Break-even analysis
 
 _Coût fixe B = active_tokens B − chars_injected B (baseline TS : system prompt, schémas ToolSearch). Gain chars = chars_A − chars_B. TS rentable sur active_tokens si : (active_A − active_B) ≥ 0, i.e. le gain chars_injected doit couvrir le surcoût baseline._
 
-- **Surcoût moyen active_tokens B − A** : +2,724 tokens / tâche
-- **Cas où B ≤ A sur active** : 10/20
+- **Surcoût moyen active_tokens B − A** : -28 tokens / tâche
+- **Cas où B ≤ A sur active** : 31/59
 
 | Task | Gain chars (A−B) | Surcoût active (B−A) |
 |---|---:|---:|
+| TASK-052 | +187,014 | -1,658 |
 | TASK-043 | +180,618 | +7,042 |
+| TASK-058 | +156,017 | +5,015 |
+| TASK-025 | +112,321 | -4,848 |
+| TASK-026 | +112,043 | -26,557 |
+| TASK-036 | +89,611 | +979 |
+| TASK-053 | +66,373 | +9,137 |
+| TASK-051 | +43,385 | -21,235 |
+| TASK-024 | +39,224 | -22,277 |
+| TASK-023 | +38,313 | -3,154 |
+| TASK-037 | +22,384 | +2,340 |
+| TASK-035 | +21,512 | -16,322 |
 | TASK-044 | +21,213 | -7,177 |
+| TASK-055 | +20,264 | +25,457 |
+| TASK-047 | +18,715 | -30,498 |
+| TASK-038 | +17,036 | -11,415 |
 | TASK-042 | +14,277 | -4,997 |
 | TASK-041 | +14,237 | -22,909 |
+| TASK-056 | +12,953 | +33,151 |
 | TASK-046 | +11,496 | -2,512 |
 | TASK-010 | +10,882 | -9,572 |
+| TASK-060 | +6,736 | -731 |
 | TASK-014 | +4,775 | -12,372 |
 | TASK-009 | +4,474 | -32,180 |
+| TASK-057 | +3,248 | -23,700 |
 | TASK-008 | +2,877 | -6,490 |
+| TASK-019 | +1,677 | -2,662 |
 | TASK-001 | +1,640 | +35,687 |
 | TASK-002 | +1,387 | -6,179 |
+| TASK-018 | +915 | +2,961 |
+| TASK-030 | +501 | -12,920 |
+| TASK-049 | +434 | +2,305 |
+| TASK-016 | +210 | -21,440 |
+| TASK-032 | +201 | -4,248 |
+| TASK-039 | -181 | -3,185 |
+| TASK-021 | -213 | +1,880 |
+| TASK-048 | -233 | +2,870 |
+| TASK-020 | -416 | +4,952 |
+| TASK-059 | -550 | +3,310 |
 | TASK-012 | -595 | -4,357 |
 | TASK-011 | -597 | +3,682 |
 | TASK-013 | -597 | +3,942 |
 | TASK-004 | -738 | +35,829 |
 | TASK-007 | -911 | +3,351 |
+| TASK-050 | -938 | +3,433 |
+| TASK-054 | -1,479 | +37,521 |
 | TASK-005 | -1,483 | +5,504 |
 | TASK-003 | -1,509 | +28,378 |
+| TASK-034 | -1,898 | -854 |
 | TASK-045 | -2,145 | +15,157 |
+| TASK-033 | -2,183 | -2,849 |
+| TASK-017 | -2,387 | -18,351 |
 | TASK-006 | -2,776 | +24,660 |
+| TASK-028 | -5,572 | -240 |
+| TASK-029 | -6,500 | -1,235 |
+| TASK-022 | -7,597 | +9,928 |
+| TASK-027 | -14,243 | +1,495 |
+| TASK-040 | -16,002 | +2,598 |
+| TASK-031 | -41,460 | +24,885 |
 
 
 ## 4. Tâches où Token Savior perd
@@ -178,21 +254,40 @@ _Coût fixe B = active_tokens B − chars_injected B (baseline TS : system promp
 - **TASK-013** — active 9,192 → 13,134 | score 1→2
 - **TASK-014** — active 27,232 → 14,860 | score 2→0
 - **TASK-015** — active 9,906 → 12,698 | score 0→0
+- **TASK-018** — active 10,227 → 13,188 | score 1→1
+- **TASK-020** — active 12,059 → 17,011 | score 1→1
+- **TASK-021** — active 12,707 → 14,587 | score 0→0
+- **TASK-022** — active 12,347 → 22,275 | score 0→0
+- **TASK-027** — active 10,563 → 12,058 | score 0→0
+- **TASK-031** — active 10,634 → 35,519 | score 0→0
+- **TASK-036** — active 11,367 → 12,346 | score 0→0
+- **TASK-037** — active 9,995 → 12,335 | score 0→0
+- **TASK-040** — active 11,222 → 13,820 | score 0→0
 - **TASK-043** — active 19,531 → 26,573 | score 1→2
 - **TASK-045** — active 8,497 → 23,654 | score 0→2
+- **TASK-048** — active 9,026 → 11,896 | score 2→2
+- **TASK-049** — active 9,402 → 11,707 | score 2→2
+- **TASK-050** — active 9,713 → 13,146 | score 1→1
+- **TASK-053** — active 10,539 → 19,676 | score 2→2
+- **TASK-054** — active 10,769 → 48,290 | score 2→2
+- **TASK-055** — active 19,564 → 45,021 | score 2→2
+- **TASK-056** — active 19,813 → 52,964 | score 2→2
+- **TASK-058** — active 10,397 → 15,412 | score 2→2
+- **TASK-059** — active 9,162 → 12,472 | score 2→2
 
 ## 5. Tâches impossibles sans Token Savior
 
 - **TASK-045** — score A=0, score B=2/2
+- **TASK-047** — score A=0, score B=2/2
 
 ## 6. Distribution des tool calls
 
 **Run A (plain)** — top 5 :
-- `Read` : 29
-- `Grep` : 27
-- `Glob` : 6
-- `Agent` : 3
-- `Bash` : 3
+- `Read` : 307
+- `Bash` : 121
+- `Grep` : 84
+- `Glob` : 34
+- `Agent` : 13
 
 **Run B (token-savior)** — top 5 (TS/total = 0/409 = 0%) :
 - `mcp__token-savior-recall__switch_project` : 60
@@ -203,43 +298,86 @@ _Coût fixe B = active_tokens B − chars_injected B (baseline TS : system promp
 
 ## 7. Rapidité
 
-- **Wall time moyen / tâche** : A=29.6s · B=28.5s (-4%)
-- **Wall time total (14 tâches)** : A=622.6s · B=597.8s (-4%)
+- **Wall time moyen / tâche** : A=51.0s · B=36.6s (-28%)
+- **Wall time total (14 tâches)** : A=3061.9s · B=2197.1s (-28%)
 
 ### Par catégorie
 
 | Catégorie | N | Wall A moy | Wall B moy | Δ | Wall A total | Wall B total |
 |---|---:|---:|---:|---:|---:|---:|
-| call_chain | 3 | 13.4s | 44.9s | +236% | 40.1s | 134.8s |
+| audit | 6 | 110.3s | 31.6s | -71% | 661.6s | 189.6s |
+| call_chain | 4 | 13.7s | 38.2s | +179% | 54.7s | 152.8s |
+| config | 3 | 25.4s | 34.5s | +36% | 76.2s | 103.6s |
+| cross-language | 2 | 26.9s | 38.2s | +42% | 53.8s | 76.5s |
+| debug | 3 | 47.0s | 43.4s | -7% | 140.9s | 130.3s |
 | dépendants | 4 | 11.1s | 18.7s | +68% | 44.5s | 74.7s |
+| edit | 7 | 87.5s | 54.2s | -38% | 612.3s | 379.1s |
+| git | 2 | 79.3s | 21.0s | -74% | 158.5s | 42.0s |
 | heavy_read | 6 | 51.8s | 33.9s | -35% | 310.9s | 203.3s |
-| impact | 2 | 69.0s | 29.5s | -57% | 137.9s | 58.9s |
+| impact | 3 | 50.9s | 25.6s | -50% | 152.7s | 76.8s |
+| infra | 2 | 57.0s | 118.2s | +107% | 114.1s | 236.4s |
 | localisation | 6 | 14.9s | 21.0s | +41% | 89.1s | 126.0s |
+| navigation | 4 | 34.3s | 23.3s | -32% | 137.1s | 93.3s |
+| onboarding | 2 | 43.6s | 44.3s | +2% | 87.2s | 88.5s |
+| review | 3 | 94.3s | 51.2s | -46% | 283.0s | 153.7s |
+| testing | 3 | 28.4s | 23.5s | -17% | 85.3s | 70.4s |
 
 ### Tâches où TS est significativement plus rapide (>20%)
 
+- **TASK-025** — 116.1s → 17.9s (-85%)
+- **TASK-021** — 139.2s → 22.6s (-84%)
+- **TASK-059** — 73.0s → 15.6s (-79%)
+- **TASK-026** — 132.4s → 30.2s (-77%)
+- **TASK-055** — 81.0s → 18.7s (-77%)
 - **TASK-015** — 116.3s → 27.3s (-77%)
+- **TASK-058** — 122.8s → 31.6s (-74%)
+- **TASK-052** — 133.9s → 38.5s (-71%)
 - **TASK-043** — 159.2s → 48.0s (-70%)
+- **TASK-051** — 90.1s → 27.8s (-69%)
+- **TASK-060** — 85.6s → 26.4s (-69%)
+- **TASK-024** — 61.9s → 24.2s (-61%)
+- **TASK-018** — 78.2s → 30.9s (-60%)
+- **TASK-057** — 42.7s → 20.6s (-52%)
+- **TASK-056** — 143.7s → 70.0s (-51%)
+- **TASK-020** — 93.0s → 46.1s (-50%)
+- **TASK-053** — 94.5s → 47.2s (-50%)
+- **TASK-036** — 99.5s → 51.5s (-48%)
+- **TASK-054** — 96.5s → 57.8s (-40%)
 - **TASK-044** — 55.7s → 33.4s (-40%)
+- **TASK-022** — 96.9s → 62.1s (-36%)
 
 ### Tâches où TS est significativement plus lent (>20%)
 
 - **TASK-011** — 13.8s → 85.2s (+519%)
+- **TASK-031** — 25.2s → 132.1s (+424%)
+- **TASK-034** — 16.9s → 54.7s (+223%)
+- **TASK-039** — 12.2s → 25.3s (+108%)
+- **TASK-017** — 21.5s → 41.3s (+92%)
 - **TASK-012** — 13.6s → 26.1s (+92%)
 - **TASK-009** — 11.2s → 21.3s (+91%)
 - **TASK-013** — 12.8s → 23.5s (+84%)
+- **TASK-029** — 18.8s → 34.3s (+83%)
 - **TASK-008** — 8.9s → 16.0s (+80%)
 - **TASK-006** — 13.3s → 22.4s (+69%)
 - **TASK-001** — 9.4s → 15.7s (+67%)
 - **TASK-007** — 10.9s → 17.4s (+60%)
+- **TASK-048** — 12.4s → 19.3s (+56%)
 - **TASK-010** — 13.6s → 19.9s (+47%)
+- **TASK-023** — 46.9s → 68.9s (+47%)
 - **TASK-014** — 21.6s → 31.6s (+47%)
+- **TASK-050** — 21.6s → 31.3s (+45%)
+- **TASK-028** — 20.3s → 29.3s (+45%)
+- **TASK-038** — 28.1s → 40.1s (+43%)
 - **TASK-003** — 13.7s → 19.6s (+43%)
 - **TASK-002** — 11.4s → 16.1s (+41%)
+- **TASK-033** — 22.7s → 31.3s (+38%)
 - **TASK-041** — 26.0s → 35.4s (+36%)
 - **TASK-046** — 28.7s → 38.8s (+35%)
 - **TASK-005** — 28.1s → 37.1s (+32%)
 - **TASK-045** — 17.3s → 22.7s (+32%)
+- **TASK-049** — 14.6s → 18.0s (+23%)
+- **TASK-040** — 41.6s → 51.1s (+23%)
+- **TASK-016** — 14.8s → 17.9s (+21%)
 
 
 ## 8. Données brutes

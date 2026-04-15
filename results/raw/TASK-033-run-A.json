@@ -1,0 +1,59 @@
+{
+  "task_id": "TASK-033",
+  "run": "A",
+  "baseline": "plain",
+  "input_tokens": 6,
+  "output_tokens": 713,
+  "cache_creation_input_tokens": 9913,
+  "cache_read_input_tokens": 120503,
+  "total_tokens": 131135,
+  "active_tokens": 10632,
+  "turns_count": 9,
+  "tool_calls_count": 6,
+  "tool_calls_breakdown": {
+    "Grep": 3,
+    "Glob": 2,
+    "Read": 1
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "Grep",
+      "result_chars": 147,
+      "is_error": false
+    },
+    {
+      "tool": "Glob",
+      "result_chars": 14,
+      "is_error": false
+    },
+    {
+      "tool": "Grep",
+      "result_chars": 14,
+      "is_error": false
+    },
+    {
+      "tool": "Glob",
+      "result_chars": 267,
+      "is_error": false
+    },
+    {
+      "tool": "Grep",
+      "result_chars": 14,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 567,
+      "is_error": false
+    }
+  ],
+  "ts_tool_details": [],
+  "total_context_chars_injected": 1023,
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 22.68,
+  "raw_response": "Il n'y a **aucun fichier de test** qui r\u00e9f\u00e9rence `alpha_middle` ou le module `chains/alpha`. Ce module n'a pas de suite de tests existante.\n\n**Cha\u00eene d'appels** (fichier `apps/api/chains/alpha.py`) :\n`alpha_entry` \u2192 `alpha_middle` \u2192 `alpha_inner` \u2192 `alpha_leaf`\n\n**Recommandation :**\n1. Avant de modifier `alpha_middle`, **cr\u00e9e d'abord un test** pour cette cha\u00eene (par ex. `tests/test_alpha_chain.py`) qui v\u00e9rifie le r\u00e9sultat de `alpha_entry` de bout en bout (`{'leaf': 'alpha_leaf'}`).\n2. Aucun test existant ne sera impact\u00e9 \u2014 aucun autre module Python n'importe `alpha_middle`.\n\nEn r\u00e9sum\u00e9 : il n'y a pas de tests \u00e0 rejouer, car il n'en existe pas encore pour ce module.",
+  "error": null,
+  "score": 0,
+  "max_score": 2,
+  "timestamp": "2026-04-15T13:48:23.635554+00:00"
+}

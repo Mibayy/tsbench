@@ -1,0 +1,32 @@
+{
+  "task_id": "TASK-059",
+  "run": "A",
+  "baseline": "plain",
+  "input_tokens": 4,
+  "output_tokens": 404,
+  "cache_creation_input_tokens": 8754,
+  "cache_read_input_tokens": 55977,
+  "total_tokens": 65139,
+  "active_tokens": 9162,
+  "turns_count": 3,
+  "tool_calls_count": 1,
+  "tool_calls_breakdown": {
+    "Bash": 1
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "Bash",
+      "result_chars": 1058,
+      "is_error": false
+    }
+  ],
+  "ts_tool_details": [],
+  "total_context_chars_injected": 1058,
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 72.95,
+  "raw_response": "**Branche courante :** `main` (\u00e0 jour avec `origin/main`)\n\n**Fichiers modifi\u00e9s (non stag\u00e9s) \u2014 14 fichiers :**\n- `apps/api/ambig/mod1.py`\n- `apps/api/config.py`\n- `apps/api/services/billing.py`\n- `apps/api/utils/buggy_pagination.py`\n- `apps/api/utils/strings.py`\n- `apps/web/api/billing.ts`\n- `apps/web/api/members.ts`\n- `apps/web/api/webhooks.ts`\n- `apps/web/lib/constants.ts`\n- `bench.py`\n- `packages/db/schema.prisma`\n- `packages/utils/paginate_copy.py`\n- `packages/utils/slug_copy.py`\n- `results/warmup-run-B.json`\n\n**Fichiers stag\u00e9s :** aucun\n\n**Fichiers non-track\u00e9s \u2014 3 entr\u00e9es :**\n- `.token-savior-cache.json`\n- `.token-savior-checkpoints/`\n- `apps/api/services/billing.py.checkpoint`",
+  "error": null,
+  "score": 2,
+  "max_score": 2,
+  "timestamp": "2026-04-15T14:20:18.245040+00:00"
+}

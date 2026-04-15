@@ -1,0 +1,59 @@
+{
+  "task_id": "TASK-040",
+  "run": "A",
+  "baseline": "plain",
+  "input_tokens": 71,
+  "output_tokens": 1054,
+  "cache_creation_input_tokens": 10097,
+  "cache_read_input_tokens": 155099,
+  "total_tokens": 166321,
+  "active_tokens": 11222,
+  "turns_count": 9,
+  "tool_calls_count": 6,
+  "tool_calls_breakdown": {
+    "Bash": 1,
+    "Grep": 4,
+    "Read": 1
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "Grep",
+      "result_chars": 83,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 219,
+      "is_error": false
+    },
+    {
+      "tool": "Grep",
+      "result_chars": 14,
+      "is_error": false
+    },
+    {
+      "tool": "Grep",
+      "result_chars": 14,
+      "is_error": false
+    },
+    {
+      "tool": "Grep",
+      "result_chars": 186,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 934,
+      "is_error": false
+    }
+  ],
+  "ts_tool_details": [],
+  "total_context_chars_injected": 1450,
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 41.58,
+  "raw_response": "**Non \u2014 `config/app.config.yaml` n'est consomm\u00e9 nulle part dans le code.**\n\nAucun fichier dans `apps/` ou `packages/` n'importe, ne lit ni ne r\u00e9f\u00e9rence `app.config.yaml`. Les valeurs qui *ressemblent* \u00e0 celles du YAML (pagination default=20, max=100, etc.) sont en r\u00e9alit\u00e9 d\u00e9finies ind\u00e9pendamment via des variables d'environnement dans `apps/api/config.py` et des constantes hard-cod\u00e9es ailleurs.\n\nR\u00e9sum\u00e9 par champ :\n\n| Champ YAML | Consomm\u00e9 ? | Source r\u00e9elle dans le code |\n|---|---|---|\n| `app.name` | Non | hard-cod\u00e9 (`\"tsbench\"`) dans `package.json`, etc. |\n| `app.version` | Non | `package.json` |\n| `features.billing` | Non | pas de feature-flag lu depuis le YAML |\n| `features.exports` | Non | idem |\n| `features.audit` | Non | idem |\n| `pagination.default` (20) | Non | `os.environ.get(\"DEFAULT_PAGE_SIZE\", \"20\")` dans `config.py` |\n| `pagination.max` (100) | Non | `os.environ.get(\"MAX_PAGE_SIZE\", \"100\")` dans `config.py` |\n| `timeouts.db` (5000) | Non | non r\u00e9f\u00e9renc\u00e9 |\n| `timeouts.http` (30000) | Non | non r\u00e9f\u00e9renc\u00e9 |\n\nLe fichier YAML est un **dead config** \u2014 il ne sert \u00e0 rien en l'\u00e9tat.",
+  "error": null,
+  "score": 0,
+  "max_score": 2,
+  "timestamp": "2026-04-15T17:14:38.828020+00:00"
+}

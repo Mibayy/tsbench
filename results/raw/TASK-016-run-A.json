@@ -1,0 +1,43 @@
+{
+  "task_id": "TASK-016",
+  "run": "A",
+  "baseline": "plain",
+  "input_tokens": 4,
+  "output_tokens": 311,
+  "cache_creation_input_tokens": 32680,
+  "cache_read_input_tokens": 32181,
+  "total_tokens": 65176,
+  "active_tokens": 32995,
+  "turns_count": 6,
+  "tool_calls_count": 3,
+  "tool_calls_breakdown": {
+    "Grep": 1,
+    "Glob": 2
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "Grep",
+      "result_chars": 366,
+      "is_error": false
+    },
+    {
+      "tool": "Glob",
+      "result_chars": 81,
+      "is_error": false
+    },
+    {
+      "tool": "Glob",
+      "result_chars": 14,
+      "is_error": false
+    }
+  ],
+  "ts_tool_details": [],
+  "total_context_chars_injected": 461,
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 14.77,
+  "raw_response": "Le fichier de test prioritaire est :\n\n- **`tests/test_billing.py`** \u2014 c'est le seul fichier de test qui couvre directement `compute_invoice`.\n\nAucun autre fichier de test ne r\u00e9f\u00e9rence `compute_invoice`. Lancez :\n\n```bash\npytest tests/test_billing.py -v\n```",
+  "error": null,
+  "score": 0,
+  "max_score": 2,
+  "timestamp": "2026-04-15T13:19:48.579195+00:00"
+}

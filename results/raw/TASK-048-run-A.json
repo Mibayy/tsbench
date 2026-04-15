@@ -1,0 +1,37 @@
+{
+  "task_id": "TASK-048",
+  "run": "A",
+  "baseline": "plain",
+  "input_tokens": 4,
+  "output_tokens": 357,
+  "cache_creation_input_tokens": 8665,
+  "cache_read_input_tokens": 55949,
+  "total_tokens": 64975,
+  "active_tokens": 9026,
+  "turns_count": 4,
+  "tool_calls_count": 2,
+  "tool_calls_breakdown": {
+    "Grep": 2
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "Grep",
+      "result_chars": 384,
+      "is_error": false
+    },
+    {
+      "tool": "Grep",
+      "result_chars": 14,
+      "is_error": false
+    }
+  ],
+  "ts_tool_details": [],
+  "total_context_chars_injected": 398,
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 12.37,
+  "raw_response": "13 fichiers importent `apps/api/config.py` :\n\n**`apps/api/`**\n- `main.py`\n\n**`apps/api/services/`**\n- `auth.py`\n- `audit.py`\n- `billing.py`\n- `exports.py`\n- `integrations.py`\n- `members.py`\n- `notifications.py`\n- `reports.py`\n- `sessions.py`\n- `webhooks.py`\n\n**`apps/api/utils/`**\n- `logging.py`\n- `pagination.py`",
+  "error": null,
+  "score": 2,
+  "max_score": 2,
+  "timestamp": "2026-04-15T14:00:16.980149+00:00"
+}

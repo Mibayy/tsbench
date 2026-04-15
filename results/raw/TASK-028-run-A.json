@@ -1,0 +1,44 @@
+{
+  "task_id": "TASK-028",
+  "run": "A",
+  "baseline": "plain",
+  "input_tokens": 5,
+  "output_tokens": 437,
+  "cache_creation_input_tokens": 9609,
+  "cache_read_input_tokens": 89118,
+  "total_tokens": 99169,
+  "active_tokens": 10051,
+  "turns_count": 6,
+  "tool_calls_count": 3,
+  "tool_calls_breakdown": {
+    "Grep": 1,
+    "Glob": 1,
+    "Read": 1
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "Grep",
+      "result_chars": 2200,
+      "is_error": false
+    },
+    {
+      "tool": "Glob",
+      "result_chars": 19,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 466,
+      "is_error": false
+    }
+  ],
+  "ts_tool_details": [],
+  "total_context_chars_injected": 2685,
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 20.26,
+  "raw_response": "Variables lues dans le code Python mais **absentes** de `config/.env.example` :\n\n| Variable | Fichier(s) |\n|---|---|\n| `SECRET_UNDECLARED_TOKEN` | `apps/api/utils/secret_reader.py:8`, `generate.py:1662` |\n| `TSBENCH_HIDDEN_REGION` | `apps/api/utils/secret_reader.py:9`, `generate.py:1663` |\n\nCe sont les deux seules variables manquantes. Toutes les autres (`DATABASE_URL`, `SECRET_KEY`, `STRIPE_API_KEY`, etc.) sont bien d\u00e9clar\u00e9es dans `.env.example`.",
+  "error": null,
+  "score": 0,
+  "max_score": 2,
+  "timestamp": "2026-04-15T13:45:28.226994+00:00"
+}

@@ -1,0 +1,37 @@
+{
+  "task_id": "TASK-021",
+  "run": "A",
+  "baseline": "plain",
+  "input_tokens": 5,
+  "output_tokens": 560,
+  "cache_creation_input_tokens": 12142,
+  "cache_read_input_tokens": 88386,
+  "total_tokens": 101093,
+  "active_tokens": 12707,
+  "turns_count": 4,
+  "tool_calls_count": 2,
+  "tool_calls_breakdown": {
+    "Bash": 2
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "Bash",
+      "result_chars": 522,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 7904,
+      "is_error": false
+    }
+  ],
+  "ts_tool_details": [],
+  "total_context_chars_injected": 8426,
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 139.19,
+  "raw_response": "Voici les changements entre `v1` et `v2` :\n\n- **`Settings.default_page_size`** (`apps/api/config.py`) \u2014 valeur par d\u00e9faut chang\u00e9e de `20` \u2192 `50`\n- **`compute_invoice` \u2192 `calculate_invoice`** (`apps/api/services/billing.py`) \u2014 fonction renomm\u00e9e, retour `'op'` mis \u00e0 jour aussi\n- **`svc.compute_invoice` \u2192 `svc.calculate_invoice`** (`apps/api/routers/billing.py`) \u2014 6 appels mis \u00e0 jour dans les handlers billing\n- **`authenticate_user`** (`apps/api/services/auth.py`) \u2014 signature chang\u00e9e de `(payload: dict, user_id: int = 0)` \u2192 `(credentials: dict)` (param\u00e8tre `user_id` supprim\u00e9, `payload` renomm\u00e9 en `credentials`)\n- **`delete_webhooks`** (`apps/api/routers/webhooks.py`) \u2014 route et handler enti\u00e8rement supprim\u00e9s\n- **`bulk_import_members`** (`apps/api/services/members.py`) \u2014 fonction enti\u00e8rement supprim\u00e9e\n- **`MembersStatus`** (`packages/shared-types/members.ts`) \u2014 la valeur `'pending'` retir\u00e9e du type union",
+  "error": null,
+  "score": 0,
+  "max_score": 2,
+  "timestamp": "2026-04-15T13:29:04.675146+00:00"
+}

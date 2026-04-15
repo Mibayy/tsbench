@@ -1,0 +1,32 @@
+{
+  "task_id": "TASK-038",
+  "run": "A",
+  "baseline": "plain",
+  "input_tokens": 4,
+  "output_tokens": 769,
+  "cache_creation_input_tokens": 18754,
+  "cache_read_input_tokens": 55961,
+  "total_tokens": 75488,
+  "active_tokens": 19527,
+  "turns_count": 3,
+  "tool_calls_count": 1,
+  "tool_calls_breakdown": {
+    "Read": 1
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "Read",
+      "result_chars": 20530,
+      "is_error": false
+    }
+  ],
+  "ts_tool_details": [],
+  "total_context_chars_injected": 20530,
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 28.11,
+  "raw_response": "Voici l'analyse du module :\n\n## Responsabilit\u00e9s\n\nCouche service pour la facturation (billing). Il expose des op\u00e9rations CRUD et de cycle de vie sur les factures/paiements : calcul, remise, facturation, remboursement, listage, annulation.\n\n## Fonctions principales\n\n**6 fonctions publiques \"m\u00e9tier\"** (toutes prennent `payload: dict, user_id: int`) :\n- `calculate_invoice` \u2014 calcul de facture\n- `apply_discount` \u2014 application de remise\n- `charge_customer` \u2014 d\u00e9bit client (seule \u00e0 valider `payload` non vide via `ValueError`)\n- `refund_payment` \u2014 remboursement\n- `list_invoices` \u2014 listage des factures\n- `void_invoice` \u2014 annulation de facture\n\n**1 validateur** (dupliqu\u00e9 \u2014 `validate_invoice_total` est d\u00e9fini deux fois, lignes 49 et 53) : v\u00e9rifie que `invoice[\"total\"] > 0`.\n\n**~20 fonctions internes** (`*_billing_internal`) : pipeline interne (prepare, finalize, audit, notify, enqueue, reconcile, upsert, serialize, deserialize, rate_limit, retry, batch, stream, index, soft/hard delete, etc.). Elles prennent un `dict`, loguent une \u00e9tape, et retournent les donn\u00e9es telles quelles \u2014 ce sont des stubs/placeholders.\n\n## D\u00e9pendances\n\n| Import | R\u00f4le |\n|---|---|\n| `apps.api.db.get_session`, `supabase_admin` | Acc\u00e8s DB (Supabase admin) |\n| `apps.api.models.billing.Billing` | Mod\u00e8le billing (import\u00e9 mais non utilis\u00e9) |\n| `apps.api.config.settings` | Configuration (import\u00e9 mais non utilis\u00e9) |\n| `apps.api.utils.logging.info/warn/error` | Logging (seul `info` est utilis\u00e9) |\n| `apps.api.utils.errors.NotFoundError/ValidationError` | Exceptions m\u00e9tier (import\u00e9es mais non utilis\u00e9es) |\n\n## Observations notables\n\n- Chaque fonction m\u00e9tier contient un **boilerplate massif de variables inutilis\u00e9es** (`x_0`\u2013`x_17`) \u2014 code mort / g\u00e9n\u00e9r\u00e9.\n- `validate_invoice_total` est **d\u00e9finie deux fois** identiquement (la seconde \u00e9crase la premi\u00e8re).\n- `Billing`, `settings`, `warn`, `error`, `NotFoundError`, `ValidationError` sont import\u00e9s mais **jamais utilis\u00e9s**.\n- Les fonctions m\u00e9tier retournent toutes un dict `{'ok': True, ...}` sans r\u00e9elle logique \u2014 ce sont des stubs.",
+  "error": null,
+  "score": 0,
+  "max_score": 2,
+  "timestamp": "2026-04-15T13:56:11.447349+00:00"
+}

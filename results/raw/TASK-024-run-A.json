@@ -1,0 +1,145 @@
+{
+  "task_id": "TASK-024",
+  "run": "A",
+  "baseline": "plain",
+  "input_tokens": 4,
+  "output_tokens": 541,
+  "cache_creation_input_tokens": 33620,
+  "cache_read_input_tokens": 32350,
+  "total_tokens": 66515,
+  "active_tokens": 34165,
+  "turns_count": 25,
+  "tool_calls_count": 23,
+  "tool_calls_breakdown": {
+    "Agent": 1,
+    "Glob": 1,
+    "Grep": 12,
+    "Bash": 9
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "Glob",
+      "result_chars": 2914,
+      "is_error": false
+    },
+    {
+      "tool": "Grep",
+      "result_chars": 13268,
+      "is_error": false
+    },
+    {
+      "tool": "Grep",
+      "result_chars": 2185,
+      "is_error": false
+    },
+    {
+      "tool": "Grep",
+      "result_chars": 159,
+      "is_error": false
+    },
+    {
+      "tool": "Grep",
+      "result_chars": 133,
+      "is_error": false
+    },
+    {
+      "tool": "Grep",
+      "result_chars": 138,
+      "is_error": false
+    },
+    {
+      "tool": "Grep",
+      "result_chars": 216,
+      "is_error": false
+    },
+    {
+      "tool": "Grep",
+      "result_chars": 37,
+      "is_error": false
+    },
+    {
+      "tool": "Grep",
+      "result_chars": 547,
+      "is_error": false
+    },
+    {
+      "tool": "Grep",
+      "result_chars": 514,
+      "is_error": false
+    },
+    {
+      "tool": "Grep",
+      "result_chars": 514,
+      "is_error": false
+    },
+    {
+      "tool": "Grep",
+      "result_chars": 37,
+      "is_error": false
+    },
+    {
+      "tool": "Grep",
+      "result_chars": 37,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 11,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 11,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 11,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 1389,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 588,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 12673,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 608,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 997,
+      "is_error": false
+    },
+    {
+      "tool": "Bash",
+      "result_chars": 13,
+      "is_error": false
+    },
+    {
+      "tool": "Agent",
+      "result_chars": 2664,
+      "is_error": false
+    }
+  ],
+  "ts_tool_details": [],
+  "total_context_chars_injected": 39664,
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 61.89,
+  "raw_response": "Voici 5 fonctions export\u00e9es jamais appel\u00e9es ailleurs dans le projet :\n\n| # | Fonction | Fichier |\n|---|----------|---------|\n| 1 | `bulkMembers()` | `apps/web/api/members.ts` |\n| 2 | `searchMembers()` | `apps/web/api/members.ts` |\n| 3 | `bulkBilling()` | `apps/web/api/billing.ts` |\n| 4 | `searchWebhooks()` | `apps/web/api/webhooks.ts` |\n| 5 | `bulkNotifications()` | `apps/web/api/notifications.ts` |\n\nCes fonctions `bulk*` et `search*` sont d\u00e9finies et export\u00e9es dans les modules API mais ne sont import\u00e9es ni utilis\u00e9es nulle part dans le reste du code.",
+  "error": null,
+  "score": 0,
+  "max_score": 2,
+  "timestamp": "2026-04-15T17:09:06.170098+00:00"
+}

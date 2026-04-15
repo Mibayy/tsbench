@@ -1,0 +1,48 @@
+{
+  "task_id": "TASK-029",
+  "run": "A",
+  "baseline": "plain",
+  "input_tokens": 5,
+  "output_tokens": 587,
+  "cache_creation_input_tokens": 9262,
+  "cache_read_input_tokens": 88195,
+  "total_tokens": 98049,
+  "active_tokens": 9854,
+  "turns_count": 7,
+  "tool_calls_count": 4,
+  "tool_calls_breakdown": {
+    "Glob": 1,
+    "Read": 3
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "Glob",
+      "result_chars": 62,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 466,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 199,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 836,
+      "is_error": false
+    }
+  ],
+  "ts_tool_details": [],
+  "total_context_chars_injected": 1563,
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 18.79,
+  "raw_response": "**Oui, `config/.env.staging` contient des secrets en clair**, m\u00eame s'ils portent la mention \"placeholder\" :\n\n| Ligne | Variable | Risque |\n|-------|----------|--------|\n| 3 | `SECRET_KEY` | Cl\u00e9 secr\u00e8te applicative |\n| 5 | `STRIPE_API_KEY` | Cl\u00e9 API Stripe |\n| 7 | `STRIPE_WEBHOOK_SECRET` | Secret webhook Stripe |\n| 9 | `AWS_SECRET_ACCESS_KEY` | Cl\u00e9 secr\u00e8te AWS |\n\n**Les deux autres fichiers sont s\u00fbrs** : `.env.example` ne contient que des placeholders vides, et `app.config.yaml` ne contient aucun secret.\n\n**Actions recommand\u00e9es :**\n1. **Ajouter `config/.env.staging` au `.gitignore`** \u2014 ce fichier ne devrait pas \u00eatre versionn\u00e9.\n2. V\u00e9rifier avec `git log -- config/.env.staging` si ces valeurs ont \u00e9t\u00e9 commit\u00e9es dans l'historique.\n3. Si ce sont de vraies cl\u00e9s (m\u00eame de staging), les r\u00e9voquer et les remplacer par un gestionnaire de secrets (Vault, AWS Secrets Manager, etc.).",
+  "error": null,
+  "score": 0,
+  "max_score": 2,
+  "timestamp": "2026-04-15T13:45:47.024035+00:00"
+}

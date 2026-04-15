@@ -1,0 +1,44 @@
+{
+  "task_id": "TASK-050",
+  "run": "A",
+  "baseline": "plain",
+  "input_tokens": 5,
+  "output_tokens": 676,
+  "cache_creation_input_tokens": 9032,
+  "cache_read_input_tokens": 88415,
+  "total_tokens": 98128,
+  "active_tokens": 9713,
+  "turns_count": 6,
+  "tool_calls_count": 3,
+  "tool_calls_breakdown": {
+    "Grep": 1,
+    "Glob": 1,
+    "Read": 1
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "Grep",
+      "result_chars": 159,
+      "is_error": false
+    },
+    {
+      "tool": "Glob",
+      "result_chars": 65,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 885,
+      "is_error": false
+    }
+  ],
+  "ts_tool_details": [],
+  "total_context_chars_injected": 1109,
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 21.61,
+  "raw_response": "La fonction `reconcile_payments` est **auto-contenue** \u2014 elle n'appelle aucune autre fonction et n'importe aucun module externe.\n\n## Backward slice de `reconcile_payments`\n\n**Symboles influen\u00e7ant directement ou transitivement la valeur de retour (`result`) :**\n\n| Symbole | Type | R\u00f4le |\n|---|---|---|\n| `data` | param\u00e8tre | D\u00e9clar\u00e9 mais **jamais utilis\u00e9** (dead parameter) |\n| `result` | variable locale | Accumulateur principal, initialis\u00e9 \u00e0 `0` |\n| `items` | variable locale | `list(range(10))` \u2192 `[0..9]`, pilote les deux boucles `for` |\n| `it_1` | variable de boucle | It\u00e8re sur `items` (lignes 11-15), modifie `result` |\n| `it_5` | variable de boucle | It\u00e8re sur `items` (lignes 30-34), modifie `result` |\n\n**D\u00e9pendances externes : aucune.** Pas d'import, pas d'appel de fonction, pas de variable globale, pas de closure. Le param\u00e8tre `data` est un dead code \u2014 il n'influence pas le r\u00e9sultat.\n\n**Cha\u00eene de d\u00e9pendance transitive :**\n```\nreturn result\n  \u2190 result (arithm\u00e9tique conditionnelle aux lignes 7-29, 30-34)\n    \u2190 items (contr\u00f4le des boucles for)\n      \u2190 range(10) (builtin)\n    \u2190 it_1, it_5 (\u00e9l\u00e9ments extraits de items)\n```\n\nLe slice est enti\u00e8rement clos dans la fonction elle-m\u00eame.",
+  "error": null,
+  "score": 1,
+  "max_score": 2,
+  "timestamp": "2026-04-15T14:00:53.179233+00:00"
+}
