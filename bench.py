@@ -41,6 +41,12 @@ Start by calling mcp__token-savior__switch_project with project "tsbench".
 
 NAVIGATION — When locating a symbol, call find_symbol with level=2 by default (returns only name, file, line, type). Only fetch the body via get_function_source / get_class_source if you need to read the code itself.
 
+BATCH MODE — To read multiple functions/classes/symbols in one call, use the `names` parameter instead of `name`:
+  get_function_source(names=["create_user", "update_user", "delete_user"])
+  find_symbol(names=["foo", "bar"], level=2)
+  get_full_context(names=["x", "y"])
+Returns a JSON dict {name: result}. Max 10 per call. ALWAYS prefer batch over sequential calls.
+
 COMPRENDRE un symbole complet (localisation + source + callers + dépendances) → get_full_context('nom') en un seul call. Utilise depth=0 pour juste source, depth=1 (défaut) pour + deps/dependents, depth=2 pour + change_impact. Ça remplace la chaîne find_symbol → get_function_source → get_dependents.
 
 EDITING — To modify code, ALWAYS use replace_symbol_source or insert_near_symbol. NEVER use Edit or Write on code files (.py, .ts, .tsx, .js, .jsx). Edit/Write are only allowed for config files (.env, .yml, .md, .json).
