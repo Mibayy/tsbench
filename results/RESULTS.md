@@ -1,17 +1,17 @@
 # tsbench — RESULTS
 
-_Generated 2026-04-15T19:53:18.388476+00:00_
+_Generated 2026-04-15T20:20:02.576011+00:00_
 
 ## 1. Résumé exécutif
 
 _Métrique principale : `active_tokens` = input + output + cache_creation (cache_read exclu — contexte réutilisé, proxy du coût quota abonnement)._
 
 - **Tâches appariées** : 60
-- **Réduction active_tokens A→B** : 25.7% (1,030,132 → 765,848)
-- **Turns cumulés** : A=733 · B=519
+- **Réduction active_tokens A→B** : 22.6% (1,030,132 → 797,646)
+- **Turns cumulés** : A=733 · B=556
 - **Score global A** : 67/120 (56%)
-- **Score global B** : 94/120 (78%)
-- **Token Savior** : gagne 19, ex æquo 39, perd 2
+- **Score global B** : 98/120 (82%)
+- **Token Savior** : gagne 22, ex æquo 36, perd 2
 
 ## 2. Tableau principal
 
@@ -41,19 +41,19 @@ _Métrique principale : `active_tokens` = input + output + cache_creation (cache
 | TASK-022 | review | 12347 | 19275 | -56% | 6,295 | 11,471 | -82% | 0/2 | 2/2 |
 | TASK-023 | review | 10140 | 13221 | -30% | 43,584 | 2,005 | +95% | 2/2 | 2/2 |
 | TASK-024 | audit | 34165 | 17284 | +49% | 39,664 | 5,992 | +85% | 0/2 | 1/2 |
-| TASK-025 | audit | 9957 | 12557 | -26% | 112,703 | 382 | +100% | 0/2 | 0/2 |
+| TASK-025 | audit | 9957 | 12751 | -28% | 112,703 | 1,643 | +99% | 0/2 | 1/2 |
 | TASK-026 | audit | 33632 | 27126 | +19% | 113,280 | 46,965 | +59% | 2/2 | 2/2 |
 | TASK-027 | config | 10563 | 20883 | -98% | 937 | 17,937 | -1814% | 0/2 | 2/2 |
 | TASK-028 | config | 10051 | 15898 | -58% | 2,685 | 9,734 | -263% | 0/2 | 2/2 |
 | TASK-029 | config | 9854 | 13181 | -34% | 1,563 | 1,884 | -21% | 0/2 | 2/2 |
 | TASK-030 | infra | 18191 | 14521 | +20% | 840 | 1,490 | -77% | 0/2 | 2/2 |
-| TASK-031 | infra | 10634 | 12121 | -14% | 2,066 | 60 | +97% | 0/2 | 0/2 |
+| TASK-031 | infra | 10634 | 27380 | -157% | 2,066 | 27,473 | -1230% | 0/2 | 2/2 |
 | TASK-032 | testing | 9213 | 4813 | +48% | 341 | 251 | +26% | 0/2 | 2/2 |
 | TASK-033 | testing | 10632 | 6496 | +39% | 1,023 | 2,572 | -151% | 0/2 | 0/2 |
 | TASK-034 | debug | 9644 | 15776 | -64% | 1,754 | 19,169 | -993% | 1/2 | 2/2 |
-| TASK-035 | debug | 22599 | 6501 | +71% | 25,359 | 3,596 | +86% | 2/2 | 0/2 |
+| TASK-035 | debug | 22599 | 13948 | +38% | 25,359 | 3,806 | +85% | 2/2 | 0/2 |
 | TASK-036 | debug | 11367 | 13872 | -22% | 101,205 | 15,405 | +85% | 0/2 | 1/2 |
-| TASK-037 | onboarding | 9995 | 7996 | +20% | 26,813 | 4,665 | +83% | 0/2 | 0/2 |
+| TASK-037 | onboarding | 9995 | 16894 | -69% | 26,813 | 7,802 | +71% | 0/2 | 1/2 |
 | TASK-038 | onboarding | 19527 | 8047 | +59% | 20,530 | 5,720 | +72% | 0/2 | 0/2 |
 | TASK-039 | cross-language | 8950 | 8527 | +5% | 508 | 5,839 | -1049% | 0/2 | 0/2 |
 | TASK-040 | cross-language | 11222 | 7462 | +34% | 1,450 | 5,160 | -256% | 0/2 | 1/2 |
@@ -82,29 +82,29 @@ _Métrique principale : `active_tokens` = input + output + cache_creation (cache
 
 | Catégorie | N | Active A moy | Active B moy | Réduction | Turns A moy | Turns B moy | Score A moy | Score B moy |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| audit | 6 | 19,305 | 16,237 | +16% | 45.3 | 13.7 | 1.33 | 1.33 |
+| audit | 6 | 19,305 | 16,269 | +16% | 45.3 | 13.7 | 1.33 | 1.50 |
 | call_chain | 4 | 12,418 | 11,223 | +10% | 4.5 | 7.8 | 1.25 | 2.00 |
 | config | 3 | 10,156 | 16,654 | -64% | 8.7 | 9.3 | 0.00 | 2.00 |
 | cross-language | 2 | 10,086 | 7,994 | +21% | 6.5 | 9.5 | 0.00 | 0.50 |
-| debug | 3 | 14,537 | 12,050 | +17% | 16.7 | 14.7 | 1.00 | 1.00 |
+| debug | 3 | 14,537 | 14,532 | +0% | 16.7 | 15.0 | 1.00 | 1.00 |
 | dépendants | 4 | 23,455 | 22,281 | +5% | 2.0 | 4.0 | 2.00 | 2.00 |
 | edit | 7 | 18,512 | 11,359 | +39% | 13.0 | 13.9 | 1.71 | 1.71 |
 | git | 2 | 11,770 | 7,546 | +36% | 5.0 | 4.0 | 2.00 | 2.00 |
 | heavy_read | 6 | 20,705 | 10,308 | +50% | 6.8 | 8.3 | 1.50 | 1.83 |
 | impact | 3 | 23,378 | 13,743 | +41% | 8.0 | 5.0 | 0.67 | 2.00 |
-| infra | 2 | 14,412 | 13,321 | +8% | 8.5 | 7.5 | 0.00 | 1.00 |
+| infra | 2 | 14,412 | 20,950 | -45% | 8.5 | 24.5 | 0.00 | 2.00 |
 | localisation | 6 | 14,070 | 17,375 | -23% | 3.7 | 4.7 | 1.17 | 1.50 |
 | navigation | 4 | 23,931 | 5,786 | +76% | 15.8 | 5.2 | 1.25 | 1.75 |
-| onboarding | 2 | 14,761 | 8,022 | +46% | 13.0 | 10.0 | 0.00 | 0.00 |
+| onboarding | 2 | 14,761 | 12,470 | +16% | 13.0 | 11.0 | 0.00 | 0.50 |
 | review | 3 | 11,731 | 16,183 | -38% | 8.3 | 9.3 | 0.67 | 1.67 |
 | testing | 3 | 18,460 | 5,335 | +71% | 9.0 | 5.7 | 0.67 | 1.33 |
 
 ## 3bis. Analyse chars_injected (ce que TS prétend économiser)
 
 - **Pairs mesurés** : 59
-- **Chars injectés cumulés** : A=1,431,624 · B=359,841 · Δ=+75%
-- **TS gagne sur chars** : 35/59
-- **TS perd sur chars** : 24/59
+- **Chars injectés cumulés** : A=1,431,624 · B=391,862 · Δ=+73%
+- **TS gagne sur chars** : 34/59
+- **TS perd sur chars** : 25/59
 - **Ex æquo** : 0/59
 
 ### Tâches où TS gagne sur chars_injected
@@ -112,17 +112,17 @@ _Métrique principale : `active_tokens` = input + output + cache_creation (cache
 - **TASK-052** — chars 190,723→3,737 (-98%) | active 17,142→8,375 (-51%)
 - **TASK-043** — chars 196,882→16,416 (-92%) | active 19,531→20,618 (+6%)
 - **TASK-058** — chars 162,108→3,869 (-98%) | active 10,397→7,285 (-30%)
-- **TASK-025** — chars 112,703→382 (-100%) | active 9,957→12,557 (+26%)
+- **TASK-025** — chars 112,703→1,643 (-99%) | active 9,957→12,751 (+28%)
 - **TASK-036** — chars 101,205→15,405 (-85%) | active 11,367→13,872 (+22%)
 - **TASK-026** — chars 113,280→46,965 (-59%) | active 33,632→27,126 (-19%)
 - **TASK-051** — chars 48,374→4,988 (-90%) | active 34,877→6,746 (-81%)
 - **TASK-023** — chars 43,584→2,005 (-95%) | active 10,140→13,221 (+30%)
 - **TASK-053** — chars 77,398→41,516 (-46%) | active 10,539→24,795 (+135%)
 - **TASK-024** — chars 39,664→5,992 (-85%) | active 34,165→17,284 (-49%)
-- **TASK-037** — chars 26,813→4,665 (-83%) | active 9,995→7,996 (-20%)
-- **TASK-035** — chars 25,359→3,596 (-86%) | active 22,599→6,501 (-71%)
+- **TASK-035** — chars 25,359→3,806 (-85%) | active 22,599→13,948 (-38%)
 - **TASK-044** — chars 30,789→9,479 (-69%) | active 23,485→8,664 (-63%)
 - **TASK-055** — chars 20,617→353 (-98%) | active 19,564→5,094 (-74%)
+- **TASK-037** — chars 26,813→7,802 (-71%) | active 9,995→16,894 (+69%)
 - **TASK-047** — chars 18,895→180 (-99%) | active 42,109→4,697 (-89%)
 - **TASK-056** — chars 20,540→2,644 (-87%) | active 19,813→8,197 (-59%)
 - **TASK-038** — chars 20,530→5,720 (-72%) | active 19,527→8,047 (-59%)
@@ -134,7 +134,6 @@ _Métrique principale : `active_tokens` = input + output + cache_creation (cache
 - **TASK-009** — chars 5,231→754 (-86%) | active 44,160→12,734 (-71%)
 - **TASK-057** — chars 3,487→239 (-93%) | active 35,534→4,695 (-87%)
 - **TASK-008** — chars 3,227→347 (-89%) | active 18,033→16,587 (-8%)
-- **TASK-031** — chars 2,066→60 (-97%) | active 10,634→12,121 (+14%)
 - **TASK-001** — chars 1,761→121 (-93%) | active 9,080→11,893 (+31%)
 - **TASK-007** — chars 1,761→155 (-91%) | active 9,136→12,256 (+34%)
 - **TASK-060** — chars 11,110→10,451 (-6%) | active 14,378→8,926 (-38%)
@@ -147,6 +146,7 @@ _Métrique principale : `active_tokens` = input + output + cache_creation (cache
 
 ### Tâches où TS perd sur chars_injected
 
+- **TASK-031** — chars 2,066→27,473 (+1230%) | active 10,634→27,380 (+157%)
 - **TASK-034** — chars 1,754→19,169 (+993%) | active 9,644→15,776 (+64%)
 - **TASK-027** — chars 937→17,937 (+1814%) | active 10,563→20,883 (+98%)
 - **TASK-054** — chars 1,027→9,717 (+846%) | active 10,769→11,550 (+7%)
@@ -176,25 +176,25 @@ _Métrique principale : `active_tokens` = input + output + cache_creation (cache
 
 _Coût fixe B = active_tokens B − chars_injected B (baseline TS : system prompt, schémas ToolSearch). Gain chars = chars_A − chars_B. TS rentable sur active_tokens si : (active_A − active_B) ≥ 0, i.e. le gain chars_injected doit couvrir le surcoût baseline._
 
-- **Surcoût moyen active_tokens B − A** : -4,526 tokens / tâche
-- **Cas où B ≤ A sur active** : 38/59
+- **Surcoût moyen active_tokens B − A** : -3,987 tokens / tâche
+- **Cas où B ≤ A sur active** : 37/59
 
 | Task | Gain chars (A−B) | Surcoût active (B−A) |
 |---|---:|---:|
 | TASK-052 | +186,986 | -8,767 |
 | TASK-043 | +180,466 | +1,087 |
 | TASK-058 | +158,239 | -3,112 |
-| TASK-025 | +112,321 | +2,600 |
+| TASK-025 | +111,060 | +2,794 |
 | TASK-036 | +85,800 | +2,505 |
 | TASK-026 | +66,315 | -6,506 |
 | TASK-051 | +43,386 | -28,131 |
 | TASK-023 | +41,579 | +3,081 |
 | TASK-053 | +35,882 | +14,256 |
 | TASK-024 | +33,672 | -16,881 |
-| TASK-037 | +22,148 | -1,999 |
-| TASK-035 | +21,763 | -16,098 |
+| TASK-035 | +21,553 | -8,651 |
 | TASK-044 | +21,310 | -14,821 |
 | TASK-055 | +20,264 | -14,470 |
+| TASK-037 | +19,011 | +6,899 |
 | TASK-047 | +18,715 | -37,412 |
 | TASK-056 | +17,896 | -11,616 |
 | TASK-038 | +14,810 | -11,480 |
@@ -206,7 +206,6 @@ _Coût fixe B = active_tokens B − chars_injected B (baseline TS : system promp
 | TASK-009 | +4,477 | -31,426 |
 | TASK-057 | +3,248 | -30,839 |
 | TASK-008 | +2,880 | -1,446 |
-| TASK-031 | +2,006 | +1,487 |
 | TASK-001 | +1,640 | +2,813 |
 | TASK-007 | +1,606 | +3,120 |
 | TASK-060 | +659 | -5,452 |
@@ -240,6 +239,7 @@ _Coût fixe B = active_tokens B − chars_injected B (baseline TS : system promp
 | TASK-054 | -8,690 | +781 |
 | TASK-027 | -17,000 | +10,320 |
 | TASK-034 | -17,415 | +6,132 |
+| TASK-031 | -25,407 | +16,746 |
 
 
 ## 4. Tâches où Token Savior perd
@@ -256,14 +256,15 @@ _Coût fixe B = active_tokens B − chars_injected B (baseline TS : system promp
 - **TASK-021** — active 12,707 → 16,054 | score 0→1
 - **TASK-022** — active 12,347 → 19,275 | score 0→2
 - **TASK-023** — active 10,140 → 13,221 | score 2→2
-- **TASK-025** — active 9,957 → 12,557 | score 0→0
+- **TASK-025** — active 9,957 → 12,751 | score 0→1
 - **TASK-027** — active 10,563 → 20,883 | score 0→2
 - **TASK-028** — active 10,051 → 15,898 | score 0→2
 - **TASK-029** — active 9,854 → 13,181 | score 0→2
-- **TASK-031** — active 10,634 → 12,121 | score 0→0
+- **TASK-031** — active 10,634 → 27,380 | score 0→2
 - **TASK-034** — active 9,644 → 15,776 | score 1→2
-- **TASK-035** — active 22,599 → 6,501 | score 2→0
+- **TASK-035** — active 22,599 → 13,948 | score 2→0
 - **TASK-036** — active 11,367 → 13,872 | score 0→1
+- **TASK-037** — active 9,995 → 16,894 | score 0→1
 - **TASK-043** — active 19,531 → 20,618 | score 1→1
 - **TASK-052** — active 17,142 → 8,375 | score 2→1
 - **TASK-053** — active 10,539 → 24,795 | score 2→2
@@ -277,12 +278,15 @@ _Coût fixe B = active_tokens B − chars_injected B (baseline TS : system promp
 - **TASK-021** — score A=0, score B=1/2
 - **TASK-022** — score A=0, score B=2/2
 - **TASK-024** — score A=0, score B=1/2
+- **TASK-025** — score A=0, score B=1/2
 - **TASK-027** — score A=0, score B=2/2
 - **TASK-028** — score A=0, score B=2/2
 - **TASK-029** — score A=0, score B=2/2
 - **TASK-030** — score A=0, score B=2/2
+- **TASK-031** — score A=0, score B=2/2
 - **TASK-032** — score A=0, score B=2/2
 - **TASK-036** — score A=0, score B=1/2
+- **TASK-037** — score A=0, score B=1/2
 - **TASK-040** — score A=0, score B=1/2
 - **TASK-045** — score A=0, score B=2/2
 - **TASK-047** — score A=0, score B=2/2
@@ -296,44 +300,44 @@ _Coût fixe B = active_tokens B − chars_injected B (baseline TS : system promp
 - `Glob` : 34
 - `Agent` : 13
 
-**Run B (token-savior)** — top 5 (TS/total = 0/311 = 0%) :
+**Run B (token-savior)** — top 5 (TS/total = 0/338 = 0%) :
 - `mcp__token-savior-recall__switch_project` : 60
-- `mcp__token-savior-recall__get_function_source` : 40
-- `mcp__token-savior-recall__search_codebase` : 36
-- `mcp__token-savior-recall__get_functions` : 33
-- `mcp__token-savior-recall__get_dependents` : 17
+- `mcp__token-savior-recall__search_codebase` : 42
+- `mcp__token-savior-recall__get_function_source` : 41
+- `mcp__token-savior-recall__get_functions` : 34
+- `mcp__token-savior-recall__get_structure_summary` : 23
 
 ## 7. Rapidité
 
-- **Wall time moyen / tâche** : A=51.0s · B=41.5s (-19%)
-- **Wall time total (14 tâches)** : A=3061.9s · B=2489.9s (-19%)
+- **Wall time moyen / tâche** : A=51.0s · B=43.1s (-16%)
+- **Wall time total (14 tâches)** : A=3061.9s · B=2587.1s (-16%)
 
 ### Par catégorie
 
 | Catégorie | N | Wall A moy | Wall B moy | Δ | Wall A total | Wall B total |
 |---|---:|---:|---:|---:|---:|---:|
-| audit | 6 | 110.3s | 39.3s | -64% | 661.6s | 235.6s |
+| audit | 6 | 110.3s | 39.5s | -64% | 661.6s | 236.9s |
 | call_chain | 4 | 13.7s | 37.1s | +172% | 54.7s | 148.5s |
 | config | 3 | 25.4s | 27.3s | +7% | 76.2s | 81.8s |
 | cross-language | 2 | 26.9s | 36.0s | +34% | 53.8s | 72.0s |
-| debug | 3 | 47.0s | 57.2s | +22% | 140.9s | 171.7s |
+| debug | 3 | 47.0s | 58.6s | +25% | 140.9s | 175.8s |
 | dépendants | 4 | 11.1s | 22.3s | +101% | 44.5s | 89.3s |
 | edit | 7 | 87.5s | 42.4s | -52% | 612.3s | 296.5s |
 | git | 2 | 79.3s | 25.0s | -69% | 158.5s | 49.9s |
 | heavy_read | 6 | 51.8s | 91.0s | +76% | 310.9s | 546.1s |
 | impact | 3 | 50.9s | 23.8s | -53% | 152.7s | 71.5s |
-| infra | 2 | 57.0s | 37.2s | -35% | 114.1s | 74.4s |
+| infra | 2 | 57.0s | 81.5s | +43% | 114.1s | 163.0s |
 | localisation | 6 | 14.9s | 20.8s | +40% | 89.1s | 124.9s |
 | navigation | 4 | 34.3s | 61.1s | +78% | 137.1s | 244.5s |
-| onboarding | 2 | 43.6s | 39.3s | -10% | 87.2s | 78.5s |
+| onboarding | 2 | 43.6s | 40.9s | -6% | 87.2s | 81.8s |
 | review | 3 | 94.3s | 38.7s | -59% | 283.0s | 116.2s |
 | testing | 3 | 28.4s | 29.5s | +4% | 85.3s | 88.4s |
 
 ### Tâches où TS est significativement plus rapide (>20%)
 
-- **TASK-025** — 116.1s → 21.0s (-82%)
 - **TASK-015** — 116.3s → 21.3s (-82%)
 - **TASK-021** — 139.2s → 26.5s (-81%)
+- **TASK-025** — 116.1s → 22.2s (-81%)
 - **TASK-026** — 132.4s → 27.8s (-79%)
 - **TASK-058** — 122.8s → 27.3s (-78%)
 - **TASK-055** — 81.0s → 18.2s (-78%)
@@ -345,16 +349,15 @@ _Coût fixe B = active_tokens B − chars_injected B (baseline TS : system promp
 - **TASK-018** — 78.2s → 29.7s (-62%)
 - **TASK-057** — 42.7s → 18.6s (-56%)
 - **TASK-023** — 46.9s → 21.4s (-54%)
-- **TASK-031** — 25.2s → 12.0s (-52%)
 - **TASK-020** — 93.0s → 45.0s (-52%)
 - **TASK-051** — 90.1s → 48.1s (-47%)
 - **TASK-019** — 98.4s → 57.3s (-42%)
 - **TASK-054** — 96.5s → 58.8s (-39%)
 - **TASK-036** — 99.5s → 67.0s (-33%)
-- **TASK-037** — 59.1s → 40.5s (-31%)
 - **TASK-030** — 88.8s → 62.3s (-30%)
 - **TASK-022** — 96.9s → 68.2s (-30%)
 - **TASK-024** — 61.9s → 45.4s (-27%)
+- **TASK-037** — 59.1s → 43.7s (-26%)
 - **TASK-053** — 94.5s → 72.3s (-24%)
 - **TASK-005** — 28.1s → 22.2s (-21%)
 
@@ -365,6 +368,7 @@ _Coût fixe B = active_tokens B − chars_injected B (baseline TS : system promp
 - **TASK-041** — 26.0s → 129.3s (+397%)
 - **TASK-034** — 16.9s → 79.1s (+367%)
 - **TASK-011** — 13.8s → 59.9s (+336%)
+- **TASK-031** — 25.2s → 100.6s (+299%)
 - **TASK-012** — 13.6s → 41.0s (+201%)
 - **TASK-046** — 28.7s → 86.0s (+199%)
 - **TASK-039** — 12.2s → 36.1s (+196%)
@@ -386,6 +390,7 @@ _Coût fixe B = active_tokens B − chars_injected B (baseline TS : system promp
 - **TASK-038** — 28.1s → 38.0s (+35%)
 - **TASK-003** — 13.7s → 17.9s (+30%)
 - **TASK-016** — 14.8s → 19.0s (+29%)
+- **TASK-035** — 24.4s → 29.7s (+22%)
 
 
 ## 8. Données brutes

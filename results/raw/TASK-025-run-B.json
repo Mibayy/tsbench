@@ -3,11 +3,11 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 5,
-  "output_tokens": 389,
-  "cache_creation_input_tokens": 12163,
-  "cache_read_input_tokens": 125285,
-  "total_tokens": 137842,
-  "active_tokens": 12557,
+  "output_tokens": 436,
+  "cache_creation_input_tokens": 12310,
+  "cache_read_input_tokens": 124214,
+  "total_tokens": 136965,
+  "active_tokens": 12751,
   "turns_count": 4,
   "tool_calls_count": 2,
   "tool_calls_breakdown": {
@@ -22,7 +22,7 @@
     },
     {
       "tool": "mcp__token-savior-recall__find_hotspots",
-      "result_chars": 322,
+      "result_chars": 1583,
       "is_error": false
     }
   ],
@@ -38,28 +38,28 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "find_hotspots",
-      "time_ms": 179
+      "time_ms": 138
     },
     {
       "tool": "find_hotspots",
       "args": {
-        "max_results": 3
+        "max_results": 20
       },
-      "result_chars": 322,
+      "result_chars": 1583,
       "result_empty": false,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": null,
-      "time_ms": 690
+      "time_ms": 779
     }
   ],
-  "total_context_chars_injected": 382,
+  "total_context_chars_injected": 1643,
   "ts_tool_calls_count": 2,
-  "wall_time_seconds": 21.01,
-  "raw_response": "Voici les 3 fonctions les plus complexes du projet :\n\n| # | Fonction | Fichier | Score | Lignes | Branches | Prof. max |\n|---|----------|---------|------:|-------:|---------:|----------:|\n| 1 | `generate_report()` | `bench.py:664` | **148.9** | 223 | 38 | 4 |\n| 2 | `gen_web()` | `generate.py:779` | **135.3** | 331 | 15 | 4 |\n| 3 | `parse_stream_json()` | `bench.py:227` | **124.0** | 165 | 32 | 7 |\n\n`generate_report()` domine avec 38 branches sur 223 lignes. `parse_stream_json()` est notable pour sa profondeur d'imbrication maximale (7 niveaux), signe de logique conditionnelle tr\u00e8s enchev\u00eatr\u00e9e.",
+  "wall_time_seconds": 22.24,
+  "raw_response": "Voici les **3 fonctions les plus complexes** du code applicatif (`apps/` et `packages/`), en excluant `bench.py` et `generate.py` :\n\n| # | Score | Fonction | Fichier | Branches | Profondeur |\n|---|-------|----------|---------|----------|------------|\n| 1 | **44.4** | `authenticate_multi_factor()` | `apps/api/services/complex_auth.py:3` | 15 | 3 |\n| 2 | **44.4** | `route_webhook_event()` | `apps/api/services/complex_routing.py:3` | 15 | 3 |\n| 3 | **44.4** | `reconcile_payments()` | `apps/api/services/complex_billing.py:3` | 15 | 3 |\n\nCes trois fonctions ont un score identique (44.4) avec 33 lignes et 15 branches chacune. Juste derri\u00e8re se trouvent `orchestrate_nightly_job()` (worker, m\u00eame score) et `validate_contract()` (score 36.9, 12 branches).",
   "error": null,
-  "score": 0,
+  "score": 1,
   "max_score": 2,
-  "timestamp": "2026-04-15T18:39:26.818529+00:00"
+  "timestamp": "2026-04-15T20:15:24.773620+00:00"
 }
