@@ -2,20 +2,17 @@
   "task_id": "TASK-028",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 8,
-  "output_tokens": 722,
-  "cache_creation_input_tokens": 9081,
-  "cache_read_input_tokens": 266856,
-  "total_tokens": 276667,
-  "active_tokens": 9811,
-  "turns_count": 9,
-  "tool_calls_count": 6,
+  "input_tokens": 5,
+  "output_tokens": 603,
+  "cache_creation_input_tokens": 15290,
+  "cache_read_input_tokens": 125271,
+  "total_tokens": 141169,
+  "active_tokens": 15898,
+  "turns_count": 5,
+  "tool_calls_count": 2,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__search_codebase": 2,
-    "mcp__token-savior-recall__list_files": 1,
-    "mcp__token-savior-recall__get_structure_summary": 1,
-    "mcp__token-savior-recall__get_function_source": 1
+    "mcp__token-savior-recall__analyze_config": 1
   },
   "tool_calls_detail": [
     {
@@ -24,28 +21,8 @@
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__search_codebase",
-      "result_chars": 3272,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__list_files",
-      "result_chars": 45,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_structure_summary",
-      "result_chars": 36,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 58,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__search_codebase",
-      "result_chars": 4786,
+      "tool": "mcp__token-savior-recall__analyze_config",
+      "result_chars": 9674,
       "is_error": false
     }
   ],
@@ -60,83 +37,31 @@
       "is_error": false,
       "call_index": 0,
       "preceded_by": null,
-      "followed_by": "search_codebase",
-      "time_ms": 113
+      "followed_by": "analyze_config",
+      "time_ms": 115
     },
     {
-      "tool": "search_codebase",
+      "tool": "analyze_config",
       "args": {
-        "pattern": "os\\.environ|os\\.getenv|environ\\.get|environ\\["
+        "checks": [
+          "orphans"
+        ]
       },
-      "result_chars": 3272,
+      "result_chars": 9674,
       "result_empty": false,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
-      "followed_by": "list_files",
-      "time_ms": 474
-    },
-    {
-      "tool": "list_files",
-      "args": {
-        "pattern": "*env*"
-      },
-      "result_chars": 45,
-      "result_empty": true,
-      "is_error": false,
-      "call_index": 2,
-      "preceded_by": "search_codebase",
-      "followed_by": "get_structure_summary",
-      "time_ms": 468
-    },
-    {
-      "tool": "get_structure_summary",
-      "args": {
-        "file_path": "config/.env.example"
-      },
-      "result_chars": 36,
-      "result_empty": true,
-      "is_error": false,
-      "call_index": 3,
-      "preceded_by": "list_files",
-      "followed_by": "get_function_source",
-      "time_ms": 42
-    },
-    {
-      "tool": "get_function_source",
-      "args": {
-        "name": "config/.env.example",
-        "level": 0
-      },
-      "result_chars": 58,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 4,
-      "preceded_by": "get_structure_summary",
-      "followed_by": "search_codebase",
-      "time_ms": 245
-    },
-    {
-      "tool": "search_codebase",
-      "args": {
-        "pattern": "^[A-Z_]+=",
-        "project": "tsbench"
-      },
-      "result_chars": 4786,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 5,
-      "preceded_by": "get_function_source",
       "followed_by": null,
-      "time_ms": 90
+      "time_ms": 631
     }
   ],
-  "total_context_chars_injected": 8257,
-  "ts_tool_calls_count": 6,
-  "wall_time_seconds": 29.29,
-  "raw_response": "Voici les variables d'environnement lues dans le code Python (via `os.environ.get`) mais **absentes** de `config/.env.example` :\n\n| Variable | Fichier | Ligne |\n|---|---|---|\n| `SECRET_UNDECLARED_TOKEN` | `apps/api/utils/secret_reader.py` | 8 |\n| `TSBENCH_HIDDEN_REGION` | `apps/api/utils/secret_reader.py` | 9 |\n\nToutes les autres variables (`DATABASE_URL`, `SECRET_KEY`, `STRIPE_API_KEY`, `STRIPE_WEBHOOK_SECRET`, `REDIS_URL`, `LOG_LEVEL`, `ALLOWED_ORIGINS`, `MAX_PAGE_SIZE`, `DEFAULT_PAGE_SIZE`) sont bien d\u00e9clar\u00e9es dans `config/.env.example`.",
+  "total_context_chars_injected": 9734,
+  "ts_tool_calls_count": 2,
+  "wall_time_seconds": 20.25,
+  "raw_response": "Variables d'environnement lues dans le code Python (`apps/api/`) mais absentes de `config/.env.example` :\n\n| Variable | Fichier |\n|---|---|\n| `DATABASE_URL` | `apps/api/config.py:9` |\n| `SECRET_KEY` | `apps/api/config.py:10` |\n| `STRIPE_API_KEY` | `apps/api/config.py:11` |\n| `STRIPE_WEBHOOK_SECRET` | `apps/api/config.py:12` |\n| `REDIS_URL` | `apps/api/config.py:13` |\n| `LOG_LEVEL` | `apps/api/config.py:14` |\n| `ALLOWED_ORIGINS` | `apps/api/config.py:15` |\n| `DEFAULT_PAGE_SIZE` | `apps/api/config.py:5` |\n| `MAX_PAGE_SIZE` | `apps/api/config.py:17` |\n| `SECRET_UNDECLARED_TOKEN` | `apps/api/utils/secret_reader.py:7` |\n| `TSBENCH_HIDDEN_REGION` | `apps/api/utils/secret_reader.py:8` |\n\n**11 variables** au total. Les 9 premi\u00e8res sont des variables de configuration classiques. Les 2 derni\u00e8res (`SECRET_UNDECLARED_TOKEN`, `TSBENCH_HIDDEN_REGION`) dans `secret_reader.py` semblent particuli\u00e8rement sensibles \u2014 elles ne devraient probablement pas \u00eatre lues sans \u00eatre d\u00e9clar\u00e9es dans `.env.example` (m\u00eame avec des valeurs placeholder).",
   "error": null,
-  "score": 0,
+  "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T12:48:04.066902+00:00"
+  "timestamp": "2026-04-15T18:40:57.326106+00:00"
 }

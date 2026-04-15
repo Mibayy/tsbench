@@ -3,12 +3,12 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 6,
-  "output_tokens": 392,
-  "cache_creation_input_tokens": 44623,
-  "cache_read_input_tokens": 132789,
-  "total_tokens": 177810,
-  "active_tokens": 45021,
-  "turns_count": 6,
+  "output_tokens": 383,
+  "cache_creation_input_tokens": 4705,
+  "cache_read_input_tokens": 176168,
+  "total_tokens": 181262,
+  "active_tokens": 5094,
+  "turns_count": 5,
   "tool_calls_count": 3,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
@@ -44,7 +44,7 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "find_symbol",
-      "time_ms": 298
+      "time_ms": 92
     },
     {
       "tool": "find_symbol",
@@ -58,14 +58,14 @@
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": "insert_near_symbol",
-      "time_ms": 380
+      "time_ms": 368
     },
     {
       "tool": "insert_near_symbol",
       "args": {
         "symbol_name": "calculate_invoice",
-        "position": "after",
         "content": "\n\ndef validate_invoice_total(invoice: dict) -> bool:\n    return invoice[\"total\"] > 0\n",
+        "position": "after",
         "file_path": "apps/api/services/billing.py"
       },
       "result_chars": 184,
@@ -74,15 +74,15 @@
       "call_index": 2,
       "preceded_by": "find_symbol",
       "followed_by": null,
-      "time_ms": 66
+      "time_ms": 110
     }
   ],
   "total_context_chars_injected": 353,
   "ts_tool_calls_count": 3,
-  "wall_time_seconds": 18.67,
-  "raw_response": "Fonction `validate_invoice_total` ins\u00e9r\u00e9e \u00e0 la ligne 47 de `apps/api/services/billing.py`, juste apr\u00e8s `calculate_invoice`. Elle retourne `True` si `invoice[\"total\"] > 0`, `False` sinon.",
+  "wall_time_seconds": 18.18,
+  "raw_response": "Fonction `validate_invoice_total` ins\u00e9r\u00e9e apr\u00e8s `calculate_invoice` \u00e0 la ligne 47 de `apps/api/services/billing.py`. Elle retourne `True` si `invoice[\"total\"] > 0`, `False` sinon.",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T13:06:16.947140+00:00"
+  "timestamp": "2026-04-15T19:49:47.693815+00:00"
 }

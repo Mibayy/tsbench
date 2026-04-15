@@ -2,39 +2,22 @@
   "task_id": "TASK-015",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 7,
-  "output_tokens": 621,
-  "cache_creation_input_tokens": 12070,
-  "cache_read_input_tokens": 212601,
-  "total_tokens": 225299,
-  "active_tokens": 12698,
-  "turns_count": 9,
-  "tool_calls_count": 6,
+  "input_tokens": 6,
+  "output_tokens": 387,
+  "cache_creation_input_tokens": 12252,
+  "cache_read_input_tokens": 170524,
+  "total_tokens": 183169,
+  "active_tokens": 12645,
+  "turns_count": 5,
+  "tool_calls_count": 3,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__get_structure_summary": 1,
-    "mcp__token-savior-recall__get_change_impact": 2,
     "mcp__token-savior-recall__get_file_dependents": 2
   },
   "tool_calls_detail": [
     {
       "tool": "mcp__token-savior-recall__switch_project",
       "result_chars": 60,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_structure_summary",
-      "result_chars": 128,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_change_impact",
-      "result_chars": 58,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_change_impact",
-      "result_chars": 58,
       "is_error": false
     },
     {
@@ -59,47 +42,8 @@
       "is_error": false,
       "call_index": 0,
       "preceded_by": null,
-      "followed_by": "get_structure_summary",
-      "time_ms": 77
-    },
-    {
-      "tool": "get_structure_summary",
-      "args": {
-        "file_path": "apps/api/cycles/mod_a.py"
-      },
-      "result_chars": 128,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 1,
-      "preceded_by": "switch_project",
-      "followed_by": "get_change_impact",
-      "time_ms": 313
-    },
-    {
-      "tool": "get_change_impact",
-      "args": {
-        "name": "a_call"
-      },
-      "result_chars": 58,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 2,
-      "preceded_by": "get_structure_summary",
-      "followed_by": "get_change_impact",
-      "time_ms": 711
-    },
-    {
-      "tool": "get_change_impact",
-      "args": {
-        "name": "a_leaf"
-      },
-      "result_chars": 58,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 3,
-      "preceded_by": "get_change_impact",
       "followed_by": "get_file_dependents",
-      "time_ms": 81
+      "time_ms": 110
     },
     {
       "tool": "get_file_dependents",
@@ -109,10 +53,10 @@
       "result_chars": 28,
       "result_empty": true,
       "is_error": false,
-      "call_index": 4,
-      "preceded_by": "get_change_impact",
+      "call_index": 1,
+      "preceded_by": "switch_project",
       "followed_by": "get_file_dependents",
-      "time_ms": 41
+      "time_ms": 585
     },
     {
       "tool": "get_file_dependents",
@@ -122,18 +66,18 @@
       "result_chars": 28,
       "result_empty": true,
       "is_error": false,
-      "call_index": 5,
+      "call_index": 2,
       "preceded_by": "get_file_dependents",
       "followed_by": null,
-      "time_ms": 38
+      "time_ms": 84
     }
   ],
-  "total_context_chars_injected": 360,
-  "ts_tool_calls_count": 6,
-  "wall_time_seconds": 27.29,
-  "raw_response": "Voici l'impact aval de `apps/api/cycles/mod_a.py` :\n\n**Direct :**\n- `apps/api/cycles/mod_b.py` \u2014 importe depuis `mod_a`\n\n**Transitif :**\n- Aucun autre fichier au-del\u00e0. `mod_b.py` pointe uniquement vers `mod_a.py` (d\u00e9pendance cyclique entre les deux modules), donc l'impact est contenu \u00e0 ce couple `mod_a \u2194 mod_b`.\n\nLes fonctions `a_call()` et `a_leaf()` n'ont pas de d\u00e9pendants enregistr\u00e9s au-del\u00e0 de `mod_b`. Seul `mod_b.py` est susceptible d'\u00eatre affect\u00e9 par vos modifications.",
+  "total_context_chars_injected": 116,
+  "ts_tool_calls_count": 3,
+  "wall_time_seconds": 21.31,
+  "raw_response": "Il y a une **d\u00e9pendance circulaire** entre ces deux fichiers :\n\n- **Direct** : `apps/api/cycles/mod_b.py` importe depuis `mod_a.py`\n- **Transitif** : `mod_b.py` \u2192 `mod_a.py` (cycle ferm\u00e9, pas de propagation au-del\u00e0)\n\n**Seul `apps/api/cycles/mod_b.py`** est susceptible d'\u00eatre affect\u00e9 en aval par vos modifications \u00e0 `mod_a.py`. Aucun autre fichier du projet n'importe depuis ces deux modules.",
   "error": null,
-  "score": 0,
+  "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T12:38:58.235225+00:00"
+  "timestamp": "2026-04-15T18:10:52.185078+00:00"
 }

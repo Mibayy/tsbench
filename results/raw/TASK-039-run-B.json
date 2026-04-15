@@ -2,19 +2,20 @@
   "task_id": "TASK-039",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 7,
-  "output_tokens": 571,
-  "cache_creation_input_tokens": 5187,
-  "cache_read_input_tokens": 219253,
-  "total_tokens": 225018,
-  "active_tokens": 5765,
-  "turns_count": 8,
-  "tool_calls_count": 5,
+  "input_tokens": 10,
+  "output_tokens": 662,
+  "cache_creation_input_tokens": 7855,
+  "cache_read_input_tokens": 368064,
+  "total_tokens": 376591,
+  "active_tokens": 8527,
+  "turns_count": 10,
+  "tool_calls_count": 7,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
     "mcp__token-savior-recall__find_symbol": 1,
+    "mcp__token-savior-recall__search_codebase": 3,
     "mcp__token-savior-recall__list_files": 1,
-    "mcp__token-savior-recall__get_structure_summary": 2
+    "mcp__token-savior-recall__get_structure_summary": 1
   },
   "tool_calls_detail": [
     {
@@ -24,7 +25,17 @@
     },
     {
       "tool": "mcp__token-savior-recall__find_symbol",
-      "result_chars": 38,
+      "result_chars": 175,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 2387,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 2387,
       "is_error": false
     },
     {
@@ -38,8 +49,8 @@
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__get_structure_summary",
-      "result_chars": 192,
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 431,
       "is_error": false
     }
   ],
@@ -55,34 +66,63 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "find_symbol",
-      "time_ms": 111
+      "time_ms": 195
     },
     {
       "tool": "find_symbol",
       "args": {
         "name": "Members",
-        "level": 2
+        "level": 0
       },
-      "result_chars": 38,
-      "result_empty": true,
+      "result_chars": 175,
+      "result_empty": false,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
-      "followed_by": "list_files",
-      "time_ms": 524
+      "followed_by": "search_codebase",
+      "time_ms": 711
     },
     {
-      "tool": "list_files",
+      "tool": "search_codebase",
       "args": {
-        "pattern": "**/members*"
+        "pattern": "Members",
+        "max_results": 20
       },
-      "result_chars": 214,
+      "result_chars": 2387,
       "result_empty": false,
       "is_error": false,
       "call_index": 2,
       "preceded_by": "find_symbol",
+      "followed_by": "search_codebase",
+      "time_ms": 70
+    },
+    {
+      "tool": "search_codebase",
+      "args": {
+        "pattern": "Members",
+        "max_results": 20,
+        "project": "tsbench"
+      },
+      "result_chars": 2387,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 3,
+      "preceded_by": "search_codebase",
+      "followed_by": "list_files",
+      "time_ms": 83
+    },
+    {
+      "tool": "list_files",
+      "args": {
+        "pattern": "**/shared-types/**"
+      },
+      "result_chars": 214,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 4,
+      "preceded_by": "search_codebase",
       "followed_by": "get_structure_summary",
-      "time_ms": 45
+      "time_ms": 84
     },
     {
       "tool": "get_structure_summary",
@@ -92,31 +132,32 @@
       "result_chars": 185,
       "result_empty": false,
       "is_error": false,
-      "call_index": 3,
+      "call_index": 5,
       "preceded_by": "list_files",
-      "followed_by": "get_structure_summary",
-      "time_ms": 243
+      "followed_by": "search_codebase",
+      "time_ms": 36
     },
     {
-      "tool": "get_structure_summary",
+      "tool": "search_codebase",
       "args": {
-        "file_path": "apps/api/models/members.py"
+        "pattern": "class Member",
+        "max_results": 10
       },
-      "result_chars": 192,
+      "result_chars": 431,
       "result_empty": false,
       "is_error": false,
-      "call_index": 4,
+      "call_index": 6,
       "preceded_by": "get_structure_summary",
       "followed_by": null,
-      "time_ms": 58
+      "time_ms": 123
     }
   ],
-  "total_context_chars_injected": 689,
-  "ts_tool_calls_count": 5,
-  "wall_time_seconds": 25.34,
-  "raw_response": "Le type TypeScript `Members` (fichier `packages/shared-types/members.ts`) correspond au mod\u00e8le Python **`Member`** dans **`apps/api/models/members.py`**.\n\nLe fichier TS d\u00e9clare trois types li\u00e9s (`MembersId`, `MembersStatus`, `MembersMeta`) qui mappent sur la classe `Member` (lignes 3-22) et sa classe compagnon `MemberAudit` (lignes 24-31) c\u00f4t\u00e9 backend.",
+  "total_context_chars_injected": 5839,
+  "ts_tool_calls_count": 7,
+  "wall_time_seconds": 36.13,
+  "raw_response": "Le type TypeScript `Members` (d\u00e9fini dans `packages/shared-types/members.ts` avec les types `MembersId`, `MembersStatus`, `MembersMeta`) correspond au mod\u00e8le Python **`Member`** dans **`apps/api/models/members.py`** (ligne 3).",
   "error": null,
   "score": 0,
   "max_score": 2,
-  "timestamp": "2026-04-15T12:57:28.881574+00:00"
+  "timestamp": "2026-04-15T19:26:50.284105+00:00"
 }

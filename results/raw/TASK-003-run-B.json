@@ -3,11 +3,11 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 5,
-  "output_tokens": 222,
-  "cache_creation_input_tokens": 45188,
-  "cache_read_input_tokens": 88870,
-  "total_tokens": 134285,
-  "active_tokens": 45415,
+  "output_tokens": 233,
+  "cache_creation_input_tokens": 12436,
+  "cache_read_input_tokens": 124449,
+  "total_tokens": 137123,
+  "active_tokens": 12674,
   "turns_count": 4,
   "tool_calls_count": 2,
   "tool_calls_breakdown": {
@@ -38,7 +38,7 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "search_codebase",
-      "time_ms": 234
+      "time_ms": 103
     },
     {
       "tool": "search_codebase",
@@ -51,15 +51,15 @@
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": null,
-      "time_ms": 457
+      "time_ms": 790
     }
   ],
   "total_context_chars_injected": 1789,
   "ts_tool_calls_count": 2,
-  "wall_time_seconds": 19.57,
-  "raw_response": "`SECRET_UNDECLARED_TOKEN` est utilis\u00e9e dans **`apps/api/utils/secret_reader.py`**, dans la fonction **`load_secret_config`** (ligne 8), via `os.environ.get(\"SECRET_UNDECLARED_TOKEN\", \"\")`.",
+  "wall_time_seconds": 17.87,
+  "raw_response": "`SECRET_UNDECLARED_TOKEN` est utilis\u00e9e dans le fichier **`apps/api/utils/secret_reader.py`**, dans la fonction **`load_secret_config`** (ligne 8), via `os.environ.get(\"SECRET_UNDECLARED_TOKEN\", \"\")`.",
   "error": null,
   "score": 1,
   "max_score": 2,
-  "timestamp": "2026-04-15T12:33:15.080911+00:00"
+  "timestamp": "2026-04-15T18:05:09.993022+00:00"
 }

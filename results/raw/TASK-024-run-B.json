@@ -2,17 +2,19 @@
   "task_id": "TASK-024",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 5,
-  "output_tokens": 407,
-  "cache_creation_input_tokens": 11476,
-  "cache_read_input_tokens": 122761,
-  "total_tokens": 134649,
-  "active_tokens": 11888,
-  "turns_count": 4,
-  "tool_calls_count": 2,
+  "input_tokens": 13,
+  "output_tokens": 1543,
+  "cache_creation_input_tokens": 15728,
+  "cache_read_input_tokens": 411889,
+  "total_tokens": 429173,
+  "active_tokens": 17284,
+  "turns_count": 22,
+  "tool_calls_count": 14,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__find_dead_code": 1
+    "mcp__token-savior-recall__find_dead_code": 3,
+    "mcp__token-savior-recall__get_functions": 5,
+    "mcp__token-savior-recall__get_dependents": 5
   },
   "tool_calls_detail": [
     {
@@ -23,6 +25,66 @@
     {
       "tool": "mcp__token-savior-recall__find_dead_code",
       "result_chars": 380,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__find_dead_code",
+      "result_chars": 1830,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__find_dead_code",
+      "result_chars": 2947,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_functions",
+      "result_chars": 72,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_functions",
+      "result_chars": 44,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_functions",
+      "result_chars": 34,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_functions",
+      "result_chars": 56,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_dependents",
+      "result_chars": 65,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_dependents",
+      "result_chars": 59,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_dependents",
+      "result_chars": 69,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_dependents",
+      "result_chars": 60,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_functions",
+      "result_chars": 242,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_dependents",
+      "result_chars": 74,
       "is_error": false
     }
   ],
@@ -38,7 +100,7 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "find_dead_code",
-      "time_ms": 117
+      "time_ms": 213
     },
     {
       "tool": "find_dead_code",
@@ -50,16 +112,184 @@
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
+      "followed_by": "find_dead_code",
+      "time_ms": 578
+    },
+    {
+      "tool": "find_dead_code",
+      "args": {
+        "max_results": 30
+      },
+      "result_chars": 1830,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 2,
+      "preceded_by": "find_dead_code",
+      "followed_by": "find_dead_code",
+      "time_ms": 183
+    },
+    {
+      "tool": "find_dead_code",
+      "args": {
+        "max_results": 50
+      },
+      "result_chars": 2947,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 3,
+      "preceded_by": "find_dead_code",
+      "followed_by": "get_functions",
+      "time_ms": 194
+    },
+    {
+      "tool": "get_functions",
+      "args": {
+        "file_path": "apps/web/lib/constants.ts",
+        "hints": false
+      },
+      "result_chars": 72,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 4,
+      "preceded_by": "find_dead_code",
+      "followed_by": "get_functions",
+      "time_ms": 481
+    },
+    {
+      "tool": "get_functions",
+      "args": {
+        "file_path": "apps/api/utils/strings.py",
+        "hints": false
+      },
+      "result_chars": 44,
+      "result_empty": true,
+      "is_error": false,
+      "call_index": 5,
+      "preceded_by": "get_functions",
+      "followed_by": "get_functions",
+      "time_ms": 481
+    },
+    {
+      "tool": "get_functions",
+      "args": {
+        "file_path": "packages/utils/slug_copy.py",
+        "hints": false
+      },
+      "result_chars": 34,
+      "result_empty": true,
+      "is_error": false,
+      "call_index": 6,
+      "preceded_by": "get_functions",
+      "followed_by": "get_functions",
+      "time_ms": 523
+    },
+    {
+      "tool": "get_functions",
+      "args": {
+        "file_path": "packages/utils/paginate_copy.py",
+        "hints": false
+      },
+      "result_chars": 56,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 7,
+      "preceded_by": "get_functions",
+      "followed_by": "get_dependents",
+      "time_ms": 38
+    },
+    {
+      "tool": "get_dependents",
+      "args": {
+        "name": "paginate_also",
+        "max_results": 5
+      },
+      "result_chars": 65,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 8,
+      "preceded_by": "get_functions",
+      "followed_by": "get_dependents",
+      "time_ms": 472
+    },
+    {
+      "tool": "get_dependents",
+      "args": {
+        "name": "slugify",
+        "max_results": 5,
+        "project": "tsbench"
+      },
+      "result_chars": 59,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 9,
+      "preceded_by": "get_dependents",
+      "followed_by": "get_dependents",
+      "time_ms": 470
+    },
+    {
+      "tool": "get_dependents",
+      "args": {
+        "name": "constants_default",
+        "max_results": 5
+      },
+      "result_chars": 69,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 10,
+      "preceded_by": "get_dependents",
+      "followed_by": "get_dependents",
+      "time_ms": 219
+    },
+    {
+      "tool": "get_dependents",
+      "args": {
+        "name": "truncate",
+        "max_results": 5
+      },
+      "result_chars": 60,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 11,
+      "preceded_by": "get_dependents",
+      "followed_by": "get_functions",
+      "time_ms": 42
+    },
+    {
+      "tool": "get_functions",
+      "args": {
+        "file_path": "apps/api/services/billing.py",
+        "hints": false,
+        "max_results": 5
+      },
+      "result_chars": 242,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 12,
+      "preceded_by": "get_dependents",
+      "followed_by": "get_dependents",
+      "time_ms": 64
+    },
+    {
+      "tool": "get_dependents",
+      "args": {
+        "name": "validate_invoice_total",
+        "max_results": 5
+      },
+      "result_chars": 74,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 13,
+      "preceded_by": "get_functions",
       "followed_by": null,
-      "time_ms": 447
+      "time_ms": 72
     }
   ],
-  "total_context_chars_injected": 440,
-  "ts_tool_calls_count": 2,
-  "wall_time_seconds": 24.22,
-  "raw_response": "Voici 5 fonctions export\u00e9es jamais appel\u00e9es dans le projet, toutes dans `apps/api/services/billing.py` :\n\n| # | Fonction | Ligne |\n|---|----------|-------|\n| 1 | `validate_invoice_total(invoice)` | 49 |\n| 2 | `prepare_billing_internal(data)` | 222 |\n| 3 | `finalize_billing_internal(data)` | 240 |\n| 4 | `audit_billing_internal(data)` | 258 |\n| 5 | `notify_billing_internal(data)` | 276 |\n\nLes 4 fonctions `*_billing_internal` semblent \u00eatre un pipeline interne de facturation dont aucune \u00e9tape n'est invoqu\u00e9e. `validate_invoice_total` est \u00e9galement orpheline \u2014 aucun appelant d\u00e9tect\u00e9 dans l'ensemble du projet.",
+  "total_context_chars_injected": 5992,
+  "ts_tool_calls_count": 14,
+  "wall_time_seconds": 45.37,
+  "raw_response": "Voici **5 fonctions export\u00e9es jamais appel\u00e9es** dans le projet :\n\n| # | Fonction | Fichier | Ligne |\n|---|----------|---------|-------|\n| 1 | `paginate_also(items, page, page_size)` | `packages/utils/paginate_copy.py` | 6 |\n| 2 | `slugify(value)` | `packages/utils/slug_copy.py` | 4 |\n| 3 | `truncate(value, max_len)` | `apps/api/utils/strings.py` | 6 |\n| 4 | `validate_invoice_total(invoice)` | `apps/api/services/billing.py` | 49 |\n| 5 | `constants_default()` | `apps/web/lib/constants.ts` | 15 |\n\nAucune de ces fonctions n'a de d\u00e9pendant dans le graphe de d\u00e9pendances du projet \u2014 elles constituent du code mort.",
   "error": null,
-  "score": 0,
+  "score": 1,
   "max_score": 2,
-  "timestamp": "2026-04-15T12:46:06.707785+00:00"
+  "timestamp": "2026-04-15T18:39:05.799888+00:00"
 }

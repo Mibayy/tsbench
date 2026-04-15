@@ -3,12 +3,12 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 6,
-  "output_tokens": 684,
-  "cache_creation_input_tokens": 14170,
-  "cache_read_input_tokens": 169790,
-  "total_tokens": 184650,
-  "active_tokens": 14860,
-  "turns_count": 7,
+  "output_tokens": 1298,
+  "cache_creation_input_tokens": 14884,
+  "cache_read_input_tokens": 172827,
+  "total_tokens": 189015,
+  "active_tokens": 16188,
+  "turns_count": 6,
   "tool_calls_count": 3,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
@@ -23,7 +23,7 @@
     },
     {
       "tool": "mcp__token-savior-recall__get_full_context",
-      "result_chars": 5588,
+      "result_chars": 5582,
       "is_error": false
     },
     {
@@ -44,7 +44,7 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "get_full_context",
-      "time_ms": 106
+      "time_ms": 128
     },
     {
       "tool": "get_full_context",
@@ -52,13 +52,13 @@
         "name": "hub_util",
         "depth": 2
       },
-      "result_chars": 5588,
+      "result_chars": 5582,
       "result_empty": false,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": "search_codebase",
-      "time_ms": 468
+      "time_ms": 597
     },
     {
       "tool": "search_codebase",
@@ -71,15 +71,15 @@
       "call_index": 2,
       "preceded_by": "get_full_context",
       "followed_by": null,
-      "time_ms": 141
+      "time_ms": 494
     }
   ],
-  "total_context_chars_injected": 7893,
+  "total_context_chars_injected": 7887,
   "ts_tool_calls_count": 3,
-  "wall_time_seconds": 31.65,
-  "raw_response": "**Rien ne casse.**\n\nTous les 20 appels \u00e0 `hub_util()` passent l'argument **de fa\u00e7on positionnelle** (`hub_util(payload)`). Aucun n'utilise la forme keyword `hub_util(payload=...)`. Le renommage du param\u00e8tre `payload \u2192 context` dans la signature n'affecte donc aucun appelant.\n\nLes 20 fichiers concern\u00e9s (pour r\u00e9f\u00e9rence) :\n\n| Fichier | Fonction appelante |\n|---|---|\n| `apps/api/callers/caller_lonely_util_00.py` | `do_it_0` |\n| `apps/api/callers/caller_hub_util_01.py` \u2192 `\u202619.py` | `do_it_1` \u2192 `do_it_19` |\n\n**Seule modification n\u00e9cessaire** : dans `packages/utils/targeted.py:15`, mettre \u00e0 jour le corps de la fonction (`return dict(payload)` \u2192 `return dict(context)`) en m\u00eame temps que la signature, sans quoi `hub_util` elle-m\u00eame plantera sur un `NameError`.",
+  "wall_time_seconds": 31.23,
+  "raw_response": "Tous les appels passent l'argument **par position** (`hub_util(payload)`), pas par nom (`hub_util(payload=...)`). Renommer le param\u00e8tre `payload` \u2192 `context` ne cassera donc **rien \u00e0 l'ex\u00e9cution**.\n\nVoici le r\u00e9sum\u00e9 complet :\n\n---\n\n**Aucun site d'appel ne casse \u00e0 l'ex\u00e9cution.** Les 20 appelants passent tous l'argument par position :\n\n| Fichier | Fonction | Appel |\n|---|---|---|\n| `apps/api/callers/caller_hub_util_00.py:6` | `do_it_0` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_01.py:6` | `do_it_1` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_02.py:6` | `do_it_2` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_03.py:6` | `do_it_3` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_04.py:6` | `do_it_4` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_05.py:6` | `do_it_5` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_06.py:6` | `do_it_6` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_07.py:6` | `do_it_7` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_08.py:6` | `do_it_8` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_09.py:6` | `do_it_9` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_10.py:6` | `do_it_10` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_11.py:6` | `do_it_11` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_12.py:6` | `do_it_12` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_13.py:6` | `do_it_13` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_14.py:6` | `do_it_14` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_15.py:6` | `do_it_15` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_16.py:6` | `do_it_16` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_17.py:6` | `do_it_17` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_18.py:6` | `do_it_18` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_19.py:6` | `do_it_19` | `hub_util(payload)` |\n\nPuisque **aucun** appelant n'utilise `hub_util(payload=...)` (argument nomm\u00e9), le renommage du param\u00e8tre `payload` \u2192 `context` est **r\u00e9tro-compatible** et ne provoque aucune casse. Le seul risque serait un appel externe non index\u00e9 utilisant `hub_util(payload=val)` \u2014 ce qui n'existe pas dans ce projet.",
   "error": null,
-  "score": 0,
+  "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T12:38:30.947066+00:00"
+  "timestamp": "2026-04-15T18:10:30.860473+00:00"
 }

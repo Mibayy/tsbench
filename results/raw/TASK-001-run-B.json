@@ -4,10 +4,10 @@
   "baseline": "token-savior",
   "input_tokens": 5,
   "output_tokens": 190,
-  "cache_creation_input_tokens": 44572,
-  "cache_read_input_tokens": 88788,
-  "total_tokens": 133555,
-  "active_tokens": 44767,
+  "cache_creation_input_tokens": 11698,
+  "cache_read_input_tokens": 124518,
+  "total_tokens": 136411,
+  "active_tokens": 11893,
   "turns_count": 4,
   "tool_calls_count": 2,
   "tool_calls_breakdown": {
@@ -38,7 +38,7 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "find_symbol",
-      "time_ms": 107
+      "time_ms": 72
     },
     {
       "tool": "find_symbol",
@@ -52,15 +52,15 @@
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": null,
-      "time_ms": 540
+      "time_ms": 630
     }
   ],
   "total_context_chars_injected": 121,
   "ts_tool_calls_count": 2,
-  "wall_time_seconds": 15.68,
-  "raw_response": "`lonely_util` est d\u00e9finie dans **`packages/utils/targeted.py`**, ligne **3**.",
+  "wall_time_seconds": 16.65,
+  "raw_response": "`lonely_util` est d\u00e9finie dans **`packages/utils/targeted.py`**, \u00e0 la **ligne 3**.",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T12:32:39.398301+00:00"
+  "timestamp": "2026-04-15T18:04:29.312205+00:00"
 }

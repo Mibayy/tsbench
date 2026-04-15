@@ -3,27 +3,21 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 7,
-  "output_tokens": 1115,
-  "cache_creation_input_tokens": 15186,
-  "cache_read_input_tokens": 216497,
-  "total_tokens": 232805,
-  "active_tokens": 16308,
-  "turns_count": 11,
-  "tool_calls_count": 7,
+  "output_tokens": 691,
+  "cache_creation_input_tokens": 7966,
+  "cache_read_input_tokens": 228720,
+  "total_tokens": 237384,
+  "active_tokens": 8664,
+  "turns_count": 6,
+  "tool_calls_count": 4,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__memory_search": 1,
-    "mcp__token-savior-recall__get_full_context": 5
+    "mcp__token-savior-recall__get_full_context": 3
   },
   "tool_calls_detail": [
     {
       "tool": "mcp__token-savior-recall__switch_project",
       "result_chars": 60,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__memory_search",
-      "result_chars": 32,
       "is_error": false
     },
     {
@@ -33,22 +27,12 @@
     },
     {
       "tool": "mcp__token-savior-recall__get_full_context",
-      "result_chars": 1369,
+      "result_chars": 7186,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__get_full_context",
-      "result_chars": 3557,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_full_context",
-      "result_chars": 2745,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_full_context",
-      "result_chars": 307,
+      "result_chars": 727,
       "is_error": false
     }
   ],
@@ -63,21 +47,8 @@
       "is_error": false,
       "call_index": 0,
       "preceded_by": null,
-      "followed_by": "memory_search",
-      "time_ms": 118
-    },
-    {
-      "tool": "memory_search",
-      "args": {
-        "query": "dispatch_webhook webhooks"
-      },
-      "result_chars": 32,
-      "result_empty": true,
-      "is_error": false,
-      "call_index": 1,
-      "preceded_by": "switch_project",
       "followed_by": "get_full_context",
-      "time_ms": 71
+      "time_ms": 140
     },
     {
       "tool": "get_full_context",
@@ -88,76 +59,52 @@
       "result_chars": 1506,
       "result_empty": false,
       "is_error": false,
-      "call_index": 2,
-      "preceded_by": "memory_search",
+      "call_index": 1,
+      "preceded_by": "switch_project",
       "followed_by": "get_full_context",
-      "time_ms": 324
+      "time_ms": 25335
     },
     {
       "tool": "get_full_context",
       "args": {
-        "name": "_webhooks_admin_db",
+        "names": [
+          "_webhooks_admin_db",
+          "info"
+        ],
         "depth": 1
       },
-      "result_chars": 1369,
+      "result_chars": 7186,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 2,
+      "preceded_by": "get_full_context",
+      "followed_by": "get_full_context",
+      "time_ms": 25189
+    },
+    {
+      "tool": "get_full_context",
+      "args": {
+        "names": [
+          "supabase_admin",
+          "log"
+        ],
+        "depth": 0
+      },
+      "result_chars": 727,
       "result_empty": false,
       "is_error": false,
       "call_index": 3,
       "preceded_by": "get_full_context",
-      "followed_by": "get_full_context",
-      "time_ms": 456
-    },
-    {
-      "tool": "get_full_context",
-      "args": {
-        "name": "info",
-        "depth": 1,
-        "project": "tsbench"
-      },
-      "result_chars": 3557,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 4,
-      "preceded_by": "get_full_context",
-      "followed_by": "get_full_context",
-      "time_ms": 57
-    },
-    {
-      "tool": "get_full_context",
-      "args": {
-        "name": "supabase_admin",
-        "depth": 1
-      },
-      "result_chars": 2745,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 5,
-      "preceded_by": "get_full_context",
-      "followed_by": "get_full_context",
-      "time_ms": 439
-    },
-    {
-      "tool": "get_full_context",
-      "args": {
-        "name": "log",
-        "depth": 0,
-        "project": "tsbench"
-      },
-      "result_chars": 307,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 6,
-      "preceded_by": "get_full_context",
       "followed_by": null,
-      "time_ms": 53
+      "time_ms": 27875
     }
   ],
-  "total_context_chars_injected": 9576,
-  "ts_tool_calls_count": 7,
-  "wall_time_seconds": 33.38,
-  "raw_response": "Voici la cha\u00eene d'appels compl\u00e8te de `dispatch_webhook` :\n\n```\ndispatch_webhook(payload, user_id)          # apps/api/services/webhooks.py:14\n\u251c\u2500\u2500 _webhooks_admin_db()                    # apps/api/services/webhooks.py:8\n\u2502   \u251c\u2500\u2500 supabase_admin()                    # apps/api/db.py:40        \u2190 ACC\u00c8S DB\n\u2502   \u2502   \u2514\u2500\u2500 DBSession(\"postgresql://\u2026admin\") # apps/api/db.py:6 (class)\n\u2502   \u2502       \u2514\u2500\u2500 __init__(url)               # apps/api/db.py:7\n\u2502   \u2514\u2500\u2500 info(msg)                           # apps/api/utils/logging.py:12\n\u2502       \u2514\u2500\u2500 log(level, message)             # apps/api/utils/logging.py:5\n\u2502           \u2514\u2500\u2500 print(\u2026)                    # (builtin)\n\u251c\u2500\u2500 info(msg)                               # apps/api/utils/logging.py:12\n\u2502   \u2514\u2500\u2500 log(level, message)                 # (m\u00eame que ci-dessus)\n\u2514\u2500\u2500 payload.get('check', True)              # (dict builtin)\n```\n\n**R\u00e9sum\u00e9 :**\n- **2 appels directs** : `_webhooks_admin_db()` et `info()`\n- **1 acc\u00e8s DB** : via `_webhooks_admin_db()` \u2192 `supabase_admin()` \u2192 `DBSession(\u2026admin)` qui ouvre une session PostgreSQL avec le r\u00f4le `admin`\n- **`log()`** est le point terminal du logging \u2014 c'est un stub qui fait `print()`, filtr\u00e9 par `settings.log_level`\n- `DBSession` expose les m\u00e9thodes `query`, `add`, `commit`, `rollback`, `close`, mais `dispatch_webhook` ne les appelle pas directement (la session est obtenue puis retourn\u00e9e sans \u00eatre utilis\u00e9e dans le corps de la fonction)",
+  "total_context_chars_injected": 9479,
+  "ts_tool_calls_count": 4,
+  "wall_time_seconds": 114.49,
+  "raw_response": "Voici le call chain complet de `dispatch_webhook` :\n\n```\ndispatch_webhook(payload, user_id)          # apps/api/services/webhooks.py:14\n\u251c\u2500\u2500 _webhooks_admin_db()                    # apps/api/services/webhooks.py:8\n\u2502   \u251c\u2500\u2500 supabase_admin()                    # apps/api/db.py:40        \u2190 acc\u00e8s DB\n\u2502   \u2502   \u2514\u2500\u2500 DBSession(\"postgresql://\u2026admin\") # connexion admin Postgres\n\u2502   \u2514\u2500\u2500 info(\u2026)                             # apps/api/utils/logging.py:12\n\u2502       \u2514\u2500\u2500 log(\"INFO\", msg)               # apps/api/utils/logging.py:5\n\u2502           \u2514\u2500\u2500 print(\u2026)                    # feuille (stub)\n\u251c\u2500\u2500 info(\u2026)                                 # apps/api/utils/logging.py:12\n\u2502   \u2514\u2500\u2500 log(\"INFO\", msg)                   # (idem ci-dessus)\n\u2514\u2500\u2500 payload.get('check', True)              # builtin dict, pas d'appel custom\n```\n\n**Acc\u00e8s DB** : un seul, via `_webhooks_admin_db()` \u2192 `supabase_admin()` qui cr\u00e9e une `DBSession` avec le r\u00f4le `admin` sur PostgreSQL. La session est obtenue mais pas directement utilis\u00e9e par `dispatch_webhook` (le r\u00e9sultat est affect\u00e9 \u00e0 `_` et ignor\u00e9).",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T13:00:41.828486+00:00"
+  "timestamp": "2026-04-15T19:35:29.058952+00:00"
 }

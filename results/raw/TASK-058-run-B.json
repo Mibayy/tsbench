@@ -3,12 +3,12 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 6,
-  "output_tokens": 942,
-  "cache_creation_input_tokens": 14464,
-  "cache_read_input_tokens": 169400,
-  "total_tokens": 184812,
-  "active_tokens": 15412,
-  "turns_count": 8,
+  "output_tokens": 904,
+  "cache_creation_input_tokens": 6375,
+  "cache_read_input_tokens": 179460,
+  "total_tokens": 186745,
+  "active_tokens": 7285,
+  "turns_count": 6,
   "tool_calls_count": 3,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
@@ -22,12 +22,12 @@
     },
     {
       "tool": "mcp__token-savior-recall__find_hotspots",
-      "result_chars": 1583,
+      "result_chars": 1245,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__find_hotspots",
-      "result_chars": 4448,
+      "result_chars": 2564,
       "is_error": false
     }
   ],
@@ -43,42 +43,41 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "find_hotspots",
-      "time_ms": 96
+      "time_ms": 193
     },
     {
       "tool": "find_hotspots",
       "args": {
-        "max_results": 20
+        "max_results": 15
       },
-      "result_chars": 1583,
+      "result_chars": 1245,
       "result_empty": false,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": "find_hotspots",
-      "time_ms": 723
+      "time_ms": 731
     },
     {
       "tool": "find_hotspots",
       "args": {
-        "max_results": 50,
-        "min_score": 5
+        "max_results": 30
       },
-      "result_chars": 4448,
+      "result_chars": 2564,
       "result_empty": false,
       "is_error": false,
       "call_index": 2,
       "preceded_by": "find_hotspots",
       "followed_by": null,
-      "time_ms": 116
+      "time_ms": 139
     }
   ],
-  "total_context_chars_injected": 6091,
+  "total_context_chars_injected": 3869,
   "ts_tool_calls_count": 3,
-  "wall_time_seconds": 31.58,
-  "raw_response": "Voici les **5 fonctions les plus complexes dans `apps/`**, par score d\u00e9croissant :\n\n| Rang | Score | Lignes | Branches | Depth | Fonction |\n|------|-------|--------|----------|-------|----------|\n| 1 | **44.4** | 33 | 15 | 3 | `apps/api/services/complex_billing.py:3` \u2014 `reconcile_payments()` |\n| 2 | **44.4** | 33 | 15 | 3 | `apps/api/services/complex_auth.py:3` \u2014 `authenticate_multi_factor()` |\n| 3 | **44.4** | 33 | 15 | 3 | `apps/api/services/complex_routing.py:3` \u2014 `route_webhook_event()` |\n| 4 | **44.4** | 33 | 15 | 3 | `apps/worker/tasks/complex_pipeline.py:3` \u2014 `orchestrate_nightly_job()` |\n| 5 | **36.9** | 28 | 12 | 3 | `apps/api/utils/complex_validation.py:3` \u2014 `validate_contract()` |\n\nLes 4 premi\u00e8res sont \u00e0 \u00e9galit\u00e9 (score 44.4) avec 15 branches chacune sur 33 lignes. `validate_contract()` suit avec 12 branches sur 28 lignes. Toutes partagent une profondeur de nesting de 3, mais c'est le nombre \u00e9lev\u00e9 de branches qui tire leur score vers le haut \u2014 ce sont les candidats prioritaires pour un refactoring.",
+  "wall_time_seconds": 27.33,
+  "raw_response": "Voici les **5 fonctions les plus complexes dans `apps/`**, par score d\u00e9croissant :\n\n| # | Score | Lignes | Branches | Profondeur | Fichier | Fonction |\n|---|-------|--------|----------|------------|---------|----------|\n| 1 | **44.4** | 33 | 15 | 3 | `apps/api/services/complex_auth.py:3` | `authenticate_multi_factor()` |\n| 2 | **44.4** | 33 | 15 | 3 | `apps/api/services/complex_billing.py:3` | `reconcile_payments()` |\n| 3 | **44.4** | 33 | 15 | 3 | `apps/api/services/complex_routing.py:3` | `route_webhook_event()` |\n| 4 | **44.4** | 33 | 15 | 3 | `apps/worker/tasks/complex_pipeline.py:3` | `orchestrate_nightly_job()` |\n| 5 | **36.9** | 28 | 12 | 3 | `apps/api/utils/complex_validation.py:3` | `validate_contract()` |\n\nLes 4 premi\u00e8res sont \u00e0 \u00e9galit\u00e9 (score 44.4) avec 15 branches chacune sur 33 lignes. `validate_contract()` suit avec 12 branches sur 28 lignes. Toutes partagent un nesting depth de 3 \u2014 la complexit\u00e9 vient principalement du nombre \u00e9lev\u00e9 de branches conditionnelles concentr\u00e9es dans un code relativement court.",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T13:08:19.084662+00:00"
+  "timestamp": "2026-04-15T19:51:16.901406+00:00"
 }

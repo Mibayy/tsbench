@@ -3,17 +3,16 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 5,
-  "output_tokens": 295,
-  "cache_creation_input_tokens": 4665,
-  "cache_read_input_tokens": 129539,
-  "total_tokens": 134504,
-  "active_tokens": 4965,
-  "turns_count": 5,
-  "tool_calls_count": 3,
+  "output_tokens": 222,
+  "cache_creation_input_tokens": 4586,
+  "cache_read_input_tokens": 132844,
+  "total_tokens": 137657,
+  "active_tokens": 4813,
+  "turns_count": 4,
+  "tool_calls_count": 2,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__get_file_dependents": 1,
-    "mcp__token-savior-recall__list_files": 1
+    "mcp__token-savior-recall__find_impacted_test_files": 1
   },
   "tool_calls_detail": [
     {
@@ -22,13 +21,8 @@
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__get_file_dependents",
-      "result_chars": 55,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__list_files",
-      "result_chars": 25,
+      "tool": "mcp__token-savior-recall__find_impacted_test_files",
+      "result_chars": 191,
       "is_error": false
     }
   ],
@@ -43,42 +37,31 @@
       "is_error": false,
       "call_index": 0,
       "preceded_by": null,
-      "followed_by": "get_file_dependents",
-      "time_ms": 105
+      "followed_by": "find_impacted_test_files",
+      "time_ms": 117
     },
     {
-      "tool": "get_file_dependents",
+      "tool": "find_impacted_test_files",
       "args": {
-        "file_path": "apps/api/services/billing.py"
+        "changed_files": [
+          "apps/api/services/billing.py"
+        ]
       },
-      "result_chars": 55,
+      "result_chars": 191,
       "result_empty": false,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
-      "followed_by": "list_files",
-      "time_ms": 440
-    },
-    {
-      "tool": "list_files",
-      "args": {
-        "pattern": "**/test*billing*"
-      },
-      "result_chars": 25,
-      "result_empty": true,
-      "is_error": false,
-      "call_index": 2,
-      "preceded_by": "get_file_dependents",
       "followed_by": null,
-      "time_ms": 55
+      "time_ms": 431
     }
   ],
-  "total_context_chars_injected": 140,
-  "ts_tool_calls_count": 3,
-  "wall_time_seconds": 18.48,
-  "raw_response": "Le module `apps/api/services/billing.py` est couvert par un seul fichier de test :\n\n- **`tests/test_billing.py`**\n\nC'est le seul fichier qui importe directement depuis `apps/api/services/billing.py` (en dehors du routeur `apps/api/routers/billing.py`).",
+  "total_context_chars_injected": 251,
+  "ts_tool_calls_count": 2,
+  "wall_time_seconds": 22.97,
+  "raw_response": "Le module `apps/api/services/billing.py` est couvert par un seul fichier de test :\n\n- **`tests/test_billing.py`** \u2014 il importe directement depuis `apps/api/services/billing.py`.",
   "error": null,
-  "score": 0,
+  "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T12:52:53.361269+00:00"
+  "timestamp": "2026-04-15T19:21:17.049377+00:00"
 }

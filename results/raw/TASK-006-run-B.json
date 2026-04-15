@@ -2,18 +2,18 @@
   "task_id": "TASK-006",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 5,
-  "output_tokens": 570,
-  "cache_creation_input_tokens": 45954,
-  "cache_read_input_tokens": 88942,
-  "total_tokens": 135471,
-  "active_tokens": 46529,
+  "input_tokens": 6,
+  "output_tokens": 664,
+  "cache_creation_input_tokens": 12422,
+  "cache_read_input_tokens": 170221,
+  "total_tokens": 183313,
+  "active_tokens": 13092,
   "turns_count": 5,
   "tool_calls_count": 3,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
     "mcp__token-savior-recall__find_symbol": 1,
-    "mcp__token-savior-recall__search_codebase": 1
+    "mcp__token-savior-recall__get_dependents": 1
   },
   "tool_calls_detail": [
     {
@@ -27,8 +27,8 @@
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__search_codebase",
-      "result_chars": 3639,
+      "tool": "mcp__token-savior-recall__get_dependents",
+      "result_chars": 1230,
       "is_error": false
     }
   ],
@@ -44,7 +44,7 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "find_symbol",
-      "time_ms": 128
+      "time_ms": 112
     },
     {
       "tool": "find_symbol",
@@ -57,29 +57,30 @@
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
-      "followed_by": "search_codebase",
-      "time_ms": 611
+      "followed_by": "get_dependents",
+      "time_ms": 583
     },
     {
-      "tool": "search_codebase",
+      "tool": "get_dependents",
       "args": {
-        "pattern": "<Sidebar"
+        "name": "Sidebar",
+        "compress": true
       },
-      "result_chars": 3639,
+      "result_chars": 1230,
       "result_empty": false,
       "is_error": false,
       "call_index": 2,
       "preceded_by": "find_symbol",
       "followed_by": null,
-      "time_ms": 489
+      "time_ms": 83
     }
   ],
-  "total_context_chars_injected": 3762,
+  "total_context_chars_injected": 1353,
   "ts_tool_calls_count": 3,
-  "wall_time_seconds": 22.43,
-  "raw_response": "Le composant `<Sidebar>` est d\u00e9fini dans `apps/web/components/Sidebar.tsx` (ligne 26) et est import\u00e9/utilis\u00e9 dans **15 pages** :\n\n| Fichier |\n|---|\n| `apps/web/app/audit/page.tsx` |\n| `apps/web/app/billing/page.tsx` |\n| `apps/web/app/dashboard/page.tsx` |\n| `apps/web/app/forgot-password/page.tsx` |\n| `apps/web/app/invite/page.tsx` |\n| `apps/web/app/login/page.tsx` |\n| `apps/web/app/members/page.tsx` |\n| `apps/web/app/notifications/page.tsx` |\n| `apps/web/app/pricing/page.tsx` |\n| `apps/web/app/profile/page.tsx` |\n| `apps/web/app/reports/page.tsx` |\n| `apps/web/app/sessions/page.tsx` |\n| `apps/web/app/settings/page.tsx` |\n| `apps/web/app/signup/page.tsx` |\n| `apps/web/app/webhooks/page.tsx` |\n\nChaque page utilise `<Sidebar id=\"side\" />` \u00e0 deux endroits (lignes 50 et 59), vraisemblablement pour un rendu conditionnel (desktop/mobile ou deux breakpoints).",
+  "wall_time_seconds": 23.87,
+  "raw_response": "Le composant `<Sidebar>` (d\u00e9fini dans `apps/web/components/Sidebar.tsx:26`) est import\u00e9 et utilis\u00e9 par **15 pages** :\n\n| Fichier | Composant |\n|---|---|\n| `apps/web/app/audit/page.tsx` | `AuditPage` |\n| `apps/web/app/billing/page.tsx` | `BillingPage` |\n| `apps/web/app/dashboard/page.tsx` | `DashboardPage` |\n| `apps/web/app/forgot-password/page.tsx` | `ForgotPasswordPage` |\n| `apps/web/app/invite/page.tsx` | `InvitePage` |\n| `apps/web/app/login/page.tsx` | `LoginPage` |\n| `apps/web/app/members/page.tsx` | `MembersPage` |\n| `apps/web/app/notifications/page.tsx` | `NotificationsPage` |\n| `apps/web/app/pricing/page.tsx` | `PricingPage` |\n| `apps/web/app/profile/page.tsx` | `ProfilePage` |\n| `apps/web/app/reports/page.tsx` | `ReportsPage` |\n| `apps/web/app/sessions/page.tsx` | `SessionsPage` |\n| `apps/web/app/settings/page.tsx` | `SettingsPage` |\n| `apps/web/app/signup/page.tsx` | `SignupPage` |\n| `apps/web/app/webhooks/page.tsx` | `WebhooksPage` |\n\nToutes les pages de l'application web l'utilisent comme layout commun.",
   "error": null,
-  "score": 0,
+  "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T12:34:29.786918+00:00"
+  "timestamp": "2026-04-15T18:06:17.607788+00:00"
 }

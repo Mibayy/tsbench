@@ -3,11 +3,11 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 5,
-  "output_tokens": 268,
-  "cache_creation_input_tokens": 11282,
-  "cache_read_input_tokens": 122889,
-  "total_tokens": 134444,
-  "active_tokens": 11555,
+  "output_tokens": 260,
+  "cache_creation_input_tokens": 12132,
+  "cache_read_input_tokens": 124897,
+  "total_tokens": 137294,
+  "active_tokens": 12397,
   "turns_count": 4,
   "tool_calls_count": 2,
   "tool_calls_breakdown": {
@@ -38,7 +38,7 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "find_impacted_test_files",
-      "time_ms": 102
+      "time_ms": 147
     },
     {
       "tool": "find_impacted_test_files",
@@ -56,15 +56,15 @@
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": null,
-      "time_ms": 375
+      "time_ms": 585
     }
   ],
   "total_context_chars_injected": 251,
   "ts_tool_calls_count": 2,
-  "wall_time_seconds": 17.9,
-  "raw_response": "Le fichier de test \u00e0 rejouer en priorit\u00e9 est :\n\n- **`tests/test_billing.py`** \u2014 il importe directement `apps/api/services/billing.py`, donc il couvre `compute_invoice`.\n\nC'est le seul fichier de test impact\u00e9 d\u00e9tect\u00e9 par l'analyse de d\u00e9pendances.",
+  "wall_time_seconds": 19.0,
+  "raw_response": "Le fichier de test \u00e0 rejouer en priorit\u00e9 est :\n\n- **`tests/test_billing.py`** \u2014 il importe directement `apps/api/services/billing.py`, donc il couvre `compute_invoice`.\n\nC'est le seul fichier de test index\u00e9 qui d\u00e9pend de ce module.",
   "error": null,
-  "score": 0,
+  "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T12:39:16.137039+00:00"
+  "timestamp": "2026-04-15T18:11:11.194219+00:00"
 }
