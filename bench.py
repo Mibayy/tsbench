@@ -80,7 +80,16 @@ ORPHAN ENV VARS:
 switch_project → analyze_config(checks=["orphans"]) → stop
 
 FIND A BUG:
-If the prompt mentions a specific file name (e.g. buggy_auth.py), search for that EXACT file first with find_symbol or search_codebase before exploring related files.
+If the prompt mentions a specific file name (e.g. buggy_auth.py), search for that EXACT file first with find_symbol or search_codebase(pattern="buggy_auth") before exploring related files. Do NOT search generic terms like "auth" — start with the exact name from the prompt.
+
+CALL CHAIN:
+To trace a call chain between two symbols, use get_call_chain(source, target) in one call. Do NOT chain get_function_source or get_dependencies manually step by step.
+
+IMPORT SEARCH:
+To find files that import a given file, use get_file_dependents("file.py") in one call. Do NOT use search_codebase to grep for import statements.
+
+TOOL CALL LIMIT:
+Maximum 5 tool calls per simple task (locate, read, single-symbol analysis). If you exceed 5 calls, you are over-exploring — stop and answer with what you have.
 
 AFTER AN EMPTY RESULT:
 If find_symbol returns empty → try search_codebase
@@ -553,7 +562,7 @@ def score_response(scoring: str, expected: dict, response: str) -> tuple[int, in
         candidates = _collect_strings_recursive(expected)
         if not candidates:
             return 0, max_score
-        if scoring in ("boolean_with_evidence", "free_form_rubric"):
+        if scoring in ("boolean_with_evidence", "free_form_rubric", "contains_all"):
             hits = sum(1 for c in candidates if _keyword_match(c, text))
         else:
             hits = sum(1 for c in candidates if c.lower() in text)
