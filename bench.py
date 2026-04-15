@@ -41,6 +41,8 @@ Start by calling mcp__token-savior__switch_project with project "tsbench".
 
 NAVIGATION — When locating a symbol, call find_symbol with level=2 by default (returns only name, file, line, type). Only fetch the body via get_function_source / get_class_source if you need to read the code itself.
 
+COMPRENDRE un symbole complet (localisation + source + callers + dépendances) → get_full_context('nom') en un seul call. Utilise depth=0 pour juste source, depth=1 (défaut) pour + deps/dependents, depth=2 pour + change_impact. Ça remplace la chaîne find_symbol → get_function_source → get_dependents.
+
 EDITING — To modify code, ALWAYS use replace_symbol_source or insert_near_symbol. NEVER use Edit or Write on code files (.py, .ts, .tsx, .js, .jsx). Edit/Write are only allowed for config files (.env, .yml, .md, .json).
 
 MEMORY — At the start of each task:
@@ -399,6 +401,32 @@ def score_response(scoring: str, expected: dict, response: str) -> tuple[int, in
         return 0, max_score
 
     if scoring in ("list_f1", "set_match_strict", "set_match_loose"):
+        # Cycle-detection tasks: expected_cycles is list[list[file]].
+        # Each inner list is one cycle. Score = fraction of cycles fully mentioned.
+        exp_cycles = expected.get("expected_cycles")
+        if exp_cycles:
+            cycles_hit = 0
+            for cycle in exp_cycles:
+                ok = True
+                for f in cycle:
+                    fl = str(f).lower()
+                    base = fl.rsplit("/", 1)[-1]
+                    stem = base[:-3] if base.endswith(".py") else base
+                    if fl in text or base in text or stem in text:
+                        continue
+                    ok = False
+                    break
+                if ok and cycle:
+                    cycles_hit += 1
+            if cycles_hit == 0:
+                return 0, max_score
+            ratio = cycles_hit / len(exp_cycles)
+            if ratio >= 0.95:
+                return 2, max_score
+            if ratio >= 0.5:
+                return 1, max_score
+            return 0, max_score
+
         exp_list = (
             expected.get("expected_files")
             or expected.get("expected_breaks")
