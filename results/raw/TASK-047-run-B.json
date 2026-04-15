@@ -3,16 +3,15 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 5,
-  "output_tokens": 288,
-  "cache_creation_input_tokens": 4572,
-  "cache_read_input_tokens": 127624,
-  "total_tokens": 132489,
-  "active_tokens": 4865,
-  "turns_count": 5,
-  "tool_calls_count": 3,
+  "output_tokens": 249,
+  "cache_creation_input_tokens": 11259,
+  "cache_read_input_tokens": 121223,
+  "total_tokens": 132736,
+  "active_tokens": 11513,
+  "turns_count": 4,
+  "tool_calls_count": 2,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__memory_search": 1,
     "mcp__token-savior-recall__get_file_dependencies": 1
   },
   "tool_calls_detail": [
@@ -22,22 +21,45 @@
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__memory_search",
-      "result_chars": 32,
-      "is_error": false
-    },
-    {
       "tool": "mcp__token-savior-recall__get_file_dependencies",
       "result_chars": 120,
       "is_error": false
     }
   ],
-  "total_context_chars_injected": 212,
-  "ts_tool_calls_count": 0,
-  "wall_time_seconds": 18.76,
-  "raw_response": "Les imports locaux de `apps/api/services/auth.py` sont :\n\n1. `apps/api/config.py`\n2. `apps/api/db.py`\n3. `apps/api/models/auth.py`\n4. `apps/api/utils/errors.py`\n5. `apps/api/utils/logging.py`",
+  "ts_tool_details": [
+    {
+      "tool": "switch_project",
+      "args": {
+        "name": "tsbench"
+      },
+      "result_chars": 60,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 0,
+      "preceded_by": null,
+      "followed_by": "get_file_dependencies",
+      "time_ms": 96
+    },
+    {
+      "tool": "get_file_dependencies",
+      "args": {
+        "file_path": "apps/api/services/auth.py"
+      },
+      "result_chars": 120,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 1,
+      "preceded_by": "switch_project",
+      "followed_by": null,
+      "time_ms": 297
+    }
+  ],
+  "total_context_chars_injected": 180,
+  "ts_tool_calls_count": 2,
+  "wall_time_seconds": 14.65,
+  "raw_response": "`apps/api/services/auth.py` importe directement ces 5 fichiers locaux :\n\n1. `apps/api/config.py`\n2. `apps/api/db.py`\n3. `apps/api/models/auth.py`\n4. `apps/api/utils/errors.py`\n5. `apps/api/utils/logging.py`",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T06:56:47.511056+00:00"
+  "timestamp": "2026-04-15T09:01:17.668387+00:00"
 }

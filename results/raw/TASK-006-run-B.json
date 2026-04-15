@@ -2,48 +2,84 @@
   "task_id": "TASK-006",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 9,
-  "output_tokens": 742,
-  "cache_creation_input_tokens": 11692,
-  "cache_read_input_tokens": 92543,
-  "total_tokens": 104986,
-  "active_tokens": 12443,
-  "turns_count": 6,
-  "tool_calls_count": 4,
+  "input_tokens": 5,
+  "output_tokens": 556,
+  "cache_creation_input_tokens": 44967,
+  "cache_read_input_tokens": 87410,
+  "total_tokens": 132938,
+  "active_tokens": 45528,
+  "turns_count": 5,
+  "tool_calls_count": 3,
   "tool_calls_breakdown": {
-    "ToolSearch": 1,
-    "mcp__token-savior__switch_project": 1,
-    "mcp__token-savior__find_symbol": 1,
-    "mcp__token-savior__get_dependents": 1
+    "mcp__token-savior-recall__switch_project": 1,
+    "mcp__token-savior-recall__find_symbol": 1,
+    "mcp__token-savior-recall__search_codebase": 1
   },
   "tool_calls_detail": [
     {
-      "tool": "ToolSearch",
-      "result_chars": 225,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior__switch_project",
+      "tool": "mcp__token-savior-recall__switch_project",
       "result_chars": 60,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior__find_symbol",
-      "result_chars": 125,
+      "tool": "mcp__token-savior-recall__find_symbol",
+      "result_chars": 63,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior__get_dependents",
-      "result_chars": 1452,
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 2465,
       "is_error": false
     }
   ],
-  "total_context_chars_injected": 1862,
+  "ts_tool_details": [
+    {
+      "tool": "switch_project",
+      "args": {
+        "name": "tsbench"
+      },
+      "result_chars": 60,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 0,
+      "preceded_by": null,
+      "followed_by": "find_symbol",
+      "time_ms": 94
+    },
+    {
+      "tool": "find_symbol",
+      "args": {
+        "name": "Sidebar",
+        "level": 2
+      },
+      "result_chars": 63,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 1,
+      "preceded_by": "switch_project",
+      "followed_by": "search_codebase",
+      "time_ms": 403
+    },
+    {
+      "tool": "search_codebase",
+      "args": {
+        "pattern": "import.*Sidebar|from.*['\\\"].*Sidebar['\\\"]"
+      },
+      "result_chars": 2465,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 2,
+      "preceded_by": "find_symbol",
+      "followed_by": null,
+      "time_ms": 324
+    }
+  ],
+  "total_context_chars_injected": 2588,
   "ts_tool_calls_count": 3,
-  "wall_time_seconds": 28.96,
-  "raw_response": "Le composant `<Sidebar>` est d\u00e9fini dans `apps/web/components/Sidebar.tsx` et import\u00e9 par **15 pages** :\n\n| Fichier | Composant |\n|---|---|\n| `apps/web/app/audit/page.tsx` | `AuditPage` |\n| `apps/web/app/billing/page.tsx` | `BillingPage` |\n| `apps/web/app/dashboard/page.tsx` | `DashboardPage` |\n| `apps/web/app/forgot-password/page.tsx` | `ForgotPasswordPage` |\n| `apps/web/app/invite/page.tsx` | `InvitePage` |\n| `apps/web/app/login/page.tsx` | `LoginPage` |\n| `apps/web/app/members/page.tsx` | `MembersPage` |\n| `apps/web/app/notifications/page.tsx` | `NotificationsPage` |\n| `apps/web/app/pricing/page.tsx` | `PricingPage` |\n| `apps/web/app/profile/page.tsx` | `ProfilePage` |\n| `apps/web/app/reports/page.tsx` | `ReportsPage` |\n| `apps/web/app/sessions/page.tsx` | `SessionsPage` |\n| `apps/web/app/settings/page.tsx` | `SettingsPage` |\n| `apps/web/app/signup/page.tsx` | `SignupPage` |\n| `apps/web/app/webhooks/page.tsx` | `WebhooksPage` |\n\nToutes ces pages se trouvent sous `apps/web/app/` et utilisent `<Sidebar>` dans leur rendu.",
+  "wall_time_seconds": 17.15,
+  "raw_response": "Le composant `<Sidebar>` est d\u00e9fini dans `apps/web/components/Sidebar.tsx` (ligne 26) et import\u00e9 par **15 pages** :\n\n| Fichier |\n|---|\n| `apps/web/app/audit/page.tsx` |\n| `apps/web/app/billing/page.tsx` |\n| `apps/web/app/dashboard/page.tsx` |\n| `apps/web/app/forgot-password/page.tsx` |\n| `apps/web/app/invite/page.tsx` |\n| `apps/web/app/login/page.tsx` |\n| `apps/web/app/members/page.tsx` |\n| `apps/web/app/notifications/page.tsx` |\n| `apps/web/app/pricing/page.tsx` |\n| `apps/web/app/profile/page.tsx` |\n| `apps/web/app/reports/page.tsx` |\n| `apps/web/app/sessions/page.tsx` |\n| `apps/web/app/settings/page.tsx` |\n| `apps/web/app/signup/page.tsx` |\n| `apps/web/app/webhooks/page.tsx` |\n\nToutes les pages `app/*/page.tsx` l'importent via `import { Sidebar } from '../../components/Sidebar'`.",
   "error": null,
   "score": 0,
   "max_score": 2,
-  "timestamp": "2026-04-14T21:39:23.376134+00:00"
+  "timestamp": "2026-04-15T08:34:53.465247+00:00"
 }

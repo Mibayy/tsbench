@@ -3,16 +3,15 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 5,
-  "output_tokens": 813,
-  "cache_creation_input_tokens": 14737,
-  "cache_read_input_tokens": 120858,
-  "total_tokens": 136413,
-  "active_tokens": 15555,
-  "turns_count": 6,
-  "tool_calls_count": 3,
+  "output_tokens": 857,
+  "cache_creation_input_tokens": 12878,
+  "cache_read_input_tokens": 121547,
+  "total_tokens": 135287,
+  "active_tokens": 13740,
+  "turns_count": 5,
+  "tool_calls_count": 2,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__memory_search": 1,
     "mcp__token-savior-recall__get_changed_symbols": 1
   },
   "tool_calls_detail": [
@@ -22,22 +21,45 @@
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__memory_search",
-      "result_chars": 32,
-      "is_error": false
-    },
-    {
       "tool": "mcp__token-savior-recall__get_changed_symbols",
-      "result_chars": 10584,
+      "result_chars": 4120,
       "is_error": false
     }
   ],
-  "total_context_chars_injected": 10676,
-  "ts_tool_calls_count": 0,
-  "wall_time_seconds": 22.03,
-  "raw_response": "Voici le r\u00e9sum\u00e9 des changements depuis HEAD~1 :\n\n## Fichiers modifi\u00e9s (5)\n\n### `apps/api/services/billing.py` \u2014 20 fonctions modifi\u00e9es\nToutes les fonctions du module billing ont \u00e9t\u00e9 touch\u00e9es : `_billing_admin_db`, `calculate_invoice`, `validate_invoice_total`, `apply_discount`, `charge_customer`, `refund_payment`, `list_invoices`, `void_invoice`, plus 12 fonctions internes (`prepare_billing_internal`, `finalize_billing_internal`, `audit_billing_internal`, `notify_billing_internal`, `enqueue_billing_internal`, `reconcile_billing_internal`, `upsert_billing_internal`, `expand_billing_internal`, `reduce_billing_internal`, `snapshot_billing_internal`, `replay_billing_internal`, `validate_input_billing_internal`).\n\n### `apps/api/utils/buggy_pagination.py` \u2014 1 fonction modifi\u00e9e\n- `buggy_paginate` (modifi\u00e9)\n\n### `bench.py` \u2014 16 fonctions modifi\u00e9es\n`load_tasks_index`, `load_task_prompt`, `load_expected_answer`, `run_claude`, `parse_stream_json`, `extract_files`, `extract_symbols`, `f1`, `score_response`, `result_path`, `prewarm_run_b`, `run_task`, `_active`, `_turns`, `_chars`, `generate_report`, `main`.\n\n### `GROUND_TRUTH.json` \u2014 sections modifi\u00e9es\nM\u00e9tadonn\u00e9es (`seed`, `generator_version`, `summary`, etc.) et artefacts (`AMBIG-001`, `AMBIG-002`, etc.).\n\n### `tasks/index.json` \u2014 sections modifi\u00e9es\nEntr\u00e9es de t\u00e2ches (`TASK-001`, `TASK-002`, `TASK-003`, etc.).\n\n## Fichiers ajout\u00e9s (22)\n\n- **20 fichiers de t\u00e2ches** : `TASK-041.md` \u00e0 `TASK-060.md` (chacun avec sections Prompt, R\u00e9ponse attendue, Scoring, Notes)\n- `.token-savior-cache.json`\n- `.token-savior-checkpoints/` (copie de sauvegarde de `billing.py`)\n\n## Fichiers supprim\u00e9s\nAucun.",
+  "ts_tool_details": [
+    {
+      "tool": "switch_project",
+      "args": {
+        "name": "tsbench"
+      },
+      "result_chars": 60,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 0,
+      "preceded_by": null,
+      "followed_by": "get_changed_symbols",
+      "time_ms": 237
+    },
+    {
+      "tool": "get_changed_symbols",
+      "args": {
+        "ref": "HEAD~1"
+      },
+      "result_chars": 4120,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 1,
+      "preceded_by": "switch_project",
+      "followed_by": null,
+      "time_ms": 434
+    }
+  ],
+  "total_context_chars_injected": 4180,
+  "ts_tool_calls_count": 2,
+  "wall_time_seconds": 22.85,
+  "raw_response": "Voici le r\u00e9sum\u00e9 des changements depuis `HEAD~1` :\n\n## Fichiers modifi\u00e9s avec symboles chang\u00e9s (8 fichiers, 45 symboles)\n\n### `apps/api/ambig/mod1.py`\n- **`create_regular_user`** \u2014 fonction modifi\u00e9e\n- **`process_event`** \u2014 fonction modifi\u00e9e\n\n### `apps/api/config.py`\n- **`Settings`** \u2014 classe modifi\u00e9e\n\n### `apps/api/services/billing.py` (20 symboles)\n- **`_billing_admin_db`**, **`calculate_invoice`**, **`validate_invoice_total`**, **`apply_discount`**, **`charge_customer`**, **`refund_payment`**, **`list_invoices`**, **`void_invoice`** \u2014 fonctions modifi\u00e9es\n- 12 fonctions internes modifi\u00e9es : `prepare_billing_internal`, `finalize_billing_internal`, `audit_billing_internal`, `notify_billing_internal`, `enqueue_billing_internal`, `reconcile_billing_internal`, `upsert_billing_internal`, `expand_billing_internal`, `reduce_billing_internal`, `snapshot_billing_internal`, `replay_billing_internal`, `validate_input_billing_internal`\n\n### `apps/api/utils/buggy_pagination.py`\n- **`buggy_paginate`** \u2014 fonction modifi\u00e9e\n\n### `apps/api/utils/strings.py`\n- **`truncate`** \u2014 fonction modifi\u00e9e\n\n### `bench.py` (17 symboles)\n- Fonctions modifi\u00e9es : `load_tasks_index`, `load_task_prompt`, `load_expected_answer`, `run_claude`, `parse_stream_json`, `extract_files`, `extract_symbols`, `f1`, `score_response`, `result_path`, `prewarm_run_b`, `run_task`, `_active`, `_turns`, `_chars`, `generate_report`, `main`\n\n### `packages/utils/paginate_copy.py`\n- **`paginate_also`** \u2014 fonction modifi\u00e9e\n\n### `packages/utils/slug_copy.py`\n- **`to_slug`**, **`slugify`** \u2014 fonctions modifi\u00e9es\n\n## Fichiers donn\u00e9es (JSON) \u2014 26+ fichiers\nLes fichiers `results/raw/TASK-*-run-B.json` et `results/warmup-run-B.json` sont modifi\u00e9s (pas de symboles structurels).\n\n## Totaux\n| | Nombre |\n|---|---|\n| Fichiers modifi\u00e9s | 42 |\n| Fichiers ajout\u00e9s | 4 |\n| Fichiers supprim\u00e9s | 0 |\n| Symboles impact\u00e9s | 45 |",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T06:54:54.853642+00:00"
+  "timestamp": "2026-04-15T09:08:09.528029+00:00"
 }

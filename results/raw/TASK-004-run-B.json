@@ -2,58 +2,81 @@
   "task_id": "TASK-004",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 15,
-  "output_tokens": 554,
-  "cache_creation_input_tokens": 12749,
-  "cache_read_input_tokens": 134627,
-  "total_tokens": 147945,
-  "active_tokens": 13318,
-  "turns_count": 9,
-  "tool_calls_count": 6,
+  "input_tokens": 5,
+  "output_tokens": 230,
+  "cache_creation_input_tokens": 16586,
+  "cache_read_input_tokens": 120369,
+  "total_tokens": 137190,
+  "active_tokens": 16821,
+  "turns_count": 5,
+  "tool_calls_count": 3,
   "tool_calls_breakdown": {
-    "ToolSearch": 3,
-    "mcp__token-savior__switch_project": 1,
-    "mcp__token-savior__get_routes": 1,
-    "mcp__token-savior__search_codebase": 1
+    "mcp__token-savior-recall__switch_project": 1,
+    "mcp__token-savior-recall__search_codebase": 1,
+    "mcp__token-savior-recall__get_routes": 1
   },
   "tool_calls_detail": [
     {
-      "tool": "ToolSearch",
-      "result_chars": 76,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior__switch_project",
+      "tool": "mcp__token-savior-recall__switch_project",
       "result_chars": 60,
       "is_error": false
     },
     {
-      "tool": "ToolSearch",
-      "result_chars": 72,
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 14817,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior__get_routes",
+      "tool": "mcp__token-savior-recall__get_routes",
       "result_chars": 1633,
-      "is_error": false
-    },
-    {
-      "tool": "ToolSearch",
-      "result_chars": 77,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior__search_codebase",
-      "result_chars": 2590,
       "is_error": false
     }
   ],
-  "total_context_chars_injected": 4508,
+  "ts_tool_details": [
+    {
+      "tool": "switch_project",
+      "args": {
+        "name": "tsbench"
+      },
+      "result_chars": 60,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 0,
+      "preceded_by": null,
+      "followed_by": "search_codebase",
+      "time_ms": 86
+    },
+    {
+      "tool": "search_codebase",
+      "args": {
+        "pattern": "billing"
+      },
+      "result_chars": 14817,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 1,
+      "preceded_by": "switch_project",
+      "followed_by": "get_routes",
+      "time_ms": 229
+    },
+    {
+      "tool": "get_routes",
+      "args": {},
+      "result_chars": 1633,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 2,
+      "preceded_by": "search_codebase",
+      "followed_by": null,
+      "time_ms": 205
+    }
+  ],
+  "total_context_chars_injected": 16510,
   "ts_tool_calls_count": 3,
-  "wall_time_seconds": 32.55,
-  "raw_response": "Le fichier qui g\u00e8re la route `POST /api/billing` est **`apps/api/routers/billing.py`** (ligne 7, handler `create_billing`).",
+  "wall_time_seconds": 19.36,
+  "raw_response": "La route `POST /api/billing` est d\u00e9finie dans **`apps/api/routers/billing.py`** (ligne 7), qui d\u00e9l\u00e8gue au service **`apps/api/services/billing.py`**.",
   "error": null,
   "score": 1,
   "max_score": 2,
-  "timestamp": "2026-04-14T21:38:03.623265+00:00"
+  "timestamp": "2026-04-15T08:33:59.598624+00:00"
 }

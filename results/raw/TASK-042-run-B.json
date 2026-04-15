@@ -3,12 +3,12 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 8,
-  "output_tokens": 1702,
-  "cache_creation_input_tokens": 6983,
-  "cache_read_input_tokens": 172289,
-  "total_tokens": 180982,
-  "active_tokens": 8693,
-  "turns_count": 13,
+  "output_tokens": 1487,
+  "cache_creation_input_tokens": 13879,
+  "cache_read_input_tokens": 166734,
+  "total_tokens": 182108,
+  "active_tokens": 15374,
+  "turns_count": 12,
   "tool_calls_count": 8,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
@@ -28,27 +28,27 @@
     },
     {
       "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 71,
+      "result_chars": 192,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 64,
+      "result_chars": 191,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 66,
+      "result_chars": 192,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 68,
+      "result_chars": 193,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 72,
+      "result_chars": 195,
       "is_error": false
     },
     {
@@ -57,12 +57,132 @@
       "is_error": false
     }
   ],
-  "total_context_chars_injected": 5031,
-  "ts_tool_calls_count": 0,
-  "wall_time_seconds": 40.91,
-  "raw_response": "Voici les 29 fonctions publiques (non-underscore) de `apps/api/services/auth.py` :\n\n| # | Signature | Lignes |\n|---|-----------|--------|\n| 1 | `authenticate_user(credentials)` | 14\u201346 |\n| 2 | `issue_token(payload, user_id)` | 48\u201380 |\n| 3 | `revoke_token(payload, user_id)` | 82\u2013114 |\n| 4 | `hash_password(payload, user_id)` | 116\u2013148 |\n| 5 | `verify_password(payload, user_id)` | 150\u2013182 |\n| 6 | `prepare_auth_internal(data)` | 184\u2013200 |\n| 7 | `finalize_auth_internal(data)` | 202\u2013218 |\n| 8 | `audit_auth_internal(data)` | 220\u2013236 |\n| 9 | `notify_auth_internal(data)` | 238\u2013254 |\n| 10 | `enqueue_auth_internal(data)` | 256\u2013272 |\n| 11 | `reconcile_auth_internal(data)` | 274\u2013290 |\n| 12 | `upsert_auth_internal(data)` | 292\u2013308 |\n| 13 | `expand_auth_internal(data)` | 310\u2013326 |\n| 14 | `reduce_auth_internal(data)` | 328\u2013344 |\n| 15 | `snapshot_auth_internal(data)` | 346\u2013362 |\n| 16 | `replay_auth_internal(data)` | 364\u2013380 |\n| 17 | `validate_input_auth_internal(data)` | 382\u2013398 |\n| 18 | `serialize_output_auth_internal(data)` | 400\u2013416 |\n| 19 | `deserialize_input_auth_internal(data)` | 418\u2013434 |\n| 20 | `build_context_auth_internal(data)` | 436\u2013452 |\n| 21 | `emit_metric_auth_internal(data)` | 454\u2013470 |\n| 22 | `rate_limit_auth_internal(data)` | 472\u2013488 |\n| 23 | `retry_with_backoff_auth_internal(data)` | 490\u2013506 |\n| 24 | `batch_process_auth_internal(data)` | 508\u2013524 |\n| 25 | `stream_process_auth_internal(data)` | 526\u2013542 |\n| 26 | `index_entity_auth_internal(data)` | 544\u2013560 |\n| 27 | `reindex_entity_auth_internal(data)` | 562\u2013578 |\n| 28 | `soft_delete_auth_internal(data)` | 580\u2013596 |\n| 29 | `hard_delete_auth_internal(data)` | 598\u2013614 |\n\nAucune annotation de type n'est utilis\u00e9e. La seule fonction priv\u00e9e (pr\u00e9fix\u00e9e `_`) exclue est `_auth_admin_db()` (lignes 8\u201312).",
+  "ts_tool_details": [
+    {
+      "tool": "switch_project",
+      "args": {
+        "name": "tsbench"
+      },
+      "result_chars": 60,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 0,
+      "preceded_by": null,
+      "followed_by": "get_functions",
+      "time_ms": 92
+    },
+    {
+      "tool": "get_functions",
+      "args": {
+        "file_path": "apps/api/services/auth.py",
+        "compress": false,
+        "max_results": 0
+      },
+      "result_chars": 4558,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 1,
+      "preceded_by": "switch_project",
+      "followed_by": "get_function_source",
+      "time_ms": 292
+    },
+    {
+      "tool": "get_function_source",
+      "args": {
+        "name": "authenticate_user",
+        "file_path": "apps/api/services/auth.py",
+        "level": 1
+      },
+      "result_chars": 192,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 2,
+      "preceded_by": "get_functions",
+      "followed_by": "get_function_source",
+      "time_ms": 488
+    },
+    {
+      "tool": "get_function_source",
+      "args": {
+        "name": "issue_token",
+        "file_path": "apps/api/services/auth.py",
+        "level": 1
+      },
+      "result_chars": 191,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 3,
+      "preceded_by": "get_function_source",
+      "followed_by": "get_function_source",
+      "time_ms": 464
+    },
+    {
+      "tool": "get_function_source",
+      "args": {
+        "name": "revoke_token",
+        "file_path": "apps/api/services/auth.py",
+        "level": 1
+      },
+      "result_chars": 192,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 4,
+      "preceded_by": "get_function_source",
+      "followed_by": "get_function_source",
+      "time_ms": 446
+    },
+    {
+      "tool": "get_function_source",
+      "args": {
+        "name": "hash_password",
+        "file_path": "apps/api/services/auth.py",
+        "level": 1
+      },
+      "result_chars": 193,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 5,
+      "preceded_by": "get_function_source",
+      "followed_by": "get_function_source",
+      "time_ms": 490
+    },
+    {
+      "tool": "get_function_source",
+      "args": {
+        "name": "verify_password",
+        "file_path": "apps/api/services/auth.py",
+        "level": 1
+      },
+      "result_chars": 195,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 6,
+      "preceded_by": "get_function_source",
+      "followed_by": "get_function_source",
+      "time_ms": 354
+    },
+    {
+      "tool": "get_function_source",
+      "args": {
+        "name": "prepare_auth_internal",
+        "file_path": "apps/api/services/auth.py",
+        "level": 1
+      },
+      "result_chars": 72,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 7,
+      "preceded_by": "get_function_source",
+      "followed_by": null,
+      "time_ms": 281
+    }
+  ],
+  "total_context_chars_injected": 5653,
+  "ts_tool_calls_count": 8,
+  "wall_time_seconds": 30.53,
+  "raw_response": "Voici les **29 fonctions publiques** de `apps/api/services/auth.py` :\n\n| # | Signature |\n|---|-----------|\n| 1 | `authenticate_user(credentials)` |\n| 2 | `issue_token(payload, user_id)` |\n| 3 | `revoke_token(payload, user_id)` |\n| 4 | `hash_password(payload, user_id)` |\n| 5 | `verify_password(payload, user_id)` |\n| 6 | `prepare_auth_internal(data)` |\n| 7 | `finalize_auth_internal(data)` |\n| 8 | `audit_auth_internal(data)` |\n| 9 | `notify_auth_internal(data)` |\n| 10 | `enqueue_auth_internal(data)` |\n| 11 | `reconcile_auth_internal(data)` |\n| 12 | `upsert_auth_internal(data)` |\n| 13 | `expand_auth_internal(data)` |\n| 14 | `reduce_auth_internal(data)` |\n| 15 | `snapshot_auth_internal(data)` |\n| 16 | `replay_auth_internal(data)` |\n| 17 | `validate_input_auth_internal(data)` |\n| 18 | `serialize_output_auth_internal(data)` |\n| 19 | `deserialize_input_auth_internal(data)` |\n| 20 | `build_context_auth_internal(data)` |\n| 21 | `emit_metric_auth_internal(data)` |\n| 22 | `rate_limit_auth_internal(data)` |\n| 23 | `retry_with_backoff_auth_internal(data)` |\n| 24 | `batch_process_auth_internal(data)` |\n| 25 | `stream_process_auth_internal(data)` |\n| 26 | `index_entity_auth_internal(data)` |\n| 27 | `reindex_entity_auth_internal(data)` |\n| 28 | `soft_delete_auth_internal(data)` |\n| 29 | `hard_delete_auth_internal(data)` |\n\nLa seule fonction priv\u00e9e (pr\u00e9fix\u00e9e `_`) exclue est `_auth_admin_db()` (L8-12).",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T06:23:12.106470+00:00"
+  "timestamp": "2026-04-15T08:58:34.957973+00:00"
 }

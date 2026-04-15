@@ -3,12 +3,12 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 5,
-  "output_tokens": 243,
-  "cache_creation_input_tokens": 4679,
-  "cache_read_input_tokens": 127423,
-  "total_tokens": 132350,
-  "active_tokens": 4927,
-  "turns_count": 4,
+  "output_tokens": 234,
+  "cache_creation_input_tokens": 11389,
+  "cache_read_input_tokens": 121315,
+  "total_tokens": 132943,
+  "active_tokens": 11628,
+  "turns_count": 3,
   "tool_calls_count": 2,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
@@ -26,12 +26,42 @@
       "is_error": false
     }
   ],
+  "ts_tool_details": [
+    {
+      "tool": "switch_project",
+      "args": {
+        "name": "tsbench"
+      },
+      "result_chars": 60,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 0,
+      "preceded_by": null,
+      "followed_by": "get_call_chain",
+      "time_ms": 84
+    },
+    {
+      "tool": "get_call_chain",
+      "args": {
+        "from_name": "alpha_entry",
+        "to_name": "alpha_leaf",
+        "level": 2
+      },
+      "result_chars": 241,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 1,
+      "preceded_by": "switch_project",
+      "followed_by": null,
+      "time_ms": 321
+    }
+  ],
   "total_context_chars_injected": 301,
-  "ts_tool_calls_count": 0,
-  "wall_time_seconds": 15.92,
-  "raw_response": "Chemin complet dans `apps/api/chains/alpha.py` :\n\n```\nalpha_entry (L3) \u2192 alpha_middle (L7) \u2192 alpha_inner (L11) \u2192 alpha_leaf (L15)\n```",
+  "ts_tool_calls_count": 2,
+  "wall_time_seconds": 13.99,
+  "raw_response": "Chemin complet dans `apps/api/chains/alpha.py` :\n\n```\nalpha_entry \u2192 alpha_middle \u2192 alpha_inner \u2192 alpha_leaf\n```\n\n4 fonctions, 3 sauts, toutes dans le m\u00eame fichier.",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T06:57:24.597580+00:00"
+  "timestamp": "2026-04-15T09:01:53.672511+00:00"
 }

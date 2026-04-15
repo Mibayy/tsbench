@@ -3,16 +3,15 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 6,
-  "output_tokens": 442,
-  "cache_creation_input_tokens": 43745,
-  "cache_read_input_tokens": 130049,
-  "total_tokens": 174242,
-  "active_tokens": 44193,
-  "turns_count": 7,
-  "tool_calls_count": 4,
+  "output_tokens": 389,
+  "cache_creation_input_tokens": 43967,
+  "cache_read_input_tokens": 130846,
+  "total_tokens": 175208,
+  "active_tokens": 44362,
+  "turns_count": 5,
+  "tool_calls_count": 3,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__memory_search": 1,
     "mcp__token-savior-recall__find_symbol": 1,
     "mcp__token-savior-recall__insert_near_symbol": 1
   },
@@ -23,13 +22,8 @@
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__memory_search",
-      "result_chars": 32,
-      "is_error": false
-    },
-    {
       "tool": "mcp__token-savior-recall__find_symbol",
-      "result_chars": 70,
+      "result_chars": 109,
       "is_error": false
     },
     {
@@ -38,12 +32,57 @@
       "is_error": false
     }
   ],
-  "total_context_chars_injected": 346,
-  "ts_tool_calls_count": 0,
-  "wall_time_seconds": 23.44,
+  "ts_tool_details": [
+    {
+      "tool": "switch_project",
+      "args": {
+        "name": "tsbench"
+      },
+      "result_chars": 60,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 0,
+      "preceded_by": null,
+      "followed_by": "find_symbol",
+      "time_ms": 113
+    },
+    {
+      "tool": "find_symbol",
+      "args": {
+        "name": "calculate_invoice",
+        "level": 2
+      },
+      "result_chars": 109,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 1,
+      "preceded_by": "switch_project",
+      "followed_by": "insert_near_symbol",
+      "time_ms": 641
+    },
+    {
+      "tool": "insert_near_symbol",
+      "args": {
+        "symbol_name": "calculate_invoice",
+        "position": "after",
+        "content": "\n\ndef validate_invoice_total(invoice: dict) -> bool:\n    return invoice[\"total\"] > 0\n",
+        "file_path": "apps/api/services/billing.py"
+      },
+      "result_chars": 184,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 2,
+      "preceded_by": "find_symbol",
+      "followed_by": null,
+      "time_ms": 109
+    }
+  ],
+  "total_context_chars_injected": 353,
+  "ts_tool_calls_count": 3,
+  "wall_time_seconds": 22.01,
   "raw_response": "Fonction `validate_invoice_total` ins\u00e9r\u00e9e apr\u00e8s `calculate_invoice` \u00e0 la ligne 47 de `apps/api/services/billing.py`. Elle retourne `True` si `invoice[\"total\"] > 0`, `False` sinon.",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T06:53:14.849380+00:00"
+  "timestamp": "2026-04-15T09:05:13.234294+00:00"
 }

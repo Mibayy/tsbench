@@ -2,42 +2,65 @@
   "task_id": "TASK-001",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 8,
-  "output_tokens": 266,
-  "cache_creation_input_tokens": 20762,
-  "cache_read_input_tokens": 61349,
-  "total_tokens": 82385,
-  "active_tokens": 21036,
-  "turns_count": 5,
-  "tool_calls_count": 3,
+  "input_tokens": 5,
+  "output_tokens": 193,
+  "cache_creation_input_tokens": 44006,
+  "cache_read_input_tokens": 87296,
+  "total_tokens": 131500,
+  "active_tokens": 44204,
+  "turns_count": 4,
+  "tool_calls_count": 2,
   "tool_calls_breakdown": {
-    "ToolSearch": 1,
-    "mcp__token-savior__switch_project": 1,
-    "mcp__token-savior__find_symbol": 1
+    "mcp__token-savior-recall__switch_project": 1,
+    "mcp__token-savior-recall__find_symbol": 1
   },
   "tool_calls_detail": [
     {
-      "tool": "ToolSearch",
-      "result_chars": 149,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior__switch_project",
+      "tool": "mcp__token-savior-recall__switch_project",
       "result_chars": 60,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior__find_symbol",
-      "result_chars": 128,
+      "tool": "mcp__token-savior-recall__find_symbol",
+      "result_chars": 61,
       "is_error": false
     }
   ],
-  "total_context_chars_injected": 337,
+  "ts_tool_details": [
+    {
+      "tool": "switch_project",
+      "args": {
+        "name": "tsbench"
+      },
+      "result_chars": 60,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 0,
+      "preceded_by": null,
+      "followed_by": "find_symbol",
+      "time_ms": 113
+    },
+    {
+      "tool": "find_symbol",
+      "args": {
+        "name": "lonely_util",
+        "level": 2
+      },
+      "result_chars": 61,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 1,
+      "preceded_by": "switch_project",
+      "followed_by": null,
+      "time_ms": 462
+    }
+  ],
+  "total_context_chars_injected": 121,
   "ts_tool_calls_count": 2,
-  "wall_time_seconds": 13.19,
-  "raw_response": "`lonely_util` est d\u00e9finie dans **`packages/utils/targeted.py`**, lignes **3\u20135**.",
+  "wall_time_seconds": 15.4,
+  "raw_response": "`lonely_util` est d\u00e9finie dans **`packages/utils/targeted.py`**, \u00e0 la **ligne 3**.",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-14T21:36:53.432138+00:00"
+  "timestamp": "2026-04-15T08:33:05.052211+00:00"
 }

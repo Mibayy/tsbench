@@ -2,57 +2,200 @@
   "task_id": "TASK-005",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 11,
-  "output_tokens": 701,
-  "cache_creation_input_tokens": 12737,
-  "cache_read_input_tokens": 137218,
-  "total_tokens": 150667,
-  "active_tokens": 13449,
+  "input_tokens": 9,
+  "output_tokens": 975,
+  "cache_creation_input_tokens": 47232,
+  "cache_read_input_tokens": 266067,
+  "total_tokens": 314283,
+  "active_tokens": 48216,
   "turns_count": 11,
-  "tool_calls_count": 6,
+  "tool_calls_count": 9,
   "tool_calls_breakdown": {
-    "ToolSearch": 1,
-    "mcp__token-savior__switch_project": 1,
-    "mcp__token-savior__search_codebase": 4
+    "mcp__token-savior-recall__switch_project": 1,
+    "mcp__token-savior-recall__search_codebase": 3,
+    "mcp__token-savior-recall__list_files": 2,
+    "mcp__token-savior-recall__get_structure_summary": 1,
+    "mcp__token-savior-recall__get_class_source": 2
   },
   "tool_calls_detail": [
     {
-      "tool": "ToolSearch",
-      "result_chars": 226,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior__switch_project",
+      "tool": "mcp__token-savior-recall__switch_project",
       "result_chars": 60,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior__search_codebase",
+      "tool": "mcp__token-savior-recall__search_codebase",
       "result_chars": 239,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior__search_codebase",
-      "result_chars": 587,
+      "tool": "mcp__token-savior-recall__list_files",
+      "result_chars": 340,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior__search_codebase",
-      "result_chars": 369,
+      "tool": "mcp__token-savior-recall__get_structure_summary",
+      "result_chars": 199,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior__search_codebase",
-      "result_chars": 1470,
+      "tool": "mcp__token-savior-recall__get_class_source",
+      "result_chars": 146,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 483,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 2359,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__list_files",
+      "result_chars": 329,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_class_source",
+      "result_chars": 520,
       "is_error": false
     }
   ],
-  "total_context_chars_injected": 2951,
-  "ts_tool_calls_count": 5,
-  "wall_time_seconds": 32.83,
-  "raw_response": "Le r\u00f4le d'un membre d'association est stock\u00e9 dans :\n\n- **Table (mod\u00e8le)** : `Member`\n- **Colonne (champ)** : `role` (type `String`)\n- **Fichier de sch\u00e9ma** : `packages/db/schema.prisma`",
+  "ts_tool_details": [
+    {
+      "tool": "switch_project",
+      "args": {
+        "name": "tsbench"
+      },
+      "result_chars": 60,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 0,
+      "preceded_by": null,
+      "followed_by": "search_codebase",
+      "time_ms": 94
+    },
+    {
+      "tool": "search_codebase",
+      "args": {
+        "pattern": "role.*member|member.*role",
+        "max_results": 20
+      },
+      "result_chars": 239,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 1,
+      "preceded_by": "switch_project",
+      "followed_by": "list_files",
+      "time_ms": 411
+    },
+    {
+      "tool": "list_files",
+      "args": {
+        "pattern": "*schema*"
+      },
+      "result_chars": 340,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 2,
+      "preceded_by": "search_codebase",
+      "followed_by": "get_structure_summary",
+      "time_ms": 435
+    },
+    {
+      "tool": "get_structure_summary",
+      "args": {
+        "file_path": "apps/api/schemas/members.py"
+      },
+      "result_chars": 199,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 3,
+      "preceded_by": "list_files",
+      "followed_by": "get_class_source",
+      "time_ms": 64
+    },
+    {
+      "tool": "get_class_source",
+      "args": {
+        "name": "MemberResponse",
+        "file_path": "apps/api/schemas/members.py",
+        "level": 0
+      },
+      "result_chars": 146,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 4,
+      "preceded_by": "get_structure_summary",
+      "followed_by": "search_codebase",
+      "time_ms": 820
+    },
+    {
+      "tool": "search_codebase",
+      "args": {
+        "pattern": "role.*=|Column.*role|association_members|member.*association",
+        "max_results": 20
+      },
+      "result_chars": 483,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 5,
+      "preceded_by": "get_class_source",
+      "followed_by": "search_codebase",
+      "time_ms": 99
+    },
+    {
+      "tool": "search_codebase",
+      "args": {
+        "pattern": "class.*Model|Table|CREATE TABLE|models",
+        "max_results": 20
+      },
+      "result_chars": 2359,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 6,
+      "preceded_by": "search_codebase",
+      "followed_by": "list_files",
+      "time_ms": 247
+    },
+    {
+      "tool": "list_files",
+      "args": {
+        "pattern": "*model*"
+      },
+      "result_chars": 329,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 7,
+      "preceded_by": "search_codebase",
+      "followed_by": "get_class_source",
+      "time_ms": 34
+    },
+    {
+      "tool": "get_class_source",
+      "args": {
+        "name": "Member",
+        "file_path": "apps/api/models/members.py",
+        "level": 0
+      },
+      "result_chars": 520,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 8,
+      "preceded_by": "list_files",
+      "followed_by": null,
+      "time_ms": 263
+    }
+  ],
+  "total_context_chars_injected": 4675,
+  "ts_tool_calls_count": 9,
+  "wall_time_seconds": 36.7,
+  "raw_response": "Le mod\u00e8le `Member` dans ce projet ne contient **pas de colonne `role`** (ni de table d'association d\u00e9di\u00e9e). Le mod\u00e8le (`apps/api/models/members.py`) n'a que `id` et `name`, et le sch\u00e9ma (`apps/api/schemas/members.py`) confirme la m\u00eame chose.\n\nIl n'y a **aucune table ni colonne dans ce codebase** qui stocke le r\u00f4le d'un membre d'association. Le seul usage de `role` li\u00e9 \u00e0 un \"member\" est un param\u00e8tre par d\u00e9faut `role=\"member\"` dans `apps/api/ambig/mod1.py:create_user`, mais ce n'est pas un champ persist\u00e9 en base.\n\n**R\u00e9sum\u00e9 :** cette information n'existe pas dans le sch\u00e9ma actuel du projet.",
   "error": null,
-  "score": 1,
+  "score": 0,
   "max_score": 2,
-  "timestamp": "2026-04-14T22:32:06.691643+00:00"
+  "timestamp": "2026-04-15T08:34:36.308616+00:00"
 }

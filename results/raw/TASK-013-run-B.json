@@ -3,56 +3,141 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 9,
-  "output_tokens": 479,
-  "cache_creation_input_tokens": 44208,
-  "cache_read_input_tokens": 261889,
-  "total_tokens": 306585,
-  "active_tokens": 44696,
-  "turns_count": 7,
+  "output_tokens": 588,
+  "cache_creation_input_tokens": 11817,
+  "cache_read_input_tokens": 297700,
+  "total_tokens": 310114,
+  "active_tokens": 12414,
+  "turns_count": 8,
   "tool_calls_count": 6,
   "tool_calls_breakdown": {
-    "mcp__token-savior__switch_project": 1,
-    "mcp__token-savior__find_symbol": 1,
-    "mcp__token-savior__get_dependencies": 4
+    "mcp__token-savior-recall__switch_project": 1,
+    "mcp__token-savior-recall__find_symbol": 1,
+    "mcp__token-savior-recall__get_function_source": 4
   },
   "tool_calls_detail": [
     {
-      "tool": "mcp__token-savior__switch_project",
+      "tool": "mcp__token-savior-recall__switch_project",
       "result_chars": 60,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior__find_symbol",
-      "result_chars": 95,
+      "tool": "mcp__token-savior-recall__find_symbol",
+      "result_chars": 59,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior__get_dependencies",
-      "result_chars": 128,
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 107,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior__get_dependencies",
-      "result_chars": 128,
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 108,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior__get_dependencies",
-      "result_chars": 126,
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 105,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior__get_dependencies",
-      "result_chars": 2,
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 106,
       "is_error": false
     }
   ],
-  "total_context_chars_injected": 539,
+  "ts_tool_details": [
+    {
+      "tool": "switch_project",
+      "args": {
+        "name": "tsbench"
+      },
+      "result_chars": 60,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 0,
+      "preceded_by": null,
+      "followed_by": "find_symbol",
+      "time_ms": 120
+    },
+    {
+      "tool": "find_symbol",
+      "args": {
+        "name": "gamma_entry",
+        "level": 2
+      },
+      "result_chars": 59,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 1,
+      "preceded_by": "switch_project",
+      "followed_by": "get_function_source",
+      "time_ms": 559
+    },
+    {
+      "tool": "get_function_source",
+      "args": {
+        "name": "gamma_entry",
+        "level": 0
+      },
+      "result_chars": 107,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 2,
+      "preceded_by": "find_symbol",
+      "followed_by": "get_function_source",
+      "time_ms": 280
+    },
+    {
+      "tool": "get_function_source",
+      "args": {
+        "name": "gamma_middle",
+        "level": 0
+      },
+      "result_chars": 108,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 3,
+      "preceded_by": "get_function_source",
+      "followed_by": "get_function_source",
+      "time_ms": 257
+    },
+    {
+      "tool": "get_function_source",
+      "args": {
+        "name": "gamma_inner",
+        "level": 0
+      },
+      "result_chars": 105,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 4,
+      "preceded_by": "get_function_source",
+      "followed_by": "get_function_source",
+      "time_ms": 264
+    },
+    {
+      "tool": "get_function_source",
+      "args": {
+        "name": "gamma_leaf",
+        "level": 0
+      },
+      "result_chars": 106,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 5,
+      "preceded_by": "get_function_source",
+      "followed_by": null,
+      "time_ms": 238
+    }
+  ],
+  "total_context_chars_injected": 545,
   "ts_tool_calls_count": 6,
-  "wall_time_seconds": 50.59,
-  "raw_response": "Cha\u00eene d'appels compl\u00e8te dans `apps/api/chains/gamma.py` :\n\n```\ngamma_entry  \u2192  gamma_middle  \u2192  gamma_inner  \u2192  gamma_leaf\n```\n\n`gamma_leaf` (ligne 15) est la fonction feuille \u2014 elle n'appelle aucune autre fonction du projet.",
+  "wall_time_seconds": 31.75,
+  "raw_response": "Cha\u00eene d'appels compl\u00e8te dans `apps/api/chains/gamma.py` :\n\n```\ngamma_entry \u2192 gamma_middle \u2192 gamma_inner \u2192 gamma_leaf\n```\n\n`gamma_leaf` est la fonction feuille : elle ne d\u00e9l\u00e8gue \u00e0 aucune autre fonction et retourne directement `{'leaf': 'gamma_leaf'}`.",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-14T22:56:14.817032+00:00"
+  "timestamp": "2026-04-15T08:37:44.827083+00:00"
 }

@@ -129,16 +129,38 @@ def run_claude(prompt: str, run: str, extra_disallowed: list[str] | None = None)
         env["CLAUDE_PROJECT_ROOT"] = "/root/projects/tsbench"
 
     start = time.time()
+    timed_lines: list[tuple[float, str]] = []
+    stderr_chunks: list[str] = []
+    proc: subprocess.Popen | None = None
     try:
-        proc = subprocess.run(
+        proc = subprocess.Popen(
             cmd,
             cwd=str(CLAUDE_CWD),
             env=env,
-            capture_output=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
             text=True,
-            timeout=TIMEOUT_SECONDS,
+            bufsize=1,
         )
+        assert proc.stdout is not None
+        for line in proc.stdout:
+            timed_lines.append((time.time() - start, line))
+            if time.time() - start > TIMEOUT_SECONDS:
+                proc.kill()
+                raise subprocess.TimeoutExpired(cmd, TIMEOUT_SECONDS)
+        remaining = max(1.0, TIMEOUT_SECONDS - (time.time() - start))
+        proc.wait(timeout=remaining)
+        if proc.stderr is not None:
+            try:
+                stderr_chunks.append(proc.stderr.read() or "")
+            except Exception:
+                pass
     except subprocess.TimeoutExpired:
+        if proc is not None:
+            try:
+                proc.kill()
+            except Exception:
+                pass
         return {
             "error": "timeout",
             "wall_time_seconds": TIMEOUT_SECONDS,
@@ -151,12 +173,19 @@ def run_claude(prompt: str, run: str, extra_disallowed: list[str] | None = None)
             "raw_response": "",
         }
     wall = time.time() - start
+    rc = proc.returncode if proc is not None else -1
+    return parse_stream_json(timed_lines, "".join(stderr_chunks), wall, rc)
 
-    return parse_stream_json(proc.stdout, proc.stderr, wall, proc.returncode)
 
+def parse_stream_json(stdout, stderr: str, wall: float, rc: int) -> dict:
+    """Parse stream-json output into metrics. Accepts raw str (back-compat)
+    or a list of (elapsed_seconds, line) tuples captured live so we can
+    measure per-call latency and chain neighbors for TS tools."""
+    if isinstance(stdout, str):
+        timed_lines: list[tuple[float, str]] = [(0.0, l) for l in stdout.splitlines()]
+    else:
+        timed_lines = list(stdout)
 
-def parse_stream_json(stdout: str, stderr: str, wall: float, rc: int) -> dict:
-    """Parse stream-json output into metrics."""
     input_tokens = 0
     output_tokens = 0
     cache_creation = 0
@@ -166,8 +195,9 @@ def parse_stream_json(stdout: str, stderr: str, wall: float, rc: int) -> dict:
     error: str | None = None
     final_result_seen = False
     turns_count = 0
-    tool_use_name_by_id: dict[str, str] = {}
+    tool_use_by_id: dict[str, dict] = {}
     tool_calls_detail: list[dict] = []
+    ordered_calls: list[dict] = []
 
     def _result_chars(content) -> int:
         if content is None:
@@ -189,8 +219,8 @@ def parse_stream_json(stdout: str, stderr: str, wall: float, rc: int) -> dict:
             return total
         return len(json.dumps(content, ensure_ascii=False))
 
-    for line in stdout.splitlines():
-        line = line.strip()
+    for t_rel, raw in timed_lines:
+        line = raw.strip()
         if not line or not line.startswith("{"):
             continue
         try:
@@ -205,9 +235,14 @@ def parse_stream_json(stdout: str, stderr: str, wall: float, rc: int) -> dict:
                 if block.get("type") == "tool_use":
                     name = block.get("name", "unknown")
                     tid = block.get("id")
+                    args = block.get("input") or {}
                     tool_breakdown[name] = tool_breakdown.get(name, 0) + 1
                     if tid:
-                        tool_use_name_by_id[tid] = name
+                        tool_use_by_id[tid] = {
+                            "name": name,
+                            "args": args,
+                            "t_use": t_rel,
+                        }
         elif et == "user":
             msg = ev.get("message", {})
             content = msg.get("content", [])
@@ -216,10 +251,21 @@ def parse_stream_json(stdout: str, stderr: str, wall: float, rc: int) -> dict:
                     if isinstance(block, dict) and block.get("type") == "tool_result":
                         tid = block.get("tool_use_id")
                         chars = _result_chars(block.get("content"))
+                        is_err = bool(block.get("is_error"))
+                        use = tool_use_by_id.get(tid) if tid else None
+                        name = use["name"] if use else "unknown"
                         tool_calls_detail.append({
-                            "tool": tool_use_name_by_id.get(tid, "unknown"),
+                            "tool": name,
                             "result_chars": chars,
-                            "is_error": bool(block.get("is_error")),
+                            "is_error": is_err,
+                        })
+                        ordered_calls.append({
+                            "tool": name,
+                            "args": use["args"] if use else {},
+                            "result_chars": chars,
+                            "result_empty": chars < 50,
+                            "is_error": is_err,
+                            "time_ms": int((t_rel - use["t_use"]) * 1000) if use else None,
                         })
         elif et == "result":
             final_result_seen = True
@@ -232,6 +278,39 @@ def parse_stream_json(stdout: str, stderr: str, wall: float, rc: int) -> dict:
             if ev.get("is_error"):
                 error = ev.get("subtype") or "api_error"
 
+    ts_prefixes = ("mcp__token-savior__", "mcp__token-savior-recall__")
+
+    def _is_ts(name):
+        return isinstance(name, str) and any(name.startswith(p) for p in ts_prefixes)
+
+    def _short(n):
+        if not isinstance(n, str):
+            return n
+        for p in ts_prefixes:
+            if n.startswith(p):
+                return n[len(p):]
+        return n
+
+    ts_tool_details: list[dict] = []
+    ts_idx = 0
+    for i, call in enumerate(ordered_calls):
+        if not _is_ts(call["tool"]):
+            continue
+        preceded = ordered_calls[i - 1]["tool"] if i > 0 else None
+        followed = ordered_calls[i + 1]["tool"] if i + 1 < len(ordered_calls) else None
+        ts_tool_details.append({
+            "tool": _short(call["tool"]),
+            "args": call["args"],
+            "result_chars": call["result_chars"],
+            "result_empty": call["result_empty"],
+            "is_error": call["is_error"],
+            "call_index": ts_idx,
+            "preceded_by": _short(preceded),
+            "followed_by": _short(followed),
+            "time_ms": call["time_ms"],
+        })
+        ts_idx += 1
+
     if not final_result_seen:
         error = error or f"no_result_event (rc={rc})"
         if stderr:
@@ -242,7 +321,7 @@ def parse_stream_json(stdout: str, stderr: str, wall: float, rc: int) -> dict:
     tool_calls_count = sum(tool_breakdown.values())
     total_context_chars_injected = sum(d["result_chars"] for d in tool_calls_detail)
     ts_tool_calls_count = sum(
-        v for k, v in tool_breakdown.items() if k.startswith("mcp__token-savior__")
+        v for k, v in tool_breakdown.items() if _is_ts(k)
     )
 
     return {
@@ -256,6 +335,7 @@ def parse_stream_json(stdout: str, stderr: str, wall: float, rc: int) -> dict:
         "tool_calls_count": tool_calls_count,
         "tool_calls_breakdown": tool_breakdown,
         "tool_calls_detail": tool_calls_detail,
+        "ts_tool_details": ts_tool_details,
         "total_context_chars_injected": total_context_chars_injected,
         "ts_tool_calls_count": ts_tool_calls_count,
         "wall_time_seconds": round(wall, 2),

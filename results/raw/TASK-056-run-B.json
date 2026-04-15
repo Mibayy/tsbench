@@ -2,21 +2,20 @@
   "task_id": "TASK-056",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 7,
-  "output_tokens": 1186,
-  "cache_creation_input_tokens": 45310,
-  "cache_read_input_tokens": 175423,
-  "total_tokens": 221926,
-  "active_tokens": 46503,
-  "turns_count": 10,
-  "tool_calls_count": 6,
+  "input_tokens": 13,
+  "output_tokens": 2280,
+  "cache_creation_input_tokens": 47131,
+  "cache_read_input_tokens": 358303,
+  "total_tokens": 407727,
+  "active_tokens": 49424,
+  "turns_count": 18,
+  "tool_calls_count": 9,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__memory_search": 1,
-    "mcp__token-savior-recall__get_function_source": 1,
     "mcp__token-savior-recall__create_checkpoint": 1,
-    "mcp__token-savior-recall__replace_symbol_source": 1,
-    "mcp__token-savior-recall__compare_checkpoint_by_symbol": 1
+    "mcp__token-savior-recall__get_function_source": 3,
+    "mcp__token-savior-recall__replace_symbol_source": 2,
+    "mcp__token-savior-recall__compare_checkpoint_by_symbol": 2
   },
   "tool_calls_detail": [
     {
@@ -25,18 +24,33 @@
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__memory_search",
-      "result_chars": 32,
+      "tool": "mcp__token-savior-recall__create_checkpoint",
+      "result_chars": 89,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 979,
+      "result_chars": 207,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__create_checkpoint",
-      "result_chars": 89,
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 355,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 1127,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__replace_symbol_source",
+      "result_chars": 226,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__compare_checkpoint_by_symbol",
+      "result_chars": 160,
       "is_error": false
     },
     {
@@ -50,12 +64,139 @@
       "is_error": false
     }
   ],
-  "total_context_chars_injected": 1524,
-  "ts_tool_calls_count": 0,
-  "wall_time_seconds": 26.44,
-  "raw_response": "Les 3 \u00e9tapes sont termin\u00e9es. Voici le r\u00e9sum\u00e9 :\n\n| \u00c9tape | R\u00e9sultat |\n|-------|----------|\n| **1. Checkpoint** | `b36e6a690e68` cr\u00e9\u00e9 pour `apps/api/services/billing.py` |\n| **2. Modification** | Guard `if not payload: raise ValueError(\"empty payload\")` ajout\u00e9 en t\u00eate de `charge_customer` (+2 lignes) |\n| **3. Comparaison** | 1 fichier modifi\u00e9, 1 symbole chang\u00e9 : `charge_customer` (0 ajout\u00e9, 0 supprim\u00e9) |",
+  "ts_tool_details": [
+    {
+      "tool": "switch_project",
+      "args": {
+        "name": "tsbench"
+      },
+      "result_chars": 60,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 0,
+      "preceded_by": null,
+      "followed_by": "create_checkpoint",
+      "time_ms": 135
+    },
+    {
+      "tool": "create_checkpoint",
+      "args": {
+        "file_paths": [
+          "apps/api/services/billing.py"
+        ]
+      },
+      "result_chars": 89,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 1,
+      "preceded_by": "switch_project",
+      "followed_by": "get_function_source",
+      "time_ms": 287
+    },
+    {
+      "tool": "get_function_source",
+      "args": {
+        "name": "charge_customer"
+      },
+      "result_chars": 207,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 2,
+      "preceded_by": "create_checkpoint",
+      "followed_by": "get_function_source",
+      "time_ms": 407
+    },
+    {
+      "tool": "get_function_source",
+      "args": {
+        "name": "charge_customer",
+        "level": 0
+      },
+      "result_chars": 355,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 3,
+      "preceded_by": "get_function_source",
+      "followed_by": "get_function_source",
+      "time_ms": 279
+    },
+    {
+      "tool": "get_function_source",
+      "args": {
+        "name": "charge_customer",
+        "level": 0,
+        "force_full": true
+      },
+      "result_chars": 1127,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 4,
+      "preceded_by": "get_function_source",
+      "followed_by": "replace_symbol_source",
+      "time_ms": 285
+    },
+    {
+      "tool": "replace_symbol_source",
+      "args": {
+        "symbol_name": "charge_customer",
+        "new_source": "def charge_customer(payload: dict, user_id: int = 0):\n    \"\"\"Handle charge customer.\"\"\"\n    if not payload:\n        raise ValueError(\"empty payload\")\n    x_0 = 0 * 2 + 1\n    x_1 = 'archived_1'\n    x_2 = [2, 3, 4, 5]\n    x_3 = {'k3': 3, 'prev': x_2}\n    if x_3 is not None:\n        x_4 = str(x_3)\n    else:\n        x_4 = ''\n    x_5 = sum([j for j in range(7) if j % 2 == 0])\n    x_6 = 6 * 2 + 1\n    x_7 = 'active_7'\n    x_8 = [8, 9, 10, 11]\n    x_9 = {'k9': 9, 'prev': x_8}\n    if x_9 is not None:\n        x_10 = str(x_9)\n    else:\n        x_10 = ''\n    x_11 = sum([j for j in range(13) if j % 2 == 0])\n    x_12 = 12 * 2 + 1\n    x_13 = 'secondary_13'\n    x_14 = [14, 15, 16, 17]\n    x_15 = {'k15': 15, 'prev': x_14}\n    if x_15 is not None:\n        x_16 = str(x_15)\n    else:\n        x_16 = ''\n    x_17 = sum([j for j in range(19) if j % 2 == 0])\n    _ = _billing_admin_db()\n    info('charge_customer called by user {}'.format(user_id))\n    _check = payload.get('check', True)\n    return {'ok': True, 'op': 'charge_customer', 'user': user_id}"
+      },
+      "result_chars": 226,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 5,
+      "preceded_by": "get_function_source",
+      "followed_by": "compare_checkpoint_by_symbol",
+      "time_ms": 131
+    },
+    {
+      "tool": "compare_checkpoint_by_symbol",
+      "args": {
+        "checkpoint_id": "3bfb31043302"
+      },
+      "result_chars": 160,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 6,
+      "preceded_by": "replace_symbol_source",
+      "followed_by": "replace_symbol_source",
+      "time_ms": 106
+    },
+    {
+      "tool": "replace_symbol_source",
+      "args": {
+        "symbol_name": "charge_customer",
+        "file_path": "apps/api/services/billing.py",
+        "new_source": "def charge_customer(payload: dict, user_id: int = 0):\n    \"\"\"Handle charge customer.\"\"\"\n    if not payload:\n        raise ValueError(\"empty payload\")\n    x_0 = 0 * 2 + 1\n    x_1 = 'archived_1'\n    x_2 = [2, 3, 4, 5]\n    x_3 = {'k3': 3, 'prev': x_2}\n    if x_3 is not None:\n        x_4 = str(x_3)\n    else:\n        x_4 = ''\n    x_5 = sum([j for j in range(7) if j % 2 == 0])\n    x_6 = 6 * 2 + 1\n    x_7 = 'active_7'\n    x_8 = [8, 9, 10, 11]\n    x_9 = {'k9': 9, 'prev': x_8}\n    if x_9 is not None:\n        x_10 = str(x_9)\n    else:\n        x_10 = ''\n    x_11 = sum([j for j in range(13) if j % 2 == 0])\n    x_12 = 12 * 2 + 1\n    x_13 = 'secondary_13'\n    x_14 = [14, 15, 16, 17]\n    x_15 = {'k15': 15, 'prev': x_14}\n    if x_15 is not None:\n        x_16 = str(x_15)\n    else:\n        x_16 = ''\n    x_17 = sum([j for j in range(19) if j % 2 == 0])\n    _ = _billing_admin_db()\n    info('charge_customer called by user {}'.format(user_id))\n    _check = payload.get('check', True)\n    return {'ok': True, 'op': 'charge_customer', 'user': user_id}"
+      },
+      "result_chars": 187,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 7,
+      "preceded_by": "compare_checkpoint_by_symbol",
+      "followed_by": "compare_checkpoint_by_symbol",
+      "time_ms": 381
+    },
+    {
+      "tool": "compare_checkpoint_by_symbol",
+      "args": {
+        "checkpoint_id": "3bfb31043302"
+      },
+      "result_chars": 177,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 8,
+      "preceded_by": "replace_symbol_source",
+      "followed_by": null,
+      "time_ms": 94
+    }
+  ],
+  "total_context_chars_injected": 2588,
+  "ts_tool_calls_count": 9,
+  "wall_time_seconds": 70.9,
+  "raw_response": "Workflow termin\u00e9 avec succ\u00e8s :\n\n1. **Checkpoint cr\u00e9\u00e9** \u2014 ID `3bfb31043302` sauvegardant `apps/api/services/billing.py`\n2. **Guard ajout\u00e9** \u2014 `if not payload: raise ValueError(\"empty payload\")` ins\u00e9r\u00e9 au d\u00e9but de `charge_customer`\n3. **Comparaison** \u2014 1 symbole modifi\u00e9 d\u00e9tect\u00e9 : `charge_customer` (aucun ajout ni suppression de symbole)",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T06:53:41.297362+00:00"
+  "timestamp": "2026-04-15T09:06:24.141611+00:00"
 }

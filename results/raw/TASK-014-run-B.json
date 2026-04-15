@@ -2,69 +2,182 @@
   "task_id": "TASK-014",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 12,
-  "output_tokens": 2138,
-  "cache_creation_input_tokens": 13296,
-  "cache_read_input_tokens": 118084,
-  "total_tokens": 133530,
-  "active_tokens": 15446,
-  "turns_count": 11,
+  "input_tokens": 9,
+  "output_tokens": 1880,
+  "cache_creation_input_tokens": 14640,
+  "cache_read_input_tokens": 213481,
+  "total_tokens": 230010,
+  "active_tokens": 16529,
+  "turns_count": 12,
   "tool_calls_count": 8,
   "tool_calls_breakdown": {
-    "ToolSearch": 2,
-    "mcp__token-savior__switch_project": 1,
-    "mcp__token-savior__find_symbol": 1,
-    "mcp__token-savior__get_dependents": 1,
-    "mcp__token-savior__get_function_source": 3
+    "mcp__token-savior-recall__switch_project": 1,
+    "mcp__token-savior-recall__find_symbol": 1,
+    "mcp__token-savior-recall__get_dependents": 1,
+    "mcp__token-savior-recall__get_change_impact": 1,
+    "mcp__token-savior-recall__get_function_source": 3,
+    "mcp__token-savior-recall__search_codebase": 1
   },
   "tool_calls_detail": [
     {
-      "tool": "ToolSearch",
-      "result_chars": 225,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior__switch_project",
+      "tool": "mcp__token-savior-recall__switch_project",
       "result_chars": 60,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior__find_symbol",
-      "result_chars": 124,
+      "tool": "mcp__token-savior-recall__find_symbol",
+      "result_chars": 59,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior__get_dependents",
-      "result_chars": 2010,
+      "tool": "mcp__token-savior-recall__get_dependents",
+      "result_chars": 1726,
       "is_error": false
     },
     {
-      "tool": "ToolSearch",
-      "result_chars": 81,
+      "tool": "mcp__token-savior-recall__get_change_impact",
+      "result_chars": 1225,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior__get_function_source",
-      "result_chars": 91,
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 222,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior__get_function_source",
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 154,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_function_source",
       "result_chars": 97,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior__get_function_source",
-      "result_chars": 97,
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 2245,
       "is_error": false
     }
   ],
-  "total_context_chars_injected": 2785,
-  "ts_tool_calls_count": 6,
-  "wall_time_seconds": 41.18,
-  "raw_response": "`caller_lonely_util_00.py` et `caller_medium_util_03.py` n'appellent pas `hub_util` \u2014 ce sont des faux positifs (ils importent d'autres fonctions). Voici la liste exhaustive des **20 sites d'appel** qui cassent :\n\n---\n\nTous passent `hub_util(payload)` avec un argument positionnel nomm\u00e9 `payload`. Renommer le param\u00e8tre en `context: dict` casse chaque appel par **nom de keyword** (si appel\u00e9 avec `hub_util(payload=...)`) et, plus concr\u00e8tement, chaque appelant devra \u00eatre mis \u00e0 jour si vous changez aussi la s\u00e9mantique attendue du dict.\n\n### Fichiers impact\u00e9s (18 callers confirm\u00e9s)\n\n| # | Fichier | Fonction | Ligne | Appel |\n|---|---------|----------|-------|-------|\n| 1 | `apps/api/callers/caller_hub_util_01.py` | `do_it_1` | 4-6 | `hub_util(payload)` |\n| 2 | `apps/api/callers/caller_hub_util_02.py` | `do_it_2` | 4-6 | `hub_util(payload)` |\n| 3 | `apps/api/callers/caller_hub_util_04.py` | `do_it_4` | 4-6 | `hub_util(payload)` |\n| 4 | `apps/api/callers/caller_hub_util_05.py` | `do_it_5` | 4-6 | `hub_util(payload)` |\n| 5 | `apps/api/callers/caller_hub_util_06.py` | `do_it_6` | 4-6 | `hub_util(payload)` |\n| 6 | `apps/api/callers/caller_hub_util_07.py` | `do_it_7` | 4-6 | `hub_util(payload)` |\n| 7 | `apps/api/callers/caller_hub_util_08.py` | `do_it_8` | 4-6 | `hub_util(payload)` |\n| 8 | `apps/api/callers/caller_hub_util_09.py` | `do_it_9` | 4-6 | `hub_util(payload)` |\n| 9 | `apps/api/callers/caller_hub_util_10.py` | `do_it_10` | 4-6 | `hub_util(payload)` |\n| 10 | `apps/api/callers/caller_hub_util_11.py` | `do_it_11` | 4-6 | `hub_util(payload)` |\n| 11 | `apps/api/callers/caller_hub_util_12.py` | `do_it_12` | 4-6 | `hub_util(payload)` |\n| 12 | `apps/api/callers/caller_hub_util_13.py` | `do_it_13` | 4-6 | `hub_util(payload)` |\n| 13 | `apps/api/callers/caller_hub_util_14.py` | `do_it_14` | 4-6 | `hub_util(payload)` |\n| 14 | `apps/api/callers/caller_hub_util_15.py` | `do_it_15` | 4-6 | `hub_util(payload)` |\n| 15 | `apps/api/callers/caller_hub_util_16.py` | `do_it_16` | 4-6 | `hub_util(payload)` |\n| 16 | `apps/api/callers/caller_hub_util_17.py` | `do_it_17` | 4-6 | `hub_util(payload)` |\n| 17 | `apps/api/callers/caller_hub_util_18.py` | `do_it_18` | 4-6 | `hub_util(payload)` |\n| 18 | `apps/api/callers/caller_hub_util_19.py` | `do_it_19` | 4-6 | `hub_util(payload)` |\n\n### D\u00e9finition source\n\n- `packages/utils/targeted.py:15` \u2014 `def hub_util(payload)` \u2192 \u00e0 renommer en `context`\n\n### Ce qui ne casse PAS\n\n- `caller_lonely_util_00.py` (`do_it_0`) \u2014 appelle `lonely_util`, pas `hub_util`\n- `caller_medium_util_03.py` (`do_it_3`) \u2014 appelle `medium_util`, pas `hub_util`\n\n### R\u00e9sum\u00e9 de l'impact\n\n- **1 d\u00e9finition** \u00e0 modifier (`packages/utils/targeted.py:15`)\n- **18 appelants** dans `apps/api/callers/caller_hub_util_*.py` qui passent l'argument de fa\u00e7on positionnelle \u2014 ils fonctionneront toujours **si l'appel reste positionnel** (`hub_util(payload)`), mais casseront si un appelant utilise la forme keyword `hub_util(payload=...)`. Si la s\u00e9mantique du dict change aussi (cl\u00e9s attendues), les 18 callers devront adapter le dict qu'ils construisent.",
+  "ts_tool_details": [
+    {
+      "tool": "switch_project",
+      "args": {
+        "name": "tsbench"
+      },
+      "result_chars": 60,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 0,
+      "preceded_by": null,
+      "followed_by": "find_symbol",
+      "time_ms": 83
+    },
+    {
+      "tool": "find_symbol",
+      "args": {
+        "name": "hub_util",
+        "level": 2
+      },
+      "result_chars": 59,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 1,
+      "preceded_by": "switch_project",
+      "followed_by": "get_dependents",
+      "time_ms": 550
+    },
+    {
+      "tool": "get_dependents",
+      "args": {
+        "name": "hub_util"
+      },
+      "result_chars": 1726,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 2,
+      "preceded_by": "find_symbol",
+      "followed_by": "get_change_impact",
+      "time_ms": 129
+    },
+    {
+      "tool": "get_change_impact",
+      "args": {
+        "name": "hub_util"
+      },
+      "result_chars": 1225,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 3,
+      "preceded_by": "get_dependents",
+      "followed_by": "get_function_source",
+      "time_ms": 47
+    },
+    {
+      "tool": "get_function_source",
+      "args": {
+        "name": "hub_util",
+        "level": 0
+      },
+      "result_chars": 222,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 4,
+      "preceded_by": "get_change_impact",
+      "followed_by": "get_function_source",
+      "time_ms": 469
+    },
+    {
+      "tool": "get_function_source",
+      "args": {
+        "name": "do_it_1",
+        "level": 0,
+        "file_path": "apps/api/callers/caller_hub_util_01.py"
+      },
+      "result_chars": 154,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 5,
+      "preceded_by": "get_function_source",
+      "followed_by": "get_function_source",
+      "time_ms": 419
+    },
+    {
+      "tool": "get_function_source",
+      "args": {
+        "name": "do_it_0",
+        "level": 0,
+        "file_path": "apps/api/callers/caller_lonely_util_00.py"
+      },
+      "result_chars": 97,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 6,
+      "preceded_by": "get_function_source",
+      "followed_by": "search_codebase",
+      "time_ms": 275
+    },
+    {
+      "tool": "search_codebase",
+      "args": {
+        "pattern": "hub_util\\("
+      },
+      "result_chars": 2245,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 7,
+      "preceded_by": "get_function_source",
+      "followed_by": null,
+      "time_ms": 126
+    }
+  ],
+  "total_context_chars_injected": 5788,
+  "ts_tool_calls_count": 8,
+  "wall_time_seconds": 40.52,
+  "raw_response": "\n\nVoici l'impact exhaustif du renommage `payload` \u2192 `context` dans la signature de `hub_util` :\n\n## D\u00e9finition (1 fichier)\n\n- **`packages/utils/targeted.py:15`** \u2014 `hub_util(payload: dict)` \u2192 signature \u00e0 modifier\n\n## Sites d'appel cass\u00e9s (20 fichiers)\n\nTous passent `hub_util(payload)` en argument positionnel. Le renommage du param\u00e8tre en `context` ne casse **pas** ces appels positionnels \u2014 Python r\u00e9sout par position, pas par nom.\n\n**Cependant**, si un appelant utilise la forme nomm\u00e9e `hub_util(payload=...)`, cela casserait. Aucun des 20 appelants ne le fait actuellement \u2014 ils passent tous `hub_util(payload)` positionnellement :\n\n| Fichier | Fonction | Appel (l.6) |\n|---|---|---|\n| `apps/api/callers/caller_hub_util_00.py` | `do_it_0` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_01.py` | `do_it_1` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_02.py` | `do_it_2` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_03.py` | `do_it_3` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_04.py` | `do_it_4` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_05.py` | `do_it_5` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_06.py` | `do_it_6` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_07.py` | `do_it_7` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_08.py` | `do_it_8` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_09.py` | `do_it_9` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_10.py` | `do_it_10` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_11.py` | `do_it_11` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_12.py` | `do_it_12` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_13.py` | `do_it_13` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_14.py` | `do_it_14` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_15.py` | `do_it_15` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_16.py` | `do_it_16` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_17.py` | `do_it_17` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_18.py` | `do_it_18` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_19.py` | `do_it_19` | `hub_util(payload)` |\n\n## Verdict\n\n**Rien ne casse \u00e0 l'ex\u00e9cution** avec ce renommage seul \u2014 tous les 20 appels sont positionnels. Le corps de `hub_util` utilise `payload` en interne (`return dict(payload)`), donc il faudra aussi remplacer `payload` par `context` dans le corps de la fonction, mais c'est local.\n\nLe seul risque r\u00e9el serait un appel avec keyword argument (`hub_util(payload=data)`) ailleurs dans du code non index\u00e9 (tests dynamiques, scripts externes, etc.).",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-14T22:32:47.876788+00:00"
+  "timestamp": "2026-04-15T08:38:25.353350+00:00"
 }

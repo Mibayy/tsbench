@@ -2,17 +2,16 @@
   "task_id": "TASK-050",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 8,
-  "output_tokens": 944,
-  "cache_creation_input_tokens": 6001,
-  "cache_read_input_tokens": 261707,
-  "total_tokens": 268660,
-  "active_tokens": 6953,
-  "turns_count": 10,
-  "tool_calls_count": 7,
+  "input_tokens": 9,
+  "output_tokens": 943,
+  "cache_creation_input_tokens": 13210,
+  "cache_read_input_tokens": 299999,
+  "total_tokens": 314161,
+  "active_tokens": 14162,
+  "turns_count": 9,
+  "tool_calls_count": 6,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__memory_search": 1,
     "mcp__token-savior-recall__find_symbol": 1,
     "mcp__token-savior-recall__get_function_source": 1,
     "mcp__token-savior-recall__get_dependencies": 1,
@@ -23,11 +22,6 @@
     {
       "tool": "mcp__token-savior-recall__switch_project",
       "result_chars": 60,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__memory_search",
-      "result_chars": 32,
       "is_error": false
     },
     {
@@ -47,21 +41,106 @@
     },
     {
       "tool": "mcp__token-savior-recall__get_relevance_cluster",
-      "result_chars": 916,
+      "result_chars": 954,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__get_backward_slice",
-      "result_chars": 905,
+      "result_chars": 940,
       "is_error": false
     }
   ],
-  "total_context_chars_injected": 2741,
-  "ts_tool_calls_count": 0,
-  "wall_time_seconds": 32.52,
-  "raw_response": "Voici l'analyse compl\u00e8te :\n\n## Backward slice de `reconcile_payments`\n\n**La fonction est enti\u00e8rement auto-contenue** \u2014 elle n'a **aucune d\u00e9pendance externe** (0 import, 0 appel de fonction, 0 variable globale). Le graphe de d\u00e9pendances (RWR) confirme un score de 0.0 pour tous les voisins.\n\n### Symboles internes influen\u00e7ant `return result` (ligne 35)\n\nLe backward slice sur `result` (30.3% de r\u00e9duction, 23/33 lignes) identifie ces flux de donn\u00e9es :\n\n| Variable | R\u00f4le |\n|----------|------|\n| `result` | Accumulateur principal \u2014 initialis\u00e9 \u00e0 `0` (l.5), mut\u00e9 par toutes les branches |\n| `items` | `list(range(10))` (l.6) \u2014 alimente les deux boucles `for` |\n| `it_1` | It\u00e9rateur de la 1\u00e8re boucle (l.11-15) \u2014 conditionne `result +=/-=` |\n| `it_5` | It\u00e9rateur de la 2\u00e8me boucle (l.30-34) \u2014 conditionne `result +=/-=` |\n| `data` | Param\u00e8tre d'entr\u00e9e \u2014 **jamais utilis\u00e9** (dead parameter) |\n\n### Conclusion\n\nAucun symbole externe n'influence `reconcile_payments`, ni directement ni transitivement. La fonction est un \u00eelot de calcul isol\u00e9 avec un param\u00e8tre `data: dict` mort.",
+  "ts_tool_details": [
+    {
+      "tool": "switch_project",
+      "args": {
+        "name": "tsbench"
+      },
+      "result_chars": 60,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 0,
+      "preceded_by": null,
+      "followed_by": "find_symbol",
+      "time_ms": 121
+    },
+    {
+      "tool": "find_symbol",
+      "args": {
+        "name": "reconcile_payments",
+        "level": 2
+      },
+      "result_chars": 78,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 1,
+      "preceded_by": "switch_project",
+      "followed_by": "get_function_source",
+      "time_ms": 510
+    },
+    {
+      "tool": "get_function_source",
+      "args": {
+        "name": "reconcile_payments",
+        "level": 0
+      },
+      "result_chars": 748,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 2,
+      "preceded_by": "find_symbol",
+      "followed_by": "get_dependencies",
+      "time_ms": 257
+    },
+    {
+      "tool": "get_dependencies",
+      "args": {
+        "name": "reconcile_payments"
+      },
+      "result_chars": 2,
+      "result_empty": true,
+      "is_error": false,
+      "call_index": 3,
+      "preceded_by": "get_function_source",
+      "followed_by": "get_relevance_cluster",
+      "time_ms": 54
+    },
+    {
+      "tool": "get_relevance_cluster",
+      "args": {
+        "name": "reconcile_payments",
+        "budget": 10
+      },
+      "result_chars": 954,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 4,
+      "preceded_by": "get_dependencies",
+      "followed_by": "get_backward_slice",
+      "time_ms": 135
+    },
+    {
+      "tool": "get_backward_slice",
+      "args": {
+        "name": "reconcile_payments",
+        "variable": "result",
+        "line": 34
+      },
+      "result_chars": 940,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 5,
+      "preceded_by": "get_relevance_cluster",
+      "followed_by": null,
+      "time_ms": 107
+    }
+  ],
+  "total_context_chars_injected": 2782,
+  "ts_tool_calls_count": 6,
+  "wall_time_seconds": 34.86,
+  "raw_response": "## Backward Slice de `reconcile_payments`\n\n### D\u00e9pendances externes\n**Aucune.** La fonction est enti\u00e8rement auto-contenue \u2014 elle n'appelle aucun autre symbole du projet (0 d\u00e9pendances dans le graphe).\n\n### Backward slice intra-fonction (variable `result`, ligne 35 `return`)\n\nLe slice identifie **24 lignes sur 33** (r\u00e9duction de 27,3%). Les symboles/variables qui influencent la valeur de retour :\n\n| Variable | R\u00f4le |\n|---|---|\n| `data` | Param\u00e8tre d'entr\u00e9e (d\u00e9clar\u00e9 mais **non utilis\u00e9** dans le corps) |\n| `result` | Accumulateur central \u2014 initialis\u00e9 \u00e0 `0`, modifi\u00e9 par toutes les branches |\n| `items` | `list(range(10))` \u2014 pilote les deux boucles `for` |\n| `it_1` | It\u00e9rateur de la 1\u00e8re boucle, influence `result` via `% 2` et `% 3` |\n| `it_5` | It\u00e9rateur de la 2\u00e8me boucle, m\u00eame logique |\n\n### Lignes exclues du slice\nSeules les lignes 23-24 (`if result == 3: break`) et la ligne 9 (`else:`) sont exclues comme non-contributives directement au calcul final.\n\n### Conclusion\n`reconcile_payments` est une **fonction pure isol\u00e9e** sans d\u00e9pendance transitive. Tout le flux de donn\u00e9es est interne : `result` d\u00e9pend uniquement de `items` (constante) et des deux it\u00e9rateurs de boucle.",
   "error": null,
   "score": 1,
   "max_score": 2,
-  "timestamp": "2026-04-15T06:57:57.123563+00:00"
+  "timestamp": "2026-04-15T09:02:28.530158+00:00"
 }

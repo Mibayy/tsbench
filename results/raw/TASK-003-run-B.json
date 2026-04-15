@@ -2,47 +2,64 @@
   "task_id": "TASK-003",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 11,
-  "output_tokens": 408,
-  "cache_creation_input_tokens": 11210,
-  "cache_read_input_tokens": 92245,
-  "total_tokens": 103874,
-  "active_tokens": 11629,
-  "turns_count": 6,
-  "tool_calls_count": 4,
+  "input_tokens": 5,
+  "output_tokens": 218,
+  "cache_creation_input_tokens": 11448,
+  "cache_read_input_tokens": 120489,
+  "total_tokens": 132160,
+  "active_tokens": 11671,
+  "turns_count": 4,
+  "tool_calls_count": 2,
   "tool_calls_breakdown": {
-    "ToolSearch": 2,
-    "mcp__token-savior__switch_project": 1,
-    "mcp__token-savior__get_env_usage": 1
+    "mcp__token-savior-recall__switch_project": 1,
+    "mcp__token-savior-recall__search_codebase": 1
   },
   "tool_calls_detail": [
     {
-      "tool": "ToolSearch",
-      "result_chars": 76,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior__switch_project",
+      "tool": "mcp__token-savior-recall__switch_project",
       "result_chars": 60,
       "is_error": false
     },
     {
-      "tool": "ToolSearch",
-      "result_chars": 75,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior__get_env_usage",
-      "result_chars": 1902,
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 1729,
       "is_error": false
     }
   ],
-  "total_context_chars_injected": 2113,
+  "ts_tool_details": [
+    {
+      "tool": "switch_project",
+      "args": {
+        "name": "tsbench"
+      },
+      "result_chars": 60,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 0,
+      "preceded_by": null,
+      "followed_by": "search_codebase",
+      "time_ms": 128
+    },
+    {
+      "tool": "search_codebase",
+      "args": {
+        "pattern": "SECRET_UNDECLARED_TOKEN"
+      },
+      "result_chars": 1729,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 1,
+      "preceded_by": "switch_project",
+      "followed_by": null,
+      "time_ms": 335
+    }
+  ],
+  "total_context_chars_injected": 1789,
   "ts_tool_calls_count": 2,
-  "wall_time_seconds": 20.04,
-  "raw_response": "`SECRET_UNDECLARED_TOKEN` est utilis\u00e9e dans :\n\n- **Fichier** : `apps/api/utils/secret_reader.py`\n- **Fonction** : `load_secret_config` (ligne 8)\n\nElle est lue via `os.environ.get(\"SECRET_UNDECLARED_TOKEN\", \"\")`.",
+  "wall_time_seconds": 15.52,
+  "raw_response": "`SECRET_UNDECLARED_TOKEN` est utilis\u00e9e dans **`apps/api/utils/secret_reader.py`**, dans la fonction **`load_secret_config`** (ligne 6-8), via `os.environ.get(\"SECRET_UNDECLARED_TOKEN\", \"\")`.",
   "error": null,
   "score": 1,
   "max_score": 2,
-  "timestamp": "2026-04-14T21:37:31.072599+00:00"
+  "timestamp": "2026-04-15T08:33:40.235667+00:00"
 }

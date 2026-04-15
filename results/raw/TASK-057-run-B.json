@@ -3,16 +3,15 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 5,
-  "output_tokens": 292,
-  "cache_creation_input_tokens": 11177,
-  "cache_read_input_tokens": 121108,
-  "total_tokens": 132582,
-  "active_tokens": 11474,
-  "turns_count": 5,
-  "tool_calls_count": 3,
+  "output_tokens": 254,
+  "cache_creation_input_tokens": 11601,
+  "cache_read_input_tokens": 121449,
+  "total_tokens": 133309,
+  "active_tokens": 11860,
+  "turns_count": 4,
+  "tool_calls_count": 2,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__memory_search": 1,
     "mcp__token-savior-recall__find_impacted_test_files": 1
   },
   "tool_calls_detail": [
@@ -22,22 +21,50 @@
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__memory_search",
-      "result_chars": 32,
-      "is_error": false
-    },
-    {
       "tool": "mcp__token-savior-recall__find_impacted_test_files",
       "result_chars": 182,
       "is_error": false
     }
   ],
-  "total_context_chars_injected": 274,
-  "ts_tool_calls_count": 0,
-  "wall_time_seconds": 15.97,
-  "raw_response": "Seul **un fichier de test** serait impact\u00e9 :\n\n- **`tests/test_auth.py`** \u2014 correspondance directe avec le module `apps/api/services/auth.py` contenant `authenticate_user`.",
+  "ts_tool_details": [
+    {
+      "tool": "switch_project",
+      "args": {
+        "name": "tsbench"
+      },
+      "result_chars": 60,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 0,
+      "preceded_by": null,
+      "followed_by": "find_impacted_test_files",
+      "time_ms": 113
+    },
+    {
+      "tool": "find_impacted_test_files",
+      "args": {
+        "symbol_names": [
+          "authenticate_user"
+        ],
+        "changed_files": [
+          "apps/api/services/auth.py"
+        ]
+      },
+      "result_chars": 182,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 1,
+      "preceded_by": "switch_project",
+      "followed_by": null,
+      "time_ms": 186
+    }
+  ],
+  "total_context_chars_injected": 242,
+  "ts_tool_calls_count": 2,
+  "wall_time_seconds": 15.81,
+  "raw_response": "Le seul fichier de test impact\u00e9 par une modification de `authenticate_user` dans `apps/api/services/auth.py` est :\n\n- **`tests/test_auth.py`** \u2014 correspondance directe par nom de module avec `apps/api/services/auth.py`.",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T06:53:57.271877+00:00"
+  "timestamp": "2026-04-15T09:06:39.950781+00:00"
 }

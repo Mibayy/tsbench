@@ -2,19 +2,18 @@
   "task_id": "TASK-044",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 12,
-  "output_tokens": 1418,
-  "cache_creation_input_tokens": 8375,
-  "cache_read_input_tokens": 351323,
-  "total_tokens": 361128,
-  "active_tokens": 9805,
-  "turns_count": 15,
-  "tool_calls_count": 12,
+  "input_tokens": 10,
+  "output_tokens": 1092,
+  "cache_creation_input_tokens": 13167,
+  "cache_read_input_tokens": 257133,
+  "total_tokens": 271402,
+  "active_tokens": 14269,
+  "turns_count": 11,
+  "tool_calls_count": 9,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__memory_search": 1,
     "mcp__token-savior-recall__get_function_source": 5,
-    "mcp__token-savior-recall__get_dependencies": 5
+    "mcp__token-savior-recall__get_dependencies": 3
   },
   "tool_calls_detail": [
     {
@@ -23,13 +22,8 @@
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__memory_search",
-      "result_chars": 32,
-      "is_error": false
-    },
-    {
       "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 980,
+      "result_chars": 1116,
       "is_error": false
     },
     {
@@ -39,7 +33,7 @@
     },
     {
       "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 170,
+      "result_chars": 304,
       "is_error": false
     },
     {
@@ -59,31 +53,148 @@
     },
     {
       "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 171,
+      "result_chars": 241,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 292,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_dependencies",
-      "result_chars": 492,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_dependencies",
-      "result_chars": 2,
+      "result_chars": 240,
       "is_error": false
     }
   ],
-  "total_context_chars_injected": 2660,
-  "ts_tool_calls_count": 0,
-  "wall_time_seconds": 42.78,
-  "raw_response": "Voici le call chain complet de `dispatch_webhook` :\n\n```\ndispatch_webhook(payload, user_id)          # apps/api/services/webhooks.py\n\u251c\u2500\u2500 _webhooks_admin_db()                    # apps/api/services/webhooks.py:8\n\u2502   \u251c\u2500\u2500 supabase_admin()                    # apps/api/db.py:40\n\u2502   \u2502   \u2514\u2500\u2500 DBSession.__init__(url)         # apps/api/db.py:7  [acc\u00e8s DB \u2014 postgresql://localhost/tsbench?role=admin]\n\u2502   \u2514\u2500\u2500 info(msg)                           # apps/api/utils/logging.py:12\n\u2502       \u2514\u2500\u2500 log(level, message)             # apps/api/utils/logging.py:5  [feuille \u2014 print()]\n\u2514\u2500\u2500 info(msg)                               # apps/api/utils/logging.py:12\n    \u2514\u2500\u2500 log(level, message)                 # apps/api/utils/logging.py:5  [feuille \u2014 print()]\n```\n\n**R\u00e9sum\u00e9 :**\n\n- **Appels directs** : `_webhooks_admin_db()` et `info()`\n- **Acc\u00e8s DB** : via `_webhooks_admin_db()` \u2192 `supabase_admin()` \u2192 `DBSession(\"postgresql://...?role=admin\")` \u2014 ouvre une session DB privil\u00e9gi\u00e9e\n- **Logging** : `info()` \u2192 `log()` \u2192 `print()` (stub, pas d'I/O externe)\n- **Feuilles** : `log()` et `DBSession.__init__()` sont les terminaux de la cha\u00eene\n- `DBSession` expose aussi `query`, `add`, `commit`, `rollback`, `close`, mais aucune de ces m\u00e9thodes n'est appel\u00e9e dans ce chemin \u2014 seule la session est cr\u00e9\u00e9e et retourn\u00e9e",
+  "ts_tool_details": [
+    {
+      "tool": "switch_project",
+      "args": {
+        "name": "tsbench"
+      },
+      "result_chars": 60,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 0,
+      "preceded_by": null,
+      "followed_by": "get_function_source",
+      "time_ms": 123
+    },
+    {
+      "tool": "get_function_source",
+      "args": {
+        "name": "dispatch_webhook",
+        "level": 0
+      },
+      "result_chars": 1116,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 1,
+      "preceded_by": "switch_project",
+      "followed_by": "get_dependencies",
+      "time_ms": 598
+    },
+    {
+      "tool": "get_dependencies",
+      "args": {
+        "name": "dispatch_webhook"
+      },
+      "result_chars": 177,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 2,
+      "preceded_by": "get_function_source",
+      "followed_by": "get_function_source",
+      "time_ms": 619
+    },
+    {
+      "tool": "get_function_source",
+      "args": {
+        "name": "_webhooks_admin_db",
+        "level": 0
+      },
+      "result_chars": 304,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 3,
+      "preceded_by": "get_dependencies",
+      "followed_by": "get_function_source",
+      "time_ms": 593
+    },
+    {
+      "tool": "get_function_source",
+      "args": {
+        "name": "info",
+        "file_path": "apps/api/utils/logging.py",
+        "level": 0
+      },
+      "result_chars": 48,
+      "result_empty": true,
+      "is_error": false,
+      "call_index": 4,
+      "preceded_by": "get_function_source",
+      "followed_by": "get_dependencies",
+      "time_ms": 283
+    },
+    {
+      "tool": "get_dependencies",
+      "args": {
+        "name": "_webhooks_admin_db"
+      },
+      "result_chars": 155,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 5,
+      "preceded_by": "get_function_source",
+      "followed_by": "get_dependencies",
+      "time_ms": 113
+    },
+    {
+      "tool": "get_dependencies",
+      "args": {
+        "name": "info",
+        "project": "tsbench"
+      },
+      "result_chars": 81,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 6,
+      "preceded_by": "get_dependencies",
+      "followed_by": "get_function_source",
+      "time_ms": 63
+    },
+    {
+      "tool": "get_function_source",
+      "args": {
+        "name": "supabase_admin",
+        "level": 0
+      },
+      "result_chars": 241,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 7,
+      "preceded_by": "get_dependencies",
+      "followed_by": "get_function_source",
+      "time_ms": 364
+    },
+    {
+      "tool": "get_function_source",
+      "args": {
+        "name": "log",
+        "file_path": "apps/api/utils/logging.py",
+        "level": 0
+      },
+      "result_chars": 240,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 8,
+      "preceded_by": "get_function_source",
+      "followed_by": null,
+      "time_ms": 313
+    }
+  ],
+  "total_context_chars_injected": 2422,
+  "ts_tool_calls_count": 9,
+  "wall_time_seconds": 47.82,
+  "raw_response": "\n\nVoici le call chain complet de `dispatch_webhook` :\n\n```\ndispatch_webhook(payload, user_id)          # apps/api/services/webhooks.py\n\u251c\u2500\u2500 _webhooks_admin_db()                    # apps/api/services/webhooks.py:8\n\u2502   \u251c\u2500\u2500 supabase_admin()                    # apps/api/db.py:40\n\u2502   \u2502   \u2514\u2500\u2500 DBSession(\"postgresql://localhost/tsbench?role=admin\")  # DB access\n\u2502   \u2514\u2500\u2500 info(msg)                           # apps/api/utils/logging.py:12\n\u2502       \u2514\u2500\u2500 log(\"INFO\", msg)               # apps/api/utils/logging.py:5\n\u2502           \u2514\u2500\u2500 print(...)\n\u251c\u2500\u2500 info(\"dispatch_webhook called by ...\")  # apps/api/utils/logging.py:12\n\u2502   \u2514\u2500\u2500 log(\"INFO\", msg)                   # apps/api/utils/logging.py:5\n\u2502       \u2514\u2500\u2500 print(...)\n\u2514\u2500\u2500 payload.get(\"check\", True)             # dict built-in\n```\n\n**Acc\u00e8s DB** : un seul, via `_webhooks_admin_db()` \u2192 `supabase_admin()` \u2192 `DBSession(...)` qui ouvre une session PostgreSQL privil\u00e9gi\u00e9e (r\u00f4le `admin`) sur `localhost/tsbench`.\n\n**R\u00e9sum\u00e9** : la fonction appelle 2 d\u00e9pendances directes (`_webhooks_admin_db`, `info`) et 3 indirectes (`supabase_admin`, `DBSession`, `log`). Le reste du corps est du code inerte (variables locales non utilis\u00e9es).",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T06:24:31.132490+00:00"
+  "timestamp": "2026-04-15T08:59:57.330968+00:00"
 }

@@ -3,16 +3,15 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 8,
-  "output_tokens": 2004,
-  "cache_creation_input_tokens": 15833,
-  "cache_read_input_tokens": 167338,
-  "total_tokens": 185183,
-  "active_tokens": 17845,
-  "turns_count": 16,
-  "tool_calls_count": 13,
+  "output_tokens": 1524,
+  "cache_creation_input_tokens": 18486,
+  "cache_read_input_tokens": 161210,
+  "total_tokens": 181228,
+  "active_tokens": 20018,
+  "turns_count": 15,
+  "tool_calls_count": 12,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__memory_search": 1,
     "mcp__token-savior-recall__get_leiden_stats": 1,
     "mcp__token-savior-recall__get_community": 10
   },
@@ -23,72 +22,223 @@
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__memory_search",
-      "result_chars": 32,
-      "is_error": false
-    },
-    {
       "tool": "mcp__token-savior-recall__get_leiden_stats",
-      "result_chars": 515,
+      "result_chars": 481,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__get_community",
-      "result_chars": 2875,
+      "result_chars": 637,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__get_community",
-      "result_chars": 2058,
+      "result_chars": 609,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__get_community",
-      "result_chars": 1374,
+      "result_chars": 412,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__get_community",
-      "result_chars": 1392,
+      "result_chars": 244,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__get_community",
-      "result_chars": 1146,
+      "result_chars": 233,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__get_community",
-      "result_chars": 831,
+      "result_chars": 168,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__get_community",
-      "result_chars": 1911,
+      "result_chars": 226,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__get_community",
-      "result_chars": 1329,
+      "result_chars": 220,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__get_community",
-      "result_chars": 1265,
+      "result_chars": 221,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__get_community",
-      "result_chars": 1268,
+      "result_chars": 198,
       "is_error": false
     }
   ],
-  "total_context_chars_injected": 16056,
-  "ts_tool_calls_count": 0,
-  "wall_time_seconds": 51.62,
-  "raw_response": "\n\nVoici les **10 plus grandes communaut\u00e9s** du projet (139 au total, 1255 symboles couverts, modularit\u00e9 Q=0.46) :\n\n---\n\n### 1. `find_dead_code` (43 symboles)\n**Th\u00e8me : D\u00e9tection de code mort**\nSymboles cl\u00e9s : `find_dead_code`, `TestBasicDeadCode`, `TestEntryPoints`, `TestFrameworkAndDispatchHeuristics`\nLogique de d\u00e9tection des symboles sans appelants, avec heuristiques pour exclure les entry points (main, routes, fixtures, d\u00e9corateurs Spring/Click, etc.)\n\n### 2. `annotate_python` (43 symboles)\n**Th\u00e8me : Parseur AST Python**\nSymboles cl\u00e9s : `annotate_python`, `_extract_class_info`, `_extract_function_info`, `_base_name`, `_decorator_name`\nExtraction de fonctions, classes, imports, d\u00e9corateurs, fonctions async et cas limites (erreurs de syntaxe, imports relatifs).\n\n### 3. `annotate_typescript` (34 symboles)\n**Th\u00e8me : Parseur TypeScript/TSX**\nSymboles cl\u00e9s : `annotate_typescript`, `_find_arrow_body_start`, `_find_brace_end`, `_join_until_paren_close`\nD\u00e9tection de fonctions (arrow, async, export), classes, interfaces, type aliases.\n\n### 4. `analyze_docker` (34 symboles)\n**Th\u00e8me : Analyse Dockerfile & Docker Compose**\nSymboles cl\u00e9s : `analyze_docker`, `_extract_base_images`, `_extract_stages`, `_extract_env_arg_vars`, `_extract_compose_services`\nAudit d'images de base, ports expos\u00e9s, variables d'environnement, multi-stage builds, warning sur tag `latest`.\n\n### 5. `annotate_java` (33 symboles)\n**Th\u00e8me : Parseur Java + d\u00e9tection de breaking changes**\nSymboles cl\u00e9s : `annotate_java`, `BreakingChange`, `ChangeType`, `_compare_java_sources`, `_java_api_signature_map`\nExtraction de classes/m\u00e9thodes/records Java, support sealed types, generics, et comparaison d'API pour d\u00e9tecter les changements cassants.\n\n### 6. `annotate_json` (32 symboles)\n**Th\u00e8me : Parseur structurel JSON**\nSymboles cl\u00e9s : `annotate_json`, `TestJsonNestedObject`, `TestJsonSchemaRefs`, `TestJsonN8NWorkflow`\nExtraction de sections JSON imbriqu\u00e9es, gestion des `$ref`, workflows n8n, cap de profondeur.\n\n### 7. `annotate_hcl` (30 symboles)\n**Th\u00e8me : Parseur HCL (Terraform)**\nSymboles cl\u00e9s : `annotate_hcl`, `_count_close_braces`, `TestHclResourceBlock`, `TestHclVariableBlock`\nExtraction de blocs `resource`, `variable`, `output`, paires cl\u00e9-valeur imbriqu\u00e9es.\n\n### 8. `FunctionInfo` (28 symboles)\n**Th\u00e8me : Mod\u00e8le de donn\u00e9es & moteur de requ\u00eates**\nSymboles cl\u00e9s : `FunctionInfo`, `ClassInfo`, `ProjectQueryEngine`, `build_dependency_graph`, `get_cluster_for_symbol`, `analyze_symbol_semantics`\nStructures de donn\u00e9es centrales pour symboles, graphe de d\u00e9pendances, r\u00e9solution de cha\u00eenes d'appels et clustering.\n\n### 9. `annotate_xml` (28 symboles)\n**Th\u00e8me : Parseur XML**\nSymboles cl\u00e9s : `annotate_xml`, `TestXmlNamespaceStripping`, `TestXmlAttributes`, `TestXmlNestedLevels`\nExtraction d'\u00e9l\u00e9ments XML avec gestion des namespaces, attributs distinctifs (id/name/type), cap de profondeur.\n\n### 10. `_ProjectSlot` (27 symboles)\n**Th\u00e8me : Dispatch MCP / handlers de projet**\nSymboles cl\u00e9s : `_ProjectSlot`, `_prep`, `_hm_set_project_root`, et 20+ handlers (`_h_find_dead_code`, `_h_analyze_docker`, `_h_create_checkpoint`, etc.)\nPoint d'entr\u00e9e des outils MCP : routing des requ\u00eates vers les fonctions d'analyse, checkpoints, tests impact\u00e9s, \u00e9dition de symboles.\n\n---\n\n**R\u00e9sum\u00e9 architectural** : Le projet est un serveur MCP d'analyse de code multi-langage. Les communaut\u00e9s se r\u00e9partissent en **parseurs par langage** (Python, TS, Java, JSON, HCL, XML), des **analyseurs transversaux** (dead code, Docker), un **mod\u00e8le de donn\u00e9es central** (FunctionInfo/ClassInfo + query engine), et une **couche de dispatch MCP** (_ProjectSlot + handlers).",
+  "ts_tool_details": [
+    {
+      "tool": "switch_project",
+      "args": {
+        "name": "tsbench"
+      },
+      "result_chars": 60,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 0,
+      "preceded_by": null,
+      "followed_by": "get_leiden_stats",
+      "time_ms": 94
+    },
+    {
+      "tool": "get_leiden_stats",
+      "args": {},
+      "result_chars": 481,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 1,
+      "preceded_by": "switch_project",
+      "followed_by": "get_community",
+      "time_ms": 128
+    },
+    {
+      "tool": "get_community",
+      "args": {
+        "name": "main__n32"
+      },
+      "result_chars": 637,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 2,
+      "preceded_by": "get_leiden_stats",
+      "followed_by": "get_community",
+      "time_ms": 522
+    },
+    {
+      "tool": "get_community",
+      "args": {
+        "name": "apiClient__n31"
+      },
+      "result_chars": 609,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 3,
+      "preceded_by": "get_community",
+      "followed_by": "get_community",
+      "time_ms": 413
+    },
+    {
+      "tool": "get_community",
+      "args": {
+        "name": "TopBar__n22"
+      },
+      "result_chars": 412,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 4,
+      "preceded_by": "get_community",
+      "followed_by": "get_community",
+      "time_ms": 917
+    },
+    {
+      "tool": "get_community",
+      "args": {
+        "name": "hub_util__n13"
+      },
+      "result_chars": 244,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 5,
+      "preceded_by": "get_community",
+      "followed_by": "get_community",
+      "time_ms": 62
+    },
+    {
+      "tool": "get_community",
+      "args": {
+        "name": "_billing_admin_db__n7"
+      },
+      "result_chars": 233,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 6,
+      "preceded_by": "get_community",
+      "followed_by": "get_community",
+      "time_ms": 38
+    },
+    {
+      "tool": "get_community",
+      "args": {
+        "name": "medium_util__n6"
+      },
+      "result_chars": 168,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 7,
+      "preceded_by": "get_community",
+      "followed_by": "get_community",
+      "time_ms": 19
+    },
+    {
+      "tool": "get_community",
+      "args": {
+        "name": "_notifications_admin_db__n6"
+      },
+      "result_chars": 226,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 8,
+      "preceded_by": "get_community",
+      "followed_by": "get_community",
+      "time_ms": 10
+    },
+    {
+      "tool": "get_community",
+      "args": {
+        "name": "_members_admin_db__n6"
+      },
+      "result_chars": 220,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 9,
+      "preceded_by": "get_community",
+      "followed_by": "get_community",
+      "time_ms": 468
+    },
+    {
+      "tool": "get_community",
+      "args": {
+        "name": "_webhooks_admin_db__n6"
+      },
+      "result_chars": 221,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 10,
+      "preceded_by": "get_community",
+      "followed_by": "get_community",
+      "time_ms": 19
+    },
+    {
+      "tool": "get_community",
+      "args": {
+        "name": "fetcher__n6"
+      },
+      "result_chars": 198,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 11,
+      "preceded_by": "get_community",
+      "followed_by": null,
+      "time_ms": 32
+    }
+  ],
+  "total_context_chars_injected": 3709,
+  "ts_tool_calls_count": 12,
+  "wall_time_seconds": 33.66,
+  "raw_response": "\n\nVoici les **10 principales communaut\u00e9s** d\u00e9tect\u00e9es (28 au total, modularity Q=0.405) :\n\n| # | Communaut\u00e9 | Taille | Symboles cl\u00e9s | Th\u00e8me fonctionnel |\n|---|-----------|--------|---------------|-------------------|\n| 1 | `main` | 32 | `main`, `load_tasks`, `gen_api_*`, `plant_bugs`, `plant_dupes`, `plant_dead_code`, `rwrite_py` | **G\u00e9n\u00e9ration du benchmark** \u2014 orchestration, g\u00e9n\u00e9ration de code synth\u00e9tique et injection de d\u00e9fauts |\n| 2 | `apiClient` | 31 | `apiClient`, `create/get/list/update/delete/bulk` \u00d7 (Billing, Members, Sessions, Webhooks, Notifications) | **Client API TypeScript** \u2014 couche CRUD compl\u00e8te pour toutes les entit\u00e9s m\u00e9tier |\n| 3 | `TopBar` | 22 | `TopBar`, `Sidebar`, `Pagination`, `LoginPage`, `DashboardPage`, `SettingsPage`, `MembersPage`\u2026 | **Composants UI React** \u2014 pages, layout et composants partag\u00e9s du frontend |\n| 4 | `hub_util` | 13 | `hub_util`, `do_it_8` \u00e0 `do_it_19` | **Utilitaires hub (large)** \u2014 fonctions utilitaires cha\u00een\u00e9es, complexit\u00e9 \u00e9lev\u00e9e |\n| 5 | `_billing_admin_db` | 7 | `charge_customer`, `calculate_invoice`, `refund_payment`, `apply_discount`, `void_invoice` | **Service de facturation** \u2014 logique m\u00e9tier billing c\u00f4t\u00e9 backend |\n| 6 | `_notifications_admin_db` | 6 | `send_email`, `send_sms`, `queue_notification`, `render_template` | **Service de notifications** \u2014 envoi multi-canal (email, SMS) |\n| 7 | `_members_admin_db` | 6 | `create_member`, `find_member_by_email`, `update_member`, `deactivate_member` | **Gestion des membres** \u2014 CRUD membres backend |\n| 8 | `_webhooks_admin_db` | 6 | `register_webhook`, `dispatch_webhook`, `verify_signature`, `retry_webhook` | **Gestion des webhooks** \u2014 enregistrement, dispatch et retry |\n| 9 | `medium_util` | 6 | `medium_util`, `do_it_3` \u00e0 `do_it_7` | **Utilitaires medium** \u2014 fonctions utilitaires cha\u00een\u00e9es, complexit\u00e9 moyenne |\n| 10 | `fetcher` | 6 | `fetcher`, `search*` (Billing, Members, Notifications, Sessions, Webhooks) | **Recherche c\u00f4t\u00e9 client** \u2014 couche de recherche/filtrage cross-entit\u00e9s |\n\n**Structure globale** : le projet est un benchmark synth\u00e9tique (`bench.py` + g\u00e9n\u00e9rateurs) qui produit une app full-stack avec un backend Python (services par domaine : billing, members, notifications, webhooks) et un frontend React/TypeScript (composants UI + client API). Les communaut\u00e9s hub/medium_util sont des cha\u00eenes de fonctions utilitaires \u00e0 complexit\u00e9 croissante, utilis\u00e9es comme cas de test.",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T06:59:11.837501+00:00"
+  "timestamp": "2026-04-15T09:03:25.380119+00:00"
 }

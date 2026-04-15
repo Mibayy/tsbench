@@ -2,17 +2,16 @@
   "task_id": "TASK-045",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 8,
-  "output_tokens": 455,
-  "cache_creation_input_tokens": 44629,
-  "cache_read_input_tokens": 219650,
-  "total_tokens": 264742,
-  "active_tokens": 45092,
+  "input_tokens": 7,
+  "output_tokens": 390,
+  "cache_creation_input_tokens": 11637,
+  "cache_read_input_tokens": 209615,
+  "total_tokens": 221649,
+  "active_tokens": 12034,
   "turns_count": 6,
-  "tool_calls_count": 5,
+  "tool_calls_count": 4,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__get_file_dependents": 1,
     "mcp__token-savior-recall__search_codebase": 3
   },
   "tool_calls_detail": [
@@ -22,32 +21,81 @@
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__get_file_dependents",
-      "result_chars": 72,
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 2,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__search_codebase",
-      "result_chars": 262,
+      "result_chars": 207,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__search_codebase",
-      "result_chars": 573,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__search_codebase",
-      "result_chars": 635,
+      "result_chars": 207,
       "is_error": false
     }
   ],
-  "total_context_chars_injected": 1602,
-  "ts_tool_calls_count": 0,
-  "wall_time_seconds": 28.27,
-  "raw_response": "Deux fichiers importent depuis `apps.api.services.auth` :\n\n1. **`apps/api/routers/auth.py`** \u2014 `from apps.api.services import auth as svc`\n2. **`tests/test_auth.py`** \u2014 `from apps.api.services import auth as svc`",
+  "ts_tool_details": [
+    {
+      "tool": "switch_project",
+      "args": {
+        "name": "tsbench"
+      },
+      "result_chars": 60,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 0,
+      "preceded_by": null,
+      "followed_by": "search_codebase",
+      "time_ms": 105
+    },
+    {
+      "tool": "search_codebase",
+      "args": {
+        "pattern": "from apps\\.api\\.services\\.auth|import apps\\.api\\.services\\.auth"
+      },
+      "result_chars": 2,
+      "result_empty": true,
+      "is_error": false,
+      "call_index": 1,
+      "preceded_by": "switch_project",
+      "followed_by": "search_codebase",
+      "time_ms": 522
+    },
+    {
+      "tool": "search_codebase",
+      "args": {
+        "pattern": "apps\\.api\\.services\\.auth"
+      },
+      "result_chars": 207,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 2,
+      "preceded_by": "search_codebase",
+      "followed_by": "search_codebase",
+      "time_ms": 78
+    },
+    {
+      "tool": "search_codebase",
+      "args": {
+        "pattern": "services\\.auth"
+      },
+      "result_chars": 207,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 3,
+      "preceded_by": "search_codebase",
+      "followed_by": null,
+      "time_ms": 97
+    }
+  ],
+  "total_context_chars_injected": 476,
+  "ts_tool_calls_count": 4,
+  "wall_time_seconds": 22.73,
+  "raw_response": "Aucun fichier Python du projet n'importe quoi que ce soit depuis `apps.api.services.auth`. La seule occurrence de cette cha\u00eene se trouve dans l'\u00e9nonc\u00e9 de la t\u00e2che elle-m\u00eame (`tasks/TASK-045.md`).\n\n**R\u00e9sultat : 0 fichier importateur.**",
   "error": null,
-  "score": 2,
+  "score": 0,
   "max_score": 2,
-  "timestamp": "2026-04-15T06:24:59.411316+00:00"
+  "timestamp": "2026-04-15T09:00:20.062482+00:00"
 }

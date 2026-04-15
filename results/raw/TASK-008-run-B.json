@@ -2,53 +2,84 @@
   "task_id": "TASK-008",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 12,
-  "output_tokens": 857,
-  "cache_creation_input_tokens": 22439,
-  "cache_read_input_tokens": 104163,
-  "total_tokens": 127471,
-  "active_tokens": 23308,
-  "turns_count": 9,
-  "tool_calls_count": 5,
+  "input_tokens": 5,
+  "output_tokens": 368,
+  "cache_creation_input_tokens": 12725,
+  "cache_read_input_tokens": 120669,
+  "total_tokens": 133767,
+  "active_tokens": 13098,
+  "turns_count": 5,
+  "tool_calls_count": 3,
   "tool_calls_breakdown": {
-    "ToolSearch": 2,
-    "mcp__token-savior__switch_project": 1,
-    "mcp__token-savior__get_dependents": 1,
-    "mcp__token-savior__search_codebase": 1
+    "mcp__token-savior-recall__switch_project": 1,
+    "mcp__token-savior-recall__find_symbol": 1,
+    "mcp__token-savior-recall__search_codebase": 1
   },
   "tool_calls_detail": [
     {
-      "tool": "ToolSearch",
-      "result_chars": 225,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior__switch_project",
+      "tool": "mcp__token-savior-recall__switch_project",
       "result_chars": 60,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior__get_dependents",
-      "result_chars": 818,
+      "tool": "mcp__token-savior-recall__find_symbol",
+      "result_chars": 60,
       "is_error": false
     },
     {
-      "tool": "ToolSearch",
-      "result_chars": 77,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior__search_codebase",
-      "result_chars": 439,
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 4707,
       "is_error": false
     }
   ],
-  "total_context_chars_injected": 1619,
+  "ts_tool_details": [
+    {
+      "tool": "switch_project",
+      "args": {
+        "name": "tsbench"
+      },
+      "result_chars": 60,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 0,
+      "preceded_by": null,
+      "followed_by": "find_symbol",
+      "time_ms": 104
+    },
+    {
+      "tool": "find_symbol",
+      "args": {
+        "name": "small_util",
+        "level": 2
+      },
+      "result_chars": 60,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 1,
+      "preceded_by": "switch_project",
+      "followed_by": "search_codebase",
+      "time_ms": 458
+    },
+    {
+      "tool": "search_codebase",
+      "args": {
+        "pattern": "small_util"
+      },
+      "result_chars": 4707,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 2,
+      "preceded_by": "find_symbol",
+      "followed_by": null,
+      "time_ms": 577
+    }
+  ],
+  "total_context_chars_injected": 4827,
   "ts_tool_calls_count": 3,
-  "wall_time_seconds": 28.03,
-  "raw_response": "Voici la liste exhaustive des fichiers qui **appellent** `small_util` (hors sa d\u00e9finition) :\n\n| # | Fichier | Ligne |\n|---|---------|-------|\n| 1 | `apps/api/callers/caller_small_util_00.py` | 6 |\n| 2 | `apps/api/callers/caller_small_util_01.py` | 6 |\n| 3 | `apps/api/callers/caller_small_util_02.py` | 6 |\n\n3 call sites, tous sous la forme `return small_util(payload)`. La fonction est d\u00e9finie dans `packages/utils/targeted.py:7`.",
+  "wall_time_seconds": 15.93,
+  "raw_response": "La fonction `small_util` est d\u00e9finie dans `packages/utils/targeted.py:7` et est appel\u00e9e dans exactement **3 fichiers** :\n\n1. `apps/api/callers/caller_small_util_00.py` (ligne 6)\n2. `apps/api/callers/caller_small_util_01.py` (ligne 6)\n3. `apps/api/callers/caller_small_util_02.py` (ligne 6)\n\nChacun l'importe depuis `packages.utils.targeted` et l'appelle une fois. Pas d'autres call sites dans le projet.",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-14T21:40:15.951915+00:00"
+  "timestamp": "2026-04-15T08:35:30.642288+00:00"
 }

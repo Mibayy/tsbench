@@ -3,16 +3,15 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 5,
-  "output_tokens": 514,
-  "cache_creation_input_tokens": 4688,
-  "cache_read_input_tokens": 127622,
-  "total_tokens": 132829,
-  "active_tokens": 5207,
-  "turns_count": 5,
-  "tool_calls_count": 3,
+  "output_tokens": 418,
+  "cache_creation_input_tokens": 11390,
+  "cache_read_input_tokens": 121242,
+  "total_tokens": 133055,
+  "active_tokens": 11813,
+  "turns_count": 4,
+  "tool_calls_count": 2,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__memory_search": 1,
     "mcp__token-savior-recall__get_file_dependents": 1
   },
   "tool_calls_detail": [
@@ -22,22 +21,45 @@
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__memory_search",
-      "result_chars": 32,
-      "is_error": false
-    },
-    {
       "tool": "mcp__token-savior-recall__get_file_dependents",
-      "result_chars": 467,
+      "result_chars": 501,
       "is_error": false
     }
   ],
-  "total_context_chars_injected": 559,
-  "ts_tool_calls_count": 0,
-  "wall_time_seconds": 21.16,
-  "raw_response": "Fichiers qui importent `apps/api/config.py` (hors cache interne) :\n\n| # | Fichier |\n|---|---------|\n| 1 | `apps/api/main.py` |\n| 2 | `apps/api/services/audit.py` |\n| 3 | `apps/api/services/auth.py` |\n| 4 | `apps/api/services/billing.py` |\n| 5 | `apps/api/services/exports.py` |\n| 6 | `apps/api/services/integrations.py` |\n| 7 | `apps/api/services/members.py` |\n| 8 | `apps/api/services/notifications.py` |\n| 9 | `apps/api/services/reports.py` |\n| 10 | `apps/api/services/sessions.py` |\n| 11 | `apps/api/services/webhooks.py` |\n| 12 | `apps/api/utils/logging.py` |\n| 13 | `apps/api/utils/pagination.py` |\n\n**13 fichiers** d\u00e9pendent de ce module \u2014 principalement les services m\u00e9tier et quelques utilitaires.",
+  "ts_tool_details": [
+    {
+      "tool": "switch_project",
+      "args": {
+        "name": "tsbench"
+      },
+      "result_chars": 60,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 0,
+      "preceded_by": null,
+      "followed_by": "get_file_dependents",
+      "time_ms": 101
+    },
+    {
+      "tool": "get_file_dependents",
+      "args": {
+        "file_path": "apps/api/config.py"
+      },
+      "result_chars": 501,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 1,
+      "preceded_by": "switch_project",
+      "followed_by": null,
+      "time_ms": 343
+    }
+  ],
+  "total_context_chars_injected": 561,
+  "ts_tool_calls_count": 2,
+  "wall_time_seconds": 22.01,
+  "raw_response": "Voici les fichiers qui importent `apps/api/config.py` (hors checkpoint) :\n\n1. `apps/api/main.py`\n2. `apps/api/services/audit.py`\n3. `apps/api/services/auth.py`\n4. `apps/api/services/billing.py`\n5. `apps/api/services/exports.py`\n6. `apps/api/services/integrations.py`\n7. `apps/api/services/members.py`\n8. `apps/api/services/notifications.py`\n9. `apps/api/services/reports.py`\n10. `apps/api/services/sessions.py`\n11. `apps/api/services/webhooks.py`\n12. `apps/api/utils/logging.py`\n13. `apps/api/utils/pagination.py`\n14. `packages/utils/paginate_copy.py`\n\n**14 fichiers** d\u00e9pendent de ce module \u2014 principalement les services API, quelques utilitaires, et le point d'entr\u00e9e `main.py`.",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T06:57:08.676478+00:00"
+  "timestamp": "2026-04-15T09:01:39.680922+00:00"
 }
