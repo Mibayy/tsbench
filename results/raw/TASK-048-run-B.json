@@ -3,12 +3,12 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 5,
-  "output_tokens": 418,
-  "cache_creation_input_tokens": 11390,
-  "cache_read_input_tokens": 121242,
-  "total_tokens": 133055,
-  "active_tokens": 11813,
-  "turns_count": 4,
+  "output_tokens": 409,
+  "cache_creation_input_tokens": 11482,
+  "cache_read_input_tokens": 123105,
+  "total_tokens": 135001,
+  "active_tokens": 11896,
+  "turns_count": 3,
   "tool_calls_count": 2,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
@@ -22,7 +22,7 @@
     },
     {
       "tool": "mcp__token-savior-recall__get_file_dependents",
-      "result_chars": 501,
+      "result_chars": 571,
       "is_error": false
     }
   ],
@@ -38,28 +38,28 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "get_file_dependents",
-      "time_ms": 101
+      "time_ms": 112
     },
     {
       "tool": "get_file_dependents",
       "args": {
         "file_path": "apps/api/config.py"
       },
-      "result_chars": 501,
+      "result_chars": 571,
       "result_empty": false,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": null,
-      "time_ms": 343
+      "time_ms": 400
     }
   ],
-  "total_context_chars_injected": 561,
+  "total_context_chars_injected": 631,
   "ts_tool_calls_count": 2,
-  "wall_time_seconds": 22.01,
-  "raw_response": "Voici les fichiers qui importent `apps/api/config.py` (hors checkpoint) :\n\n1. `apps/api/main.py`\n2. `apps/api/services/audit.py`\n3. `apps/api/services/auth.py`\n4. `apps/api/services/billing.py`\n5. `apps/api/services/exports.py`\n6. `apps/api/services/integrations.py`\n7. `apps/api/services/members.py`\n8. `apps/api/services/notifications.py`\n9. `apps/api/services/reports.py`\n10. `apps/api/services/sessions.py`\n11. `apps/api/services/webhooks.py`\n12. `apps/api/utils/logging.py`\n13. `apps/api/utils/pagination.py`\n14. `packages/utils/paginate_copy.py`\n\n**14 fichiers** d\u00e9pendent de ce module \u2014 principalement les services API, quelques utilitaires, et le point d'entr\u00e9e `main.py`.",
+  "wall_time_seconds": 19.29,
+  "raw_response": "Fichiers qui importent `apps/api/config.py` (hors checkpoints) :\n\n| Fichier |\n|---|\n| `apps/api/main.py` |\n| `apps/api/services/audit.py` |\n| `apps/api/services/auth.py` |\n| `apps/api/services/billing.py` |\n| `apps/api/services/exports.py` |\n| `apps/api/services/integrations.py` |\n| `apps/api/services/members.py` |\n| `apps/api/services/notifications.py` |\n| `apps/api/services/reports.py` |\n| `apps/api/services/sessions.py` |\n| `apps/api/services/webhooks.py` |\n| `apps/api/utils/logging.py` |\n| `apps/api/utils/pagination.py` |\n| `packages/utils/paginate_copy.py` |\n\n**14 fichiers** d\u00e9pendent de ce module \u2014 principalement les services API, quelques utilitaires, et le point d'entr\u00e9e `main.py`.",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T09:01:39.680922+00:00"
+  "timestamp": "2026-04-15T13:02:17.614338+00:00"
 }

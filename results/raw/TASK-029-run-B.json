@@ -1,0 +1,144 @@
+{
+  "task_id": "TASK-029",
+  "run": "B",
+  "baseline": "token-savior",
+  "input_tokens": 9,
+  "output_tokens": 895,
+  "cache_creation_input_tokens": 7715,
+  "cache_read_input_tokens": 313530,
+  "total_tokens": 322149,
+  "active_tokens": 8619,
+  "turns_count": 10,
+  "tool_calls_count": 6,
+  "tool_calls_breakdown": {
+    "mcp__token-savior-recall__switch_project": 1,
+    "mcp__token-savior-recall__list_files": 1,
+    "mcp__token-savior-recall__analyze_config": 1,
+    "mcp__token-savior-recall__search_codebase": 2,
+    "mcp__token-savior-recall__get_structure_summary": 1
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "mcp__token-savior-recall__switch_project",
+      "result_chars": 60,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__list_files",
+      "result_chars": 70,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__analyze_config",
+      "result_chars": 1824,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 3376,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_structure_summary",
+      "result_chars": 36,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 2697,
+      "is_error": false
+    }
+  ],
+  "ts_tool_details": [
+    {
+      "tool": "switch_project",
+      "args": {
+        "name": "tsbench"
+      },
+      "result_chars": 60,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 0,
+      "preceded_by": null,
+      "followed_by": "list_files",
+      "time_ms": 100
+    },
+    {
+      "tool": "list_files",
+      "args": {
+        "pattern": "config/*"
+      },
+      "result_chars": 70,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 1,
+      "preceded_by": "switch_project",
+      "followed_by": "analyze_config",
+      "time_ms": 321
+    },
+    {
+      "tool": "analyze_config",
+      "args": {
+        "checks": [
+          "secrets"
+        ]
+      },
+      "result_chars": 1824,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 2,
+      "preceded_by": "list_files",
+      "followed_by": "search_codebase",
+      "time_ms": 70
+    },
+    {
+      "tool": "search_codebase",
+      "args": {
+        "pattern": "(SECRET|KEY|TOKEN|PASSWORD|CREDENTIAL|AWS_SECRET)",
+        "max_results": 30
+      },
+      "result_chars": 3376,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 3,
+      "preceded_by": "analyze_config",
+      "followed_by": "get_structure_summary",
+      "time_ms": 130
+    },
+    {
+      "tool": "get_structure_summary",
+      "args": {
+        "file_path": "config/.env.staging"
+      },
+      "result_chars": 36,
+      "result_empty": true,
+      "is_error": false,
+      "call_index": 4,
+      "preceded_by": "search_codebase",
+      "followed_by": "search_codebase",
+      "time_ms": 47
+    },
+    {
+      "tool": "search_codebase",
+      "args": {
+        "pattern": "^[A-Z_]+=.+",
+        "max_results": 30
+      },
+      "result_chars": 2697,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 5,
+      "preceded_by": "get_structure_summary",
+      "followed_by": null,
+      "time_ms": 88
+    }
+  ],
+  "total_context_chars_injected": 8063,
+  "ts_tool_calls_count": 6,
+  "wall_time_seconds": 34.33,
+  "raw_response": "Oui, **`config/.env.staging`** contient des secrets en clair (bien que ce soient des placeholders de test). Voici les 4 variables probl\u00e9matiques :\n\n| Ligne | Variable | Valeur |\n|-------|----------|--------|\n| 2 | `DATABASE_URL` | Credentials embarqu\u00e9s : `postgresql://staging:staging@db.example.com/tsbench` |\n| 3 | `SECRET_KEY` | `tsbench_fake_secret_key_placeholder_001` |\n| 5 | `STRIPE_API_KEY` | `tsbench_placeholder_stripe_key_do_not_scan` |\n| 7 | `STRIPE_WEBHOOK_SECRET` | `tsbench_placeholder_webhook_secret_do_not_scan` |\n| 9 | `AWS_SECRET_ACCESS_KEY` | `tsbench_placeholder_aws_secret_do_not_scan` |\n\n**`config/.env.example`** est propre \u2014 il ne contient que des valeurs par d\u00e9faut g\u00e9n\u00e9riques (`change-me`, cha\u00eenes vides).\n\n**`config/app.config.yaml`** n'a pas \u00e9t\u00e9 signal\u00e9 comme contenant de secrets.\n\n**En r\u00e9sum\u00e9** : 5 secrets hardcod\u00e9s dans `config/.env.staging` (1 URL avec credentials + 4 cl\u00e9s/tokens). M\u00eame s'ils portent le suffixe \"placeholder/do_not_scan\", ce fichier ne devrait pas \u00eatre versionn\u00e9 \u2014 il devrait figurer dans `.gitignore`.",
+  "error": null,
+  "score": 0,
+  "max_score": 2,
+  "timestamp": "2026-04-15T12:48:38.402028+00:00"
+}

@@ -1,0 +1,193 @@
+{
+  "task_id": "TASK-038",
+  "run": "B",
+  "baseline": "token-savior",
+  "input_tokens": 9,
+  "output_tokens": 1491,
+  "cache_creation_input_tokens": 6612,
+  "cache_read_input_tokens": 221529,
+  "total_tokens": 229641,
+  "active_tokens": 8112,
+  "turns_count": 12,
+  "tool_calls_count": 8,
+  "tool_calls_breakdown": {
+    "mcp__token-savior-recall__switch_project": 1,
+    "mcp__token-savior-recall__get_full_context": 1,
+    "mcp__token-savior-recall__get_structure_summary": 1,
+    "mcp__token-savior-recall__get_functions": 1,
+    "mcp__token-savior-recall__get_imports": 1,
+    "mcp__token-savior-recall__get_function_source": 3
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "mcp__token-savior-recall__switch_project",
+      "result_chars": 60,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_full_context",
+      "result_chars": 38,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_structure_summary",
+      "result_chars": 2021,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_functions",
+      "result_chars": 341,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_imports",
+      "result_chars": 281,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 220,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 220,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 313,
+      "is_error": false
+    }
+  ],
+  "ts_tool_details": [
+    {
+      "tool": "switch_project",
+      "args": {
+        "name": "tsbench"
+      },
+      "result_chars": 60,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 0,
+      "preceded_by": null,
+      "followed_by": "get_full_context",
+      "time_ms": 96
+    },
+    {
+      "tool": "get_full_context",
+      "args": {
+        "name": "billing",
+        "depth": 1,
+        "project": "tsbench"
+      },
+      "result_chars": 38,
+      "result_empty": true,
+      "is_error": false,
+      "call_index": 1,
+      "preceded_by": "switch_project",
+      "followed_by": "get_structure_summary",
+      "time_ms": 558
+    },
+    {
+      "tool": "get_structure_summary",
+      "args": {
+        "file_path": "apps/api/services/billing.py",
+        "project": "tsbench"
+      },
+      "result_chars": 2021,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 2,
+      "preceded_by": "get_full_context",
+      "followed_by": "get_functions",
+      "time_ms": 43
+    },
+    {
+      "tool": "get_functions",
+      "args": {
+        "file_path": "apps/api/services/billing.py",
+        "max_results": 7,
+        "hints": false,
+        "project": "tsbench"
+      },
+      "result_chars": 341,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 3,
+      "preceded_by": "get_structure_summary",
+      "followed_by": "get_imports",
+      "time_ms": 840
+    },
+    {
+      "tool": "get_imports",
+      "args": {
+        "file_path": "apps/api/services/billing.py",
+        "project": "tsbench"
+      },
+      "result_chars": 281,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 4,
+      "preceded_by": "get_functions",
+      "followed_by": "get_function_source",
+      "time_ms": 53
+    },
+    {
+      "tool": "get_function_source",
+      "args": {
+        "name": "calculate_invoice",
+        "level": 1,
+        "hints": false,
+        "project": "tsbench"
+      },
+      "result_chars": 220,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 5,
+      "preceded_by": "get_imports",
+      "followed_by": "get_function_source",
+      "time_ms": 300
+    },
+    {
+      "tool": "get_function_source",
+      "args": {
+        "name": "charge_customer",
+        "level": 1,
+        "hints": false,
+        "project": "tsbench"
+      },
+      "result_chars": 220,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 6,
+      "preceded_by": "get_function_source",
+      "followed_by": "get_function_source",
+      "time_ms": 247
+    },
+    {
+      "tool": "get_function_source",
+      "args": {
+        "name": "_billing_admin_db",
+        "level": 0,
+        "hints": false,
+        "project": "tsbench"
+      },
+      "result_chars": 313,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 7,
+      "preceded_by": "get_function_source",
+      "followed_by": null,
+      "time_ms": 245
+    }
+  ],
+  "total_context_chars_injected": 3494,
+  "ts_tool_calls_count": 8,
+  "wall_time_seconds": 40.11,
+  "raw_response": "## Architecture de `apps/api/services/billing.py`\n\n### Responsabilit\u00e9s\n\nModule de service billing qui g\u00e8re le cycle de vie complet de la facturation : cr\u00e9ation de factures, application de remises, encaissement, remboursement, et gestion administrative.\n\n### D\u00e9pendances (5 imports)\n\n| Module | \u00c9l\u00e9ments import\u00e9s | R\u00f4le |\n|---|---|---|\n| `apps.api.db` | `get_session`, `supabase_admin` | Acc\u00e8s base de donn\u00e9es (Supabase) |\n| `apps.api.models.billing` | `Billing` | Mod\u00e8le de donn\u00e9es facturation |\n| `apps.api.config` | `settings` | Configuration applicative |\n| `apps.api.utils.logging` | `info`, `warn`, `error` | Logging structur\u00e9 |\n| `apps.api.utils.errors` | `NotFoundError`, `ValidationError` | Exceptions m\u00e9tier |\n\n### Fonctions principales (publiques, lignes 14-222)\n\n| Fonction | Signature | Responsabilit\u00e9 |\n|---|---|---|\n| `calculate_invoice` | `(payload, user_id)` | Calcul d'une facture |\n| `validate_invoice_total` | `(invoice)` | Validation du total facture |\n| `apply_discount` | `(payload, user_id)` | Application de remises |\n| `charge_customer` | `(payload, user_id)` | Encaissement client |\n| `refund_payment` | `(payload, user_id)` | Remboursement |\n| `list_invoices` | `(payload, user_id)` | Liste des factures d'un utilisateur |\n| `void_invoice` | `(payload, user_id)` | Annulation de facture |\n\n### Fonctions internes (lignes 224-654)\n\n**~26 fonctions `*_billing_internal(data)`** couvrant l'infrastructure : pr\u00e9paration, finalisation, audit, notifications, s\u00e9rialisation, rate-limiting, retry avec backoff, batch/stream processing, soft/hard delete, etc.\n\n### Structure\n\n- **`_billing_admin_db()`** (ligne 8) : accessor priv\u00e9 qui ouvre une session admin Supabase via `supabase_admin()` \u2014 utilis\u00e9 par les 6 fonctions publiques (elles forment un cluster fonctionnel coh\u00e9rent).\n- Les fonctions publiques suivent un pattern uniforme `(payload, user_id)` \u2192 op\u00e9ration DB scop\u00e9e par utilisateur.\n- Le fichier est volumineux (655 lignes) \u2014 la majorit\u00e9 est constitu\u00e9e des fonctions `*_internal` d'infrastructure.",
+  "error": null,
+  "score": 0,
+  "max_score": 2,
+  "timestamp": "2026-04-15T12:57:03.539939+00:00"
+}

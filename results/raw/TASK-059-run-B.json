@@ -4,10 +4,10 @@
   "baseline": "token-savior",
   "input_tokens": 5,
   "output_tokens": 365,
-  "cache_creation_input_tokens": 12013,
-  "cache_read_input_tokens": 121613,
-  "total_tokens": 133996,
-  "active_tokens": 12383,
+  "cache_creation_input_tokens": 12102,
+  "cache_read_input_tokens": 123507,
+  "total_tokens": 135979,
+  "active_tokens": 12472,
   "turns_count": 3,
   "tool_calls_count": 2,
   "tool_calls_breakdown": {
@@ -22,7 +22,7 @@
     },
     {
       "tool": "mcp__token-savior-recall__get_git_status",
-      "result_chars": 1552,
+      "result_chars": 1548,
       "is_error": false
     }
   ],
@@ -38,26 +38,26 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "get_git_status",
-      "time_ms": 114
+      "time_ms": 109
     },
     {
       "tool": "get_git_status",
       "args": {},
-      "result_chars": 1552,
+      "result_chars": 1548,
       "result_empty": false,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": null,
-      "time_ms": 162
+      "time_ms": 75
     }
   ],
-  "total_context_chars_injected": 1612,
+  "total_context_chars_injected": 1608,
   "ts_tool_calls_count": 2,
-  "wall_time_seconds": 17.03,
-  "raw_response": "**Branche courante :** `main` (synchronis\u00e9e avec `origin/main`, 0 ahead / 0 behind)\n\n**Fichiers staged :** aucun\n\n**Fichiers modifi\u00e9s (unstaged) \u2014 41 fichiers :**\n- Code source (8) : `apps/api/ambig/mod1.py`, `apps/api/config.py`, `apps/api/services/billing.py`, `apps/api/utils/buggy_pagination.py`, `apps/api/utils/strings.py`, `bench.py`, `packages/utils/paginate_copy.py`, `packages/utils/slug_copy.py`\n- R\u00e9sultats (32) : `results/raw/TASK-{001..014,041..058}-run-B.json`, `results/warmup-run-B.json`\n\n**Fichiers non-track\u00e9s (3) :**\n- `.token-savior-cache.json`\n- `.token-savior-checkpoints/`\n- `analyze_signals.py`",
+  "wall_time_seconds": 15.56,
+  "raw_response": "**Branche courante :** `main` (1 commit en avance sur `origin/main`)\n\n**Fichiers staged :** aucun\n\n**Fichiers modifi\u00e9s (unstaged) \u2014 41 fichiers :**\n- Code source (8) : `apps/api/ambig/mod1.py`, `apps/api/config.py`, `apps/api/services/billing.py`, `apps/api/utils/buggy_pagination.py`, `apps/api/utils/strings.py`, `apps/web/lib/constants.ts`, `packages/utils/paginate_copy.py`, `packages/utils/slug_copy.py`\n- R\u00e9sultats (32) : `results/raw/TASK-{001..014,041..058}-run-B.json`\n- Config : `results/warmup-run-B.json`\n\n**Fichiers non-track\u00e9s (2) :** `.token-savior-cache.json`, `.token-savior-checkpoints/`\n\n**Conflits :** aucun",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T09:07:46.676211+00:00"
+  "timestamp": "2026-04-15T13:08:34.645757+00:00"
 }

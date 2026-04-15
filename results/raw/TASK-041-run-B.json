@@ -2,19 +2,18 @@
   "task_id": "TASK-041",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 9,
-  "output_tokens": 2024,
-  "cache_creation_input_tokens": 10830,
-  "cache_read_input_tokens": 219499,
-  "total_tokens": 232362,
-  "active_tokens": 12863,
-  "turns_count": 21,
-  "tool_calls_count": 15,
+  "input_tokens": 6,
+  "output_tokens": 1315,
+  "cache_creation_input_tokens": 9295,
+  "cache_read_input_tokens": 175113,
+  "total_tokens": 185729,
+  "active_tokens": 10616,
+  "turns_count": 11,
+  "tool_calls_count": 8,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__list_files": 1,
     "mcp__token-savior-recall__get_structure_summary": 1,
-    "mcp__token-savior-recall__get_function_source": 12
+    "mcp__token-savior-recall__get_function_source": 6
   },
   "tool_calls_detail": [
     {
@@ -23,73 +22,38 @@
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__list_files",
-      "result_chars": 349,
-      "is_error": false
-    },
-    {
       "tool": "mcp__token-savior-recall__get_structure_summary",
-      "result_chars": 1966,
+      "result_chars": 2021,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 220,
+      "result_chars": 1215,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 219,
+      "result_chars": 1209,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 220,
+      "result_chars": 1276,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 219,
+      "result_chars": 1210,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 218,
+      "result_chars": 1206,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 217,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 1126,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 1123,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 1127,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 1124,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 1121,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 1115,
+      "result_chars": 1199,
       "is_error": false
     }
   ],
@@ -104,222 +68,113 @@
       "is_error": false,
       "call_index": 0,
       "preceded_by": null,
-      "followed_by": "list_files",
-      "time_ms": 107
-    },
-    {
-      "tool": "list_files",
-      "args": {
-        "pattern": "**/billing*"
-      },
-      "result_chars": 349,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 1,
-      "preceded_by": "switch_project",
       "followed_by": "get_structure_summary",
-      "time_ms": 216
+      "time_ms": 85
     },
     {
       "tool": "get_structure_summary",
       "args": {
         "file_path": "apps/api/services/billing.py"
       },
-      "result_chars": 1966,
+      "result_chars": 2021,
       "result_empty": false,
       "is_error": false,
-      "call_index": 2,
-      "preceded_by": "list_files",
+      "call_index": 1,
+      "preceded_by": "switch_project",
       "followed_by": "get_function_source",
-      "time_ms": 40
+      "time_ms": 293
     },
     {
       "tool": "get_function_source",
       "args": {
         "name": "calculate_invoice",
-        "file_path": "apps/api/services/billing.py",
-        "level": 1
+        "level": 0
       },
-      "result_chars": 220,
+      "result_chars": 1215,
       "result_empty": false,
       "is_error": false,
-      "call_index": 3,
+      "call_index": 2,
       "preceded_by": "get_structure_summary",
       "followed_by": "get_function_source",
-      "time_ms": 466
+      "time_ms": 372
     },
     {
       "tool": "get_function_source",
       "args": {
         "name": "apply_discount",
-        "file_path": "apps/api/services/billing.py",
-        "level": 1
+        "level": 0
       },
-      "result_chars": 219,
+      "result_chars": 1209,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 3,
+      "preceded_by": "get_function_source",
+      "followed_by": "get_function_source",
+      "time_ms": 435
+    },
+    {
+      "tool": "get_function_source",
+      "args": {
+        "name": "charge_customer",
+        "level": 0
+      },
+      "result_chars": 1276,
       "result_empty": false,
       "is_error": false,
       "call_index": 4,
       "preceded_by": "get_function_source",
       "followed_by": "get_function_source",
-      "time_ms": 463
+      "time_ms": 501
     },
     {
       "tool": "get_function_source",
       "args": {
-        "name": "charge_customer",
-        "file_path": "apps/api/services/billing.py",
-        "level": 1
+        "name": "refund_payment",
+        "level": 0
       },
-      "result_chars": 220,
+      "result_chars": 1210,
       "result_empty": false,
       "is_error": false,
       "call_index": 5,
       "preceded_by": "get_function_source",
       "followed_by": "get_function_source",
-      "time_ms": 472
+      "time_ms": 498
     },
     {
       "tool": "get_function_source",
       "args": {
-        "name": "refund_payment",
-        "file_path": "apps/api/services/billing.py",
-        "level": 1
+        "name": "list_invoices",
+        "level": 0
       },
-      "result_chars": 219,
+      "result_chars": 1206,
       "result_empty": false,
       "is_error": false,
       "call_index": 6,
       "preceded_by": "get_function_source",
       "followed_by": "get_function_source",
-      "time_ms": 466
+      "time_ms": 248
     },
     {
       "tool": "get_function_source",
       "args": {
-        "name": "list_invoices",
-        "file_path": "apps/api/services/billing.py",
-        "level": 1
+        "name": "void_invoice",
+        "level": 0
       },
-      "result_chars": 218,
+      "result_chars": 1199,
       "result_empty": false,
       "is_error": false,
       "call_index": 7,
       "preceded_by": "get_function_source",
-      "followed_by": "get_function_source",
-      "time_ms": 273
-    },
-    {
-      "tool": "get_function_source",
-      "args": {
-        "name": "void_invoice",
-        "file_path": "apps/api/services/billing.py",
-        "level": 1
-      },
-      "result_chars": 217,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 8,
-      "preceded_by": "get_function_source",
-      "followed_by": "get_function_source",
-      "time_ms": 336
-    },
-    {
-      "tool": "get_function_source",
-      "args": {
-        "name": "calculate_invoice",
-        "file_path": "apps/api/services/billing.py",
-        "level": 0
-      },
-      "result_chars": 1126,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 9,
-      "preceded_by": "get_function_source",
-      "followed_by": "get_function_source",
-      "time_ms": 721
-    },
-    {
-      "tool": "get_function_source",
-      "args": {
-        "name": "apply_discount",
-        "file_path": "apps/api/services/billing.py",
-        "level": 0
-      },
-      "result_chars": 1123,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 10,
-      "preceded_by": "get_function_source",
-      "followed_by": "get_function_source",
-      "time_ms": 518
-    },
-    {
-      "tool": "get_function_source",
-      "args": {
-        "name": "charge_customer",
-        "file_path": "apps/api/services/billing.py",
-        "level": 0
-      },
-      "result_chars": 1127,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 11,
-      "preceded_by": "get_function_source",
-      "followed_by": "get_function_source",
-      "time_ms": 401
-    },
-    {
-      "tool": "get_function_source",
-      "args": {
-        "name": "refund_payment",
-        "file_path": "apps/api/services/billing.py",
-        "level": 0
-      },
-      "result_chars": 1124,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 12,
-      "preceded_by": "get_function_source",
-      "followed_by": "get_function_source",
-      "time_ms": 289
-    },
-    {
-      "tool": "get_function_source",
-      "args": {
-        "name": "list_invoices",
-        "file_path": "apps/api/services/billing.py",
-        "level": 0
-      },
-      "result_chars": 1121,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 13,
-      "preceded_by": "get_function_source",
-      "followed_by": "get_function_source",
-      "time_ms": 333
-    },
-    {
-      "tool": "get_function_source",
-      "args": {
-        "name": "void_invoice",
-        "file_path": "apps/api/services/billing.py",
-        "level": 0
-      },
-      "result_chars": 1115,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 14,
-      "preceded_by": "get_function_source",
       "followed_by": null,
-      "time_ms": 254
+      "time_ms": 437
     }
   ],
-  "total_context_chars_injected": 10424,
-  "ts_tool_calls_count": 15,
-  "wall_time_seconds": 45.52,
-  "raw_response": "Voici l'analyse du module `apps/api/services/billing.py` (649 lignes).\n\n## Architecture g\u00e9n\u00e9rale\n\nLe module suit un pattern **uniforme** : les 6 fonctions publiques ont une signature identique `(payload: dict, user_id: int = 0)` et partagent exactement la m\u00eame structure interne :\n\n1. **Bloc de ballast** (~28 lignes de variables locales `x_0`\u2026`x_17` \u2014 calculs arithm\u00e9tiques, listes, dicts, compr\u00e9hensions) qui ne sont jamais utilis\u00e9es. C'est du code mort / padding.\n2. **Appel \u00e0 `_billing_admin_db()`** \u2014 helper priv\u00e9 (lignes 8-12) qui initialise la connexion DB billing.\n3. **Log** via `info()` indiquant l'op\u00e9ration et le `user_id`.\n4. **Extraction de `payload.get('check', True)`** \u2014 stock\u00e9e mais jamais exploit\u00e9e.\n5. **Retour d'un dict stub** `{'ok': True, 'op': '<nom_op>', 'user': user_id}`.\n\n## Fonctions publiques\n\n| Fonction | R\u00f4le |\n|---|---|\n| **`calculate_invoice`** | Calcule une facture pour un utilisateur donn\u00e9 \u00e0 partir du payload. |\n| **`apply_discount`** | Applique une r\u00e9duction/remise sur une facture ou un compte client. |\n| **`charge_customer`** | D\u00e9clenche le pr\u00e9l\u00e8vement/paiement d'un client. |\n| **`refund_payment`** | Effectue le remboursement d'un paiement existant. |\n| **`list_invoices`** | Liste les factures associ\u00e9es \u00e0 un utilisateur. |\n| **`void_invoice`** | Annule (void) une facture existante. |\n\n## Constat\n\n**Toutes ces fonctions sont des stubs** \u2014 elles retournent un dict `{'ok': True}` sans logique m\u00e9tier r\u00e9elle. Le corps est domin\u00e9 par du code mort (variables `x_*` inutilis\u00e9es). Le fichier contient aussi ~26 fonctions internes `*_billing_internal` (lignes 218-648) qui suivent le m\u00eame pattern de padding sans logique effective.",
+  "total_context_chars_injected": 9396,
+  "ts_tool_calls_count": 8,
+  "wall_time_seconds": 35.36,
+  "raw_response": "## Module `apps/api/services/billing.py`\n\n**655 lignes** | Imports : `apps.api.config`, `apps.api.db`, `apps.api.models.billing`, `apps.api.utils.errors`, `apps.api.utils.logging`\n\n### Architecture\n\nToutes les fonctions publiques suivent le m\u00eame patron :\n1. Calcul de variables locales de remplissage (boilerplate `x_0`\u2026`x_17` \u2014 probablement du code g\u00e9n\u00e9r\u00e9/stub)\n2. Appel \u00e0 `_billing_admin_db()` (helper priv\u00e9, lignes 8-12) pour obtenir une connexion DB\n3. Log de l'op\u00e9ration via `info()`\n4. Lecture d'un flag `check` depuis le payload\n5. Retour d'un dict `{'ok': True, 'op': '<nom>', 'user': user_id}`\n\nToutes prennent `(payload: dict, user_id: int = 0)` en signature.\n\n### Fonctions publiques principales\n\n| Fonction | Lignes | R\u00f4le |\n|---|---|---|\n| **`calculate_invoice`** | 14-46 | Calcule une facture \u00e0 partir du payload et retourne un r\u00e9sultat de calcul pour l'utilisateur donn\u00e9. |\n| **`apply_discount`** | 52-84 | Applique une remise sur une facture ou un montant existant. |\n| **`charge_customer`** | 86-120 | D\u00e9bite le client ; seule fonction qui l\u00e8ve `ValueError` si le payload est vide (garde de validation en entr\u00e9e). |\n| **`refund_payment`** | 122-154 | Traite un remboursement de paiement pour l'utilisateur. |\n| **`list_invoices`** | 156-188 | Liste les factures associ\u00e9es \u00e0 un utilisateur. |\n| **`void_invoice`** | 190-222 | Annule (void) une facture existante. |\n\n### Autres \u00e9l\u00e9ments notables\n\n- **`validate_invoice_total`** (ligne 49-50) \u2014 validateur one-liner du total d'une facture.\n- **~26 fonctions `*_billing_internal`** (lignes 224-654) \u2014 fonctions internes (prepare, finalize, audit, notify, enqueue, reconcile, upsert, serialize, etc.) qui suivent toutes le m\u00eame patron stub avec un param\u00e8tre `data`.\n- Les 6 fonctions publiques forment une **communaut\u00e9 Leiden** coh\u00e9sive autour de `_billing_admin_db`, confirmant qu'elles partagent la m\u00eame couche d'acc\u00e8s DB.\n\n**Point d'attention** : `charge_customer` est la seule \u00e0 valider son payload (`raise ValueError(\"empty payload\")`), les autres acceptent silencieusement un payload vide.",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T08:58:04.419404+00:00"
+  "timestamp": "2026-04-15T12:58:55.365813+00:00"
 }

@@ -3,26 +3,20 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 5,
-  "output_tokens": 333,
-  "cache_creation_input_tokens": 4684,
-  "cache_read_input_tokens": 126840,
-  "total_tokens": 131862,
-  "active_tokens": 5022,
+  "output_tokens": 272,
+  "cache_creation_input_tokens": 11223,
+  "cache_read_input_tokens": 122291,
+  "total_tokens": 133791,
+  "active_tokens": 11500,
   "turns_count": 4,
-  "tool_calls_count": 3,
+  "tool_calls_count": 2,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__find_symbol": 1,
     "mcp__token-savior-recall__get_dependents": 1
   },
   "tool_calls_detail": [
     {
       "tool": "mcp__token-savior-recall__switch_project",
-      "result_chars": 60,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__find_symbol",
       "result_chars": 60,
       "is_error": false
     },
@@ -43,22 +37,8 @@
       "is_error": false,
       "call_index": 0,
       "preceded_by": null,
-      "followed_by": "find_symbol",
-      "time_ms": 121
-    },
-    {
-      "tool": "find_symbol",
-      "args": {
-        "name": "small_util",
-        "level": 2
-      },
-      "result_chars": 60,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 1,
-      "preceded_by": "switch_project",
       "followed_by": "get_dependents",
-      "time_ms": 467
+      "time_ms": 111
     },
     {
       "tool": "get_dependents",
@@ -68,18 +48,18 @@
       "result_chars": 290,
       "result_empty": false,
       "is_error": false,
-      "call_index": 2,
-      "preceded_by": "find_symbol",
+      "call_index": 1,
+      "preceded_by": "switch_project",
       "followed_by": null,
-      "time_ms": 476
+      "time_ms": 365
     }
   ],
-  "total_context_chars_injected": 410,
-  "ts_tool_calls_count": 3,
-  "wall_time_seconds": 19.65,
-  "raw_response": "`small_util` est d\u00e9finie dans `packages/utils/targeted.py:7` et appel\u00e9e dans **3 fichiers** :\n\n1. `apps/api/callers/caller_lonely_util_00.py` (fonction `do_it_0`, ligne 4)\n2. `apps/api/callers/caller_hub_util_01.py` (fonction `do_it_1`, ligne 4)\n3. `apps/api/callers/caller_hub_util_02.py` (fonction `do_it_2`, ligne 4)",
+  "total_context_chars_injected": 350,
+  "ts_tool_calls_count": 2,
+  "wall_time_seconds": 16.1,
+  "raw_response": "Voici les fichiers qui appellent `small_util` :\n\n1. `apps/api/callers/caller_lonely_util_00.py` \u2014 fonction `do_it_0`\n2. `apps/api/callers/caller_hub_util_01.py` \u2014 fonction `do_it_1`\n3. `apps/api/callers/caller_hub_util_02.py` \u2014 fonction `do_it_2`\n\n3 fichiers, 3 call sites.",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T08:33:24.705829+00:00"
+  "timestamp": "2026-04-15T12:32:55.509856+00:00"
 }

@@ -1,0 +1,65 @@
+{
+  "task_id": "TASK-025",
+  "run": "B",
+  "baseline": "token-savior",
+  "input_tokens": 5,
+  "output_tokens": 418,
+  "cache_creation_input_tokens": 4686,
+  "cache_read_input_tokens": 129543,
+  "total_tokens": 134652,
+  "active_tokens": 5109,
+  "turns_count": 4,
+  "tool_calls_count": 2,
+  "tool_calls_breakdown": {
+    "mcp__token-savior-recall__switch_project": 1,
+    "mcp__token-savior-recall__find_hotspots": 1
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "mcp__token-savior-recall__switch_project",
+      "result_chars": 60,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__find_hotspots",
+      "result_chars": 322,
+      "is_error": false
+    }
+  ],
+  "ts_tool_details": [
+    {
+      "tool": "switch_project",
+      "args": {
+        "name": "tsbench"
+      },
+      "result_chars": 60,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 0,
+      "preceded_by": null,
+      "followed_by": "find_hotspots",
+      "time_ms": 101
+    },
+    {
+      "tool": "find_hotspots",
+      "args": {
+        "max_results": 3
+      },
+      "result_chars": 322,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 1,
+      "preceded_by": "switch_project",
+      "followed_by": null,
+      "time_ms": 443
+    }
+  ],
+  "total_context_chars_injected": 382,
+  "ts_tool_calls_count": 2,
+  "wall_time_seconds": 17.94,
+  "raw_response": "Voici les 3 fonctions les plus complexes du projet :\n\n| # | Fonction | Fichier | Score | Lignes | Branches | Prof. max |\n|---|----------|---------|------:|-------:|---------:|----------:|\n| 1 | `generate_report()` | `bench.py:589` | **148.9** | 223 | 38 | 4 |\n| 2 | `gen_web()` | `generate.py:779` | **135.3** | 331 | 15 | 4 |\n| 3 | `parse_stream_json()` | `bench.py:182` | **124.0** | 165 | 32 | 7 |\n\n`generate_report()` domine par sa combinaison lignes + branches. `parse_stream_json()` a la profondeur d'imbrication la plus \u00e9lev\u00e9e (7 niveaux), signe de logique conditionnelle dense.",
+  "error": null,
+  "score": 0,
+  "max_score": 2,
+  "timestamp": "2026-04-15T12:46:24.650462+00:00"
+}

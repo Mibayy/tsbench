@@ -1,0 +1,67 @@
+{
+  "task_id": "TASK-021",
+  "run": "B",
+  "baseline": "token-savior",
+  "input_tokens": 5,
+  "output_tokens": 821,
+  "cache_creation_input_tokens": 13761,
+  "cache_read_input_tokens": 122936,
+  "total_tokens": 137523,
+  "active_tokens": 14587,
+  "turns_count": 5,
+  "tool_calls_count": 2,
+  "tool_calls_breakdown": {
+    "mcp__token-savior-recall__switch_project": 1,
+    "mcp__token-savior-recall__get_changed_symbols": 1
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "mcp__token-savior-recall__switch_project",
+      "result_chars": 60,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_changed_symbols",
+      "result_chars": 8579,
+      "is_error": false
+    }
+  ],
+  "ts_tool_details": [
+    {
+      "tool": "switch_project",
+      "args": {
+        "name": "tsbench"
+      },
+      "result_chars": 60,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 0,
+      "preceded_by": null,
+      "followed_by": "get_changed_symbols",
+      "time_ms": 90
+    },
+    {
+      "tool": "get_changed_symbols",
+      "args": {
+        "ref": "v1..v2",
+        "max_files": 30,
+        "max_symbols_per_file": 30
+      },
+      "result_chars": 8579,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 1,
+      "preceded_by": "switch_project",
+      "followed_by": null,
+      "time_ms": 465
+    }
+  ],
+  "total_context_chars_injected": 8639,
+  "ts_tool_calls_count": 2,
+  "wall_time_seconds": 22.62,
+  "raw_response": "Voici les changements symbole par symbole entre `v1` et `v2` (fichiers source uniquement) :\n\n**`apps/api/ambig/mod1.py`**\n- `create_regular_user` \u2014 modifi\u00e9\n- `process_event` \u2014 modifi\u00e9\n\n**`apps/api/config.py`**\n- `Settings` (class) \u2014 modifi\u00e9e\n\n**`apps/api/services/billing.py`**\n- `_billing_admin_db` \u2014 modifi\u00e9\n- `calculate_invoice` \u2014 modifi\u00e9\n- `validate_invoice_total` \u2014 modifi\u00e9\n- `apply_discount` \u2014 modifi\u00e9\n- `charge_customer` \u2014 modifi\u00e9\n- `refund_payment` \u2014 modifi\u00e9\n- `list_invoices` \u2014 modifi\u00e9\n- `void_invoice` \u2014 modifi\u00e9\n- 20 fonctions `*_billing_internal` \u2014 modifi\u00e9es (`prepare`, `finalize`, `audit`, `notify`, `enqueue`, `reconcile`, `upsert`, `expand`, `reduce`, `snapshot`, `replay`, `validate_input`, `serialize_output`, `deserialize_input`, `build_context`, `emit_metric`, `rate_limit`, `retry_with_backoff`, `batch_process`, `stream_process`, `index_entity`, `reindex_entity`)\n\n**`apps/api/utils/buggy_pagination.py`**\n- `buggy_paginate` \u2014 modifi\u00e9\n\n**`apps/api/utils/strings.py`**\n- `truncate` \u2014 modifi\u00e9\n\n**`apps/web/lib/constants.ts`**\n- `constants` \u2014 modifi\u00e9\n- `constants_default` \u2014 modifi\u00e9\n- `constantsOptions` (class) \u2014 modifi\u00e9e\n- `constantsResult` (class) \u2014 modifi\u00e9e\n\n**`packages/utils/paginate_copy.py`**\n- `paginate_also` \u2014 modifi\u00e9\n\n**`packages/utils/slug_copy.py`**\n- `to_slug` \u2014 modifi\u00e9\n- `slugify` \u2014 modifi\u00e9\n\n**Fichiers data** : 14 fichiers `results/raw/TASK-*-run-B.json` + `results/warmup-run-B.json` \u2014 mis \u00e0 jour (pas de symboles).",
+  "error": null,
+  "score": 0,
+  "max_score": 2,
+  "timestamp": "2026-04-15T12:43:31.436794+00:00"
+}

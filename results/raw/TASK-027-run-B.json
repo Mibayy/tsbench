@@ -1,0 +1,273 @@
+{
+  "task_id": "TASK-027",
+  "run": "B",
+  "baseline": "token-savior",
+  "input_tokens": 12,
+  "output_tokens": 1269,
+  "cache_creation_input_tokens": 10777,
+  "cache_read_input_tokens": 360495,
+  "total_tokens": 372553,
+  "active_tokens": 12058,
+  "turns_count": 18,
+  "tool_calls_count": 13,
+  "tool_calls_breakdown": {
+    "mcp__token-savior-recall__switch_project": 1,
+    "mcp__token-savior-recall__list_files": 3,
+    "mcp__token-savior-recall__get_structure_summary": 1,
+    "mcp__token-savior-recall__get_functions": 1,
+    "mcp__token-savior-recall__search_codebase": 7
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "mcp__token-savior-recall__switch_project",
+      "result_chars": 60,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__list_files",
+      "result_chars": 23,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__list_files",
+      "result_chars": 2,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__list_files",
+      "result_chars": 45,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_structure_summary",
+      "result_chars": 36,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_functions",
+      "result_chars": 2,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 4468,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 832,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 621,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 2254,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 646,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 3524,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 2667,
+      "is_error": false
+    }
+  ],
+  "ts_tool_details": [
+    {
+      "tool": "switch_project",
+      "args": {
+        "name": "tsbench"
+      },
+      "result_chars": 60,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 0,
+      "preceded_by": null,
+      "followed_by": "list_files",
+      "time_ms": 100
+    },
+    {
+      "tool": "list_files",
+      "args": {
+        "pattern": "*.env.example"
+      },
+      "result_chars": 23,
+      "result_empty": true,
+      "is_error": false,
+      "call_index": 1,
+      "preceded_by": "switch_project",
+      "followed_by": "list_files",
+      "time_ms": 521
+    },
+    {
+      "tool": "list_files",
+      "args": {
+        "pattern": ".env.example"
+      },
+      "result_chars": 2,
+      "result_empty": true,
+      "is_error": false,
+      "call_index": 2,
+      "preceded_by": "list_files",
+      "followed_by": "list_files",
+      "time_ms": 67
+    },
+    {
+      "tool": "list_files",
+      "args": {
+        "pattern": "**/.env*"
+      },
+      "result_chars": 45,
+      "result_empty": true,
+      "is_error": false,
+      "call_index": 3,
+      "preceded_by": "list_files",
+      "followed_by": "get_structure_summary",
+      "time_ms": 68
+    },
+    {
+      "tool": "get_structure_summary",
+      "args": {
+        "file_path": "config/.env.example"
+      },
+      "result_chars": 36,
+      "result_empty": true,
+      "is_error": false,
+      "call_index": 4,
+      "preceded_by": "list_files",
+      "followed_by": "get_functions",
+      "time_ms": 89
+    },
+    {
+      "tool": "get_functions",
+      "args": {
+        "file_path": "config/.env.example"
+      },
+      "result_chars": 2,
+      "result_empty": true,
+      "is_error": false,
+      "call_index": 5,
+      "preceded_by": "get_structure_summary",
+      "followed_by": "search_codebase",
+      "time_ms": 80
+    },
+    {
+      "tool": "search_codebase",
+      "args": {
+        "pattern": "^[A-Z_]+=",
+        "max_results": 50
+      },
+      "result_chars": 4468,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 6,
+      "preceded_by": "get_functions",
+      "followed_by": "search_codebase",
+      "time_ms": 127
+    },
+    {
+      "tool": "search_codebase",
+      "args": {
+        "pattern": "DATABASE_URL",
+        "max_results": 20
+      },
+      "result_chars": 832,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 7,
+      "preceded_by": "search_codebase",
+      "followed_by": "search_codebase",
+      "time_ms": 684
+    },
+    {
+      "tool": "search_codebase",
+      "args": {
+        "pattern": "SECRET_KEY",
+        "max_results": 20
+      },
+      "result_chars": 621,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 8,
+      "preceded_by": "search_codebase",
+      "followed_by": "search_codebase",
+      "time_ms": 463
+    },
+    {
+      "tool": "search_codebase",
+      "args": {
+        "pattern": "STRIPE_API_KEY|STRIPE_WEBHOOK_SECRET",
+        "max_results": 20
+      },
+      "result_chars": 2254,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 9,
+      "preceded_by": "search_codebase",
+      "followed_by": "search_codebase",
+      "time_ms": 219
+    },
+    {
+      "tool": "search_codebase",
+      "args": {
+        "pattern": "REDIS_URL",
+        "max_results": 20
+      },
+      "result_chars": 646,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 10,
+      "preceded_by": "search_codebase",
+      "followed_by": "search_codebase",
+      "time_ms": 90
+    },
+    {
+      "tool": "search_codebase",
+      "args": {
+        "pattern": "LOG_LEVEL|ALLOWED_ORIGINS|MAX_PAGE_SIZE|DEFAULT_PAGE_SIZE",
+        "max_results": 30
+      },
+      "result_chars": 3524,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 11,
+      "preceded_by": "search_codebase",
+      "followed_by": "search_codebase",
+      "time_ms": 499
+    },
+    {
+      "tool": "search_codebase",
+      "args": {
+        "pattern": "LEGACY_SMTP_HOST|LEGACY_SMTP_PORT|UNUSED_FEATURE_FLAG|OLD_ANALYTICS_TOKEN",
+        "max_results": 30
+      },
+      "result_chars": 2667,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 12,
+      "preceded_by": "search_codebase",
+      "followed_by": null,
+      "time_ms": 92
+    }
+  ],
+  "total_context_chars_injected": 15180,
+  "ts_tool_calls_count": 13,
+  "wall_time_seconds": 39.95,
+  "raw_response": "Voici les **4 variables** d\u00e9clar\u00e9es dans `config/.env.example` qui ne sont **jamais lues** (`os.environ.get`, `process.env`, etc.) dans le code applicatif :\n\n| Variable | Ligne dans `.env.example` |\n|---|---|\n| `LEGACY_SMTP_HOST` | 12 |\n| `LEGACY_SMTP_PORT` | 14 |\n| `UNUSED_FEATURE_FLAG` | 16 |\n| `OLD_ANALYTICS_TOKEN` | 18 |\n\nCes 4 variables n'apparaissent que dans les fichiers `.env.*`, `generate.py` (le g\u00e9n\u00e9rateur de bench), `GROUND_TRUTH.json` et `tasks/`. Aucun code applicatif (`apps/`, `packages/`) ne les lit. Elles peuvent \u00eatre supprim\u00e9es de `.env.example` et `.env.staging`.",
+  "error": null,
+  "score": 0,
+  "max_score": 2,
+  "timestamp": "2026-04-15T12:47:34.769634+00:00"
+}

@@ -1,0 +1,119 @@
+{
+  "task_id": "TASK-030",
+  "run": "B",
+  "baseline": "token-savior",
+  "input_tokens": 6,
+  "output_tokens": 420,
+  "cache_creation_input_tokens": 4845,
+  "cache_read_input_tokens": 174615,
+  "total_tokens": 179886,
+  "active_tokens": 5271,
+  "turns_count": 7,
+  "tool_calls_count": 5,
+  "tool_calls_breakdown": {
+    "mcp__token-savior-recall__switch_project": 1,
+    "mcp__token-savior-recall__memory_search": 1,
+    "mcp__token-savior-recall__analyze_docker": 1,
+    "mcp__token-savior-recall__list_files": 2
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "mcp__token-savior-recall__switch_project",
+      "result_chars": 60,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__memory_search",
+      "result_chars": 32,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__analyze_docker",
+      "result_chars": 67,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__list_files",
+      "result_chars": 2,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__list_files",
+      "result_chars": 178,
+      "is_error": false
+    }
+  ],
+  "ts_tool_details": [
+    {
+      "tool": "switch_project",
+      "args": {
+        "name": "tsbench"
+      },
+      "result_chars": 60,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 0,
+      "preceded_by": null,
+      "followed_by": "memory_search",
+      "time_ms": 172
+    },
+    {
+      "tool": "memory_search",
+      "args": {
+        "query": "docker dockerfile infra"
+      },
+      "result_chars": 32,
+      "result_empty": true,
+      "is_error": false,
+      "call_index": 1,
+      "preceded_by": "switch_project",
+      "followed_by": "analyze_docker",
+      "time_ms": 49
+    },
+    {
+      "tool": "analyze_docker",
+      "args": {},
+      "result_chars": 67,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 2,
+      "preceded_by": "memory_search",
+      "followed_by": "list_files",
+      "time_ms": 342
+    },
+    {
+      "tool": "list_files",
+      "args": {
+        "pattern": "**/Docker*"
+      },
+      "result_chars": 2,
+      "result_empty": true,
+      "is_error": false,
+      "call_index": 3,
+      "preceded_by": "analyze_docker",
+      "followed_by": "list_files",
+      "time_ms": 124
+    },
+    {
+      "tool": "list_files",
+      "args": {
+        "pattern": "infra/**"
+      },
+      "result_chars": 178,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 4,
+      "preceded_by": "list_files",
+      "followed_by": null,
+      "time_ms": 49
+    }
+  ],
+  "total_context_chars_injected": 339,
+  "ts_tool_calls_count": 5,
+  "wall_time_seconds": 104.32,
+  "raw_response": "Il n'y a **aucun Dockerfile** dans `infra/docker/` \u2014 ce r\u00e9pertoire n'existe pas dans le projet. Le dossier `infra/` ne contient que :\n\n- `infra/k8s/` \u2014 manifestes Kubernetes (api, ingress, web, worker)\n- `infra/terraform/` \u2014 config Terraform (main, outputs, variables)\n\nPas de Dockerfiles \u00e0 analyser. Voulez-vous que je review les manifestes K8s ou la config Terraform \u00e0 la place ?",
+  "error": null,
+  "score": 0,
+  "max_score": 2,
+  "timestamp": "2026-04-15T12:50:22.729486+00:00"
+}

@@ -1,0 +1,647 @@
+{
+  "task_id": "TASK-031",
+  "run": "B",
+  "baseline": "token-savior",
+  "input_tokens": 24,
+  "output_tokens": 4942,
+  "cache_creation_input_tokens": 30553,
+  "cache_read_input_tokens": 825312,
+  "total_tokens": 860831,
+  "active_tokens": 35519,
+  "turns_count": 50,
+  "tool_calls_count": 33,
+  "tool_calls_breakdown": {
+    "mcp__token-savior-recall__switch_project": 1,
+    "mcp__token-savior-recall__list_files": 2,
+    "mcp__token-savior-recall__search_codebase": 4,
+    "mcp__token-savior-recall__get_structure_summary": 5,
+    "mcp__token-savior-recall__get_function_source": 5,
+    "mcp__token-savior-recall__analyze_config": 2,
+    "mcp__token-savior-recall__analyze_docker": 1,
+    "mcp__token-savior-recall__get_env_usage": 11,
+    "mcp__token-savior-recall__get_class_source": 1,
+    "mcp__token-savior-recall__pack_context": 1
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "mcp__token-savior-recall__switch_project",
+      "result_chars": 60,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__list_files",
+      "result_chars": 92,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__list_files",
+      "result_chars": 45,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 1676,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_structure_summary",
+      "result_chars": 36,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 2,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 47,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__analyze_config",
+      "result_chars": 9674,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__analyze_docker",
+      "result_chars": 67,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_env_usage",
+      "result_chars": 954,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_env_usage",
+      "result_chars": 727,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_env_usage",
+      "result_chars": 1473,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_env_usage",
+      "result_chars": 752,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_env_usage",
+      "result_chars": 3925,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_env_usage",
+      "result_chars": 664,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_env_usage",
+      "result_chars": 628,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_env_usage",
+      "result_chars": 710,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 90,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_env_usage",
+      "result_chars": 1424,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_env_usage",
+      "result_chars": 1902,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_env_usage",
+      "result_chars": 1079,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 11431,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_structure_summary",
+      "result_chars": 487,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_structure_summary",
+      "result_chars": 490,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_structure_summary",
+      "result_chars": 487,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_structure_summary",
+      "result_chars": 491,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 38,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 38,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 38,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 38,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_class_source",
+      "result_chars": 29,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__analyze_config",
+      "result_chars": 1823,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__pack_context",
+      "result_chars": 2109,
+      "is_error": false
+    }
+  ],
+  "ts_tool_details": [
+    {
+      "tool": "switch_project",
+      "args": {
+        "name": "tsbench"
+      },
+      "result_chars": 60,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 0,
+      "preceded_by": null,
+      "followed_by": "list_files",
+      "time_ms": 91
+    },
+    {
+      "tool": "list_files",
+      "args": {
+        "pattern": "infra/k8s/*"
+      },
+      "result_chars": 92,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 1,
+      "preceded_by": "switch_project",
+      "followed_by": "list_files",
+      "time_ms": 350
+    },
+    {
+      "tool": "list_files",
+      "args": {
+        "pattern": "config/.env*"
+      },
+      "result_chars": 45,
+      "result_empty": true,
+      "is_error": false,
+      "call_index": 2,
+      "preceded_by": "list_files",
+      "followed_by": "search_codebase",
+      "time_ms": 245
+    },
+    {
+      "tool": "search_codebase",
+      "args": {
+        "pattern": "valueFrom|value:\\s|name:\\s+\\w+.*\\n\\s+value"
+      },
+      "result_chars": 1676,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 3,
+      "preceded_by": "list_files",
+      "followed_by": "get_structure_summary",
+      "time_ms": 196
+    },
+    {
+      "tool": "get_structure_summary",
+      "args": {
+        "file_path": "config/.env.example"
+      },
+      "result_chars": 36,
+      "result_empty": true,
+      "is_error": false,
+      "call_index": 4,
+      "preceded_by": "search_codebase",
+      "followed_by": "search_codebase",
+      "time_ms": 89
+    },
+    {
+      "tool": "search_codebase",
+      "args": {
+        "pattern": "name:.*[A-Z_]{3,}"
+      },
+      "result_chars": 2,
+      "result_empty": true,
+      "is_error": false,
+      "call_index": 5,
+      "preceded_by": "get_structure_summary",
+      "followed_by": "get_function_source",
+      "time_ms": 97
+    },
+    {
+      "tool": "get_function_source",
+      "args": {
+        "name": "config/.env.example",
+        "file_path": "config/.env.example",
+        "level": 0
+      },
+      "result_chars": 47,
+      "result_empty": true,
+      "is_error": false,
+      "call_index": 6,
+      "preceded_by": "search_codebase",
+      "followed_by": "analyze_config",
+      "time_ms": 251
+    },
+    {
+      "tool": "analyze_config",
+      "args": {
+        "checks": [
+          "orphans"
+        ]
+      },
+      "result_chars": 9674,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 7,
+      "preceded_by": "get_function_source",
+      "followed_by": "analyze_docker",
+      "time_ms": 294
+    },
+    {
+      "tool": "analyze_docker",
+      "args": {},
+      "result_chars": 67,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 8,
+      "preceded_by": "analyze_config",
+      "followed_by": "get_env_usage",
+      "time_ms": 316
+    },
+    {
+      "tool": "get_env_usage",
+      "args": {
+        "var_name": "DATABASE_URL"
+      },
+      "result_chars": 954,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 9,
+      "preceded_by": "analyze_docker",
+      "followed_by": "get_env_usage",
+      "time_ms": 474
+    },
+    {
+      "tool": "get_env_usage",
+      "args": {
+        "var_name": "SECRET_KEY"
+      },
+      "result_chars": 727,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 10,
+      "preceded_by": "get_env_usage",
+      "followed_by": "get_env_usage",
+      "time_ms": 458
+    },
+    {
+      "tool": "get_env_usage",
+      "args": {
+        "var_name": "STRIPE_API_KEY"
+      },
+      "result_chars": 1473,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 11,
+      "preceded_by": "get_env_usage",
+      "followed_by": "get_env_usage",
+      "time_ms": 46
+    },
+    {
+      "tool": "get_env_usage",
+      "args": {
+        "var_name": "REDIS_URL"
+      },
+      "result_chars": 752,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 12,
+      "preceded_by": "get_env_usage",
+      "followed_by": "get_env_usage",
+      "time_ms": 74
+    },
+    {
+      "tool": "get_env_usage",
+      "args": {
+        "var_name": "DEFAULT_PAGE_SIZE"
+      },
+      "result_chars": 3925,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 13,
+      "preceded_by": "get_env_usage",
+      "followed_by": "get_env_usage",
+      "time_ms": 474
+    },
+    {
+      "tool": "get_env_usage",
+      "args": {
+        "var_name": "MAX_PAGE_SIZE"
+      },
+      "result_chars": 664,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 14,
+      "preceded_by": "get_env_usage",
+      "followed_by": "get_env_usage",
+      "time_ms": 492
+    },
+    {
+      "tool": "get_env_usage",
+      "args": {
+        "var_name": "LOG_LEVEL"
+      },
+      "result_chars": 628,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 15,
+      "preceded_by": "get_env_usage",
+      "followed_by": "get_env_usage",
+      "time_ms": 134
+    },
+    {
+      "tool": "get_env_usage",
+      "args": {
+        "var_name": "ALLOWED_ORIGINS"
+      },
+      "result_chars": 710,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 16,
+      "preceded_by": "get_env_usage",
+      "followed_by": "search_codebase",
+      "time_ms": 404
+    },
+    {
+      "tool": "search_codebase",
+      "args": {
+        "pattern": "env\\("
+      },
+      "result_chars": 90,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 17,
+      "preceded_by": "get_env_usage",
+      "followed_by": "get_env_usage",
+      "time_ms": 471
+    },
+    {
+      "tool": "get_env_usage",
+      "args": {
+        "var_name": "STRIPE_WEBHOOK_SECRET"
+      },
+      "result_chars": 1424,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 18,
+      "preceded_by": "search_codebase",
+      "followed_by": "get_env_usage",
+      "time_ms": 532
+    },
+    {
+      "tool": "get_env_usage",
+      "args": {
+        "var_name": "SECRET_UNDECLARED_TOKEN"
+      },
+      "result_chars": 1902,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 19,
+      "preceded_by": "get_env_usage",
+      "followed_by": "get_env_usage",
+      "time_ms": 335
+    },
+    {
+      "tool": "get_env_usage",
+      "args": {
+        "var_name": "TSBENCH_HIDDEN_REGION"
+      },
+      "result_chars": 1079,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 20,
+      "preceded_by": "get_env_usage",
+      "followed_by": "search_codebase",
+      "time_ms": 68
+    },
+    {
+      "tool": "search_codebase",
+      "args": {
+        "pattern": "DATABASE_URL|SECRET_KEY|STRIPE|REDIS_URL|LOG_LEVEL|ALLOWED_ORIGINS|PAGE_SIZE|UNDECLARED|HIDDEN_REGION"
+      },
+      "result_chars": 11431,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 21,
+      "preceded_by": "get_env_usage",
+      "followed_by": "get_structure_summary",
+      "time_ms": 134
+    },
+    {
+      "tool": "get_structure_summary",
+      "args": {
+        "file_path": "infra/k8s/api.yaml"
+      },
+      "result_chars": 487,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 22,
+      "preceded_by": "search_codebase",
+      "followed_by": "get_structure_summary",
+      "time_ms": 499
+    },
+    {
+      "tool": "get_structure_summary",
+      "args": {
+        "file_path": "infra/k8s/worker.yaml"
+      },
+      "result_chars": 490,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 23,
+      "preceded_by": "get_structure_summary",
+      "followed_by": "get_structure_summary",
+      "time_ms": 398
+    },
+    {
+      "tool": "get_structure_summary",
+      "args": {
+        "file_path": "infra/k8s/web.yaml"
+      },
+      "result_chars": 487,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 24,
+      "preceded_by": "get_structure_summary",
+      "followed_by": "get_structure_summary",
+      "time_ms": 97
+    },
+    {
+      "tool": "get_structure_summary",
+      "args": {
+        "file_path": "infra/k8s/ingress.yaml"
+      },
+      "result_chars": 491,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 25,
+      "preceded_by": "get_structure_summary",
+      "followed_by": "get_function_source",
+      "time_ms": 24
+    },
+    {
+      "tool": "get_function_source",
+      "args": {
+        "name": "containers",
+        "file_path": "infra/k8s/api.yaml",
+        "level": 0
+      },
+      "result_chars": 38,
+      "result_empty": true,
+      "is_error": false,
+      "call_index": 26,
+      "preceded_by": "get_structure_summary",
+      "followed_by": "get_function_source",
+      "time_ms": 476
+    },
+    {
+      "tool": "get_function_source",
+      "args": {
+        "name": "containers",
+        "file_path": "infra/k8s/worker.yaml",
+        "level": 0
+      },
+      "result_chars": 38,
+      "result_empty": true,
+      "is_error": false,
+      "call_index": 27,
+      "preceded_by": "get_function_source",
+      "followed_by": "get_function_source",
+      "time_ms": 469
+    },
+    {
+      "tool": "get_function_source",
+      "args": {
+        "name": "containers",
+        "file_path": "infra/k8s/web.yaml",
+        "level": 0
+      },
+      "result_chars": 38,
+      "result_empty": true,
+      "is_error": false,
+      "call_index": 28,
+      "preceded_by": "get_function_source",
+      "followed_by": "get_function_source",
+      "time_ms": 394
+    },
+    {
+      "tool": "get_function_source",
+      "args": {
+        "name": "containers",
+        "file_path": "infra/k8s/ingress.yaml",
+        "level": 0
+      },
+      "result_chars": 38,
+      "result_empty": true,
+      "is_error": false,
+      "call_index": 29,
+      "preceded_by": "get_function_source",
+      "followed_by": "get_class_source",
+      "time_ms": 236
+    },
+    {
+      "tool": "get_class_source",
+      "args": {
+        "name": "spec",
+        "file_path": "infra/k8s/api.yaml",
+        "level": 0
+      },
+      "result_chars": 29,
+      "result_empty": true,
+      "is_error": false,
+      "call_index": 30,
+      "preceded_by": "get_function_source",
+      "followed_by": "analyze_config",
+      "time_ms": 240
+    },
+    {
+      "tool": "analyze_config",
+      "args": {
+        "file_path": "infra/k8s/api.yaml",
+        "checks": [
+          "schema"
+        ]
+      },
+      "result_chars": 1823,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 31,
+      "preceded_by": "get_class_source",
+      "followed_by": "pack_context",
+      "time_ms": 127
+    },
+    {
+      "tool": "pack_context",
+      "args": {
+        "query": "kubernetes env variables infra/k8s yaml",
+        "budget_tokens": 4000
+      },
+      "result_chars": 2109,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 32,
+      "preceded_by": "analyze_config",
+      "followed_by": null,
+      "time_ms": 84
+    }
+  ],
+  "total_context_chars_injected": 43526,
+  "ts_tool_calls_count": 33,
+  "wall_time_seconds": 132.13,
+  "raw_response": "Voici ma conclusion bas\u00e9e sur l'analyse compl\u00e8te :\n\n**Les manifests K8s (`infra/k8s/`) ne d\u00e9clarent pas de variables d'environnement en ligne.** Les 4 fichiers (`api.yaml`, `worker.yaml`, `web.yaml`, `ingress.yaml`) font chacun 20 lignes \u2014 ce sont des templates de Deployment minimaux (apiVersion, kind, metadata, spec, containers) sans bloc `env:` explicite. La recherche regex sur tous les fichiers index\u00e9s n'a trouv\u00e9 aucune r\u00e9f\u00e9rence \u00e0 des noms de variables d'environnement dans ces fichiers.\n\n**En revanche, le vrai probl\u00e8me est inverse** \u2014 deux variables utilis\u00e9es dans le code Python ne sont **pas** d\u00e9clar\u00e9es dans `config/.env.example` :\n\n| Variable manquante | Utilis\u00e9e dans |\n|---|---|\n| `SECRET_UNDECLARED_TOKEN` | `apps/api/utils/secret_reader.py:8` |\n| `TSBENCH_HIDDEN_REGION` | `apps/api/utils/secret_reader.py:9` |\n\nLes 9 autres variables du code (`DATABASE_URL`, `SECRET_KEY`, `STRIPE_API_KEY`, `STRIPE_WEBHOOK_SECRET`, `REDIS_URL`, `LOG_LEVEL`, `ALLOWED_ORIGINS`, `MAX_PAGE_SIZE`, `DEFAULT_PAGE_SIZE`) sont toutes correctement d\u00e9clar\u00e9es dans `config/.env.example`.",
+  "error": null,
+  "score": 0,
+  "max_score": 2,
+  "timestamp": "2026-04-15T12:52:34.872699+00:00"
+}

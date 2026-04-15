@@ -3,11 +3,11 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 5,
-  "output_tokens": 556,
-  "cache_creation_input_tokens": 44967,
-  "cache_read_input_tokens": 87410,
-  "total_tokens": 132938,
-  "active_tokens": 45528,
+  "output_tokens": 570,
+  "cache_creation_input_tokens": 45954,
+  "cache_read_input_tokens": 88942,
+  "total_tokens": 135471,
+  "active_tokens": 46529,
   "turns_count": 5,
   "tool_calls_count": 3,
   "tool_calls_breakdown": {
@@ -28,7 +28,7 @@
     },
     {
       "tool": "mcp__token-savior-recall__search_codebase",
-      "result_chars": 2465,
+      "result_chars": 3639,
       "is_error": false
     }
   ],
@@ -44,7 +44,7 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "find_symbol",
-      "time_ms": 94
+      "time_ms": 128
     },
     {
       "tool": "find_symbol",
@@ -58,28 +58,28 @@
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": "search_codebase",
-      "time_ms": 403
+      "time_ms": 611
     },
     {
       "tool": "search_codebase",
       "args": {
-        "pattern": "import.*Sidebar|from.*['\\\"].*Sidebar['\\\"]"
+        "pattern": "<Sidebar"
       },
-      "result_chars": 2465,
+      "result_chars": 3639,
       "result_empty": false,
       "is_error": false,
       "call_index": 2,
       "preceded_by": "find_symbol",
       "followed_by": null,
-      "time_ms": 324
+      "time_ms": 489
     }
   ],
-  "total_context_chars_injected": 2588,
+  "total_context_chars_injected": 3762,
   "ts_tool_calls_count": 3,
-  "wall_time_seconds": 17.15,
-  "raw_response": "Le composant `<Sidebar>` est d\u00e9fini dans `apps/web/components/Sidebar.tsx` (ligne 26) et import\u00e9 par **15 pages** :\n\n| Fichier |\n|---|\n| `apps/web/app/audit/page.tsx` |\n| `apps/web/app/billing/page.tsx` |\n| `apps/web/app/dashboard/page.tsx` |\n| `apps/web/app/forgot-password/page.tsx` |\n| `apps/web/app/invite/page.tsx` |\n| `apps/web/app/login/page.tsx` |\n| `apps/web/app/members/page.tsx` |\n| `apps/web/app/notifications/page.tsx` |\n| `apps/web/app/pricing/page.tsx` |\n| `apps/web/app/profile/page.tsx` |\n| `apps/web/app/reports/page.tsx` |\n| `apps/web/app/sessions/page.tsx` |\n| `apps/web/app/settings/page.tsx` |\n| `apps/web/app/signup/page.tsx` |\n| `apps/web/app/webhooks/page.tsx` |\n\nToutes les pages `app/*/page.tsx` l'importent via `import { Sidebar } from '../../components/Sidebar'`.",
+  "wall_time_seconds": 22.43,
+  "raw_response": "Le composant `<Sidebar>` est d\u00e9fini dans `apps/web/components/Sidebar.tsx` (ligne 26) et est import\u00e9/utilis\u00e9 dans **15 pages** :\n\n| Fichier |\n|---|\n| `apps/web/app/audit/page.tsx` |\n| `apps/web/app/billing/page.tsx` |\n| `apps/web/app/dashboard/page.tsx` |\n| `apps/web/app/forgot-password/page.tsx` |\n| `apps/web/app/invite/page.tsx` |\n| `apps/web/app/login/page.tsx` |\n| `apps/web/app/members/page.tsx` |\n| `apps/web/app/notifications/page.tsx` |\n| `apps/web/app/pricing/page.tsx` |\n| `apps/web/app/profile/page.tsx` |\n| `apps/web/app/reports/page.tsx` |\n| `apps/web/app/sessions/page.tsx` |\n| `apps/web/app/settings/page.tsx` |\n| `apps/web/app/signup/page.tsx` |\n| `apps/web/app/webhooks/page.tsx` |\n\nChaque page utilise `<Sidebar id=\"side\" />` \u00e0 deux endroits (lignes 50 et 59), vraisemblablement pour un rendu conditionnel (desktop/mobile ou deux breakpoints).",
   "error": null,
   "score": 0,
   "max_score": 2,
-  "timestamp": "2026-04-15T08:34:53.465247+00:00"
+  "timestamp": "2026-04-15T12:34:29.786918+00:00"
 }

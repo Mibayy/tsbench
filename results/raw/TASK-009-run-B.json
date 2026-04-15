@@ -3,11 +3,11 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 5,
-  "output_tokens": 464,
-  "cache_creation_input_tokens": 11462,
-  "cache_read_input_tokens": 120581,
-  "total_tokens": 132512,
-  "active_tokens": 11931,
+  "output_tokens": 507,
+  "cache_creation_input_tokens": 11468,
+  "cache_read_input_tokens": 122684,
+  "total_tokens": 134664,
+  "active_tokens": 11980,
   "turns_count": 4,
   "tool_calls_count": 2,
   "tool_calls_breakdown": {
@@ -38,7 +38,7 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "get_dependents",
-      "time_ms": 142
+      "time_ms": 94
     },
     {
       "tool": "get_dependents",
@@ -51,15 +51,15 @@
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": null,
-      "time_ms": 253
+      "time_ms": 449
     }
   ],
   "total_context_chars_injected": 757,
   "ts_tool_calls_count": 2,
-  "wall_time_seconds": 18.48,
-  "raw_response": "Voici les **8 fichiers** qui appellent `medium_util`, avec la fonction appelante :\n\n| Fichier | Fonction |\n|---|---|\n| `apps/api/callers/caller_lonely_util_00.py` | `do_it_0` (ligne 4) |\n| `apps/api/callers/caller_hub_util_01.py` | `do_it_1` (ligne 4) |\n| `apps/api/callers/caller_hub_util_02.py` | `do_it_2` (ligne 4) |\n| `apps/api/callers/caller_hub_util_03.py` | `do_it_3` (ligne 4) |\n| `apps/api/callers/caller_hub_util_04.py` | `do_it_4` (ligne 4) |\n| `apps/api/callers/caller_hub_util_05.py` | `do_it_5` (ligne 4) |\n| `apps/api/callers/caller_hub_util_06.py` | `do_it_6` (ligne 4) |\n| `apps/api/callers/caller_hub_util_07.py` | `do_it_7` (ligne 4) |",
+  "wall_time_seconds": 21.34,
+  "raw_response": "Voici la liste compl\u00e8te des **8 fichiers** qui appellent `medium_util` :\n\n| Fichier | Fonction appelante | Lignes |\n|---|---|---|\n| `apps/api/callers/caller_lonely_util_00.py` | `do_it_0` | 4-6 |\n| `apps/api/callers/caller_hub_util_01.py` | `do_it_1` | 4-6 |\n| `apps/api/callers/caller_hub_util_02.py` | `do_it_2` | 4-6 |\n| `apps/api/callers/caller_hub_util_03.py` | `do_it_3` | 4-6 |\n| `apps/api/callers/caller_hub_util_04.py` | `do_it_4` | 4-6 |\n| `apps/api/callers/caller_hub_util_05.py` | `do_it_5` | 4-6 |\n| `apps/api/callers/caller_hub_util_06.py` | `do_it_6` | 4-6 |\n| `apps/api/callers/caller_hub_util_07.py` | `do_it_7` | 4-6 |\n\n8 call sites au total, r\u00e9partis sur 8 fichiers distincts dans `apps/api/callers/`.",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T08:35:49.122962+00:00"
+  "timestamp": "2026-04-15T12:35:24.540029+00:00"
 }

@@ -2,21 +2,22 @@
   "task_id": "TASK-053",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 11,
-  "output_tokens": 1783,
-  "cache_creation_input_tokens": 16487,
-  "cache_read_input_tokens": 317797,
-  "total_tokens": 336078,
-  "active_tokens": 18281,
-  "turns_count": 23,
-  "tool_calls_count": 17,
+  "input_tokens": 13,
+  "output_tokens": 1831,
+  "cache_creation_input_tokens": 17832,
+  "cache_read_input_tokens": 322482,
+  "total_tokens": 342158,
+  "active_tokens": 19676,
+  "turns_count": 24,
+  "tool_calls_count": 18,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
+    "mcp__token-savior-recall__memory_search": 1,
     "mcp__token-savior-recall__find_semantic_duplicates": 1,
     "mcp__token-savior-recall__list_files": 1,
-    "mcp__token-savior-recall__get_functions": 6,
-    "mcp__token-savior-recall__get_function_source": 6,
-    "mcp__token-savior-recall__find_symbol": 2
+    "mcp__token-savior-recall__get_structure_summary": 5,
+    "mcp__token-savior-recall__get_function_source": 5,
+    "mcp__token-savior-recall__find_symbol": 4
   },
   "tool_calls_detail": [
     {
@@ -25,8 +26,13 @@
       "is_error": false
     },
     {
+      "tool": "mcp__token-savior-recall__memory_search",
+      "result_chars": 32,
+      "is_error": false
+    },
+    {
       "tool": "mcp__token-savior-recall__find_semantic_duplicates",
-      "result_chars": 6411,
+      "result_chars": 9550,
       "is_error": false
     },
     {
@@ -35,43 +41,38 @@
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__get_functions",
-      "result_chars": 56,
+      "tool": "mcp__token-savior-recall__get_structure_summary",
+      "result_chars": 133,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__get_functions",
-      "result_chars": 70,
+      "tool": "mcp__token-savior-recall__get_structure_summary",
+      "result_chars": 117,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__get_functions",
-      "result_chars": 33,
+      "tool": "mcp__token-savior-recall__get_structure_summary",
+      "result_chars": 96,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__get_functions",
-      "result_chars": 64,
+      "tool": "mcp__token-savior-recall__get_structure_summary",
+      "result_chars": 89,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__get_functions",
-      "result_chars": 60,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_functions",
-      "result_chars": 60,
+      "tool": "mcp__token-savior-recall__get_structure_summary",
+      "result_chars": 110,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 144,
+      "result_chars": 76,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 195,
+      "result_chars": 182,
       "is_error": false
     },
     {
@@ -81,7 +82,12 @@
     },
     {
       "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 154,
+      "result_chars": 64,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 79,
       "is_error": false
     },
     {
@@ -95,13 +101,13 @@
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 146,
+      "tool": "mcp__token-savior-recall__find_symbol",
+      "result_chars": 60,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 154,
+      "tool": "mcp__token-savior-recall__find_symbol",
+      "result_chars": 57,
       "is_error": false
     }
   ],
@@ -116,21 +122,32 @@
       "is_error": false,
       "call_index": 0,
       "preceded_by": null,
-      "followed_by": "find_semantic_duplicates",
-      "time_ms": 325
+      "followed_by": "memory_search",
+      "time_ms": 111
     },
     {
-      "tool": "find_semantic_duplicates",
+      "tool": "memory_search",
       "args": {
-        "min_lines": 4
+        "query": "semantic duplicates"
       },
-      "result_chars": 6411,
-      "result_empty": false,
+      "result_chars": 32,
+      "result_empty": true,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
+      "followed_by": "find_semantic_duplicates",
+      "time_ms": 93
+    },
+    {
+      "tool": "find_semantic_duplicates",
+      "args": {},
+      "result_chars": 9550,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 2,
+      "preceded_by": "memory_search",
       "followed_by": "list_files",
-      "time_ms": 1239
+      "time_ms": 1324
     },
     {
       "tool": "list_files",
@@ -140,122 +157,111 @@
       "result_chars": 95,
       "result_empty": false,
       "is_error": false,
-      "call_index": 2,
+      "call_index": 3,
       "preceded_by": "find_semantic_duplicates",
-      "followed_by": "get_functions",
-      "time_ms": 381
+      "followed_by": "get_structure_summary",
+      "time_ms": 961
     },
     {
-      "tool": "get_functions",
+      "tool": "get_structure_summary",
       "args": {
         "file_path": "packages/utils/paginate_copy.py"
       },
-      "result_chars": 56,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 3,
-      "preceded_by": "list_files",
-      "followed_by": "get_functions",
-      "time_ms": 267
-    },
-    {
-      "tool": "get_functions",
-      "args": {
-        "file_path": "packages/utils/slug_copy.py"
-      },
-      "result_chars": 70,
+      "result_chars": 133,
       "result_empty": false,
       "is_error": false,
       "call_index": 4,
-      "preceded_by": "get_functions",
-      "followed_by": "get_functions",
-      "time_ms": 55
+      "preceded_by": "list_files",
+      "followed_by": "get_structure_summary",
+      "time_ms": 64
     },
     {
-      "tool": "get_functions",
+      "tool": "get_structure_summary",
+      "args": {
+        "file_path": "packages/utils/slug_copy.py"
+      },
+      "result_chars": 117,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 5,
+      "preceded_by": "get_structure_summary",
+      "followed_by": "get_structure_summary",
+      "time_ms": 78
+    },
+    {
+      "tool": "get_structure_summary",
       "args": {
         "file_path": "packages/utils/date_copy.py"
       },
-      "result_chars": 33,
-      "result_empty": true,
-      "is_error": false,
-      "call_index": 5,
-      "preceded_by": "get_functions",
-      "followed_by": "get_functions",
-      "time_ms": 76
-    },
-    {
-      "tool": "get_functions",
-      "args": {
-        "file_path": "packages/utils/paginate.py"
-      },
-      "result_chars": 64,
+      "result_chars": 96,
       "result_empty": false,
       "is_error": false,
       "call_index": 6,
-      "preceded_by": "get_functions",
-      "followed_by": "get_functions",
-      "time_ms": 400
+      "preceded_by": "get_structure_summary",
+      "followed_by": "get_structure_summary",
+      "time_ms": 43
     },
     {
-      "tool": "get_functions",
+      "tool": "get_structure_summary",
       "args": {
-        "file_path": "packages/utils/slug.py"
+        "file_path": "apps/api/utils/strings.py"
       },
-      "result_chars": 60,
+      "result_chars": 89,
       "result_empty": false,
       "is_error": false,
       "call_index": 7,
-      "preceded_by": "get_functions",
-      "followed_by": "get_functions",
-      "time_ms": 90
+      "preceded_by": "get_structure_summary",
+      "followed_by": "get_structure_summary",
+      "time_ms": 276
     },
     {
-      "tool": "get_functions",
+      "tool": "get_structure_summary",
       "args": {
-        "file_path": "packages/utils/date.py"
+        "file_path": "apps/api/utils/buggy_pagination.py"
       },
-      "result_chars": 60,
+      "result_chars": 110,
       "result_empty": false,
       "is_error": false,
       "call_index": 8,
-      "preceded_by": "get_functions",
+      "preceded_by": "get_structure_summary",
       "followed_by": "get_function_source",
-      "time_ms": 44
+      "time_ms": 62
     },
     {
       "tool": "get_function_source",
       "args": {
         "name": "to_slug",
-        "file_path": "packages/utils/slug_copy.py"
+        "file_path": "packages/utils/slug_copy.py",
+        "hints": false
       },
-      "result_chars": 144,
+      "result_chars": 76,
       "result_empty": false,
       "is_error": false,
       "call_index": 9,
-      "preceded_by": "get_functions",
+      "preceded_by": "get_structure_summary",
       "followed_by": "get_function_source",
-      "time_ms": 472
+      "time_ms": 492
     },
     {
       "tool": "get_function_source",
       "args": {
         "name": "slugify",
-        "file_path": "packages/utils/slug_copy.py"
+        "file_path": "packages/utils/slug_copy.py",
+        "hints": false
       },
-      "result_chars": 195,
+      "result_chars": 182,
       "result_empty": false,
       "is_error": false,
       "call_index": 10,
       "preceded_by": "get_function_source",
       "followed_by": "get_function_source",
-      "time_ms": 466
+      "time_ms": 599
     },
     {
       "tool": "get_function_source",
       "args": {
         "name": "paginate_also",
-        "file_path": "packages/utils/paginate_copy.py"
+        "hints": false
       },
       "result_chars": 106,
       "result_empty": false,
@@ -263,35 +269,50 @@
       "call_index": 11,
       "preceded_by": "get_function_source",
       "followed_by": "get_function_source",
-      "time_ms": 390
+      "time_ms": 620
+    },
+    {
+      "tool": "get_function_source",
+      "args": {
+        "name": "buggy_paginate",
+        "hints": false
+      },
+      "result_chars": 64,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 12,
+      "preceded_by": "get_function_source",
+      "followed_by": "get_function_source",
+      "time_ms": 286
     },
     {
       "tool": "get_function_source",
       "args": {
         "name": "day_start",
-        "file_path": "packages/utils/date_copy.py"
+        "file_path": "packages/utils/date_copy.py",
+        "hints": false
       },
-      "result_chars": 154,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 12,
-      "preceded_by": "get_function_source",
-      "followed_by": "find_symbol",
-      "time_ms": 291
-    },
-    {
-      "tool": "find_symbol",
-      "args": {
-        "name": "paginate",
-        "level": 2
-      },
-      "result_chars": 60,
+      "result_chars": 79,
       "result_empty": false,
       "is_error": false,
       "call_index": 13,
       "preceded_by": "get_function_source",
       "followed_by": "find_symbol",
-      "time_ms": 645
+      "time_ms": 272
+    },
+    {
+      "tool": "find_symbol",
+      "args": {
+        "name": "day_start",
+        "level": 2
+      },
+      "result_chars": 60,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 14,
+      "preceded_by": "get_function_source",
+      "followed_by": "find_symbol",
+      "time_ms": 343
     },
     {
       "tool": "find_symbol",
@@ -302,46 +323,46 @@
       "result_chars": 59,
       "result_empty": false,
       "is_error": false,
-      "call_index": 14,
-      "preceded_by": "find_symbol",
-      "followed_by": "get_function_source",
-      "time_ms": 573
-    },
-    {
-      "tool": "get_function_source",
-      "args": {
-        "name": "paginate",
-        "file_path": "apps/api/utils/pagination.py"
-      },
-      "result_chars": 146,
-      "result_empty": false,
-      "is_error": false,
       "call_index": 15,
       "preceded_by": "find_symbol",
-      "followed_by": "get_function_source",
-      "time_ms": 367
+      "followed_by": "find_symbol",
+      "time_ms": 476
     },
     {
-      "tool": "get_function_source",
+      "tool": "find_symbol",
       "args": {
-        "name": "start_of_day",
-        "file_path": "apps/api/utils/dates.py"
+        "name": "paginate",
+        "level": 2
       },
-      "result_chars": 154,
+      "result_chars": 60,
       "result_empty": false,
       "is_error": false,
       "call_index": 16,
-      "preceded_by": "get_function_source",
+      "preceded_by": "find_symbol",
+      "followed_by": "find_symbol",
+      "time_ms": 429
+    },
+    {
+      "tool": "find_symbol",
+      "args": {
+        "name": "truncate",
+        "level": 2
+      },
+      "result_chars": 57,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 17,
+      "preceded_by": "find_symbol",
       "followed_by": null,
-      "time_ms": 260
+      "time_ms": 296
     }
   ],
-  "total_context_chars_injected": 7927,
-  "ts_tool_calls_count": 17,
-  "wall_time_seconds": 59.32,
-  "raw_response": "Voici les **3 paires de fonctions s\u00e9mantiquement dupliqu\u00e9es** dans le projet :\n\n| # | Fonction A | Fichier A | Fonction B | Fichier B |\n|---|-----------|-----------|-----------|-----------|\n| 1 | `slugify` | `packages/utils/slug_copy.py:9` | `to_slug` | `packages/utils/slug_copy.py:4` |\n| 2 | `paginate` | `apps/api/utils/pagination.py:5` | `paginate_also` | `packages/utils/paginate_copy.py:6` |\n| 3 | `start_of_day` | `apps/api/utils/dates.py:5` | `day_start` | `packages/utils/date_copy.py:5` |\n\nLes trois cas suivent le m\u00eame sch\u00e9ma : une fonction originale dans `apps/api/utils/` et une copie renomm\u00e9e dans `packages/utils/*_copy.py` avec un corps identique (seuls le nom et la docstring diff\u00e8rent). Les fichiers `*_copy.py` pourraient \u00eatre supprim\u00e9s en faveur des originaux.",
+  "total_context_chars_injected": 11025,
+  "ts_tool_calls_count": 18,
+  "wall_time_seconds": 47.19,
+  "raw_response": "\n\nVoici les paires de fonctions s\u00e9mantiquement dupliqu\u00e9es dans le projet :\n\n| # | Fonction A | Fichier | Fonction B | Fichier |\n|---|-----------|---------|-----------|---------|\n| 1 | `to_slug` | `packages/utils/slug_copy.py:4` | `slugify` | `packages/utils/slug_copy.py:9` |\n| 2 | `paginate_also` | `packages/utils/paginate_copy.py:6` | `paginate` | `apps/api/utils/pagination.py:5` |\n| 3 | `day_start` | `packages/utils/date_copy.py:5` | `start_of_day` | `apps/api/utils/dates.py:5` |\n\nLes trois cas suivent le m\u00eame sch\u00e9ma : une copie dans `packages/utils/*_copy.py` duplique une fonction existante dans `apps/api/utils/`. `to_slug`/`slugify` sont m\u00eame co-localis\u00e9es dans le m\u00eame fichier.\n\n`buggy_paginate` (`apps/api/utils/buggy_pagination.py:4`) ressemble aussi \u00e0 `paginate`, mais son nom sugg\u00e8re un comportement volontairement diff\u00e9rent (buggy), donc je ne la classe pas comme doublon s\u00e9mantique.",
   "error": null,
-  "score": 1,
+  "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T09:04:24.705368+00:00"
+  "timestamp": "2026-04-15T13:05:00.467984+00:00"
 }

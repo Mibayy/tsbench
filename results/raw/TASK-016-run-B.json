@@ -1,13 +1,13 @@
 {
-  "task_id": "TASK-057",
+  "task_id": "TASK-016",
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 5,
-  "output_tokens": 256,
-  "cache_creation_input_tokens": 11573,
-  "cache_read_input_tokens": 123468,
-  "total_tokens": 135302,
-  "active_tokens": 11834,
+  "output_tokens": 268,
+  "cache_creation_input_tokens": 11282,
+  "cache_read_input_tokens": 122889,
+  "total_tokens": 134444,
+  "active_tokens": 11555,
   "turns_count": 4,
   "tool_calls_count": 2,
   "tool_calls_breakdown": {
@@ -22,7 +22,7 @@
     },
     {
       "tool": "mcp__token-savior-recall__find_impacted_test_files",
-      "result_chars": 179,
+      "result_chars": 191,
       "is_error": false
     }
   ],
@@ -38,33 +38,33 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "find_impacted_test_files",
-      "time_ms": 163
+      "time_ms": 102
     },
     {
       "tool": "find_impacted_test_files",
       "args": {
         "symbol_names": [
-          "authenticate_user"
+          "compute_invoice"
         ],
         "changed_files": [
-          "apps/api/services/auth.py"
+          "apps/api/services/billing.py"
         ]
       },
-      "result_chars": 179,
+      "result_chars": 191,
       "result_empty": false,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": null,
-      "time_ms": 481
+      "time_ms": 375
     }
   ],
-  "total_context_chars_injected": 239,
+  "total_context_chars_injected": 251,
   "ts_tool_calls_count": 2,
-  "wall_time_seconds": 20.59,
-  "raw_response": "Le seul fichier de test impact\u00e9 par une modification de `authenticate_user` dans `apps/api/services/auth.py` est :\n\n- **`tests/test_auth.py`** \u2014 il importe directement depuis `apps/api/services/auth.py`.",
+  "wall_time_seconds": 17.9,
+  "raw_response": "Le fichier de test \u00e0 rejouer en priorit\u00e9 est :\n\n- **`tests/test_billing.py`** \u2014 il importe directement `apps/api/services/billing.py`, donc il couvre `compute_invoice`.\n\nC'est le seul fichier de test impact\u00e9 d\u00e9tect\u00e9 par l'analyse de d\u00e9pendances.",
   "error": null,
-  "score": 2,
+  "score": 0,
   "max_score": 2,
-  "timestamp": "2026-04-15T13:07:47.500156+00:00"
+  "timestamp": "2026-04-15T12:39:16.137039+00:00"
 }

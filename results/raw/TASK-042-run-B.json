@@ -2,18 +2,17 @@
   "task_id": "TASK-042",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 8,
-  "output_tokens": 1487,
-  "cache_creation_input_tokens": 13879,
-  "cache_read_input_tokens": 166734,
-  "total_tokens": 182108,
-  "active_tokens": 15374,
-  "turns_count": 12,
-  "tool_calls_count": 8,
+  "input_tokens": 5,
+  "output_tokens": 962,
+  "cache_creation_input_tokens": 12703,
+  "cache_read_input_tokens": 122975,
+  "total_tokens": 136645,
+  "active_tokens": 13670,
+  "turns_count": 5,
+  "tool_calls_count": 2,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__get_functions": 1,
-    "mcp__token-savior-recall__get_function_source": 6
+    "mcp__token-savior-recall__get_functions": 1
   },
   "tool_calls_detail": [
     {
@@ -24,36 +23,6 @@
     {
       "tool": "mcp__token-savior-recall__get_functions",
       "result_chars": 4558,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 192,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 191,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 192,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 193,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 195,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 72,
       "is_error": false
     }
   ],
@@ -69,13 +38,14 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "get_functions",
-      "time_ms": 92
+      "time_ms": 79
     },
     {
       "tool": "get_functions",
       "args": {
         "file_path": "apps/api/services/auth.py",
         "compress": false,
+        "hints": false,
         "max_results": 0
       },
       "result_chars": 4558,
@@ -83,106 +53,16 @@
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
-      "followed_by": "get_function_source",
-      "time_ms": 292
-    },
-    {
-      "tool": "get_function_source",
-      "args": {
-        "name": "authenticate_user",
-        "file_path": "apps/api/services/auth.py",
-        "level": 1
-      },
-      "result_chars": 192,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 2,
-      "preceded_by": "get_functions",
-      "followed_by": "get_function_source",
-      "time_ms": 488
-    },
-    {
-      "tool": "get_function_source",
-      "args": {
-        "name": "issue_token",
-        "file_path": "apps/api/services/auth.py",
-        "level": 1
-      },
-      "result_chars": 191,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 3,
-      "preceded_by": "get_function_source",
-      "followed_by": "get_function_source",
-      "time_ms": 464
-    },
-    {
-      "tool": "get_function_source",
-      "args": {
-        "name": "revoke_token",
-        "file_path": "apps/api/services/auth.py",
-        "level": 1
-      },
-      "result_chars": 192,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 4,
-      "preceded_by": "get_function_source",
-      "followed_by": "get_function_source",
-      "time_ms": 446
-    },
-    {
-      "tool": "get_function_source",
-      "args": {
-        "name": "hash_password",
-        "file_path": "apps/api/services/auth.py",
-        "level": 1
-      },
-      "result_chars": 193,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 5,
-      "preceded_by": "get_function_source",
-      "followed_by": "get_function_source",
-      "time_ms": 490
-    },
-    {
-      "tool": "get_function_source",
-      "args": {
-        "name": "verify_password",
-        "file_path": "apps/api/services/auth.py",
-        "level": 1
-      },
-      "result_chars": 195,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 6,
-      "preceded_by": "get_function_source",
-      "followed_by": "get_function_source",
-      "time_ms": 354
-    },
-    {
-      "tool": "get_function_source",
-      "args": {
-        "name": "prepare_auth_internal",
-        "file_path": "apps/api/services/auth.py",
-        "level": 1
-      },
-      "result_chars": 72,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 7,
-      "preceded_by": "get_function_source",
       "followed_by": null,
-      "time_ms": 281
+      "time_ms": 372
     }
   ],
-  "total_context_chars_injected": 5653,
-  "ts_tool_calls_count": 8,
-  "wall_time_seconds": 30.53,
-  "raw_response": "Voici les **29 fonctions publiques** de `apps/api/services/auth.py` :\n\n| # | Signature |\n|---|-----------|\n| 1 | `authenticate_user(credentials)` |\n| 2 | `issue_token(payload, user_id)` |\n| 3 | `revoke_token(payload, user_id)` |\n| 4 | `hash_password(payload, user_id)` |\n| 5 | `verify_password(payload, user_id)` |\n| 6 | `prepare_auth_internal(data)` |\n| 7 | `finalize_auth_internal(data)` |\n| 8 | `audit_auth_internal(data)` |\n| 9 | `notify_auth_internal(data)` |\n| 10 | `enqueue_auth_internal(data)` |\n| 11 | `reconcile_auth_internal(data)` |\n| 12 | `upsert_auth_internal(data)` |\n| 13 | `expand_auth_internal(data)` |\n| 14 | `reduce_auth_internal(data)` |\n| 15 | `snapshot_auth_internal(data)` |\n| 16 | `replay_auth_internal(data)` |\n| 17 | `validate_input_auth_internal(data)` |\n| 18 | `serialize_output_auth_internal(data)` |\n| 19 | `deserialize_input_auth_internal(data)` |\n| 20 | `build_context_auth_internal(data)` |\n| 21 | `emit_metric_auth_internal(data)` |\n| 22 | `rate_limit_auth_internal(data)` |\n| 23 | `retry_with_backoff_auth_internal(data)` |\n| 24 | `batch_process_auth_internal(data)` |\n| 25 | `stream_process_auth_internal(data)` |\n| 26 | `index_entity_auth_internal(data)` |\n| 27 | `reindex_entity_auth_internal(data)` |\n| 28 | `soft_delete_auth_internal(data)` |\n| 29 | `hard_delete_auth_internal(data)` |\n\nLa seule fonction priv\u00e9e (pr\u00e9fix\u00e9e `_`) exclue est `_auth_admin_db()` (L8-12).",
+  "total_context_chars_injected": 4618,
+  "ts_tool_calls_count": 2,
+  "wall_time_seconds": 25.1,
+  "raw_response": "Voici les **29 fonctions publiques** de `apps/api/services/auth.py` :\n\n| # | Fonction | Signature |\n|---|----------|-----------|\n| 1 | `authenticate_user` | `(credentials)` |\n| 2 | `issue_token` | `(payload, user_id)` |\n| 3 | `revoke_token` | `(payload, user_id)` |\n| 4 | `hash_password` | `(payload, user_id)` |\n| 5 | `verify_password` | `(payload, user_id)` |\n| 6 | `prepare_auth_internal` | `(data)` |\n| 7 | `finalize_auth_internal` | `(data)` |\n| 8 | `audit_auth_internal` | `(data)` |\n| 9 | `notify_auth_internal` | `(data)` |\n| 10 | `enqueue_auth_internal` | `(data)` |\n| 11 | `reconcile_auth_internal` | `(data)` |\n| 12 | `upsert_auth_internal` | `(data)` |\n| 13 | `expand_auth_internal` | `(data)` |\n| 14 | `reduce_auth_internal` | `(data)` |\n| 15 | `snapshot_auth_internal` | `(data)` |\n| 16 | `replay_auth_internal` | `(data)` |\n| 17 | `validate_input_auth_internal` | `(data)` |\n| 18 | `serialize_output_auth_internal` | `(data)` |\n| 19 | `deserialize_input_auth_internal` | `(data)` |\n| 20 | `build_context_auth_internal` | `(data)` |\n| 21 | `emit_metric_auth_internal` | `(data)` |\n| 22 | `rate_limit_auth_internal` | `(data)` |\n| 23 | `retry_with_backoff_auth_internal` | `(data)` |\n| 24 | `batch_process_auth_internal` | `(data)` |\n| 25 | `stream_process_auth_internal` | `(data)` |\n| 26 | `index_entity_auth_internal` | `(data)` |\n| 27 | `reindex_entity_auth_internal` | `(data)` |\n| 28 | `soft_delete_auth_internal` | `(data)` |\n| 29 | `hard_delete_auth_internal` | `(data)` |\n\nLa seule fonction priv\u00e9e (pr\u00e9fix\u00e9e `_`) exclue est `_auth_admin_db()` (lignes 8-12).",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T08:58:34.957973+00:00"
+  "timestamp": "2026-04-15T12:59:20.466600+00:00"
 }

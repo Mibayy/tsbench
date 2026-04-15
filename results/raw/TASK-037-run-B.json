@@ -1,0 +1,233 @@
+{
+  "task_id": "TASK-037",
+  "run": "B",
+  "baseline": "token-savior",
+  "input_tokens": 11,
+  "output_tokens": 1178,
+  "cache_creation_input_tokens": 11146,
+  "cache_read_input_tokens": 307790,
+  "total_tokens": 320125,
+  "active_tokens": 12335,
+  "turns_count": 12,
+  "tool_calls_count": 11,
+  "tool_calls_breakdown": {
+    "mcp__token-savior-recall__switch_project": 1,
+    "mcp__token-savior-recall__get_project_summary": 1,
+    "mcp__token-savior-recall__memory_search": 1,
+    "mcp__token-savior-recall__get_structure_summary": 1,
+    "mcp__token-savior-recall__list_files": 5,
+    "mcp__token-savior-recall__get_entry_points": 1,
+    "mcp__token-savior-recall__get_routes": 1
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "mcp__token-savior-recall__switch_project",
+      "result_chars": 60,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_project_summary",
+      "result_chars": 248,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__memory_search",
+      "result_chars": 32,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_structure_summary",
+      "result_chars": 727,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__list_files",
+      "result_chars": 101,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__list_files",
+      "result_chars": 44,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__list_files",
+      "result_chars": 2,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__list_files",
+      "result_chars": 2,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_entry_points",
+      "result_chars": 1886,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_routes",
+      "result_chars": 957,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__list_files",
+      "result_chars": 370,
+      "is_error": false
+    }
+  ],
+  "ts_tool_details": [
+    {
+      "tool": "switch_project",
+      "args": {
+        "name": "tsbench"
+      },
+      "result_chars": 60,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 0,
+      "preceded_by": null,
+      "followed_by": "get_project_summary",
+      "time_ms": 89
+    },
+    {
+      "tool": "get_project_summary",
+      "args": {},
+      "result_chars": 248,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 1,
+      "preceded_by": "switch_project",
+      "followed_by": "memory_search",
+      "time_ms": 288
+    },
+    {
+      "tool": "memory_search",
+      "args": {
+        "query": "project purpose domain overview"
+      },
+      "result_chars": 32,
+      "result_empty": true,
+      "is_error": false,
+      "call_index": 2,
+      "preceded_by": "get_project_summary",
+      "followed_by": "get_structure_summary",
+      "time_ms": 137
+    },
+    {
+      "tool": "get_structure_summary",
+      "args": {},
+      "result_chars": 727,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 3,
+      "preceded_by": "memory_search",
+      "followed_by": "list_files",
+      "time_ms": 34
+    },
+    {
+      "tool": "list_files",
+      "args": {
+        "pattern": "tasks/*.md",
+        "max_results": 5
+      },
+      "result_chars": 101,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 4,
+      "preceded_by": "get_structure_summary",
+      "followed_by": "list_files",
+      "time_ms": 455
+    },
+    {
+      "tool": "list_files",
+      "args": {
+        "pattern": "scripts/*",
+        "max_results": 10
+      },
+      "result_chars": 44,
+      "result_empty": true,
+      "is_error": false,
+      "call_index": 5,
+      "preceded_by": "list_files",
+      "followed_by": "list_files",
+      "time_ms": 70
+    },
+    {
+      "tool": "list_files",
+      "args": {
+        "pattern": "results/*",
+        "max_results": 10
+      },
+      "result_chars": 2,
+      "result_empty": true,
+      "is_error": false,
+      "call_index": 6,
+      "preceded_by": "list_files",
+      "followed_by": "list_files",
+      "time_ms": 52
+    },
+    {
+      "tool": "list_files",
+      "args": {
+        "pattern": "results/**/*",
+        "max_results": 5
+      },
+      "result_chars": 2,
+      "result_empty": true,
+      "is_error": false,
+      "call_index": 7,
+      "preceded_by": "list_files",
+      "followed_by": "get_entry_points",
+      "time_ms": 57
+    },
+    {
+      "tool": "get_entry_points",
+      "args": {
+        "max_results": 10
+      },
+      "result_chars": 1886,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 8,
+      "preceded_by": "list_files",
+      "followed_by": "get_routes",
+      "time_ms": 102
+    },
+    {
+      "tool": "get_routes",
+      "args": {
+        "max_results": 10
+      },
+      "result_chars": 957,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 9,
+      "preceded_by": "get_entry_points",
+      "followed_by": "list_files",
+      "time_ms": 236
+    },
+    {
+      "tool": "list_files",
+      "args": {
+        "pattern": "apps/web/components/*",
+        "max_results": 10
+      },
+      "result_chars": 370,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 10,
+      "preceded_by": "get_routes",
+      "followed_by": null,
+      "time_ms": 53
+    }
+  ],
+  "total_context_chars_injected": 4429,
+  "ts_tool_calls_count": 11,
+  "wall_time_seconds": 48.42,
+  "raw_response": "\n\nVoici le r\u00e9sum\u00e9 du projet **tsbench** :\n\n- **Benchmark pour outils IA** \u2014 Le projet est un banc d'essai (benchmark) qui \u00e9value des agents de code IA sur des t\u00e2ches pr\u00e9d\u00e9finies (~60 t\u00e2ches dans `tasks/`), avec des r\u00e9sultats stock\u00e9s en JSON dans `results/raw/`.\n\n- **Application SaaS multi-tenant** \u2014 Le code sous test simule une plateforme SaaS compl\u00e8te avec authentification, billing, membres, notifications, invitations et audit.\n\n- **API backend Python** (`apps/api/`) \u2014 Couche API avec routers, services m\u00e9tier (billing, webhooks, int\u00e9grations Stripe), mod\u00e8les de donn\u00e9es, et utilitaires (pagination, slugs, strings).\n\n- **Frontend Next.js / React** (`apps/web/`) \u2014 Application web App Router avec pages (dashboard, login, billing, members, audit, notifications) et composants UI r\u00e9utilisables (DataTable, FilterBar, ConfirmDialog\u2026).\n\n- **Worker asynchrone** (`apps/worker/`) \u2014 Traitement d'\u00e9v\u00e9nements en arri\u00e8re-plan : handlers pour Stripe, Slack, Postmark, Twilio, et t\u00e2ches de billing/webhooks/notifications.\n\n- **Packages partag\u00e9s** (`packages/utils/`) \u2014 Biblioth\u00e8que utilitaire commune (pagination, slugs, etc.) consomm\u00e9e par l'API et le frontend.\n\n- **Infrastructure** (`infra/`, `config/`) \u2014 Configuration d'infrastructure et fichiers de configuration projet.\n\n- **Suite de tests** (`tests/`) \u2014 12 fichiers de tests couvrant les diff\u00e9rentes couches.\n\n- **Scripts de maintenance** (`scripts/`) \u2014 Scripts de backup et de seed de donn\u00e9es.\n\n- **Pipeline de scoring** \u2014 Les r\u00e9sultats des runs (Run A, Run B\u2026) sont grad\u00e9s automatiquement, avec des m\u00e9triques comme `set_match_strict` et des signaux d'am\u00e9lioration (`IMPROVEMENT-SIGNALS.md`).",
+  "error": null,
+  "score": 0,
+  "max_score": 2,
+  "timestamp": "2026-04-15T12:56:23.429017+00:00"
+}

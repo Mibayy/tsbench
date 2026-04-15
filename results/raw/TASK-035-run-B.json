@@ -1,0 +1,86 @@
+{
+  "task_id": "TASK-035",
+  "run": "B",
+  "baseline": "token-savior",
+  "input_tokens": 6,
+  "output_tokens": 481,
+  "cache_creation_input_tokens": 5790,
+  "cache_read_input_tokens": 175639,
+  "total_tokens": 181916,
+  "active_tokens": 6277,
+  "turns_count": 5,
+  "tool_calls_count": 3,
+  "tool_calls_breakdown": {
+    "mcp__token-savior-recall__switch_project": 1,
+    "mcp__token-savior-recall__search_codebase": 1,
+    "mcp__token-savior-recall__get_function_source": 1
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "mcp__token-savior-recall__switch_project",
+      "result_chars": 60,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 3320,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 467,
+      "is_error": false
+    }
+  ],
+  "ts_tool_details": [
+    {
+      "tool": "switch_project",
+      "args": {
+        "name": "tsbench"
+      },
+      "result_chars": 60,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 0,
+      "preceded_by": null,
+      "followed_by": "search_codebase",
+      "time_ms": 102
+    },
+    {
+      "tool": "search_codebase",
+      "args": {
+        "pattern": "password|authenticate|login|auth",
+        "max_results": 30
+      },
+      "result_chars": 3320,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 1,
+      "preceded_by": "switch_project",
+      "followed_by": "get_function_source",
+      "time_ms": 361
+    },
+    {
+      "tool": "get_function_source",
+      "args": {
+        "name": "buggy_verify_password",
+        "level": 0
+      },
+      "result_chars": 467,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 2,
+      "preceded_by": "search_codebase",
+      "followed_by": null,
+      "time_ms": 275
+    }
+  ],
+  "total_context_chars_injected": 3847,
+  "ts_tool_calls_count": 3,
+  "wall_time_seconds": 24.2,
+  "raw_response": "Le bug est dans `apps/api/utils/buggy_auth.py` \u2014 fonction `buggy_verify_password`.\n\n**Le probl\u00e8me (ligne `if not input_password or not stored_hash: return True`) :**\n\nQuand `input_password` est une cha\u00eene vide (ou `None`), la condition `not input_password` est `True`, et la fonction **retourne `True`** (authentification r\u00e9ussie) au lieu de `False`.\n\nAutrement dit, **un mot de passe vide est consid\u00e9r\u00e9 comme valide** \u2014 c'est une inversion logique. La garde devrait rejeter les entr\u00e9es vides, pas les accepter.\n\n**Correction attendue :** remplacer `return True` par `return False`.\n\n**Bonus :** la comparaison `==` est aussi vuln\u00e9rable aux attaques par timing \u2014 il faudrait utiliser `hmac.compare_digest()`.",
+  "error": null,
+  "score": 2,
+  "max_score": 2,
+  "timestamp": "2026-04-15T12:54:43.556472+00:00"
+}

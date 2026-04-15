@@ -2,17 +2,19 @@
   "task_id": "TASK-054",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 8,
-  "output_tokens": 731,
-  "cache_creation_input_tokens": 44526,
-  "cache_read_input_tokens": 219050,
-  "total_tokens": 264315,
-  "active_tokens": 45265,
-  "turns_count": 8,
-  "tool_calls_count": 5,
+  "input_tokens": 12,
+  "output_tokens": 1615,
+  "cache_creation_input_tokens": 46663,
+  "cache_read_input_tokens": 314685,
+  "total_tokens": 362975,
+  "active_tokens": 48290,
+  "turns_count": 14,
+  "tool_calls_count": 7,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
     "mcp__token-savior-recall__get_function_source": 3,
+    "mcp__token-savior-recall__reindex": 1,
+    "mcp__token-savior-recall__search_codebase": 1,
     "mcp__token-savior-recall__replace_symbol_source": 1
   },
   "tool_calls_detail": [
@@ -23,22 +25,32 @@
     },
     {
       "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 102,
+      "result_chars": 287,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 211,
+      "result_chars": 287,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__reindex",
+      "result_chars": 42,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 360,
+      "result_chars": 287,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 1355,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__replace_symbol_source",
-      "result_chars": 190,
+      "result_chars": 188,
       "is_error": false
     }
   ],
@@ -54,52 +66,75 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "get_function_source",
-      "time_ms": 126
+      "time_ms": 115
     },
     {
       "tool": "get_function_source",
       "args": {
         "name": "buggy_paginate",
-        "file_path": "apps/api/utils/buggy_pagination.py"
+        "level": 0
       },
-      "result_chars": 102,
+      "result_chars": 287,
       "result_empty": false,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": "get_function_source",
-      "time_ms": 523
+      "time_ms": 603
     },
     {
       "tool": "get_function_source",
       "args": {
         "name": "buggy_paginate",
-        "file_path": "apps/api/utils/buggy_pagination.py",
-        "level": 0
+        "level": 0,
+        "force_full": true
       },
-      "result_chars": 211,
+      "result_chars": 287,
       "result_empty": false,
       "is_error": false,
       "call_index": 2,
       "preceded_by": "get_function_source",
+      "followed_by": "reindex",
+      "time_ms": 264
+    },
+    {
+      "tool": "reindex",
+      "args": {},
+      "result_chars": 42,
+      "result_empty": true,
+      "is_error": false,
+      "call_index": 3,
+      "preceded_by": "get_function_source",
       "followed_by": "get_function_source",
-      "time_ms": 300
+      "time_ms": 2162
     },
     {
       "tool": "get_function_source",
       "args": {
         "name": "buggy_paginate",
-        "file_path": "apps/api/utils/buggy_pagination.py",
         "level": 0,
         "force_full": true
       },
-      "result_chars": 360,
+      "result_chars": 287,
       "result_empty": false,
       "is_error": false,
-      "call_index": 3,
+      "call_index": 4,
+      "preceded_by": "reindex",
+      "followed_by": "search_codebase",
+      "time_ms": 276
+    },
+    {
+      "tool": "search_codebase",
+      "args": {
+        "pattern": "end = start \\+ page_size"
+      },
+      "result_chars": 1355,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 5,
       "preceded_by": "get_function_source",
       "followed_by": "replace_symbol_source",
-      "time_ms": 271
+      "time_ms": 423
     },
     {
       "tool": "replace_symbol_source",
@@ -108,21 +143,21 @@
         "file_path": "apps/api/utils/buggy_pagination.py",
         "new_source": "def buggy_paginate(items: list, page: int = 1, page_size: int = 10) -> list:\n    \"\"\"Return a page of items.\"\"\"\n    start = (page - 1) * page_size\n    end = start + page_size\n    return items[start:end]"
       },
-      "result_chars": 190,
+      "result_chars": 188,
       "result_empty": false,
       "is_error": false,
-      "call_index": 4,
-      "preceded_by": "get_function_source",
+      "call_index": 6,
+      "preceded_by": "search_codebase",
       "followed_by": null,
-      "time_ms": 74
+      "time_ms": 45
     }
   ],
-  "total_context_chars_injected": 923,
-  "ts_tool_calls_count": 5,
-  "wall_time_seconds": 26.5,
-  "raw_response": "Corrig\u00e9. La fonction `buggy_paginate` dans `apps/api/utils/buggy_pagination.py` avait `end = start + page_size + 1`, ce qui renvoyait 11 items au lieu de 10. Le `+ 1` a \u00e9t\u00e9 supprim\u00e9 : `end = start + page_size`.",
+  "total_context_chars_injected": 2506,
+  "ts_tool_calls_count": 7,
+  "wall_time_seconds": 57.8,
+  "raw_response": "\n\n**Correction appliqu\u00e9e** dans la fonction `buggy_paginate` du fichier `apps/api/utils/buggy_pagination.py`.\n\n**Bug** : `end = start + page_size + 1` renvoyait 11 \u00e9l\u00e9ments au lieu de 10 (off-by-one).\n\n**Fix** : `end = start + page_size` \u2014 le slicing Python `items[start:end]` est exclusif sur la borne droite, donc `start + page_size` donne exactement `page_size` \u00e9l\u00e9ments.",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T09:04:51.214366+00:00"
+  "timestamp": "2026-04-15T13:05:58.270093+00:00"
 }

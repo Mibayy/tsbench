@@ -4,11 +4,11 @@
   "baseline": "token-savior",
   "input_tokens": 5,
   "output_tokens": 234,
-  "cache_creation_input_tokens": 11389,
-  "cache_read_input_tokens": 121315,
-  "total_tokens": 132943,
-  "active_tokens": 11628,
-  "turns_count": 3,
+  "cache_creation_input_tokens": 11468,
+  "cache_read_input_tokens": 123209,
+  "total_tokens": 134916,
+  "active_tokens": 11707,
+  "turns_count": 4,
   "tool_calls_count": 2,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
@@ -38,14 +38,13 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "get_call_chain",
-      "time_ms": 84
+      "time_ms": 145
     },
     {
       "tool": "get_call_chain",
       "args": {
         "from_name": "alpha_entry",
-        "to_name": "alpha_leaf",
-        "level": 2
+        "to_name": "alpha_leaf"
       },
       "result_chars": 241,
       "result_empty": false,
@@ -53,15 +52,15 @@
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": null,
-      "time_ms": 321
+      "time_ms": 376
     }
   ],
   "total_context_chars_injected": 301,
   "ts_tool_calls_count": 2,
-  "wall_time_seconds": 13.99,
-  "raw_response": "Chemin complet dans `apps/api/chains/alpha.py` :\n\n```\nalpha_entry \u2192 alpha_middle \u2192 alpha_inner \u2192 alpha_leaf\n```\n\n4 fonctions, 3 sauts, toutes dans le m\u00eame fichier.",
+  "wall_time_seconds": 17.99,
+  "raw_response": "Chemin d'appel complet dans `apps/api/chains/alpha.py` :\n\n```\nalpha_entry \u2192 alpha_middle \u2192 alpha_inner \u2192 alpha_leaf\n```\n\n4 fonctions, 3 sauts, toutes dans le m\u00eame fichier.",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T09:01:53.672511+00:00"
+  "timestamp": "2026-04-15T13:02:35.608915+00:00"
 }

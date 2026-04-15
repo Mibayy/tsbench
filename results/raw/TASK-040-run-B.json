@@ -1,0 +1,301 @@
+{
+  "task_id": "TASK-040",
+  "run": "B",
+  "baseline": "token-savior",
+  "input_tokens": 13,
+  "output_tokens": 1722,
+  "cache_creation_input_tokens": 12085,
+  "cache_read_input_tokens": 426602,
+  "total_tokens": 440422,
+  "active_tokens": 13820,
+  "turns_count": 20,
+  "tool_calls_count": 14,
+  "tool_calls_breakdown": {
+    "mcp__token-savior-recall__switch_project": 1,
+    "mcp__token-savior-recall__get_structure_summary": 2,
+    "mcp__token-savior-recall__analyze_config": 1,
+    "mcp__token-savior-recall__search_codebase": 7,
+    "mcp__token-savior-recall__get_class_source": 1,
+    "mcp__token-savior-recall__get_imports": 1,
+    "mcp__token-savior-recall__get_functions": 1
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "mcp__token-savior-recall__switch_project",
+      "result_chars": 60,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_structure_summary",
+      "result_chars": 426,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__analyze_config",
+      "result_chars": 3351,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 889,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 498,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 6006,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 2428,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_structure_summary",
+      "result_chars": 103,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 889,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_class_source",
+      "result_chars": 678,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_imports",
+      "result_chars": 51,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_functions",
+      "result_chars": 2,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 1182,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 889,
+      "is_error": false
+    }
+  ],
+  "ts_tool_details": [
+    {
+      "tool": "switch_project",
+      "args": {
+        "name": "tsbench"
+      },
+      "result_chars": 60,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 0,
+      "preceded_by": null,
+      "followed_by": "get_structure_summary",
+      "time_ms": 109
+    },
+    {
+      "tool": "get_structure_summary",
+      "args": {
+        "file_path": "config/app.config.yaml"
+      },
+      "result_chars": 426,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 1,
+      "preceded_by": "switch_project",
+      "followed_by": "analyze_config",
+      "time_ms": 399
+    },
+    {
+      "tool": "analyze_config",
+      "args": {
+        "file_path": "config/app.config.yaml",
+        "checks": [
+          "orphans",
+          "loaders"
+        ]
+      },
+      "result_chars": 3351,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 2,
+      "preceded_by": "get_structure_summary",
+      "followed_by": "search_codebase",
+      "time_ms": 86
+    },
+    {
+      "tool": "search_codebase",
+      "args": {
+        "pattern": "app\\.config\\.yaml|load_config|yaml\\.safe_load",
+        "max_results": 20
+      },
+      "result_chars": 889,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 3,
+      "preceded_by": "analyze_config",
+      "followed_by": "search_codebase",
+      "time_ms": 688
+    },
+    {
+      "tool": "search_codebase",
+      "args": {
+        "pattern": "(features\\.(billing|exports|audit)|pagination\\.(default|max)|timeouts\\.(db|http)|app\\.(name|version))",
+        "max_results": 30
+      },
+      "result_chars": 498,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 4,
+      "preceded_by": "search_codebase",
+      "followed_by": "search_codebase",
+      "time_ms": 101
+    },
+    {
+      "tool": "search_codebase",
+      "args": {
+        "pattern": "(billing|exports|audit|default_page|max_page|timeout|APP_NAME|APP_VERSION)",
+        "max_results": 40
+      },
+      "result_chars": 6006,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 5,
+      "preceded_by": "search_codebase",
+      "followed_by": "search_codebase",
+      "time_ms": 381
+    },
+    {
+      "tool": "search_codebase",
+      "args": {
+        "pattern": "config\\[|config\\.get|config\\.",
+        "max_results": 30
+      },
+      "result_chars": 2428,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 6,
+      "preceded_by": "search_codebase",
+      "followed_by": "get_structure_summary",
+      "time_ms": 87
+    },
+    {
+      "tool": "get_structure_summary",
+      "args": {
+        "file_path": "apps/api/config.py"
+      },
+      "result_chars": 103,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 7,
+      "preceded_by": "search_codebase",
+      "followed_by": "search_codebase",
+      "time_ms": 740
+    },
+    {
+      "tool": "search_codebase",
+      "args": {
+        "pattern": "import yaml|from yaml|yaml\\.|load_config|app\\.config",
+        "max_results": 20
+      },
+      "result_chars": 889,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 8,
+      "preceded_by": "get_structure_summary",
+      "followed_by": "get_class_source",
+      "time_ms": 110
+    },
+    {
+      "tool": "get_class_source",
+      "args": {
+        "name": "Settings",
+        "file_path": "apps/api/config.py",
+        "level": 0,
+        "hints": false
+      },
+      "result_chars": 678,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 9,
+      "preceded_by": "search_codebase",
+      "followed_by": "get_imports",
+      "time_ms": 264
+    },
+    {
+      "tool": "get_imports",
+      "args": {
+        "file_path": "apps/api/config.py"
+      },
+      "result_chars": 51,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 10,
+      "preceded_by": "get_class_source",
+      "followed_by": "get_functions",
+      "time_ms": 61
+    },
+    {
+      "tool": "get_functions",
+      "args": {
+        "file_path": "apps/api/config.py",
+        "hints": false
+      },
+      "result_chars": 2,
+      "result_empty": true,
+      "is_error": false,
+      "call_index": 11,
+      "preceded_by": "get_imports",
+      "followed_by": "search_codebase",
+      "time_ms": 62
+    },
+    {
+      "tool": "search_codebase",
+      "args": {
+        "pattern": "yaml",
+        "max_results": 20
+      },
+      "result_chars": 1182,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 12,
+      "preceded_by": "get_functions",
+      "followed_by": "search_codebase",
+      "time_ms": 92
+    },
+    {
+      "tool": "search_codebase",
+      "args": {
+        "pattern": "app\\.config|config\\.yaml",
+        "max_results": 20
+      },
+      "result_chars": 889,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 13,
+      "preceded_by": "search_codebase",
+      "followed_by": null,
+      "time_ms": 107
+    }
+  ],
+  "total_context_chars_injected": 17452,
+  "ts_tool_calls_count": 14,
+  "wall_time_seconds": 51.11,
+  "raw_response": "**Non \u2014 aucun des champs de `config/app.config.yaml` n'est effectivement consomm\u00e9 par le code applicatif.**\n\nVoici le constat :\n\n| Champ YAML | Consomm\u00e9 ? | D\u00e9tail |\n|---|---|---|\n| `app.name` | **Non** | Aucun import/lecture du YAML dans le code |\n| `app.version` | **Non** | Idem |\n| `features.billing` | **Non** | Idem |\n| `features.exports` | **Non** | Idem |\n| `features.audit` | **Non** | Idem |\n| `pagination.default` | **Non** | Idem |\n| `pagination.max` | **Non** | Idem |\n| `timeouts.db` | **Non** | Idem |\n| `timeouts.http` | **Non** | Idem |\n\n**Raison :** Le fichier `config/app.config.yaml` existe sur disque mais **aucun module ne le charge** (`import yaml` / `yaml.safe_load` n'appara\u00eet nulle part dans le code applicatif). La configuration r\u00e9elle transite par `apps/api/config.py`, qui lit exclusivement des **variables d'environnement** (`os.environ.get`) \u2014 sans aucun lien avec le YAML.\n\nLe fichier YAML est donc **enti\u00e8rement orphelin** : ses 9 champs sont tous des dead config.",
+  "error": null,
+  "score": 0,
+  "max_score": 2,
+  "timestamp": "2026-04-15T12:58:19.996997+00:00"
+}

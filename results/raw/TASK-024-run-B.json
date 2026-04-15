@@ -1,0 +1,65 @@
+{
+  "task_id": "TASK-024",
+  "run": "B",
+  "baseline": "token-savior",
+  "input_tokens": 5,
+  "output_tokens": 407,
+  "cache_creation_input_tokens": 11476,
+  "cache_read_input_tokens": 122761,
+  "total_tokens": 134649,
+  "active_tokens": 11888,
+  "turns_count": 4,
+  "tool_calls_count": 2,
+  "tool_calls_breakdown": {
+    "mcp__token-savior-recall__switch_project": 1,
+    "mcp__token-savior-recall__find_dead_code": 1
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "mcp__token-savior-recall__switch_project",
+      "result_chars": 60,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__find_dead_code",
+      "result_chars": 380,
+      "is_error": false
+    }
+  ],
+  "ts_tool_details": [
+    {
+      "tool": "switch_project",
+      "args": {
+        "name": "tsbench"
+      },
+      "result_chars": 60,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 0,
+      "preceded_by": null,
+      "followed_by": "find_dead_code",
+      "time_ms": 117
+    },
+    {
+      "tool": "find_dead_code",
+      "args": {
+        "max_results": 5
+      },
+      "result_chars": 380,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 1,
+      "preceded_by": "switch_project",
+      "followed_by": null,
+      "time_ms": 447
+    }
+  ],
+  "total_context_chars_injected": 440,
+  "ts_tool_calls_count": 2,
+  "wall_time_seconds": 24.22,
+  "raw_response": "Voici 5 fonctions export\u00e9es jamais appel\u00e9es dans le projet, toutes dans `apps/api/services/billing.py` :\n\n| # | Fonction | Ligne |\n|---|----------|-------|\n| 1 | `validate_invoice_total(invoice)` | 49 |\n| 2 | `prepare_billing_internal(data)` | 222 |\n| 3 | `finalize_billing_internal(data)` | 240 |\n| 4 | `audit_billing_internal(data)` | 258 |\n| 5 | `notify_billing_internal(data)` | 276 |\n\nLes 4 fonctions `*_billing_internal` semblent \u00eatre un pipeline interne de facturation dont aucune \u00e9tape n'est invoqu\u00e9e. `validate_invoice_total` est \u00e9galement orpheline \u2014 aucun appelant d\u00e9tect\u00e9 dans l'ensemble du projet.",
+  "error": null,
+  "score": 0,
+  "max_score": 2,
+  "timestamp": "2026-04-15T12:46:06.707785+00:00"
+}

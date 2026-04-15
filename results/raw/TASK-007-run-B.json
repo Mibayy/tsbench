@@ -3,16 +3,15 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 6,
-  "output_tokens": 508,
-  "cache_creation_input_tokens": 12186,
-  "cache_read_input_tokens": 164975,
-  "total_tokens": 177675,
-  "active_tokens": 12700,
-  "turns_count": 9,
-  "tool_calls_count": 4,
+  "output_tokens": 326,
+  "cache_creation_input_tokens": 12155,
+  "cache_read_input_tokens": 167143,
+  "total_tokens": 179630,
+  "active_tokens": 12487,
+  "turns_count": 4,
+  "tool_calls_count": 3,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__find_symbol": 1,
     "mcp__token-savior-recall__get_dependents": 1,
     "mcp__token-savior-recall__search_codebase": 1
   },
@@ -20,11 +19,6 @@
     {
       "tool": "mcp__token-savior-recall__switch_project",
       "result_chars": 60,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__find_symbol",
-      "result_chars": 61,
       "is_error": false
     },
     {
@@ -49,58 +43,42 @@
       "is_error": false,
       "call_index": 0,
       "preceded_by": null,
-      "followed_by": "find_symbol",
-      "time_ms": 126
-    },
-    {
-      "tool": "find_symbol",
-      "args": {
-        "name": "lonely_util",
-        "level": 2
-      },
-      "result_chars": 61,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 1,
-      "preceded_by": "switch_project",
       "followed_by": "get_dependents",
-      "time_ms": 571
+      "time_ms": 113
     },
     {
       "tool": "get_dependents",
       "args": {
-        "name": "lonely_util",
-        "max_results": 0
+        "name": "lonely_util"
       },
       "result_chars": 98,
       "result_empty": false,
       "is_error": false,
-      "call_index": 2,
-      "preceded_by": "find_symbol",
+      "call_index": 1,
+      "preceded_by": "switch_project",
       "followed_by": "search_codebase",
-      "time_ms": 54
+      "time_ms": 426
     },
     {
       "tool": "search_codebase",
       "args": {
-        "pattern": "lonely_util",
-        "max_results": 0
+        "pattern": "lonely_util"
       },
       "result_chars": 2514,
       "result_empty": false,
       "is_error": false,
-      "call_index": 3,
+      "call_index": 2,
       "preceded_by": "get_dependents",
       "followed_by": null,
-      "time_ms": 121
+      "time_ms": 157
     }
   ],
-  "total_context_chars_injected": 2733,
-  "ts_tool_calls_count": 4,
-  "wall_time_seconds": 21.24,
-  "raw_response": "`lonely_util` est d\u00e9finie dans `packages/utils/targeted.py:3` et n'a qu'**un seul call site** :\n\n| Fichier | Fonction appelante | Ligne |\n|---|---|---|\n| `apps/api/callers/caller_lonely_util_00.py` | `do_it_0` | 6 |\n\nC'est la liste exhaustive \u2014 aucun autre fichier du projet n'appelle `lonely_util`.",
+  "total_context_chars_injected": 2672,
+  "ts_tool_calls_count": 3,
+  "wall_time_seconds": 17.43,
+  "raw_response": "`lonely_util` est d\u00e9finie dans `packages/utils/targeted.py:3` et n'a qu'**un seul** appelant :\n\n| # | Fichier | Ligne | Call site |\n|---|---------|-------|-----------|\n| 1 | `apps/api/callers/caller_lonely_util_00.py` | 6 | `return lonely_util(payload)` |\n\nC'est la liste exhaustive \u2014 il n'y a aucun autre fichier qui appelle `lonely_util`.",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T08:35:14.711089+00:00"
+  "timestamp": "2026-04-15T12:34:47.222888+00:00"
 }

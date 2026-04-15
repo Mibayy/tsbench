@@ -3,27 +3,21 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 5,
-  "output_tokens": 993,
-  "cache_creation_input_tokens": 16308,
-  "cache_read_input_tokens": 116517,
-  "total_tokens": 133823,
-  "active_tokens": 17306,
-  "turns_count": 4,
-  "tool_calls_count": 3,
+  "output_tokens": 875,
+  "cache_creation_input_tokens": 12040,
+  "cache_read_input_tokens": 122697,
+  "total_tokens": 135617,
+  "active_tokens": 12920,
+  "turns_count": 3,
+  "tool_calls_count": 2,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__find_symbol": 1,
     "mcp__token-savior-recall__get_dependents": 1
   },
   "tool_calls_detail": [
     {
       "tool": "mcp__token-savior-recall__switch_project",
       "result_chars": 60,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__find_symbol",
-      "result_chars": 59,
       "is_error": false
     },
     {
@@ -43,45 +37,29 @@
       "is_error": false,
       "call_index": 0,
       "preceded_by": null,
-      "followed_by": "find_symbol",
-      "time_ms": 121
-    },
-    {
-      "tool": "find_symbol",
-      "args": {
-        "name": "hub_util",
-        "level": 2
-      },
-      "result_chars": 59,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 1,
-      "preceded_by": "switch_project",
       "followed_by": "get_dependents",
-      "time_ms": 546
+      "time_ms": 96
     },
     {
       "tool": "get_dependents",
       "args": {
-        "name": "hub_util",
-        "compress": true,
-        "max_results": 0
+        "name": "hub_util"
       },
       "result_chars": 1726,
       "result_empty": false,
       "is_error": false,
-      "call_index": 2,
-      "preceded_by": "find_symbol",
+      "call_index": 1,
+      "preceded_by": "switch_project",
       "followed_by": null,
-      "time_ms": 239
+      "time_ms": 315
     }
   ],
-  "total_context_chars_injected": 1845,
-  "ts_tool_calls_count": 3,
-  "wall_time_seconds": 23.41,
-  "raw_response": "`hub_util` est d\u00e9finie dans `packages/utils/targeted.py:15` et appel\u00e9e depuis **21 fichiers** :\n\n| # | Fichier | Fonction appelante |\n|---|---------|-------------------|\n| 1 | `apps/api/callers/caller_lonely_util_00.py` | `do_it_0` |\n| 2 | `apps/api/callers/caller_hub_util_01.py` | `do_it_1` |\n| 3 | `apps/api/callers/caller_hub_util_02.py` | `do_it_2` |\n| 4 | `apps/api/callers/caller_hub_util_03.py` | `do_it_3` |\n| 5 | `apps/api/callers/caller_hub_util_04.py` | `do_it_4` |\n| 6 | `apps/api/callers/caller_hub_util_05.py` | `do_it_5` |\n| 7 | `apps/api/callers/caller_hub_util_06.py` | `do_it_6` |\n| 8 | `apps/api/callers/caller_hub_util_07.py` | `do_it_7` |\n| 9 | `apps/api/callers/caller_hub_util_08.py` | `do_it_8` |\n| 10 | `apps/api/callers/caller_hub_util_09.py` | `do_it_9` |\n| 11 | `apps/api/callers/caller_hub_util_10.py` | `do_it_10` |\n| 12 | `apps/api/callers/caller_hub_util_11.py` | `do_it_11` |\n| 13 | `apps/api/callers/caller_hub_util_12.py` | `do_it_12` |\n| 14 | `apps/api/callers/caller_hub_util_13.py` | `do_it_13` |\n| 15 | `apps/api/callers/caller_hub_util_14.py` | `do_it_14` |\n| 16 | `apps/api/callers/caller_hub_util_15.py` | `do_it_15` |\n| 17 | `apps/api/callers/caller_hub_util_16.py` | `do_it_16` |\n| 18 | `apps/api/callers/caller_hub_util_17.py` | `do_it_17` |\n| 19 | `apps/api/callers/caller_hub_util_18.py` | `do_it_18` |\n| 20 | `apps/api/callers/caller_hub_util_19.py` | `do_it_19` |\n\n20 fichiers `caller_hub_util_XX` (01\u201319) + 1 fichier `caller_lonely_util_00` \u2014 tous dans `apps/api/callers/`.",
+  "total_context_chars_injected": 1786,
+  "ts_tool_calls_count": 2,
+  "wall_time_seconds": 19.94,
+  "raw_response": "Voici la liste compl\u00e8te des **20 fichiers** qui appellent `hub_util` :\n\n| # | Fichier | Fonction appelante |\n|---|---------|-------------------|\n| 1 | `apps/api/callers/caller_lonely_util_00.py` | `do_it_0` |\n| 2 | `apps/api/callers/caller_hub_util_01.py` | `do_it_1` |\n| 3 | `apps/api/callers/caller_hub_util_02.py` | `do_it_2` |\n| 4 | `apps/api/callers/caller_hub_util_03.py` | `do_it_3` |\n| 5 | `apps/api/callers/caller_hub_util_04.py` | `do_it_4` |\n| 6 | `apps/api/callers/caller_hub_util_05.py` | `do_it_5` |\n| 7 | `apps/api/callers/caller_hub_util_06.py` | `do_it_6` |\n| 8 | `apps/api/callers/caller_hub_util_07.py` | `do_it_7` |\n| 9 | `apps/api/callers/caller_hub_util_08.py` | `do_it_8` |\n| 10 | `apps/api/callers/caller_hub_util_09.py` | `do_it_9` |\n| 11 | `apps/api/callers/caller_hub_util_10.py` | `do_it_10` |\n| 12 | `apps/api/callers/caller_hub_util_11.py` | `do_it_11` |\n| 13 | `apps/api/callers/caller_hub_util_12.py` | `do_it_12` |\n| 14 | `apps/api/callers/caller_hub_util_13.py` | `do_it_13` |\n| 15 | `apps/api/callers/caller_hub_util_14.py` | `do_it_14` |\n| 16 | `apps/api/callers/caller_hub_util_15.py` | `do_it_15` |\n| 17 | `apps/api/callers/caller_hub_util_16.py` | `do_it_16` |\n| 18 | `apps/api/callers/caller_hub_util_17.py` | `do_it_17` |\n| 19 | `apps/api/callers/caller_hub_util_18.py` | `do_it_18` |\n| 20 | `apps/api/callers/caller_hub_util_19.py` | `do_it_19` |\n\nTous les appels se situent aux lignes 4-6 de chaque fichier, dans des fonctions `do_it_N(payload)`.",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T08:36:12.536927+00:00"
+  "timestamp": "2026-04-15T12:35:44.488165+00:00"
 }

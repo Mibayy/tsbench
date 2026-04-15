@@ -3,11 +3,11 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 8,
-  "output_tokens": 1524,
-  "cache_creation_input_tokens": 18486,
-  "cache_read_input_tokens": 161210,
-  "total_tokens": 181228,
-  "active_tokens": 20018,
+  "output_tokens": 1526,
+  "cache_creation_input_tokens": 13950,
+  "cache_read_input_tokens": 168398,
+  "total_tokens": 183882,
+  "active_tokens": 15484,
   "turns_count": 15,
   "tool_calls_count": 12,
   "tool_calls_breakdown": {
@@ -89,7 +89,7 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "get_leiden_stats",
-      "time_ms": 94
+      "time_ms": 132
     },
     {
       "tool": "get_leiden_stats",
@@ -100,7 +100,7 @@
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": "get_community",
-      "time_ms": 128
+      "time_ms": 30
     },
     {
       "tool": "get_community",
@@ -113,7 +113,7 @@
       "call_index": 2,
       "preceded_by": "get_leiden_stats",
       "followed_by": "get_community",
-      "time_ms": 522
+      "time_ms": 487
     },
     {
       "tool": "get_community",
@@ -126,7 +126,7 @@
       "call_index": 3,
       "preceded_by": "get_community",
       "followed_by": "get_community",
-      "time_ms": 413
+      "time_ms": 50
     },
     {
       "tool": "get_community",
@@ -139,7 +139,7 @@
       "call_index": 4,
       "preceded_by": "get_community",
       "followed_by": "get_community",
-      "time_ms": 917
+      "time_ms": 225
     },
     {
       "tool": "get_community",
@@ -152,7 +152,7 @@
       "call_index": 5,
       "preceded_by": "get_community",
       "followed_by": "get_community",
-      "time_ms": 62
+      "time_ms": 691
     },
     {
       "tool": "get_community",
@@ -165,7 +165,7 @@
       "call_index": 6,
       "preceded_by": "get_community",
       "followed_by": "get_community",
-      "time_ms": 38
+      "time_ms": 274
     },
     {
       "tool": "get_community",
@@ -178,7 +178,7 @@
       "call_index": 7,
       "preceded_by": "get_community",
       "followed_by": "get_community",
-      "time_ms": 19
+      "time_ms": 48
     },
     {
       "tool": "get_community",
@@ -191,7 +191,7 @@
       "call_index": 8,
       "preceded_by": "get_community",
       "followed_by": "get_community",
-      "time_ms": 10
+      "time_ms": 149
     },
     {
       "tool": "get_community",
@@ -204,7 +204,7 @@
       "call_index": 9,
       "preceded_by": "get_community",
       "followed_by": "get_community",
-      "time_ms": 468
+      "time_ms": 133
     },
     {
       "tool": "get_community",
@@ -217,7 +217,7 @@
       "call_index": 10,
       "preceded_by": "get_community",
       "followed_by": "get_community",
-      "time_ms": 19
+      "time_ms": 127
     },
     {
       "tool": "get_community",
@@ -230,15 +230,15 @@
       "call_index": 11,
       "preceded_by": "get_community",
       "followed_by": null,
-      "time_ms": 32
+      "time_ms": 26
     }
   ],
   "total_context_chars_injected": 3709,
   "ts_tool_calls_count": 12,
-  "wall_time_seconds": 33.66,
-  "raw_response": "\n\nVoici les **10 principales communaut\u00e9s** d\u00e9tect\u00e9es (28 au total, modularity Q=0.405) :\n\n| # | Communaut\u00e9 | Taille | Symboles cl\u00e9s | Th\u00e8me fonctionnel |\n|---|-----------|--------|---------------|-------------------|\n| 1 | `main` | 32 | `main`, `load_tasks`, `gen_api_*`, `plant_bugs`, `plant_dupes`, `plant_dead_code`, `rwrite_py` | **G\u00e9n\u00e9ration du benchmark** \u2014 orchestration, g\u00e9n\u00e9ration de code synth\u00e9tique et injection de d\u00e9fauts |\n| 2 | `apiClient` | 31 | `apiClient`, `create/get/list/update/delete/bulk` \u00d7 (Billing, Members, Sessions, Webhooks, Notifications) | **Client API TypeScript** \u2014 couche CRUD compl\u00e8te pour toutes les entit\u00e9s m\u00e9tier |\n| 3 | `TopBar` | 22 | `TopBar`, `Sidebar`, `Pagination`, `LoginPage`, `DashboardPage`, `SettingsPage`, `MembersPage`\u2026 | **Composants UI React** \u2014 pages, layout et composants partag\u00e9s du frontend |\n| 4 | `hub_util` | 13 | `hub_util`, `do_it_8` \u00e0 `do_it_19` | **Utilitaires hub (large)** \u2014 fonctions utilitaires cha\u00een\u00e9es, complexit\u00e9 \u00e9lev\u00e9e |\n| 5 | `_billing_admin_db` | 7 | `charge_customer`, `calculate_invoice`, `refund_payment`, `apply_discount`, `void_invoice` | **Service de facturation** \u2014 logique m\u00e9tier billing c\u00f4t\u00e9 backend |\n| 6 | `_notifications_admin_db` | 6 | `send_email`, `send_sms`, `queue_notification`, `render_template` | **Service de notifications** \u2014 envoi multi-canal (email, SMS) |\n| 7 | `_members_admin_db` | 6 | `create_member`, `find_member_by_email`, `update_member`, `deactivate_member` | **Gestion des membres** \u2014 CRUD membres backend |\n| 8 | `_webhooks_admin_db` | 6 | `register_webhook`, `dispatch_webhook`, `verify_signature`, `retry_webhook` | **Gestion des webhooks** \u2014 enregistrement, dispatch et retry |\n| 9 | `medium_util` | 6 | `medium_util`, `do_it_3` \u00e0 `do_it_7` | **Utilitaires medium** \u2014 fonctions utilitaires cha\u00een\u00e9es, complexit\u00e9 moyenne |\n| 10 | `fetcher` | 6 | `fetcher`, `search*` (Billing, Members, Notifications, Sessions, Webhooks) | **Recherche c\u00f4t\u00e9 client** \u2014 couche de recherche/filtrage cross-entit\u00e9s |\n\n**Structure globale** : le projet est un benchmark synth\u00e9tique (`bench.py` + g\u00e9n\u00e9rateurs) qui produit une app full-stack avec un backend Python (services par domaine : billing, members, notifications, webhooks) et un frontend React/TypeScript (composants UI + client API). Les communaut\u00e9s hub/medium_util sont des cha\u00eenes de fonctions utilitaires \u00e0 complexit\u00e9 croissante, utilis\u00e9es comme cas de test.",
+  "wall_time_seconds": 38.55,
+  "raw_response": "\n\nVoici les **28 communaut\u00e9s** d\u00e9tect\u00e9es (modularity Q=0.405), les 10 principales :\n\n| # | Communaut\u00e9 | Taille | Symboles cl\u00e9s | Th\u00e8me fonctionnel |\n|---|-----------|--------|---------------|-------------------|\n| 1 | **main** | 32 | `main`, `Dispatcher`, `gen_api_*`, `plant_*`, `load_tasks` | **G\u00e9n\u00e9ration de code & scaffolding du bench** \u2014 orchestre la cr\u00e9ation des fichiers API, mod\u00e8les, services, et l'injection de bugs/dupes/cycles |\n| 2 | **apiClient** | 31 | `apiClient`, `create/get/list/update/delete{Billing,Members,Sessions,\u2026}` | **Client API frontend (CRUD)** \u2014 toutes les op\u00e9rations CRUD pour chaque entit\u00e9 m\u00e9tier |\n| 3 | **TopBar** | 22 | `TopBar`, `Sidebar`, `Pagination`, `LoginPage`, `DashboardPage`, `SettingsPage`\u2026 | **Composants UI React** \u2014 pages, layouts, et composants partag\u00e9s du frontend web |\n| 4 | **hub_util** | 13 | `hub_util`, `do_it_8` \u00e0 `do_it_19` | **Utilitaires lourds** \u2014 fonctions cha\u00een\u00e9es de complexit\u00e9 \u00e9lev\u00e9e (hotspot candidates) |\n| 5 | **_billing_admin_db** | 7 | `calculate_invoice`, `charge_customer`, `refund_payment`, `apply_discount` | **Service de facturation** \u2014 calcul, paiement, remboursement, r\u00e9ductions |\n| 6 | **medium_util** | 6 | `medium_util`, `do_it_3` \u00e0 `do_it_7` | **Utilitaires moyens** \u2014 fonctions cha\u00een\u00e9es de complexit\u00e9 moyenne |\n| 7 | **_notifications_admin_db** | 6 | `send_email`, `send_sms`, `queue_notification`, `render_template` | **Service de notifications** \u2014 envoi email/SMS, templating |\n| 8 | **_members_admin_db** | 6 | `create_member`, `find_member_by_email`, `deactivate_member` | **Gestion des membres** \u2014 CRUD membres c\u00f4t\u00e9 backend |\n| 9 | **_webhooks_admin_db** | 6 | `dispatch_webhook`, `register_webhook`, `verify_signature`, `retry_webhook` | **Service webhooks** \u2014 enregistrement, dispatch, retry, v\u00e9rification de signature |\n| 10 | **fetcher** | 6 | `fetcher`, `search{Billing,Members,Notifications,Sessions,Webhooks}` | **Recherche frontend** \u2014 fonctions de recherche cross-entit\u00e9s |\n\nLes 18 communaut\u00e9s restantes (3-5 membres chacune) couvrent des micro-domaines : sessions, config, pagination, utilitaires de strings, et services individuels plus petits.\n\n**Structure globale** : le projet s'organise en 3 couches \u2014 g\u00e9n\u00e9ration/bench (communaut\u00e9 1), backend par domaine m\u00e9tier (communaut\u00e9s 5-9), et frontend avec client API + UI (communaut\u00e9s 2-3, 10).",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T09:03:25.380119+00:00"
+  "timestamp": "2026-04-15T13:04:13.269116+00:00"
 }

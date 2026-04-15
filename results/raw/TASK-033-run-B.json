@@ -1,0 +1,162 @@
+{
+  "task_id": "TASK-033",
+  "run": "B",
+  "baseline": "token-savior",
+  "input_tokens": 8,
+  "output_tokens": 756,
+  "cache_creation_input_tokens": 7019,
+  "cache_read_input_tokens": 265284,
+  "total_tokens": 273067,
+  "active_tokens": 7783,
+  "turns_count": 9,
+  "tool_calls_count": 7,
+  "tool_calls_breakdown": {
+    "mcp__token-savior-recall__switch_project": 1,
+    "mcp__token-savior-recall__find_impacted_test_files": 2,
+    "mcp__token-savior-recall__get_change_impact": 1,
+    "mcp__token-savior-recall__get_dependents": 1,
+    "mcp__token-savior-recall__search_codebase": 2
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "mcp__token-savior-recall__switch_project",
+      "result_chars": 60,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__find_impacted_test_files",
+      "result_chars": 100,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_change_impact",
+      "result_chars": 99,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_dependents",
+      "result_chars": 63,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__find_impacted_test_files",
+      "result_chars": 100,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 2579,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 205,
+      "is_error": false
+    }
+  ],
+  "ts_tool_details": [
+    {
+      "tool": "switch_project",
+      "args": {
+        "name": "tsbench"
+      },
+      "result_chars": 60,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 0,
+      "preceded_by": null,
+      "followed_by": "find_impacted_test_files",
+      "time_ms": 99
+    },
+    {
+      "tool": "find_impacted_test_files",
+      "args": {
+        "symbol_names": [
+          "alpha_middle"
+        ]
+      },
+      "result_chars": 100,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 1,
+      "preceded_by": "switch_project",
+      "followed_by": "get_change_impact",
+      "time_ms": 460
+    },
+    {
+      "tool": "get_change_impact",
+      "args": {
+        "name": "alpha_middle"
+      },
+      "result_chars": 99,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 2,
+      "preceded_by": "find_impacted_test_files",
+      "followed_by": "get_dependents",
+      "time_ms": 371
+    },
+    {
+      "tool": "get_dependents",
+      "args": {
+        "name": "alpha_entry"
+      },
+      "result_chars": 63,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 3,
+      "preceded_by": "get_change_impact",
+      "followed_by": "find_impacted_test_files",
+      "time_ms": 156
+    },
+    {
+      "tool": "find_impacted_test_files",
+      "args": {
+        "changed_files": [
+          "apps/api/chains/alpha.py"
+        ]
+      },
+      "result_chars": 100,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 4,
+      "preceded_by": "get_dependents",
+      "followed_by": "search_codebase",
+      "time_ms": 58
+    },
+    {
+      "tool": "search_codebase",
+      "args": {
+        "pattern": "alpha_middle|alpha_entry|from.*chains.*alpha"
+      },
+      "result_chars": 2579,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 5,
+      "preceded_by": "find_impacted_test_files",
+      "followed_by": "search_codebase",
+      "time_ms": 180
+    },
+    {
+      "tool": "search_codebase",
+      "args": {
+        "pattern": "test.*alpha|alpha.*test|import.*alpha"
+      },
+      "result_chars": 205,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 6,
+      "preceded_by": "search_codebase",
+      "followed_by": null,
+      "time_ms": 103
+    }
+  ],
+  "total_context_chars_injected": 3206,
+  "ts_tool_calls_count": 7,
+  "wall_time_seconds": 31.29,
+  "raw_response": "Aucun fichier de test n'existe dans ce projet pour la cha\u00eene `alpha_*`. Voici ce que l'analyse de d\u00e9pendances r\u00e9v\u00e8le :\n\n**Cha\u00eene d'appels impact\u00e9e :**\n`alpha_entry` \u2192 **`alpha_middle`** \u2192 `alpha_inner` \u2192 `alpha_leaf`\n(fichier unique : `apps/api/chains/alpha.py`)\n\n**Dependants directs :** `alpha_entry` (l.3) appelle `alpha_middle`.\n\n**Tests \u00e0 rejouer :** Aucun test unitaire n'a \u00e9t\u00e9 trouv\u00e9 dans le projet ciblant `alpha_middle`, `alpha_entry`, ni le module `apps/api/chains/alpha`. Il n'y a pas de fichiers de test importants ce module.\n\n**Recommandation :** Avant de modifier `alpha_middle`, il serait pertinent de cr\u00e9er des tests couvrant la cha\u00eene compl\u00e8te `alpha_entry \u2192 alpha_middle \u2192 alpha_inner \u2192 alpha_leaf`, puis de les ex\u00e9cuter apr\u00e8s la modification pour valider la non-r\u00e9gression.",
+  "error": null,
+  "score": 0,
+  "max_score": 2,
+  "timestamp": "2026-04-15T12:53:24.651445+00:00"
+}

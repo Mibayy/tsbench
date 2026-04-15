@@ -2,21 +2,17 @@
   "task_id": "TASK-058",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 11,
-  "output_tokens": 1788,
-  "cache_creation_input_tokens": 16726,
-  "cache_read_input_tokens": 305755,
-  "total_tokens": 324280,
-  "active_tokens": 18525,
-  "turns_count": 24,
-  "tool_calls_count": 17,
+  "input_tokens": 6,
+  "output_tokens": 942,
+  "cache_creation_input_tokens": 14464,
+  "cache_read_input_tokens": 169400,
+  "total_tokens": 184812,
+  "active_tokens": 15412,
+  "turns_count": 8,
+  "tool_calls_count": 3,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__find_hotspots": 1,
-    "mcp__token-savior-recall__get_functions": 1,
-    "mcp__token-savior-recall__list_files": 1,
-    "mcp__token-savior-recall__get_structure_summary": 8,
-    "mcp__token-savior-recall__get_function_source": 5
+    "mcp__token-savior-recall__find_hotspots": 2
   },
   "tool_calls_detail": [
     {
@@ -26,82 +22,12 @@
     },
     {
       "tool": "mcp__token-savior-recall__find_hotspots",
-      "result_chars": 843,
+      "result_chars": 1583,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__get_functions",
-      "result_chars": 43,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__list_files",
-      "result_chars": 4133,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_structure_summary",
-      "result_chars": 104,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_structure_summary",
-      "result_chars": 100,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_structure_summary",
-      "result_chars": 101,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_structure_summary",
-      "result_chars": 99,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_structure_summary",
-      "result_chars": 106,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_structure_summary",
-      "result_chars": 110,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_structure_summary",
-      "result_chars": 118,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_structure_summary",
-      "result_chars": 260,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 762,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 748,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 750,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 615,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 758,
+      "tool": "mcp__token-savior-recall__find_hotspots",
+      "result_chars": 4448,
       "is_error": false
     }
   ],
@@ -117,229 +43,42 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "find_hotspots",
-      "time_ms": 125
+      "time_ms": 96
     },
     {
       "tool": "find_hotspots",
       "args": {
-        "max_results": 10
+        "max_results": 20
       },
-      "result_chars": 843,
+      "result_chars": 1583,
       "result_empty": false,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
-      "followed_by": "get_functions",
-      "time_ms": 350
+      "followed_by": "find_hotspots",
+      "time_ms": 723
     },
     {
-      "tool": "get_functions",
+      "tool": "find_hotspots",
       "args": {
-        "file_path": "apps/",
-        "max_results": 0
+        "max_results": 50,
+        "min_score": 5
       },
-      "result_chars": 43,
-      "result_empty": true,
+      "result_chars": 4448,
+      "result_empty": false,
       "is_error": false,
       "call_index": 2,
       "preceded_by": "find_hotspots",
-      "followed_by": "list_files",
-      "time_ms": 41
-    },
-    {
-      "tool": "list_files",
-      "args": {
-        "pattern": "apps/**/*.py"
-      },
-      "result_chars": 4133,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 3,
-      "preceded_by": "get_functions",
-      "followed_by": "get_structure_summary",
-      "time_ms": 354
-    },
-    {
-      "tool": "get_structure_summary",
-      "args": {
-        "file_path": "apps/api/services/complex_auth.py"
-      },
-      "result_chars": 104,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 4,
-      "preceded_by": "list_files",
-      "followed_by": "get_structure_summary",
-      "time_ms": 286
-    },
-    {
-      "tool": "get_structure_summary",
-      "args": {
-        "file_path": "apps/api/services/complex_billing.py"
-      },
-      "result_chars": 100,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 5,
-      "preceded_by": "get_structure_summary",
-      "followed_by": "get_structure_summary",
-      "time_ms": 374
-    },
-    {
-      "tool": "get_structure_summary",
-      "args": {
-        "file_path": "apps/api/services/complex_routing.py"
-      },
-      "result_chars": 101,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 6,
-      "preceded_by": "get_structure_summary",
-      "followed_by": "get_structure_summary",
-      "time_ms": 494
-    },
-    {
-      "tool": "get_structure_summary",
-      "args": {
-        "file_path": "apps/api/utils/complex_validation.py"
-      },
-      "result_chars": 99,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 7,
-      "preceded_by": "get_structure_summary",
-      "followed_by": "get_structure_summary",
-      "time_ms": 495
-    },
-    {
-      "tool": "get_structure_summary",
-      "args": {
-        "file_path": "apps/worker/tasks/complex_pipeline.py"
-      },
-      "result_chars": 106,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 8,
-      "preceded_by": "get_structure_summary",
-      "followed_by": "get_structure_summary",
-      "time_ms": 39
-    },
-    {
-      "tool": "get_structure_summary",
-      "args": {
-        "file_path": "apps/api/utils/buggy_pagination.py"
-      },
-      "result_chars": 110,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 9,
-      "preceded_by": "get_structure_summary",
-      "followed_by": "get_structure_summary",
-      "time_ms": 470
-    },
-    {
-      "tool": "get_structure_summary",
-      "args": {
-        "file_path": "apps/api/utils/buggy_auth.py"
-      },
-      "result_chars": 118,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 10,
-      "preceded_by": "get_structure_summary",
-      "followed_by": "get_structure_summary",
-      "time_ms": 458
-    },
-    {
-      "tool": "get_structure_summary",
-      "args": {
-        "file_path": "apps/api/utils/legacy_helpers.py"
-      },
-      "result_chars": 260,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 11,
-      "preceded_by": "get_structure_summary",
-      "followed_by": "get_function_source",
-      "time_ms": 36
-    },
-    {
-      "tool": "get_function_source",
-      "args": {
-        "name": "authenticate_multi_factor",
-        "level": 0
-      },
-      "result_chars": 762,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 12,
-      "preceded_by": "get_structure_summary",
-      "followed_by": "get_function_source",
-      "time_ms": 482
-    },
-    {
-      "tool": "get_function_source",
-      "args": {
-        "name": "reconcile_payments",
-        "level": 0
-      },
-      "result_chars": 748,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 13,
-      "preceded_by": "get_function_source",
-      "followed_by": "get_function_source",
-      "time_ms": 472
-    },
-    {
-      "tool": "get_function_source",
-      "args": {
-        "name": "route_webhook_event",
-        "level": 0
-      },
-      "result_chars": 750,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 14,
-      "preceded_by": "get_function_source",
-      "followed_by": "get_function_source",
-      "time_ms": 417
-    },
-    {
-      "tool": "get_function_source",
-      "args": {
-        "name": "validate_contract",
-        "level": 0
-      },
-      "result_chars": 615,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 15,
-      "preceded_by": "get_function_source",
-      "followed_by": "get_function_source",
-      "time_ms": 301
-    },
-    {
-      "tool": "get_function_source",
-      "args": {
-        "name": "orchestrate_nightly_job",
-        "level": 0
-      },
-      "result_chars": 758,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 16,
-      "preceded_by": "get_function_source",
       "followed_by": null,
-      "time_ms": 247
+      "time_ms": 116
     }
   ],
-  "total_context_chars_injected": 9710,
-  "ts_tool_calls_count": 17,
-  "wall_time_seconds": 49.7,
-  "raw_response": "Voici les **5 fonctions les plus complexes** dans `apps/`, class\u00e9es par ordre d\u00e9croissant :\n\n| # | Score | Fonction | Fichier | Lignes | Branches | Nesting max |\n|---|-------|----------|---------|--------|----------|-------------|\n| 1 | 44.4 | `authenticate_multi_factor()` | `apps/api/services/complex_auth.py:3` | 33 | 15 | 3 |\n| 2 | 44.4 | `reconcile_payments()` | `apps/api/services/complex_billing.py:3` | 33 | 15 | 3 |\n| 3 | 44.4 | `route_webhook_event()` | `apps/api/services/complex_routing.py:3` | 33 | 15 | 3 |\n| 4 | 44.4 | `orchestrate_nightly_job()` | `apps/worker/tasks/complex_pipeline.py:3` | 33 | 15 | 3 |\n| 5 | 37.8 | `validate_contract()` | `apps/api/utils/complex_validation.py:3` | 28 | 13 | 3 |\n\nLes 4 premi\u00e8res partagent le m\u00eame score (44.4) avec une structure quasi-identique : `if/else` + 2\u00d7 `for` avec branches internes + `try/except` (2 handlers) + `while` avec `break` conditionnel. `validate_contract` est l\u00e9g\u00e8rement plus simple car elle n'a qu'une seule boucle `for` au lieu de deux, ce qui lui donne 2 branches de moins.",
+  "total_context_chars_injected": 6091,
+  "ts_tool_calls_count": 3,
+  "wall_time_seconds": 31.58,
+  "raw_response": "Voici les **5 fonctions les plus complexes dans `apps/`**, par score d\u00e9croissant :\n\n| Rang | Score | Lignes | Branches | Depth | Fonction |\n|------|-------|--------|----------|-------|----------|\n| 1 | **44.4** | 33 | 15 | 3 | `apps/api/services/complex_billing.py:3` \u2014 `reconcile_payments()` |\n| 2 | **44.4** | 33 | 15 | 3 | `apps/api/services/complex_auth.py:3` \u2014 `authenticate_multi_factor()` |\n| 3 | **44.4** | 33 | 15 | 3 | `apps/api/services/complex_routing.py:3` \u2014 `route_webhook_event()` |\n| 4 | **44.4** | 33 | 15 | 3 | `apps/worker/tasks/complex_pipeline.py:3` \u2014 `orchestrate_nightly_job()` |\n| 5 | **36.9** | 28 | 12 | 3 | `apps/api/utils/complex_validation.py:3` \u2014 `validate_contract()` |\n\nLes 4 premi\u00e8res sont \u00e0 \u00e9galit\u00e9 (score 44.4) avec 15 branches chacune sur 33 lignes. `validate_contract()` suit avec 12 branches sur 28 lignes. Toutes partagent une profondeur de nesting de 3, mais c'est le nombre \u00e9lev\u00e9 de branches qui tire leur score vers le haut \u2014 ce sont les candidats prioritaires pour un refactoring.",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T09:07:29.648578+00:00"
+  "timestamp": "2026-04-15T13:08:19.084662+00:00"
 }

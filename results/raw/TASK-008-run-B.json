@@ -3,17 +3,16 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 5,
-  "output_tokens": 368,
-  "cache_creation_input_tokens": 12725,
-  "cache_read_input_tokens": 120669,
-  "total_tokens": 133767,
-  "active_tokens": 13098,
-  "turns_count": 5,
-  "tool_calls_count": 3,
+  "output_tokens": 331,
+  "cache_creation_input_tokens": 11207,
+  "cache_read_input_tokens": 122642,
+  "total_tokens": 134185,
+  "active_tokens": 11543,
+  "turns_count": 4,
+  "tool_calls_count": 2,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__find_symbol": 1,
-    "mcp__token-savior-recall__search_codebase": 1
+    "mcp__token-savior-recall__get_dependents": 1
   },
   "tool_calls_detail": [
     {
@@ -22,13 +21,8 @@
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__find_symbol",
-      "result_chars": 60,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__search_codebase",
-      "result_chars": 4707,
+      "tool": "mcp__token-savior-recall__get_dependents",
+      "result_chars": 290,
       "is_error": false
     }
   ],
@@ -43,43 +37,29 @@
       "is_error": false,
       "call_index": 0,
       "preceded_by": null,
-      "followed_by": "find_symbol",
-      "time_ms": 104
+      "followed_by": "get_dependents",
+      "time_ms": 115
     },
     {
-      "tool": "find_symbol",
+      "tool": "get_dependents",
       "args": {
-        "name": "small_util",
-        "level": 2
+        "name": "small_util"
       },
-      "result_chars": 60,
+      "result_chars": 290,
       "result_empty": false,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
-      "followed_by": "search_codebase",
-      "time_ms": 458
-    },
-    {
-      "tool": "search_codebase",
-      "args": {
-        "pattern": "small_util"
-      },
-      "result_chars": 4707,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 2,
-      "preceded_by": "find_symbol",
       "followed_by": null,
-      "time_ms": 577
+      "time_ms": 428
     }
   ],
-  "total_context_chars_injected": 4827,
-  "ts_tool_calls_count": 3,
-  "wall_time_seconds": 15.93,
-  "raw_response": "La fonction `small_util` est d\u00e9finie dans `packages/utils/targeted.py:7` et est appel\u00e9e dans exactement **3 fichiers** :\n\n1. `apps/api/callers/caller_small_util_00.py` (ligne 6)\n2. `apps/api/callers/caller_small_util_01.py` (ligne 6)\n3. `apps/api/callers/caller_small_util_02.py` (ligne 6)\n\nChacun l'importe depuis `packages.utils.targeted` et l'appelle une fois. Pas d'autres call sites dans le projet.",
+  "total_context_chars_injected": 350,
+  "ts_tool_calls_count": 2,
+  "wall_time_seconds": 15.97,
+  "raw_response": "Voici la liste **compl\u00e8te** des fichiers qui appellent `small_util` :\n\n| # | Fichier | Fonction appelante | Lignes |\n|---|---------|-------------------|--------|\n| 1 | `apps/api/callers/caller_lonely_util_00.py` | `do_it_0` | 4-6 |\n| 2 | `apps/api/callers/caller_hub_util_01.py` | `do_it_1` | 4-6 |\n| 3 | `apps/api/callers/caller_hub_util_02.py` | `do_it_2` | 4-6 |\n\n3 call sites au total, r\u00e9partis dans 3 fichiers distincts.",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T08:35:30.642288+00:00"
+  "timestamp": "2026-04-15T12:35:03.197367+00:00"
 }

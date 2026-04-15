@@ -2,18 +2,17 @@
   "task_id": "TASK-012",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 9,
-  "output_tokens": 635,
-  "cache_creation_input_tokens": 11795,
-  "cache_read_input_tokens": 297573,
-  "total_tokens": 310012,
-  "active_tokens": 12439,
-  "turns_count": 8,
-  "tool_calls_count": 6,
+  "input_tokens": 8,
+  "output_tokens": 555,
+  "cache_creation_input_tokens": 16940,
+  "cache_read_input_tokens": 253478,
+  "total_tokens": 270981,
+  "active_tokens": 17503,
+  "turns_count": 7,
+  "tool_calls_count": 5,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__find_symbol": 1,
-    "mcp__token-savior-recall__get_function_source": 4
+    "mcp__token-savior-recall__get_full_context": 4
   },
   "tool_calls_detail": [
     {
@@ -22,28 +21,23 @@
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__find_symbol",
-      "result_chars": 57,
+      "tool": "mcp__token-savior-recall__get_full_context",
+      "result_chars": 446,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 104,
+      "tool": "mcp__token-savior-recall__get_full_context",
+      "result_chars": 518,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 105,
+      "tool": "mcp__token-savior-recall__get_full_context",
+      "result_chars": 515,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 102,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 103,
+      "tool": "mcp__token-savior-recall__get_full_context",
+      "result_chars": 383,
       "is_error": false
     }
   ],
@@ -58,86 +52,72 @@
       "is_error": false,
       "call_index": 0,
       "preceded_by": null,
-      "followed_by": "find_symbol",
-      "time_ms": 109
+      "followed_by": "get_full_context",
+      "time_ms": 101
     },
     {
-      "tool": "find_symbol",
+      "tool": "get_full_context",
       "args": {
         "name": "beta_entry",
-        "level": 2
+        "depth": 1
       },
-      "result_chars": 57,
+      "result_chars": 446,
       "result_empty": false,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
-      "followed_by": "get_function_source",
-      "time_ms": 492
+      "followed_by": "get_full_context",
+      "time_ms": 410
     },
     {
-      "tool": "get_function_source",
+      "tool": "get_full_context",
       "args": {
-        "name": "beta_entry",
-        "level": 0
+        "name": "beta_middle",
+        "depth": 1
       },
-      "result_chars": 104,
+      "result_chars": 518,
       "result_empty": false,
       "is_error": false,
       "call_index": 2,
-      "preceded_by": "find_symbol",
-      "followed_by": "get_function_source",
-      "time_ms": 265
+      "preceded_by": "get_full_context",
+      "followed_by": "get_full_context",
+      "time_ms": 70
     },
     {
-      "tool": "get_function_source",
+      "tool": "get_full_context",
       "args": {
-        "name": "beta_middle",
-        "level": 0
+        "name": "beta_inner",
+        "depth": 1
       },
-      "result_chars": 105,
+      "result_chars": 515,
       "result_empty": false,
       "is_error": false,
       "call_index": 3,
-      "preceded_by": "get_function_source",
-      "followed_by": "get_function_source",
-      "time_ms": 245
+      "preceded_by": "get_full_context",
+      "followed_by": "get_full_context",
+      "time_ms": 187
     },
     {
-      "tool": "get_function_source",
+      "tool": "get_full_context",
       "args": {
-        "name": "beta_inner",
-        "level": 0
+        "name": "beta_leaf",
+        "depth": 1
       },
-      "result_chars": 102,
+      "result_chars": 383,
       "result_empty": false,
       "is_error": false,
       "call_index": 4,
-      "preceded_by": "get_function_source",
-      "followed_by": "get_function_source",
-      "time_ms": 287
-    },
-    {
-      "tool": "get_function_source",
-      "args": {
-        "name": "beta_leaf",
-        "level": 0
-      },
-      "result_chars": 103,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 5,
-      "preceded_by": "get_function_source",
+      "preceded_by": "get_full_context",
       "followed_by": null,
-      "time_ms": 220
+      "time_ms": 54
     }
   ],
-  "total_context_chars_injected": 531,
-  "ts_tool_calls_count": 6,
-  "wall_time_seconds": 31.58,
-  "raw_response": "Cha\u00eene d'appels compl\u00e8te (toutes dans `apps/api/chains/beta.py`) :\n\n```\nbeta_entry \u2192 beta_middle \u2192 beta_inner \u2192 beta_leaf\n```\n\n- **`beta_entry`** (L3) appelle `beta_middle`\n- **`beta_middle`** appelle `beta_inner`\n- **`beta_inner`** appelle `beta_leaf`\n- **`beta_leaf`** est la fonction feuille \u2014 elle retourne directement `{'leaf': 'beta_leaf'}` sans d\u00e9l\u00e9guer.",
+  "total_context_chars_injected": 1922,
+  "ts_tool_calls_count": 5,
+  "wall_time_seconds": 26.1,
+  "raw_response": "Cha\u00eene d'appels compl\u00e8te dans `apps/api/chains/beta.py` :\n\n```\nbeta_entry (l.3) \u2192 beta_middle (l.7) \u2192 beta_inner (l.11) \u2192 beta_leaf (l.15)\n```\n\n`beta_leaf` est la fonction feuille : elle ne d\u00e9l\u00e8gue \u00e0 personne et retourne directement `{'leaf': 'beta_leaf'}`.",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T08:37:13.070549+00:00"
+  "timestamp": "2026-04-15T12:37:35.796895+00:00"
 }

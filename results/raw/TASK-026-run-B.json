@@ -1,0 +1,244 @@
+{
+  "task_id": "TASK-026",
+  "run": "B",
+  "baseline": "token-savior",
+  "input_tokens": 10,
+  "output_tokens": 954,
+  "cache_creation_input_tokens": 6111,
+  "cache_read_input_tokens": 264825,
+  "total_tokens": 271900,
+  "active_tokens": 7075,
+  "turns_count": 17,
+  "tool_calls_count": 12,
+  "tool_calls_breakdown": {
+    "mcp__token-savior-recall__switch_project": 1,
+    "mcp__token-savior-recall__get_project_summary": 1,
+    "mcp__token-savior-recall__find_cross_project_deps": 1,
+    "mcp__token-savior-recall__list_files": 2,
+    "mcp__token-savior-recall__get_imports": 7
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "mcp__token-savior-recall__switch_project",
+      "result_chars": 60,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_project_summary",
+      "result_chars": 248,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__find_cross_project_deps",
+      "result_chars": 85,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__list_files",
+      "result_chars": 514,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__list_files",
+      "result_chars": 80,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_imports",
+      "result_chars": 40,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_imports",
+      "result_chars": 40,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_imports",
+      "result_chars": 40,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_imports",
+      "result_chars": 40,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_imports",
+      "result_chars": 40,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_imports",
+      "result_chars": 25,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_imports",
+      "result_chars": 25,
+      "is_error": false
+    }
+  ],
+  "ts_tool_details": [
+    {
+      "tool": "switch_project",
+      "args": {
+        "name": "tsbench"
+      },
+      "result_chars": 60,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 0,
+      "preceded_by": null,
+      "followed_by": "get_project_summary",
+      "time_ms": 90
+    },
+    {
+      "tool": "get_project_summary",
+      "args": {},
+      "result_chars": 248,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 1,
+      "preceded_by": "switch_project",
+      "followed_by": "find_cross_project_deps",
+      "time_ms": 513
+    },
+    {
+      "tool": "find_cross_project_deps",
+      "args": {},
+      "result_chars": 85,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 2,
+      "preceded_by": "get_project_summary",
+      "followed_by": "list_files",
+      "time_ms": 55
+    },
+    {
+      "tool": "list_files",
+      "args": {
+        "pattern": "**/mod*.py"
+      },
+      "result_chars": 514,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 3,
+      "preceded_by": "find_cross_project_deps",
+      "followed_by": "list_files",
+      "time_ms": 320
+    },
+    {
+      "tool": "list_files",
+      "args": {
+        "pattern": "**/ambig/**"
+      },
+      "result_chars": 80,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 4,
+      "preceded_by": "list_files",
+      "followed_by": "get_imports",
+      "time_ms": 65
+    },
+    {
+      "tool": "get_imports",
+      "args": {
+        "file_path": "apps/api/cycles/mod_a.py"
+      },
+      "result_chars": 40,
+      "result_empty": true,
+      "is_error": false,
+      "call_index": 5,
+      "preceded_by": "list_files",
+      "followed_by": "get_imports",
+      "time_ms": 478
+    },
+    {
+      "tool": "get_imports",
+      "args": {
+        "file_path": "apps/api/cycles/mod_b.py"
+      },
+      "result_chars": 40,
+      "result_empty": true,
+      "is_error": false,
+      "call_index": 6,
+      "preceded_by": "get_imports",
+      "followed_by": "get_imports",
+      "time_ms": 464
+    },
+    {
+      "tool": "get_imports",
+      "args": {
+        "file_path": "apps/api/cycles/mod_x.py"
+      },
+      "result_chars": 40,
+      "result_empty": true,
+      "is_error": false,
+      "call_index": 7,
+      "preceded_by": "get_imports",
+      "followed_by": "get_imports",
+      "time_ms": 465
+    },
+    {
+      "tool": "get_imports",
+      "args": {
+        "file_path": "apps/api/cycles/mod_y.py"
+      },
+      "result_chars": 40,
+      "result_empty": true,
+      "is_error": false,
+      "call_index": 8,
+      "preceded_by": "get_imports",
+      "followed_by": "get_imports",
+      "time_ms": 504
+    },
+    {
+      "tool": "get_imports",
+      "args": {
+        "file_path": "apps/api/cycles/mod_z.py"
+      },
+      "result_chars": 40,
+      "result_empty": true,
+      "is_error": false,
+      "call_index": 9,
+      "preceded_by": "get_imports",
+      "followed_by": "get_imports",
+      "time_ms": 463
+    },
+    {
+      "tool": "get_imports",
+      "args": {
+        "file_path": "apps/api/ambig/mod1.py"
+      },
+      "result_chars": 25,
+      "result_empty": true,
+      "is_error": false,
+      "call_index": 10,
+      "preceded_by": "get_imports",
+      "followed_by": "get_imports",
+      "time_ms": 205
+    },
+    {
+      "tool": "get_imports",
+      "args": {
+        "file_path": "apps/api/ambig/mod2.py"
+      },
+      "result_chars": 25,
+      "result_empty": true,
+      "is_error": false,
+      "call_index": 11,
+      "preceded_by": "get_imports",
+      "followed_by": null,
+      "time_ms": 49
+    }
+  ],
+  "total_context_chars_injected": 1237,
+  "ts_tool_calls_count": 12,
+  "wall_time_seconds": 30.16,
+  "raw_response": "\n\nOui, il y a **2 cycles d'import** dans le projet, tous dans `apps/api/cycles/` :\n\n**Cycle 1 (direct) :** `mod_a.py` \u2192 importe `mod_b` \u2192 importe `mod_a` \u2192 ...\n\n**Cycle 2 (triangulaire) :** `mod_x.py` \u2192 importe `mod_y` \u2192 importe `mod_z` \u2192 importe `mod_x` \u2192 ...\n\nPas de cycle d\u00e9tect\u00e9 dans `apps/api/ambig/` (mod1 et mod2 n'ont aucun import) ni ailleurs dans le projet.",
+  "error": null,
+  "score": 2,
+  "max_score": 2,
+  "timestamp": "2026-04-15T12:46:54.812485+00:00"
+}

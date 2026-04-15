@@ -3,17 +3,16 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 5,
-  "output_tokens": 230,
-  "cache_creation_input_tokens": 16586,
-  "cache_read_input_tokens": 120369,
-  "total_tokens": 137190,
-  "active_tokens": 16821,
-  "turns_count": 5,
-  "tool_calls_count": 3,
+  "output_tokens": 232,
+  "cache_creation_input_tokens": 45019,
+  "cache_read_input_tokens": 88865,
+  "total_tokens": 134121,
+  "active_tokens": 45256,
+  "turns_count": 4,
+  "tool_calls_count": 2,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__search_codebase": 1,
-    "mcp__token-savior-recall__get_routes": 1
+    "mcp__token-savior-recall__search_codebase": 1
   },
   "tool_calls_detail": [
     {
@@ -23,12 +22,7 @@
     },
     {
       "tool": "mcp__token-savior-recall__search_codebase",
-      "result_chars": 14817,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_routes",
-      "result_chars": 1633,
+      "result_chars": 1236,
       "is_error": false
     }
   ],
@@ -44,39 +38,29 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "search_codebase",
-      "time_ms": 86
+      "time_ms": 116
     },
     {
       "tool": "search_codebase",
       "args": {
-        "pattern": "billing"
+        "pattern": "POST.*billing|billing.*POST|route.*billing|@app\\.(post|route).*billing",
+        "max_results": 10
       },
-      "result_chars": 14817,
+      "result_chars": 1236,
       "result_empty": false,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
-      "followed_by": "get_routes",
-      "time_ms": 229
-    },
-    {
-      "tool": "get_routes",
-      "args": {},
-      "result_chars": 1633,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 2,
-      "preceded_by": "search_codebase",
       "followed_by": null,
-      "time_ms": 205
+      "time_ms": 525
     }
   ],
-  "total_context_chars_injected": 16510,
-  "ts_tool_calls_count": 3,
-  "wall_time_seconds": 19.36,
-  "raw_response": "La route `POST /api/billing` est d\u00e9finie dans **`apps/api/routers/billing.py`** (ligne 7), qui d\u00e9l\u00e8gue au service **`apps/api/services/billing.py`**.",
+  "total_context_chars_injected": 1296,
+  "ts_tool_calls_count": 2,
+  "wall_time_seconds": 15.13,
+  "raw_response": "La route `POST /api/billing` est d\u00e9finie dans **`apps/api/routers/billing.py`** (ligne 7). Le handler associ\u00e9 est `create_billing`.",
   "error": null,
   "score": 1,
   "max_score": 2,
-  "timestamp": "2026-04-15T08:33:59.598624+00:00"
+  "timestamp": "2026-04-15T12:33:30.212397+00:00"
 }

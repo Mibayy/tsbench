@@ -2,20 +2,18 @@
   "task_id": "TASK-050",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 9,
-  "output_tokens": 943,
-  "cache_creation_input_tokens": 13210,
-  "cache_read_input_tokens": 299999,
-  "total_tokens": 314161,
-  "active_tokens": 14162,
-  "turns_count": 9,
-  "tool_calls_count": 6,
+  "input_tokens": 6,
+  "output_tokens": 795,
+  "cache_creation_input_tokens": 12345,
+  "cache_read_input_tokens": 168916,
+  "total_tokens": 182062,
+  "active_tokens": 13146,
+  "turns_count": 7,
+  "tool_calls_count": 4,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__find_symbol": 1,
-    "mcp__token-savior-recall__get_function_source": 1,
-    "mcp__token-savior-recall__get_dependencies": 1,
-    "mcp__token-savior-recall__get_relevance_cluster": 1,
+    "mcp__token-savior-recall__memory_search": 1,
+    "mcp__token-savior-recall__get_full_context": 1,
     "mcp__token-savior-recall__get_backward_slice": 1
   },
   "tool_calls_detail": [
@@ -25,23 +23,13 @@
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__find_symbol",
-      "result_chars": 78,
+      "tool": "mcp__token-savior-recall__memory_search",
+      "result_chars": 32,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 748,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_dependencies",
-      "result_chars": 2,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_relevance_cluster",
-      "result_chars": 954,
+      "tool": "mcp__token-savior-recall__get_full_context",
+      "result_chars": 1015,
       "is_error": false
     },
     {
@@ -61,63 +49,35 @@
       "is_error": false,
       "call_index": 0,
       "preceded_by": null,
-      "followed_by": "find_symbol",
-      "time_ms": 121
+      "followed_by": "memory_search",
+      "time_ms": 214
     },
     {
-      "tool": "find_symbol",
+      "tool": "memory_search",
       "args": {
-        "name": "reconcile_payments",
-        "level": 2
+        "query": "reconcile_payments backward slice billing"
       },
-      "result_chars": 78,
-      "result_empty": false,
+      "result_chars": 32,
+      "result_empty": true,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
-      "followed_by": "get_function_source",
-      "time_ms": 510
+      "followed_by": "get_full_context",
+      "time_ms": 43
     },
     {
-      "tool": "get_function_source",
+      "tool": "get_full_context",
       "args": {
         "name": "reconcile_payments",
-        "level": 0
+        "depth": 1
       },
-      "result_chars": 748,
+      "result_chars": 1015,
       "result_empty": false,
       "is_error": false,
       "call_index": 2,
-      "preceded_by": "find_symbol",
-      "followed_by": "get_dependencies",
-      "time_ms": 257
-    },
-    {
-      "tool": "get_dependencies",
-      "args": {
-        "name": "reconcile_payments"
-      },
-      "result_chars": 2,
-      "result_empty": true,
-      "is_error": false,
-      "call_index": 3,
-      "preceded_by": "get_function_source",
-      "followed_by": "get_relevance_cluster",
-      "time_ms": 54
-    },
-    {
-      "tool": "get_relevance_cluster",
-      "args": {
-        "name": "reconcile_payments",
-        "budget": 10
-      },
-      "result_chars": 954,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 4,
-      "preceded_by": "get_dependencies",
+      "preceded_by": "memory_search",
       "followed_by": "get_backward_slice",
-      "time_ms": 135
+      "time_ms": 350
     },
     {
       "tool": "get_backward_slice",
@@ -129,18 +89,18 @@
       "result_chars": 940,
       "result_empty": false,
       "is_error": false,
-      "call_index": 5,
-      "preceded_by": "get_relevance_cluster",
+      "call_index": 3,
+      "preceded_by": "get_full_context",
       "followed_by": null,
-      "time_ms": 107
+      "time_ms": 67
     }
   ],
-  "total_context_chars_injected": 2782,
-  "ts_tool_calls_count": 6,
-  "wall_time_seconds": 34.86,
-  "raw_response": "## Backward Slice de `reconcile_payments`\n\n### D\u00e9pendances externes\n**Aucune.** La fonction est enti\u00e8rement auto-contenue \u2014 elle n'appelle aucun autre symbole du projet (0 d\u00e9pendances dans le graphe).\n\n### Backward slice intra-fonction (variable `result`, ligne 35 `return`)\n\nLe slice identifie **24 lignes sur 33** (r\u00e9duction de 27,3%). Les symboles/variables qui influencent la valeur de retour :\n\n| Variable | R\u00f4le |\n|---|---|\n| `data` | Param\u00e8tre d'entr\u00e9e (d\u00e9clar\u00e9 mais **non utilis\u00e9** dans le corps) |\n| `result` | Accumulateur central \u2014 initialis\u00e9 \u00e0 `0`, modifi\u00e9 par toutes les branches |\n| `items` | `list(range(10))` \u2014 pilote les deux boucles `for` |\n| `it_1` | It\u00e9rateur de la 1\u00e8re boucle, influence `result` via `% 2` et `% 3` |\n| `it_5` | It\u00e9rateur de la 2\u00e8me boucle, m\u00eame logique |\n\n### Lignes exclues du slice\nSeules les lignes 23-24 (`if result == 3: break`) et la ligne 9 (`else:`) sont exclues comme non-contributives directement au calcul final.\n\n### Conclusion\n`reconcile_payments` est une **fonction pure isol\u00e9e** sans d\u00e9pendance transitive. Tout le flux de donn\u00e9es est interne : `result` d\u00e9pend uniquement de `items` (constante) et des deux it\u00e9rateurs de boucle.",
+  "total_context_chars_injected": 2047,
+  "ts_tool_calls_count": 4,
+  "wall_time_seconds": 31.3,
+  "raw_response": "Voici l'analyse compl\u00e8te :\n\n## Backward slice de `reconcile_payments` (ligne 34, variable `result`)\n\n**La fonction est auto-contenue** \u2014 elle n'a **aucune d\u00e9pendance externe** (0 imports, 0 appels \u00e0 d'autres symboles) et **aucun appelant** dans le codebase index\u00e9.\n\n### Symboles/variables internes influen\u00e7ant `result` \u00e0 la sortie (ligne 34)\n\nLe backward slice conserve **24 lignes sur 33** (r\u00e9duction de 27.3%). Les variables qui influencent transitivement `result` sont :\n\n| Variable | R\u00f4le |\n|----------|------|\n| `result` | Accumulateur principal, initialis\u00e9 \u00e0 `0` (L5) |\n| `items` | `list(range(10))` \u2014 pilote les deux boucles `for` (L6) |\n| `it_1` | It\u00e9rateur de la 1\u00e8re boucle, modifie `result` via `%2` / `%3` (L11-15) |\n| `it_5` | It\u00e9rateur de la 2\u00e8me boucle, m\u00eame logique (L30-34) |\n\n**Seules les lignes \u00e9limin\u00e9es** du slice sont : la ligne `break` (L24, contr\u00f4le de flux sans data-flow sur `result` \u00e0 L34), la signature (L3), le docstring (L4), et le `return` (L35).\n\n**Aucun symbole externe** (fonction, classe, module) n'influence cette fonction \u2014 toute la logique est locale au param\u00e8tre `data` (non utilis\u00e9) et aux litt\u00e9raux.",
   "error": null,
   "score": 1,
   "max_score": 2,
-  "timestamp": "2026-04-15T09:02:28.530158+00:00"
+  "timestamp": "2026-04-15T13:03:06.919079+00:00"
 }

@@ -3,11 +3,11 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 8,
-  "output_tokens": 2116,
-  "cache_creation_input_tokens": 23784,
-  "cache_read_input_tokens": 160903,
-  "total_tokens": 186811,
-  "active_tokens": 25908,
+  "output_tokens": 2457,
+  "cache_creation_input_tokens": 24108,
+  "cache_read_input_tokens": 163438,
+  "total_tokens": 190011,
+  "active_tokens": 26573,
   "turns_count": 18,
   "tool_calls_count": 15,
   "tool_calls_breakdown": {
@@ -38,7 +38,7 @@
     },
     {
       "tool": "mcp__token-savior-recall__get_functions",
-      "result_chars": 1598,
+      "result_chars": 1646,
       "is_error": false
     },
     {
@@ -104,12 +104,12 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "list_files",
-      "time_ms": 85
+      "time_ms": 109
     },
     {
       "tool": "list_files",
       "args": {
-        "pattern": "apps/api/services/*"
+        "pattern": "apps/api/services/*.py"
       },
       "result_chars": 465,
       "result_empty": false,
@@ -117,12 +117,13 @@
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": "get_functions",
-      "time_ms": 319
+      "time_ms": 296
     },
     {
       "tool": "get_functions",
       "args": {
-        "file_path": "apps/api/services/audit.py"
+        "file_path": "apps/api/services/audit.py",
+        "hints": false
       },
       "result_chars": 1443,
       "result_empty": false,
@@ -130,12 +131,13 @@
       "call_index": 2,
       "preceded_by": "list_files",
       "followed_by": "get_functions",
-      "time_ms": 474
+      "time_ms": 464
     },
     {
       "tool": "get_functions",
       "args": {
-        "file_path": "apps/api/services/auth.py"
+        "file_path": "apps/api/services/auth.py",
+        "hints": false
       },
       "result_chars": 1466,
       "result_empty": false,
@@ -143,25 +145,27 @@
       "call_index": 3,
       "preceded_by": "get_functions",
       "followed_by": "get_functions",
-      "time_ms": 699
+      "time_ms": 92
     },
     {
       "tool": "get_functions",
       "args": {
-        "file_path": "apps/api/services/billing.py"
+        "file_path": "apps/api/services/billing.py",
+        "hints": false
       },
-      "result_chars": 1598,
+      "result_chars": 1646,
       "result_empty": false,
       "is_error": false,
       "call_index": 4,
       "preceded_by": "get_functions",
       "followed_by": "get_functions",
-      "time_ms": 238
+      "time_ms": 81
     },
     {
       "tool": "get_functions",
       "args": {
-        "file_path": "apps/api/services/complex_auth.py"
+        "file_path": "apps/api/services/complex_auth.py",
+        "hints": false
       },
       "result_chars": 52,
       "result_empty": false,
@@ -169,12 +173,13 @@
       "call_index": 5,
       "preceded_by": "get_functions",
       "followed_by": "get_functions",
-      "time_ms": 444
+      "time_ms": 27
     },
     {
       "tool": "get_functions",
       "args": {
-        "file_path": "apps/api/services/complex_billing.py"
+        "file_path": "apps/api/services/complex_billing.py",
+        "hints": false
       },
       "result_chars": 45,
       "result_empty": true,
@@ -182,12 +187,13 @@
       "call_index": 6,
       "preceded_by": "get_functions",
       "followed_by": "get_functions",
-      "time_ms": 465
+      "time_ms": 45
     },
     {
       "tool": "get_functions",
       "args": {
-        "file_path": "apps/api/services/complex_routing.py"
+        "file_path": "apps/api/services/complex_routing.py",
+        "hints": false
       },
       "result_chars": 46,
       "result_empty": true,
@@ -195,12 +201,13 @@
       "call_index": 7,
       "preceded_by": "get_functions",
       "followed_by": "get_functions",
-      "time_ms": 436
+      "time_ms": 380
     },
     {
       "tool": "get_functions",
       "args": {
-        "file_path": "apps/api/services/exports.py"
+        "file_path": "apps/api/services/exports.py",
+        "hints": false
       },
       "result_chars": 1492,
       "result_empty": false,
@@ -208,12 +215,13 @@
       "call_index": 8,
       "preceded_by": "get_functions",
       "followed_by": "get_functions",
-      "time_ms": 58
+      "time_ms": 670
     },
     {
       "tool": "get_functions",
       "args": {
-        "file_path": "apps/api/services/integrations.py"
+        "file_path": "apps/api/services/integrations.py",
+        "hints": false
       },
       "result_chars": 1637,
       "result_empty": false,
@@ -221,12 +229,13 @@
       "call_index": 9,
       "preceded_by": "get_functions",
       "followed_by": "get_functions",
-      "time_ms": 522
+      "time_ms": 470
     },
     {
       "tool": "get_functions",
       "args": {
-        "file_path": "apps/api/services/members.py"
+        "file_path": "apps/api/services/members.py",
+        "hints": false
       },
       "result_chars": 1552,
       "result_empty": false,
@@ -234,12 +243,13 @@
       "call_index": 10,
       "preceded_by": "get_functions",
       "followed_by": "get_functions",
-      "time_ms": 298
+      "time_ms": 465
     },
     {
       "tool": "get_functions",
       "args": {
-        "file_path": "apps/api/services/notifications.py"
+        "file_path": "apps/api/services/notifications.py",
+        "hints": false
       },
       "result_chars": 1696,
       "result_empty": false,
@@ -247,12 +257,13 @@
       "call_index": 11,
       "preceded_by": "get_functions",
       "followed_by": "get_functions",
-      "time_ms": 494
+      "time_ms": 466
     },
     {
       "tool": "get_functions",
       "args": {
-        "file_path": "apps/api/services/reports.py"
+        "file_path": "apps/api/services/reports.py",
+        "hints": false
       },
       "result_chars": 1510,
       "result_empty": false,
@@ -260,12 +271,13 @@
       "call_index": 12,
       "preceded_by": "get_functions",
       "followed_by": "get_functions",
-      "time_ms": 476
+      "time_ms": 473
     },
     {
       "tool": "get_functions",
       "args": {
-        "file_path": "apps/api/services/sessions.py"
+        "file_path": "apps/api/services/sessions.py",
+        "hints": false
       },
       "result_chars": 1578,
       "result_empty": false,
@@ -273,12 +285,13 @@
       "call_index": 13,
       "preceded_by": "get_functions",
       "followed_by": "get_functions",
-      "time_ms": 71
+      "time_ms": 282
     },
     {
       "tool": "get_functions",
       "args": {
-        "file_path": "apps/api/services/webhooks.py"
+        "file_path": "apps/api/services/webhooks.py",
+        "hints": false
       },
       "result_chars": 1576,
       "result_empty": false,
@@ -286,15 +299,15 @@
       "call_index": 14,
       "preceded_by": "get_functions",
       "followed_by": null,
-      "time_ms": 50
+      "time_ms": 55
     }
   ],
-  "total_context_chars_injected": 16216,
+  "total_context_chars_injected": 16264,
   "ts_tool_calls_count": 15,
-  "wall_time_seconds": 34.54,
-  "raw_response": "Voici les fonctions publiques avec plus d'un param\u00e8tre, fichier par fichier :\n\n### `audit.py`\n| Fonction | Signature |\n|---|---|\n| `log_action` | `(payload, user_id)` |\n| `query_logs` | `(payload, user_id)` |\n| `purge_old_logs` | `(payload, user_id)` |\n| `export_audit_trail` | `(payload, user_id)` |\n\n### `auth.py`\n| Fonction | Signature |\n|---|---|\n| `issue_token` | `(payload, user_id)` |\n| `revoke_token` | `(payload, user_id)` |\n| `hash_password` | `(payload, user_id)` |\n| `verify_password` | `(payload, user_id)` |\n\n### `billing.py`\n| Fonction | Signature |\n|---|---|\n| `calculate_invoice` | `(payload, user_id)` |\n| `apply_discount` | `(payload, user_id)` |\n| `charge_customer` | `(payload, user_id)` |\n| `refund_payment` | `(payload, user_id)` |\n| `list_invoices` | `(payload, user_id)` |\n| `void_invoice` | `(payload, user_id)` |\n\n### `exports.py`\n| Fonction | Signature |\n|---|---|\n| `start_export` | `(payload, user_id)` |\n| `poll_export` | `(payload, user_id)` |\n| `download_export` | `(payload, user_id)` |\n| `cancel_export` | `(payload, user_id)` |\n\n### `integrations.py`\n| Fonction | Signature |\n|---|---|\n| `connect_stripe` | `(payload, user_id)` |\n| `sync_stripe_customers` | `(payload, user_id)` |\n| `disconnect_stripe` | `(payload, user_id)` |\n| `handle_stripe_event` | `(payload, user_id)` |\n\n### `members.py`\n| Fonction | Signature |\n|---|---|\n| `create_member` | `(payload, user_id)` |\n| `update_member` | `(payload, user_id)` |\n| `deactivate_member` | `(payload, user_id)` |\n| `list_members` | `(payload, user_id)` |\n| `find_member_by_email` | `(payload, user_id)` |\n\n### `notifications.py`\n| Fonction | Signature |\n|---|---|\n| `send_email` | `(payload, user_id)` |\n| `send_sms` | `(payload, user_id)` |\n| `render_template` | `(payload, user_id)` |\n| `queue_notification` | `(payload, user_id)` |\n| `list_notifications` | `(payload, user_id)` |\n\n### `reports.py`\n| Fonction | Signature |\n|---|---|\n| `generate_monthly_report` | `(payload, user_id)` |\n| `generate_ytd_report` | `(payload, user_id)` |\n| `export_csv` | `(payload, user_id)` |\n| `aggregate_metrics` | `(payload, user_id)` |\n\n### `sessions.py`\n| Fonction | Signature |\n|---|---|\n| `create_session` | `(payload, user_id)` |\n| `validate_session` | `(payload, user_id)` |\n| `revoke_session` | `(payload, user_id)` |\n| `extend_session` | `(payload, user_id)` |\n| `list_user_sessions` | `(payload, user_id)` |\n\n### `webhooks.py`\n| Fonction | Signature |\n|---|---|\n| `dispatch_webhook` | `(payload, user_id)` |\n| `retry_webhook` | `(payload, user_id)` |\n| `verify_signature` | `(payload, user_id)` |\n| `register_webhook` | `(payload, user_id)` |\n| `list_webhooks` | `(payload, user_id)` |\n\nLes fichiers `complex_auth.py`, `complex_billing.py` et `complex_routing.py` ne contiennent chacun qu'une seule fonction publique \u00e0 un seul param\u00e8tre `(data)`, donc aucune ne correspond au crit\u00e8re.\n\n**Total : 47 fonctions publiques \u00e0 2 param\u00e8tres**, toutes suivant le pattern `(payload, user_id)`.",
+  "wall_time_seconds": 47.97,
+  "raw_response": "Voici les fonctions publiques (non `_underscore`, non `*_internal`) acceptant **plus d'un param\u00e8tre**, fichier par fichier :\n\n### `audit.py`\n| Fonction | Signature |\n|---|---|\n| `log_action` | `(payload, user_id)` |\n| `query_logs` | `(payload, user_id)` |\n| `purge_old_logs` | `(payload, user_id)` |\n| `export_audit_trail` | `(payload, user_id)` |\n\n### `auth.py`\n| Fonction | Signature |\n|---|---|\n| `issue_token` | `(payload, user_id)` |\n| `revoke_token` | `(payload, user_id)` |\n| `hash_password` | `(payload, user_id)` |\n| `verify_password` | `(payload, user_id)` |\n\n### `billing.py`\n| Fonction | Signature |\n|---|---|\n| `calculate_invoice` | `(payload, user_id)` |\n| `apply_discount` | `(payload, user_id)` |\n| `charge_customer` | `(payload, user_id)` |\n| `refund_payment` | `(payload, user_id)` |\n| `list_invoices` | `(payload, user_id)` |\n| `void_invoice` | `(payload, user_id)` |\n\n### `exports.py`\n| Fonction | Signature |\n|---|---|\n| `start_export` | `(payload, user_id)` |\n| `poll_export` | `(payload, user_id)` |\n| `download_export` | `(payload, user_id)` |\n| `cancel_export` | `(payload, user_id)` |\n\n### `integrations.py`\n| Fonction | Signature |\n|---|---|\n| `connect_stripe` | `(payload, user_id)` |\n| `sync_stripe_customers` | `(payload, user_id)` |\n| `disconnect_stripe` | `(payload, user_id)` |\n| `handle_stripe_event` | `(payload, user_id)` |\n\n### `members.py`\n| Fonction | Signature |\n|---|---|\n| `create_member` | `(payload, user_id)` |\n| `update_member` | `(payload, user_id)` |\n| `deactivate_member` | `(payload, user_id)` |\n| `list_members` | `(payload, user_id)` |\n| `find_member_by_email` | `(payload, user_id)` |\n\n### `notifications.py`\n| Fonction | Signature |\n|---|---|\n| `send_email` | `(payload, user_id)` |\n| `send_sms` | `(payload, user_id)` |\n| `render_template` | `(payload, user_id)` |\n| `queue_notification` | `(payload, user_id)` |\n| `list_notifications` | `(payload, user_id)` |\n\n### `reports.py`\n| Fonction | Signature |\n|---|---|\n| `generate_monthly_report` | `(payload, user_id)` |\n| `generate_ytd_report` | `(payload, user_id)` |\n| `export_csv` | `(payload, user_id)` |\n| `aggregate_metrics` | `(payload, user_id)` |\n\n### `sessions.py`\n| Fonction | Signature |\n|---|---|\n| `create_session` | `(payload, user_id)` |\n| `validate_session` | `(payload, user_id)` |\n| `revoke_session` | `(payload, user_id)` |\n| `extend_session` | `(payload, user_id)` |\n| `list_user_sessions` | `(payload, user_id)` |\n\n### `webhooks.py`\n| Fonction | Signature |\n|---|---|\n| `dispatch_webhook` | `(payload, user_id)` |\n| `retry_webhook` | `(payload, user_id)` |\n| `verify_signature` | `(payload, user_id)` |\n| `register_webhook` | `(payload, user_id)` |\n| `list_webhooks` | `(payload, user_id)` |\n\n### Fichiers sans fonctions publiques multi-param\u00e8tres\n\n- **`complex_auth.py`** \u2014 seule fonction publique : `authenticate_multi_factor(data)` (1 param)\n- **`complex_billing.py`** \u2014 seule fonction publique : `reconcile_payments(data)` (1 param)\n- **`complex_routing.py`** \u2014 seule fonction publique : `route_webhook_event(data)` (1 param)\n\n**Total : 47 fonctions publiques multi-param\u00e8tres**, toutes avec la signature uniforme `(payload, user_id)` (sauf `authenticate_user(credentials)` dans `auth.py` qui n'a qu'un param\u00e8tre et `validate_invoice_total(invoice)` dans `billing.py` qui n'en a qu'un non plus).",
   "error": null,
-  "score": 1,
+  "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T08:59:09.500856+00:00"
+  "timestamp": "2026-04-15T13:00:08.441237+00:00"
 }
