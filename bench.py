@@ -51,12 +51,6 @@ COMPRENDRE un symbole complet (localisation + source + callers + dépendances) �
 
 EDITING — To modify code, ALWAYS use replace_symbol_source or insert_near_symbol. NEVER use Edit or Write on code files (.py, .ts, .tsx, .js, .jsx). Edit/Write are only allowed for config files (.env, .yml, .md, .json).
 
-MEMORY — At the start of each task:
-  memory_search(query="<relevant keywords>", project="/root/projects/tsbench")
-  to retrieve observations from previous sessions.
-At the end of each task, if you discovered useful info:
-  memory_save(content="...", type="convention", title="...", project="/root/projects/tsbench")
-
 ## Workflow recipes (follow these exact patterns)
 
 LOCATE A SYMBOL:
@@ -85,9 +79,14 @@ Do not verify each duplicate with get_function_source afterwards.
 ORPHAN ENV VARS:
 switch_project → analyze_config(checks=["orphans"]) → stop
 
+FIND A BUG:
+If the prompt mentions a specific file name (e.g. buggy_auth.py), search for that EXACT file first with find_symbol or search_codebase before exploring related files.
+
 AFTER AN EMPTY RESULT:
 If find_symbol returns empty → try search_codebase
-If search_codebase returns empty → use Read/Grep (allowed for non-indexed files: .prisma, .sql, .graphql, .proto)"""
+If search_codebase returns empty → use Read/Grep (allowed for non-indexed files: .prisma, .sql, .graphql, .proto)
+
+IMPORTANT: Do NOT call memory_search or memory_save. Skip memory entirely."""
 
 # MCP config for Run B: token-savior only, with tsbench in WORKSPACE_ROOTS
 TS_MCP_CONFIG = {
@@ -426,17 +425,26 @@ def f1(expected: set, got: set) -> float:
     return 2 * precision * recall / (precision + recall)
 
 
-def _collect_strings_recursive(obj: object) -> list[str]:
-    """Recursively extract all string values from a nested dict/list structure."""
+def _collect_strings_recursive(obj: object, _skip_keys: set[str] | None = None) -> list[str]:
+    """Recursively extract meaningful string values from a nested dict/list structure.
+
+    Filters out pure numeric strings, very short strings (<3 chars), and dict keys
+    that are metadata rather than answer content.
+    """
+    _meta_keys = _skip_keys or {"cyclomatic", "depth", "max_bullets", "min_expected_count", "hint", "note", "scoring"}
     out: list[str] = []
     if isinstance(obj, str):
-        out.append(obj)
+        stripped = obj.strip()
+        if len(stripped) >= 3 and not stripped.replace(".", "").replace("-", "").isdigit():
+            out.append(stripped)
     elif isinstance(obj, dict):
-        for v in obj.values():
-            out.extend(_collect_strings_recursive(v))
+        for k, v in obj.items():
+            if k in _meta_keys:
+                continue
+            out.extend(_collect_strings_recursive(v, _meta_keys))
     elif isinstance(obj, list):
         for item in obj:
-            out.extend(_collect_strings_recursive(item))
+            out.extend(_collect_strings_recursive(item, _meta_keys))
     return out
 
 
@@ -457,14 +465,25 @@ def score_response(scoring: str, expected: dict, response: str) -> tuple[int, in
     text = response.lower()
 
     if scoring == "exact_match":
-        exp_file = (expected.get("file") or "").lower()
-        exp_symbol = (expected.get("symbol") or expected.get("type") or "").lower()
-        has_file = exp_file and exp_file in text
-        has_symbol = exp_symbol and exp_symbol in text
+        file_keys = ("file", "py_file", "ts_file", "schema_file", "from_file", "to_file")
+        symbol_keys = ("symbol", "type", "py_class", "ts_type", "handler", "function", "env_var")
+        exp_files = [expected.get(k, "").lower() for k in file_keys if expected.get(k)]
+        exp_symbols = [expected.get(k, "").lower() for k in symbol_keys if expected.get(k)]
+        has_file = any(f in text for f in exp_files) if exp_files else False
+        has_symbol = any(s in text for s in exp_symbols) if exp_symbols else False
         if has_file and has_symbol:
             return 2, max_score
         if has_file or has_symbol:
             return 1, max_score
+        if not exp_files and not exp_symbols:
+            all_strings = _collect_strings_recursive(expected)
+            if all_strings:
+                hits = sum(1 for s in all_strings if s.lower() in text)
+                ratio = hits / len(all_strings)
+                if ratio >= 0.9:
+                    return 2, max_score
+                if ratio >= 0.5:
+                    return 1, max_score
         return 0, max_score
 
     if scoring in ("list_f1", "set_match_strict", "set_match_loose"):
@@ -534,7 +553,7 @@ def score_response(scoring: str, expected: dict, response: str) -> tuple[int, in
         candidates = _collect_strings_recursive(expected)
         if not candidates:
             return 0, max_score
-        if scoring == "boolean_with_evidence":
+        if scoring in ("boolean_with_evidence", "free_form_rubric"):
             hits = sum(1 for c in candidates if _keyword_match(c, text))
         else:
             hits = sum(1 for c in candidates if c.lower() in text)

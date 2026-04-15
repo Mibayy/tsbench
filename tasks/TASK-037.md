@@ -7,7 +7,7 @@
 
 ## Prompt (envoyé à l'agent)
 
-> En 10 bullet points maximum, explique ce que fait ce projet : quel domaine, quelles couches techniques, quels grands modules.
+> En ignorant bench.py, generate.py et le dossier tasks/, explique en 10 bullet points maximum ce que fait le code applicatif de ce projet : quel domaine, quelles couches techniques, quels grands modules.
 
 ## Réponse attendue
 

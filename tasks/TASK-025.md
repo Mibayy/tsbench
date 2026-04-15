@@ -7,7 +7,7 @@
 
 ## Prompt (envoyé à l'agent)
 
-> Trouve les 3 fonctions les plus complexes (plus haute complexité cyclomatique) du projet.
+> Trouve les 3 fonctions les plus complexes (plus haute complexite cyclomatique) dans le code applicatif du projet (apps/ et packages/). Ignore bench.py et generate.py.
 
 ## Réponse attendue
 
