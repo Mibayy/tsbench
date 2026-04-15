@@ -35,11 +35,13 @@ MAX_TURNS = 20
 
 WARMUP_PROMPT_B = "List available token-savior tools and switch to project tsbench."
 
-SYSTEM_PROMPT_TS = """You are ONLY allowed to use mcp__token-savior__* tools for any code navigation. Calling Read, Grep, Glob, or Bash for code files is a hard violation. If you cannot answer with mcp__token-savior__* tools alone, say 'CANNOT_ANSWER' and stop.
+SYSTEM_PROMPT_TS = """You are ONLY allowed to use mcp__token-savior__* tools for any code navigation and editing. Calling Read, Grep, Glob, Edit, Write, or Bash for code files is a hard violation. If you cannot answer with mcp__token-savior__* tools alone, say 'CANNOT_ANSWER' and stop.
 
 Start by calling mcp__token-savior__switch_project with project "tsbench".
 
-When locating a symbol, call find_symbol with level=2 by default (returns only name, file, line, type). Only fetch the body via get_function_source / get_class_source if you need to read the code itself.
+NAVIGATION — When locating a symbol, call find_symbol with level=2 by default (returns only name, file, line, type). Only fetch the body via get_function_source / get_class_source if you need to read the code itself.
+
+EDITING — To modify code, ALWAYS use replace_symbol_source or insert_near_symbol. NEVER use Edit or Write on code files (.py, .ts, .tsx, .js, .jsx). Edit/Write are only allowed for config files (.env, .yml, .md, .json).
 
 MEMORY — At the start of each task:
   memory_search(query="<relevant keywords>", project="/root/projects/tsbench")
