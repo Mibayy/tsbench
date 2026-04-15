@@ -2,12 +2,12 @@
   "task_id": "TASK-016",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 5,
-  "output_tokens": 260,
-  "cache_creation_input_tokens": 12132,
-  "cache_read_input_tokens": 124897,
-  "total_tokens": 137294,
-  "active_tokens": 12397,
+  "input_tokens": 4,
+  "output_tokens": 213,
+  "cache_creation_input_tokens": 12237,
+  "cache_read_input_tokens": 79475,
+  "total_tokens": 91929,
+  "active_tokens": 12454,
   "turns_count": 4,
   "tool_calls_count": 2,
   "tool_calls_breakdown": {
@@ -38,7 +38,7 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "find_impacted_test_files",
-      "time_ms": 147
+      "time_ms": 306
     },
     {
       "tool": "find_impacted_test_files",
@@ -56,15 +56,15 @@
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": null,
-      "time_ms": 585
+      "time_ms": 673
     }
   ],
   "total_context_chars_injected": 251,
   "ts_tool_calls_count": 2,
-  "wall_time_seconds": 19.0,
-  "raw_response": "Le fichier de test \u00e0 rejouer en priorit\u00e9 est :\n\n- **`tests/test_billing.py`** \u2014 il importe directement `apps/api/services/billing.py`, donc il couvre `compute_invoice`.\n\nC'est le seul fichier de test index\u00e9 qui d\u00e9pend de ce module.",
+  "wall_time_seconds": 13.23,
+  "raw_response": "Le fichier de test \u00e0 rejouer en priorit\u00e9 est :\n\n- **`tests/test_billing.py`** \u2014 il importe directement `apps/api/services/billing.py`.",
   "error": null,
-  "score": 2,
+  "score": 1,
   "max_score": 2,
-  "timestamp": "2026-04-15T18:11:11.194219+00:00"
+  "timestamp": "2026-04-15T20:40:08.325795+00:00"
 }

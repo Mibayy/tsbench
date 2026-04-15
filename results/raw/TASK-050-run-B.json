@@ -3,12 +3,12 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 8,
-  "output_tokens": 1012,
-  "cache_creation_input_tokens": 5601,
-  "cache_read_input_tokens": 271569,
-  "total_tokens": 278190,
-  "active_tokens": 6621,
-  "turns_count": 9,
+  "output_tokens": 877,
+  "cache_creation_input_tokens": 5646,
+  "cache_read_input_tokens": 272850,
+  "total_tokens": 279381,
+  "active_tokens": 6531,
+  "turns_count": 8,
   "tool_calls_count": 5,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
@@ -30,7 +30,7 @@
     },
     {
       "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 171,
+      "result_chars": 143,
       "is_error": false
     },
     {
@@ -56,7 +56,7 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "find_symbol",
-      "time_ms": 22491
+      "time_ms": 99
     },
     {
       "tool": "find_symbol",
@@ -70,20 +70,20 @@
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": "get_function_source",
-      "time_ms": 24518
+      "time_ms": 734
     },
     {
       "tool": "get_function_source",
       "args": {
         "name": "reconcile_payments"
       },
-      "result_chars": 171,
+      "result_chars": 143,
       "result_empty": false,
       "is_error": false,
       "call_index": 2,
       "preceded_by": "find_symbol",
       "followed_by": "get_full_context",
-      "time_ms": 26269
+      "time_ms": 292
     },
     {
       "tool": "get_full_context",
@@ -97,7 +97,7 @@
       "call_index": 3,
       "preceded_by": "get_function_source",
       "followed_by": "get_backward_slice",
-      "time_ms": 24188
+      "time_ms": 126
     },
     {
       "tool": "get_backward_slice",
@@ -112,15 +112,15 @@
       "call_index": 4,
       "preceded_by": "get_full_context",
       "followed_by": null,
-      "time_ms": 25753
+      "time_ms": 64
     }
   ],
-  "total_context_chars_injected": 2325,
+  "total_context_chars_injected": 2297,
   "ts_tool_calls_count": 5,
-  "wall_time_seconds": 162.92,
-  "raw_response": "Voici l'analyse du backward slice de `reconcile_payments` :\n\n## Symboles influen\u00e7ant `result` (retour, ligne 35)\n\n**La fonction est enti\u00e8rement auto-contenue** \u2014 elle n'a **aucune d\u00e9pendance externe** (ni imports, ni appels \u00e0 d'autres fonctions). Le param\u00e8tre `data` n'est **jamais utilis\u00e9**.\n\n### Variables internes influen\u00e7ant `result` :\n\n| Variable | R\u00f4le |\n|----------|------|\n| `result` | Accumulateur principal (init \u00e0 0, ligne 5) |\n| `items` | `list(range(10))` \u2014 contr\u00f4le les deux boucles `for` (lignes 11, 30) |\n| `it_1` | It\u00e9rateur de la 1\u00e8re boucle \u2014 modifie `result` via `%2` et `%3` |\n| `it_5` | It\u00e9rateur de la 2\u00e8me boucle \u2014 m\u00eame logique |\n\n### Flux de donn\u00e9es (25 lignes sur 33, r\u00e9duction de 24.2%) :\n\n1. **Init** : `result = 0`, `items = list(range(10))`\n2. **Branche conditionnelle** : `if result < 0` (dead code \u2014 `result` vaut 0)\n3. **Boucle 1** : accumulation paire/impaire sur `it_1`\n4. **Try/except** : `result * 3` (les handlers `ValueError`/`KeyError` ne peuvent pas se d\u00e9clencher ici)\n5. **While** : incr\u00e9mente `result` jusqu'\u00e0 `\u2265 30` ou `break` si `== 3`\n6. **Branche conditionnelle** : ajuste selon `result < 12`\n7. **Boucle 2** : m\u00eame accumulation sur `it_5`\n\n**Aucun symbole externe** n'influence transitivement cette fonction.",
+  "wall_time_seconds": 43.91,
+  "raw_response": "## Backward Slice de `reconcile_payments`\n\n### Symboles externes\n\n**Aucun.** La fonction n'a **z\u00e9ro d\u00e9pendance** externe \u2014 elle n'appelle aucune autre fonction et n'importe aucun module. Son seul param\u00e8tre est `data: dict`, qui n'est d'ailleurs **jamais utilis\u00e9** dans le corps.\n\n### Slice interne (variables influen\u00e7ant `return result`)\n\nLe backward slice sur `result` \u00e0 la ligne 35 identifie **25 lignes sur 33** (r\u00e9duction de 24.2%). Les variables qui influencent directement ou transitivement la valeur retourn\u00e9e sont :\n\n| Variable | R\u00f4le |\n|----------|------|\n| `result` | Accumulateur principal, initialis\u00e9 \u00e0 `0` (l.5) |\n| `items` | `list(range(10))` \u2014 pilote les deux boucles `for` (l.6) |\n| `it_1` | It\u00e9rateur de la 1\u00e8re boucle (l.11-15), modifie `result` selon `% 2` / `% 3` |\n| `it_5` | It\u00e9rateur de la 2\u00e8me boucle (l.30-34), m\u00eame logique |\n\n### Lignes exclues du slice\n\nSeules les lignes 23-24 (`if result == 3: break`) du `while` sont partiellement exclues comme contr\u00f4le de flux, ainsi que la ligne du param\u00e8tre `data` qui n'est jamais lu.\n\n**Conclusion :** `reconcile_payments` est une fonction **enti\u00e8rement auto-contenue** \u2014 aucun symbole externe ne l'influence, ni directement ni transitivement.",
   "error": null,
   "score": 1,
   "max_score": 2,
-  "timestamp": "2026-04-15T19:42:18.992158+00:00"
+  "timestamp": "2026-04-15T21:00:12.234950+00:00"
 }

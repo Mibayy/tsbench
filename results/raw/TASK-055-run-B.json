@@ -3,11 +3,11 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 6,
-  "output_tokens": 383,
-  "cache_creation_input_tokens": 4705,
-  "cache_read_input_tokens": 176168,
-  "total_tokens": 181262,
-  "active_tokens": 5094,
+  "output_tokens": 387,
+  "cache_creation_input_tokens": 45720,
+  "cache_read_input_tokens": 136109,
+  "total_tokens": 182222,
+  "active_tokens": 46113,
   "turns_count": 5,
   "tool_calls_count": 3,
   "tool_calls_breakdown": {
@@ -44,7 +44,7 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "find_symbol",
-      "time_ms": 92
+      "time_ms": 100
     },
     {
       "tool": "find_symbol",
@@ -58,7 +58,7 @@
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": "insert_near_symbol",
-      "time_ms": 368
+      "time_ms": 392
     },
     {
       "tool": "insert_near_symbol",
@@ -74,15 +74,15 @@
       "call_index": 2,
       "preceded_by": "find_symbol",
       "followed_by": null,
-      "time_ms": 110
+      "time_ms": 65
     }
   ],
   "total_context_chars_injected": 353,
   "ts_tool_calls_count": 3,
-  "wall_time_seconds": 18.18,
+  "wall_time_seconds": 16.28,
   "raw_response": "Fonction `validate_invoice_total` ins\u00e9r\u00e9e apr\u00e8s `calculate_invoice` \u00e0 la ligne 47 de `apps/api/services/billing.py`. Elle retourne `True` si `invoice[\"total\"] > 0`, `False` sinon.",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T19:49:47.693815+00:00"
+  "timestamp": "2026-04-15T21:04:46.007635+00:00"
 }

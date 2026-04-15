@@ -3,12 +3,12 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 5,
-  "output_tokens": 546,
-  "cache_creation_input_tokens": 12183,
-  "cache_read_input_tokens": 124777,
-  "total_tokens": 137511,
-  "active_tokens": 12734,
-  "turns_count": 4,
+  "output_tokens": 465,
+  "cache_creation_input_tokens": 16545,
+  "cache_read_input_tokens": 120817,
+  "total_tokens": 137832,
+  "active_tokens": 17015,
+  "turns_count": 3,
   "tool_calls_count": 2,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
@@ -22,7 +22,7 @@
     },
     {
       "tool": "mcp__token-savior-recall__get_dependents",
-      "result_chars": 694,
+      "result_chars": 696,
       "is_error": false
     }
   ],
@@ -38,28 +38,28 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "get_dependents",
-      "time_ms": 122
+      "time_ms": 92
     },
     {
       "tool": "get_dependents",
       "args": {
         "name": "medium_util"
       },
-      "result_chars": 694,
+      "result_chars": 696,
       "result_empty": false,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": null,
-      "time_ms": 462
+      "time_ms": 733
     }
   ],
-  "total_context_chars_injected": 754,
+  "total_context_chars_injected": 756,
   "ts_tool_calls_count": 2,
-  "wall_time_seconds": 21.84,
-  "raw_response": "Voici la liste **compl\u00e8te** des 8 fichiers qui appellent `medium_util` :\n\n| # | Fichier | Fonction appelante | Lignes |\n|---|---------|-------------------|--------|\n| 1 | `apps/api/callers/caller_hub_util_00.py` | `do_it_0` | 4-6 |\n| 2 | `apps/api/callers/caller_hub_util_01.py` | `do_it_1` | 4-6 |\n| 3 | `apps/api/callers/caller_hub_util_02.py` | `do_it_2` | 4-6 |\n| 4 | `apps/api/callers/caller_hub_util_03.py` | `do_it_3` | 4-6 |\n| 5 | `apps/api/callers/caller_hub_util_04.py` | `do_it_4` | 4-6 |\n| 6 | `apps/api/callers/caller_hub_util_05.py` | `do_it_5` | 4-6 |\n| 7 | `apps/api/callers/caller_hub_util_06.py` | `do_it_6` | 4-6 |\n| 8 | `apps/api/callers/caller_hub_util_07.py` | `do_it_7` | 4-6 |\n\n8 call sites au total, tous dans `apps/api/callers/`, chacun dans une fonction `do_it_N`.",
+  "wall_time_seconds": 18.18,
+  "raw_response": "Voici les **8 fichiers** qui appellent `medium_util`, avec les fonctions appelantes :\n\n| # | Fichier | Fonction |\n|---|---------|----------|\n| 1 | `apps/api/callers/caller_hub_util_00.py` | `do_it_0` |\n| 2 | `apps/api/callers/caller_small_util_01.py` | `do_it_1` |\n| 3 | `apps/api/callers/caller_hub_util_02.py` | `do_it_2` |\n| 4 | `apps/api/callers/caller_hub_util_03.py` | `do_it_3` |\n| 5 | `apps/api/callers/caller_hub_util_04.py` | `do_it_4` |\n| 6 | `apps/api/callers/caller_hub_util_05.py` | `do_it_5` |\n| 7 | `apps/api/callers/caller_hub_util_06.py` | `do_it_6` |\n| 8 | `apps/api/callers/caller_hub_util_07.py` | `do_it_7` |\n\nTous les call sites se trouvent dans le r\u00e9pertoire `apps/api/callers/`.",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T18:07:22.153371+00:00"
+  "timestamp": "2026-04-15T20:37:20.406187+00:00"
 }

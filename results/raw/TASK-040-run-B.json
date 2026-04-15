@@ -3,18 +3,18 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 8,
-  "output_tokens": 911,
-  "cache_creation_input_tokens": 6543,
-  "cache_read_input_tokens": 274571,
-  "total_tokens": 282033,
-  "active_tokens": 7462,
-  "turns_count": 9,
+  "output_tokens": 735,
+  "cache_creation_input_tokens": 6250,
+  "cache_read_input_tokens": 275761,
+  "total_tokens": 282754,
+  "active_tokens": 6993,
+  "turns_count": 8,
   "tool_calls_count": 5,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
     "mcp__token-savior-recall__analyze_config": 1,
-    "mcp__token-savior-recall__get_structure_summary": 1,
-    "mcp__token-savior-recall__search_codebase": 2
+    "mcp__token-savior-recall__search_codebase": 2,
+    "mcp__token-savior-recall__get_structure_summary": 1
   },
   "tool_calls_detail": [
     {
@@ -24,7 +24,12 @@
     },
     {
       "tool": "mcp__token-savior-recall__analyze_config",
-      "result_chars": 2896,
+      "result_chars": 2824,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 889,
       "is_error": false
     },
     {
@@ -34,12 +39,7 @@
     },
     {
       "tool": "mcp__token-savior-recall__search_codebase",
-      "result_chars": 889,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__search_codebase",
-      "result_chars": 889,
+      "result_chars": 498,
       "is_error": false
     }
   ],
@@ -55,7 +55,7 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "analyze_config",
-      "time_ms": 94
+      "time_ms": 108
     },
     {
       "tool": "analyze_config",
@@ -65,13 +65,27 @@
         ],
         "file_path": "config/app.config.yaml"
       },
-      "result_chars": 2896,
+      "result_chars": 2824,
       "result_empty": false,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
+      "followed_by": "search_codebase",
+      "time_ms": 596
+    },
+    {
+      "tool": "search_codebase",
+      "args": {
+        "pattern": "app\\.config\\.yaml|load.*config|app_config|appConfig",
+        "max_results": 20
+      },
+      "result_chars": 889,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 2,
+      "preceded_by": "analyze_config",
       "followed_by": "get_structure_summary",
-      "time_ms": 849
+      "time_ms": 139
     },
     {
       "tool": "get_structure_summary",
@@ -81,44 +95,32 @@
       "result_chars": 426,
       "result_empty": false,
       "is_error": false,
-      "call_index": 2,
-      "preceded_by": "analyze_config",
-      "followed_by": "search_codebase",
-      "time_ms": 42
-    },
-    {
-      "tool": "search_codebase",
-      "args": {
-        "pattern": "app\\.config|app\\.name|app\\.version|features\\.billing|features\\.exports|features\\.audit|pagination\\.default|pagination\\.max|timeouts\\.db|timeouts\\.http"
-      },
-      "result_chars": 889,
-      "result_empty": false,
-      "is_error": false,
       "call_index": 3,
-      "preceded_by": "get_structure_summary",
+      "preceded_by": "search_codebase",
       "followed_by": "search_codebase",
-      "time_ms": 142
+      "time_ms": 100
     },
     {
       "tool": "search_codebase",
       "args": {
-        "pattern": "app\\.config\\.yaml|load.*config.*yaml|yaml\\.safe_load|config\\[.app.\\]|config\\[.features.\\]|config\\[.pagination.\\]|config\\[.timeouts.\\]"
+        "pattern": "app\\.name|app\\.version|features\\.billing|features\\.exports|features\\.audit|pagination\\.default|pagination\\.max|timeouts\\.db|timeouts\\.http",
+        "max_results": 30
       },
-      "result_chars": 889,
+      "result_chars": 498,
       "result_empty": false,
       "is_error": false,
       "call_index": 4,
-      "preceded_by": "search_codebase",
+      "preceded_by": "get_structure_summary",
       "followed_by": null,
-      "time_ms": 108
+      "time_ms": 129
     }
   ],
-  "total_context_chars_injected": 5160,
+  "total_context_chars_injected": 4697,
   "ts_tool_calls_count": 5,
-  "wall_time_seconds": 35.84,
-  "raw_response": "**Aucun des champs de `config/app.config.yaml` n'est consomm\u00e9 par le code applicatif.** Voici le d\u00e9tail :\n\n| Cl\u00e9 YAML | Consomm\u00e9e ? |\n|---|---|\n| `app.name` | Non |\n| `app.version` | Non |\n| `features.billing` | Non |\n| `features.exports` | Non |\n| `features.audit` | Non |\n| `pagination.default` | Non |\n| `pagination.max` | Non |\n| `timeouts.db` | Non |\n| `timeouts.http` | Non |\n\nLe fichier YAML existe mais **aucun code ne le charge ni ne lit ses cl\u00e9s**. Il n'y a aucun `yaml.safe_load`, aucun import de ce fichier, ni aucune r\u00e9f\u00e9rence \u00e0 ses cl\u00e9s dans le code source applicatif (les seules mentions se trouvent dans `generate.py` qui *g\u00e9n\u00e8re* le fichier, `build_tasks.py` et `tasks/TASK-040.md` qui posent cette m\u00eame question).\n\n**Les 9 cl\u00e9s sont donc toutes orphelines** \u2014 le fichier de config est d\u00e9claratif mais mort.",
+  "wall_time_seconds": 32.92,
+  "raw_response": "**Non \u2014 aucun des champs de `config/app.config.yaml` n'est consomm\u00e9 dans le code.**\n\nLe fichier d\u00e9clare 8 cl\u00e9s (`app.name`, `app.version`, `features.billing`, `features.exports`, `features.audit`, `pagination.default`, `pagination.max`, `timeouts.db`, `timeouts.http`), mais une recherche dans tout le codebase ne trouve **aucune r\u00e9f\u00e9rence** \u00e0 ces cl\u00e9s en dehors de la question de t\u00e2che elle-m\u00eame et du script de g\u00e9n\u00e9ration.\n\nLe code utilise en revanche des variables d'environnement directement (comme `DEFAULT_PAGE_SIZE`, `DATABASE_URL`, `STRIPE_API_KEY`, etc. dans `apps/api/config.py`) \u2014 qui elles-m\u00eames ne sont d\u00e9finies dans aucun fichier de config (24 \"ghost keys\" d\u00e9tect\u00e9es). Le fichier `app.config.yaml` est donc **enti\u00e8rement orphelin** : il n'est ni charg\u00e9 ni lu par aucun module applicatif.",
   "error": null,
-  "score": 1,
+  "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T19:27:26.126177+00:00"
+  "timestamp": "2026-04-15T20:55:36.081343+00:00"
 }

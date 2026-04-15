@@ -3,11 +3,11 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 5,
-  "output_tokens": 222,
-  "cache_creation_input_tokens": 4586,
-  "cache_read_input_tokens": 132844,
-  "total_tokens": 137657,
-  "active_tokens": 4813,
+  "output_tokens": 217,
+  "cache_creation_input_tokens": 12394,
+  "cache_read_input_tokens": 125734,
+  "total_tokens": 138350,
+  "active_tokens": 12616,
   "turns_count": 4,
   "tool_calls_count": 2,
   "tool_calls_breakdown": {
@@ -38,7 +38,7 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "find_impacted_test_files",
-      "time_ms": 117
+      "time_ms": 127
     },
     {
       "tool": "find_impacted_test_files",
@@ -53,15 +53,15 @@
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": null,
-      "time_ms": 431
+      "time_ms": 461
     }
   ],
   "total_context_chars_injected": 251,
   "ts_tool_calls_count": 2,
-  "wall_time_seconds": 22.97,
+  "wall_time_seconds": 19.23,
   "raw_response": "Le module `apps/api/services/billing.py` est couvert par un seul fichier de test :\n\n- **`tests/test_billing.py`** \u2014 il importe directement depuis `apps/api/services/billing.py`.",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T19:21:17.049377+00:00"
+  "timestamp": "2026-04-15T20:50:46.878428+00:00"
 }

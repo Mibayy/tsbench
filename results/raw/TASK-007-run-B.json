@@ -3,11 +3,11 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 5,
-  "output_tokens": 275,
-  "cache_creation_input_tokens": 11976,
-  "cache_read_input_tokens": 124587,
-  "total_tokens": 136843,
-  "active_tokens": 12256,
+  "output_tokens": 237,
+  "cache_creation_input_tokens": 11981,
+  "cache_read_input_tokens": 124966,
+  "total_tokens": 137189,
+  "active_tokens": 12223,
   "turns_count": 4,
   "tool_calls_count": 2,
   "tool_calls_breakdown": {
@@ -38,7 +38,7 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "get_dependents",
-      "time_ms": 115
+      "time_ms": 101
     },
     {
       "tool": "get_dependents",
@@ -51,15 +51,15 @@
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": null,
-      "time_ms": 439
+      "time_ms": 459
     }
   ],
   "total_context_chars_injected": 155,
   "ts_tool_calls_count": 2,
-  "wall_time_seconds": 19.08,
-  "raw_response": "`lonely_util` n'a qu'**un seul call site** dans tout le projet :\n\n| Fichier | Fonction appelante | Ligne |\n|---|---|---|\n| `apps/api/callers/caller_hub_util_00.py` | `do_it_0` | 4\u20136 |\n\nC'est exhaustif \u2014 aucun autre fichier ne r\u00e9f\u00e9rence `lonely_util`.",
+  "wall_time_seconds": 16.3,
+  "raw_response": "`lonely_util` n'a qu'**un seul call site** :\n\n| Fichier | Fonction | Ligne |\n|---|---|---|\n| `apps/api/callers/caller_hub_util_00.py` | `do_it_0` | 4\u20136 |\n\nAucun autre fichier de l'index ne l'appelle.",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T18:06:36.693194+00:00"
+  "timestamp": "2026-04-15T20:36:42.152327+00:00"
 }

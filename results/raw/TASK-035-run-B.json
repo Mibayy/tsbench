@@ -2,19 +2,18 @@
   "task_id": "TASK-035",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 7,
-  "output_tokens": 662,
-  "cache_creation_input_tokens": 13279,
-  "cache_read_input_tokens": 216797,
-  "total_tokens": 230745,
-  "active_tokens": 13948,
-  "turns_count": 6,
-  "tool_calls_count": 4,
+  "input_tokens": 9,
+  "output_tokens": 750,
+  "cache_creation_input_tokens": 7811,
+  "cache_read_input_tokens": 321203,
+  "total_tokens": 329773,
+  "active_tokens": 8570,
+  "turns_count": 8,
+  "tool_calls_count": 6,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__search_codebase": 1,
-    "mcp__token-savior-recall__get_function_source": 1,
-    "mcp__token-savior-recall__get_full_context": 1
+    "mcp__token-savior-recall__search_codebase": 2,
+    "mcp__token-savior-recall__get_function_source": 3
   },
   "tool_calls_detail": [
     {
@@ -24,17 +23,27 @@
     },
     {
       "tool": "mcp__token-savior-recall__search_codebase",
-      "result_chars": 2266,
+      "result_chars": 2,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 3683,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 354,
+      "result_chars": 231,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__get_full_context",
-      "result_chars": 1126,
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 323,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 467,
       "is_error": false
     }
   ],
@@ -50,57 +59,85 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "search_codebase",
-      "time_ms": 120
+      "time_ms": 92
     },
     {
       "tool": "search_codebase",
       "args": {
-        "pattern": "password.*valid|validatePassword|authenticate|login.*password",
+        "pattern": "password.*valid|validate.*password|check.*password",
         "max_results": 20
       },
-      "result_chars": 2266,
-      "result_empty": false,
+      "result_chars": 2,
+      "result_empty": true,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
-      "followed_by": "get_function_source",
-      "time_ms": 672
+      "followed_by": "search_codebase",
+      "time_ms": 698
     },
     {
-      "tool": "get_function_source",
+      "tool": "search_codebase",
       "args": {
-        "name": "authenticate_user",
-        "file_path": "apps/api/services/auth.py"
+        "pattern": "password",
+        "max_results": 30
       },
-      "result_chars": 354,
+      "result_chars": 3683,
       "result_empty": false,
       "is_error": false,
       "call_index": 2,
       "preceded_by": "search_codebase",
-      "followed_by": "get_full_context",
-      "time_ms": 351
+      "followed_by": "get_function_source",
+      "time_ms": 73
     },
     {
-      "tool": "get_full_context",
+      "tool": "get_function_source",
       "args": {
-        "name": "authenticate_user",
-        "depth": 0
+        "name": "buggy_verify_password"
       },
-      "result_chars": 1126,
+      "result_chars": 231,
       "result_empty": false,
       "is_error": false,
       "call_index": 3,
+      "preceded_by": "search_codebase",
+      "followed_by": "get_function_source",
+      "time_ms": 300
+    },
+    {
+      "tool": "get_function_source",
+      "args": {
+        "name": "buggy_verify_password",
+        "level": 0
+      },
+      "result_chars": 323,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 4,
+      "preceded_by": "get_function_source",
+      "followed_by": "get_function_source",
+      "time_ms": 309
+    },
+    {
+      "tool": "get_function_source",
+      "args": {
+        "name": "buggy_verify_password",
+        "level": 0,
+        "force_full": true
+      },
+      "result_chars": 467,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 5,
       "preceded_by": "get_function_source",
       "followed_by": null,
-      "time_ms": 52
+      "time_ms": 324
     }
   ],
-  "total_context_chars_injected": 3806,
-  "ts_tool_calls_count": 4,
-  "wall_time_seconds": 29.72,
-  "raw_response": "Le bug est dans `apps/api/services/auth.py:14` \u2014 la fonction `authenticate_user`.\n\n**Probl\u00e8me :** La fonction ne valide **jamais** le mot de passe. Elle :\n\n1. Ex\u00e9cute ~30 lignes de code mort (variables `x_0` \u00e0 `x_17` inutilis\u00e9es)\n2. Appelle `_auth_admin_db()` (r\u00e9sultat ignor\u00e9)\n3. Retourne **directement `{'ok': True, ...}`** sans jamais v\u00e9rifier `credentials`\n\nIl n'y a aucun appel \u00e0 `verify_password` ou `hash_password` (pourtant disponibles dans le m\u00eame module). Le param\u00e8tre `credentials` n'est m\u00eame pas lu \u2014 la fonction accepte n'importe quoi, y compris un dict vide ou un mot de passe vide/nul.\n\n**De plus**, la fonction r\u00e9f\u00e9rence `payload` et `user_id` qui ne sont pas d\u00e9finis dans sa port\u00e9e (vestiges de l'ancienne signature `authenticate_user(payload, user_id)`), ce qui provoquerait un `NameError` \u00e0 l'ex\u00e9cution \u2014 signe que ce code est cass\u00e9 et n'a probablement pas \u00e9t\u00e9 test\u00e9 apr\u00e8s le refactoring de la signature.",
+  "total_context_chars_injected": 4766,
+  "ts_tool_calls_count": 6,
+  "wall_time_seconds": 37.89,
+  "raw_response": "**Fichier** : `apps/api/utils/buggy_auth.py`, fonction `buggy_verify_password`\n\n**Le bug** (ligne 10-11) :\n\n```python\nif not input_password or not stored_hash:\n    return True  # <-- devrait \u00eatre False\n```\n\nQuand `input_password` est une cha\u00eene vide (`\"\"`), `not input_password` est `True`, donc la fonction **retourne `True`** \u2014 authentification r\u00e9ussie sans mot de passe.\n\n**Pourquoi c'est critique** : un attaquant peut s'authentifier sur n'importe quel compte en envoyant un mot de passe vide.\n\n**Correction** : remplacer `return True` par `return False`. Il faudrait aussi remplacer la comparaison `==` par `hmac.compare_digest()` pour \u00e9liminer la vuln\u00e9rabilit\u00e9 de timing attack sur la ligne 12.",
   "error": null,
-  "score": 0,
+  "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T20:17:35.147992+00:00"
+  "timestamp": "2026-04-15T20:52:25.903212+00:00"
 }

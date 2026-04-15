@@ -3,11 +3,11 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 5,
-  "output_tokens": 241,
-  "cache_creation_input_tokens": 4451,
-  "cache_read_input_tokens": 132991,
-  "total_tokens": 137688,
-  "active_tokens": 4697,
+  "output_tokens": 240,
+  "cache_creation_input_tokens": 4566,
+  "cache_read_input_tokens": 133580,
+  "total_tokens": 138391,
+  "active_tokens": 4811,
   "turns_count": 4,
   "tool_calls_count": 2,
   "tool_calls_breakdown": {
@@ -51,15 +51,15 @@
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": null,
-      "time_ms": 399
+      "time_ms": 673
     }
   ],
   "total_context_chars_injected": 180,
   "ts_tool_calls_count": 2,
-  "wall_time_seconds": 15.37,
-  "raw_response": "Imports locaux de `apps/api/services/auth.py` :\n\n1. `apps/api/config.py`\n2. `apps/api/db.py`\n3. `apps/api/models/auth.py`\n4. `apps/api/utils/errors.py`\n5. `apps/api/utils/logging.py`",
+  "wall_time_seconds": 16.05,
+  "raw_response": "Les imports locaux de `apps/api/services/auth.py` sont :\n\n1. `apps/api/config.py`\n2. `apps/api/db.py`\n3. `apps/api/models/auth.py`\n4. `apps/api/utils/errors.py`\n5. `apps/api/utils/logging.py`",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T19:39:02.125091+00:00"
+  "timestamp": "2026-04-15T20:58:50.738468+00:00"
 }

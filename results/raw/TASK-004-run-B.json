@@ -3,12 +3,12 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 6,
-  "output_tokens": 260,
-  "cache_creation_input_tokens": 13118,
-  "cache_read_input_tokens": 170459,
-  "total_tokens": 183843,
-  "active_tokens": 13384,
-  "turns_count": 5,
+  "output_tokens": 286,
+  "cache_creation_input_tokens": 46483,
+  "cache_read_input_tokens": 137202,
+  "total_tokens": 183977,
+  "active_tokens": 46775,
+  "turns_count": 6,
   "tool_calls_count": 3,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
@@ -28,7 +28,7 @@
     },
     {
       "tool": "mcp__token-savior-recall__search_codebase",
-      "result_chars": 2103,
+      "result_chars": 543,
       "is_error": false
     }
   ],
@@ -44,7 +44,7 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "get_routes",
-      "time_ms": 115
+      "time_ms": 120
     },
     {
       "tool": "get_routes",
@@ -55,28 +55,29 @@
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": "search_codebase",
-      "time_ms": 464
+      "time_ms": 670
     },
     {
       "tool": "search_codebase",
       "args": {
-        "pattern": "POST.*billing|billing.*POST|@.*route.*billing|/api/billing"
+        "pattern": "POST.*billing|billing.*POST|@.*route.*billing",
+        "max_results": 10
       },
-      "result_chars": 2103,
+      "result_chars": 543,
       "result_empty": false,
       "is_error": false,
       "call_index": 2,
       "preceded_by": "get_routes",
       "followed_by": null,
-      "time_ms": 139
+      "time_ms": 212
     }
   ],
-  "total_context_chars_injected": 3796,
+  "total_context_chars_injected": 2236,
   "ts_tool_calls_count": 3,
-  "wall_time_seconds": 21.49,
-  "raw_response": "La route `POST /api/billing` est d\u00e9finie dans **`apps/api/routers/billing.py`** (ligne 7), avec le handler `create_billing`.",
+  "wall_time_seconds": 23.6,
+  "raw_response": "La route `POST /api/billing` est d\u00e9finie dans **`apps/api/routers/billing.py`** (ligne 7), o\u00f9 elle est associ\u00e9e au handler `create_billing`.",
   "error": null,
-  "score": 1,
+  "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T18:05:31.482493+00:00"
+  "timestamp": "2026-04-15T20:35:48.042347+00:00"
 }

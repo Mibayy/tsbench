@@ -2,19 +2,18 @@
   "task_id": "TASK-033",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 8,
-  "output_tokens": 661,
-  "cache_creation_input_tokens": 5827,
-  "cache_read_input_tokens": 271168,
-  "total_tokens": 277664,
-  "active_tokens": 6496,
-  "turns_count": 9,
-  "tool_calls_count": 5,
+  "input_tokens": 7,
+  "output_tokens": 559,
+  "cache_creation_input_tokens": 12693,
+  "cache_read_input_tokens": 218373,
+  "total_tokens": 231632,
+  "active_tokens": 13259,
+  "turns_count": 8,
+  "tool_calls_count": 4,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
     "mcp__token-savior-recall__find_impacted_test_files": 1,
-    "mcp__token-savior-recall__get_dependents": 2,
-    "mcp__token-savior-recall__search_codebase": 1
+    "mcp__token-savior-recall__get_dependents": 2
   },
   "tool_calls_detail": [
     {
@@ -36,11 +35,6 @@
       "tool": "mcp__token-savior-recall__get_dependents",
       "result_chars": 63,
       "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__search_codebase",
-      "result_chars": 2260,
-      "is_error": false
     }
   ],
   "ts_tool_details": [
@@ -55,7 +49,7 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "find_impacted_test_files",
-      "time_ms": 102
+      "time_ms": 98
     },
     {
       "tool": "find_impacted_test_files",
@@ -73,7 +67,7 @@
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": "get_dependents",
-      "time_ms": 432
+      "time_ms": 589
     },
     {
       "tool": "get_dependents",
@@ -86,7 +80,7 @@
       "call_index": 2,
       "preceded_by": "find_impacted_test_files",
       "followed_by": "get_dependents",
-      "time_ms": 45
+      "time_ms": 39
     },
     {
       "tool": "get_dependents",
@@ -98,30 +92,16 @@
       "is_error": false,
       "call_index": 3,
       "preceded_by": "get_dependents",
-      "followed_by": "search_codebase",
-      "time_ms": 51
-    },
-    {
-      "tool": "search_codebase",
-      "args": {
-        "pattern": "alpha_middle|alpha_entry|chains\\.alpha|chains/alpha",
-        "max_results": 20
-      },
-      "result_chars": 2260,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 4,
-      "preceded_by": "get_dependents",
       "followed_by": null,
-      "time_ms": 153
+      "time_ms": 51
     }
   ],
-  "total_context_chars_injected": 2572,
-  "ts_tool_calls_count": 5,
-  "wall_time_seconds": 46.84,
-  "raw_response": "Il n'y a **aucun fichier de test** dans le projet qui couvre `alpha_middle` ou sa cha\u00eene d'appels (`alpha_entry \u2192 alpha_middle \u2192 alpha_inner \u2192 alpha_leaf`).\n\n**Cha\u00eene d'impact :**\n- `alpha_middle` est appel\u00e9e par **`alpha_entry`** (m\u00eame fichier `apps/api/chains/alpha.py`)\n- `alpha_middle` appelle **`alpha_inner`** \u2192 **`alpha_leaf`**\n\n**Recommandation :** Avant de modifier `alpha_middle`, il serait prudent de **cr\u00e9er un test** couvrant la cha\u00eene compl\u00e8te `alpha_entry \u2192 alpha_leaf`, car aucun test existant ne prot\u00e8ge cette r\u00e9gression.",
+  "total_context_chars_injected": 312,
+  "ts_tool_calls_count": 4,
+  "wall_time_seconds": 31.55,
+  "raw_response": "`alpha_middle` n'a qu'un seul appelant direct : **`alpha_entry`** (m\u00eame fichier `apps/api/chains/alpha.py`, lignes 3-5), et `alpha_entry` n'a aucun d\u00e9pendant index\u00e9.\n\n**Aucun fichier de test existant ne couvre directement cette cha\u00eene.** Il n'y a pas de tests \u00e0 rejouer \u2014 tu devras en \u00e9crire. En priorit\u00e9, teste :\n\n1. **`alpha_middle` elle-m\u00eame** (unitaire, entr\u00e9es/sorties directes)\n2. **`alpha_entry`** (int\u00e9gration, puisqu'elle appelle `alpha_middle`)",
   "error": null,
-  "score": 0,
+  "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T19:22:03.891993+00:00"
+  "timestamp": "2026-04-15T20:51:18.431266+00:00"
 }

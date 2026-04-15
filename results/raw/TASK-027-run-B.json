@@ -2,21 +2,20 @@
   "task_id": "TASK-027",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 11,
-  "output_tokens": 1421,
-  "cache_creation_input_tokens": 19451,
-  "cache_read_input_tokens": 324989,
-  "total_tokens": 345872,
-  "active_tokens": 20883,
-  "turns_count": 19,
-  "tool_calls_count": 11,
+  "input_tokens": 10,
+  "output_tokens": 1216,
+  "cache_creation_input_tokens": 17599,
+  "cache_read_input_tokens": 268771,
+  "total_tokens": 287596,
+  "active_tokens": 18825,
+  "turns_count": 12,
+  "tool_calls_count": 7,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
     "mcp__token-savior-recall__analyze_config": 1,
     "mcp__token-savior-recall__list_files": 1,
-    "mcp__token-savior-recall__search_codebase": 2,
-    "mcp__token-savior-recall__get_structure_summary": 1,
-    "mcp__token-savior-recall__get_env_usage": 5
+    "mcp__token-savior-recall__search_codebase": 3,
+    "mcp__token-savior-recall__get_structure_summary": 1
   },
   "tool_calls_detail": [
     {
@@ -26,7 +25,7 @@
     },
     {
       "tool": "mcp__token-savior-recall__analyze_config",
-      "result_chars": 9674,
+      "result_chars": 2996,
       "is_error": false
     },
     {
@@ -45,33 +44,13 @@
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__get_env_usage",
-      "result_chars": 127,
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 3272,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__search_codebase",
-      "result_chars": 2711,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_env_usage",
-      "result_chars": 1040,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_env_usage",
-      "result_chars": 988,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_env_usage",
-      "result_chars": 1020,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_env_usage",
-      "result_chars": 999,
+      "result_chars": 4468,
       "is_error": false
     }
   ],
@@ -87,7 +66,7 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "analyze_config",
-      "time_ms": 135
+      "time_ms": 119
     },
     {
       "tool": "analyze_config",
@@ -96,13 +75,13 @@
           "orphans"
         ]
       },
-      "result_chars": 9674,
+      "result_chars": 2996,
       "result_empty": false,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": "list_files",
-      "time_ms": 962
+      "time_ms": 989
     },
     {
       "tool": "list_files",
@@ -115,7 +94,7 @@
       "call_index": 2,
       "preceded_by": "analyze_config",
       "followed_by": "search_codebase",
-      "time_ms": 507
+      "time_ms": 491
     },
     {
       "tool": "search_codebase",
@@ -141,95 +120,44 @@
       "is_error": false,
       "call_index": 4,
       "preceded_by": "search_codebase",
-      "followed_by": "get_env_usage",
-      "time_ms": 378
+      "followed_by": "search_codebase",
+      "time_ms": 454
     },
     {
-      "tool": "get_env_usage",
+      "tool": "search_codebase",
       "args": {
-        "var_name": "SENDGRID_API_KEY"
+        "pattern": "process\\.env\\.|os\\.environ|getenv",
+        "max_results": 100
       },
-      "result_chars": 127,
+      "result_chars": 3272,
       "result_empty": false,
       "is_error": false,
       "call_index": 5,
       "preceded_by": "get_structure_summary",
       "followed_by": "search_codebase",
-      "time_ms": 106
+      "time_ms": 127
     },
     {
       "tool": "search_codebase",
       "args": {
         "pattern": "^[A-Z_]+=",
-        "max_results": 30
+        "max_results": 50
       },
-      "result_chars": 2711,
+      "result_chars": 4468,
       "result_empty": false,
       "is_error": false,
       "call_index": 6,
-      "preceded_by": "get_env_usage",
-      "followed_by": "get_env_usage",
-      "time_ms": 117
-    },
-    {
-      "tool": "get_env_usage",
-      "args": {
-        "var_name": "LEGACY_SMTP_HOST"
-      },
-      "result_chars": 1040,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 7,
       "preceded_by": "search_codebase",
-      "followed_by": "get_env_usage",
-      "time_ms": 633
-    },
-    {
-      "tool": "get_env_usage",
-      "args": {
-        "var_name": "LEGACY_SMTP_PORT"
-      },
-      "result_chars": 988,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 8,
-      "preceded_by": "get_env_usage",
-      "followed_by": "get_env_usage",
-      "time_ms": 304
-    },
-    {
-      "tool": "get_env_usage",
-      "args": {
-        "var_name": "UNUSED_FEATURE_FLAG"
-      },
-      "result_chars": 1020,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 9,
-      "preceded_by": "get_env_usage",
-      "followed_by": "get_env_usage",
-      "time_ms": 193
-    },
-    {
-      "tool": "get_env_usage",
-      "args": {
-        "var_name": "OLD_ANALYTICS_TOKEN"
-      },
-      "result_chars": 999,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 10,
-      "preceded_by": "get_env_usage",
       "followed_by": null,
-      "time_ms": 64
+      "time_ms": 87
     }
   ],
-  "total_context_chars_injected": 17937,
-  "ts_tool_calls_count": 11,
-  "wall_time_seconds": 42.4,
-  "raw_response": "Les 4 variables sont uniquement pr\u00e9sentes dans des fichiers de config/d\u00e9finition et de documentation, jamais lues par le code applicatif (aucun `os.getenv`, `process.env`, etc.).\n\n## Variables orphelines dans `config/.env.example`\n\n| Variable | Ligne | Constat |\n|---|---|---|\n| `LEGACY_SMTP_HOST` | 12 | D\u00e9clar\u00e9e mais jamais lue dans le code |\n| `LEGACY_SMTP_PORT` | 14 | D\u00e9clar\u00e9e mais jamais lue dans le code |\n| `UNUSED_FEATURE_FLAG` | 16 | D\u00e9clar\u00e9e mais jamais lue dans le code |\n| `OLD_ANALYTICS_TOKEN` | 18 | D\u00e9clar\u00e9e mais jamais lue dans le code |\n\nCes 4 variables peuvent \u00eatre supprim\u00e9es de `.env.example` (et de `.env.staging`) sans impact sur l'application.",
+  "total_context_chars_injected": 12114,
+  "ts_tool_calls_count": 7,
+  "wall_time_seconds": 35.66,
+  "raw_response": "Voici le croisement entre `config/.env.example` et les usages `os.environ.get(...)` / `process.env.*` dans le code :\n\n**Variables orphelines (d\u00e9clar\u00e9es dans `.env.example` mais jamais lues dans le code) :**\n\n| Variable | Ligne dans `.env.example` |\n|---|---|\n| `LEGACY_SMTP_HOST` | L12 |\n| `LEGACY_SMTP_PORT` | L14 |\n| `UNUSED_FEATURE_FLAG` | L16 |\n| `OLD_ANALYTICS_TOKEN` | L18 |\n\nCes 4 variables ne sont r\u00e9f\u00e9renc\u00e9es par aucun appel `os.environ.get()` ni `process.env` dans le code applicatif. Les 9 autres variables du fichier (`DATABASE_URL`, `SECRET_KEY`, `STRIPE_API_KEY`, `STRIPE_WEBHOOK_SECRET`, `REDIS_URL`, `LOG_LEVEL`, `ALLOWED_ORIGINS`, `MAX_PAGE_SIZE`, `DEFAULT_PAGE_SIZE`) sont toutes lues dans `apps/api/config.py`.",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T18:40:37.071527+00:00"
+  "timestamp": "2026-04-15T20:48:30.639345+00:00"
 }

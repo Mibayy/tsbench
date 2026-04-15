@@ -3,11 +3,11 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 5,
-  "output_tokens": 477,
-  "cache_creation_input_tokens": 5684,
-  "cache_read_input_tokens": 132988,
-  "total_tokens": 139154,
-  "active_tokens": 6166,
+  "output_tokens": 395,
+  "cache_creation_input_tokens": 5758,
+  "cache_read_input_tokens": 133592,
+  "total_tokens": 139750,
+  "active_tokens": 6158,
   "turns_count": 3,
   "tool_calls_count": 2,
   "tool_calls_breakdown": {
@@ -22,7 +22,7 @@
     },
     {
       "tool": "mcp__token-savior-recall__get_git_status",
-      "result_chars": 3201,
+      "result_chars": 3133,
       "is_error": false
     }
   ],
@@ -38,26 +38,26 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "get_git_status",
-      "time_ms": 133
+      "time_ms": 110
     },
     {
       "tool": "get_git_status",
       "args": {},
-      "result_chars": 3201,
+      "result_chars": 3133,
       "result_empty": false,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": null,
-      "time_ms": 196
+      "time_ms": 60
     }
   ],
-  "total_context_chars_injected": 3261,
+  "total_context_chars_injected": 3193,
   "ts_tool_calls_count": 2,
-  "wall_time_seconds": 18.94,
-  "raw_response": "**Branche courante :** `main` (ahead de 2 commits par rapport \u00e0 `origin/main`)\n\n**Fichiers staged :** aucun\n\n**Fichiers modifi\u00e9s (unstaged) :** 91 fichiers, r\u00e9partis en :\n- **`apps/api/`** \u2014 5 fichiers Python (`mod1.py`, `config.py`, `billing.py`, `buggy_pagination.py`, `strings.py`)\n- **`apps/web/api/`** \u2014 5 fichiers TS (`billing.ts`, `members.ts`, `notifications.ts`, `sessions.ts`, `webhooks.ts`)\n- **`apps/web/app/`** \u2014 15 pages TSX (audit, billing, dashboard, forgot-password, invite, login, members, notifications, pricing, profile, reports, sessions, settings, signup, webhooks)\n- **`apps/web/lib/`** \u2014 `constants.ts`\n- **`packages/`** \u2014 `db/schema.prisma`, `utils/paginate_copy.py`, `utils/slug_copy.py`\n- **`results/raw/`** \u2014 60 fichiers JSON (`TASK-001` \u00e0 `TASK-060-run-B.json`) + `warmup-run-B.json`\n\n**Fichiers non-track\u00e9s :** 3\n- `.token-savior-cache.json`\n- `.token-savior-checkpoints/`\n- `apps/api/services/billing.py.checkpoint`",
+  "wall_time_seconds": 19.69,
+  "raw_response": "**Branche courante :** `main` (tracking `origin/main`, **2 commits ahead**, 0 behind)\n\n**Fichiers staged :** aucun\n\n**Fichiers modifi\u00e9s (unstaged) \u2014 88 fichiers :**\n- `apps/api/` \u2014 5 fichiers (ambig/mod1.py, config.py, services/billing.py, utils/buggy_pagination.py, utils/strings.py)\n- `apps/web/api/` \u2014 5 fichiers (.ts)\n- `apps/web/app/` \u2014 15 pages (.tsx)\n- `apps/web/lib/constants.ts`\n- `packages/` \u2014 3 fichiers (db/schema.prisma, utils/paginate_copy.py, utils/slug_copy.py)\n- `results/raw/` \u2014 58 fichiers TASK-*-run-B.json + warmup-run-B.json\n\n**Fichiers non-track\u00e9s :**\n- `.token-savior-cache.json`\n- `.token-savior-checkpoints/`\n- `apps/api/services/billing.py.checkpoint`",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T19:51:35.845917+00:00"
+  "timestamp": "2026-04-15T21:06:23.763961+00:00"
 }

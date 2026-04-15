@@ -2,19 +2,21 @@
   "task_id": "TASK-024",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 13,
-  "output_tokens": 1543,
-  "cache_creation_input_tokens": 15728,
-  "cache_read_input_tokens": 411889,
-  "total_tokens": 429173,
-  "active_tokens": 17284,
-  "turns_count": 22,
-  "tool_calls_count": 14,
+  "input_tokens": 12,
+  "output_tokens": 918,
+  "cache_creation_input_tokens": 15006,
+  "cache_read_input_tokens": 362192,
+  "total_tokens": 378128,
+  "active_tokens": 15936,
+  "turns_count": 12,
+  "tool_calls_count": 7,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__find_dead_code": 3,
-    "mcp__token-savior-recall__get_functions": 5,
-    "mcp__token-savior-recall__get_dependents": 5
+    "mcp__token-savior-recall__find_dead_code": 1,
+    "mcp__token-savior-recall__get_entry_points": 1,
+    "mcp__token-savior-recall__search_codebase": 2,
+    "mcp__token-savior-recall__get_dependents": 1,
+    "mcp__token-savior-recall__find_symbol": 1
   },
   "tool_calls_detail": [
     {
@@ -24,67 +26,32 @@
     },
     {
       "tool": "mcp__token-savior-recall__find_dead_code",
-      "result_chars": 380,
+      "result_chars": 381,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__find_dead_code",
-      "result_chars": 1830,
+      "tool": "mcp__token-savior-recall__get_entry_points",
+      "result_chars": 999,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__find_dead_code",
-      "result_chars": 2947,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_functions",
-      "result_chars": 72,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_functions",
-      "result_chars": 44,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_functions",
-      "result_chars": 34,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_functions",
-      "result_chars": 56,
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 4040,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__get_dependents",
-      "result_chars": 65,
+      "result_chars": 63,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__get_dependents",
-      "result_chars": 59,
+      "tool": "mcp__token-savior-recall__find_symbol",
+      "result_chars": 673,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__get_dependents",
-      "result_chars": 69,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_dependents",
-      "result_chars": 60,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_functions",
-      "result_chars": 242,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_dependents",
-      "result_chars": 74,
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 716,
       "is_error": false
     }
   ],
@@ -100,196 +67,102 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "find_dead_code",
-      "time_ms": 213
+      "time_ms": 97
     },
     {
       "tool": "find_dead_code",
       "args": {
         "max_results": 5
       },
-      "result_chars": 380,
+      "result_chars": 381,
       "result_empty": false,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
-      "followed_by": "find_dead_code",
-      "time_ms": 578
+      "followed_by": "get_entry_points",
+      "time_ms": 736
     },
     {
-      "tool": "find_dead_code",
+      "tool": "get_entry_points",
       "args": {
-        "max_results": 30
+        "max_results": 5
       },
-      "result_chars": 1830,
+      "result_chars": 999,
       "result_empty": false,
       "is_error": false,
       "call_index": 2,
       "preceded_by": "find_dead_code",
-      "followed_by": "find_dead_code",
-      "time_ms": 183
+      "followed_by": "search_codebase",
+      "time_ms": 58
     },
     {
-      "tool": "find_dead_code",
+      "tool": "search_codebase",
       "args": {
-        "max_results": 50
+        "pattern": "^(export (async )?function |export const \\w+ = )",
+        "max_results": 30
       },
-      "result_chars": 2947,
+      "result_chars": 4040,
       "result_empty": false,
       "is_error": false,
       "call_index": 3,
-      "preceded_by": "find_dead_code",
-      "followed_by": "get_functions",
-      "time_ms": 194
+      "preceded_by": "get_entry_points",
+      "followed_by": "get_dependents",
+      "time_ms": 73
     },
     {
-      "tool": "get_functions",
+      "tool": "get_dependents",
       "args": {
-        "file_path": "apps/web/lib/constants.ts",
-        "hints": false
+        "name": "bulkBilling"
       },
-      "result_chars": 72,
+      "result_chars": 63,
       "result_empty": false,
       "is_error": false,
       "call_index": 4,
-      "preceded_by": "find_dead_code",
-      "followed_by": "get_functions",
-      "time_ms": 481
+      "preceded_by": "search_codebase",
+      "followed_by": "find_symbol",
+      "time_ms": 88
     },
     {
-      "tool": "get_functions",
+      "tool": "find_symbol",
       "args": {
-        "file_path": "apps/api/utils/strings.py",
-        "hints": false
+        "names": [
+          "bulkBilling",
+          "searchBilling",
+          "bulkMembers",
+          "searchMembers",
+          "bulkNotifications"
+        ],
+        "level": 2
       },
-      "result_chars": 44,
-      "result_empty": true,
+      "result_chars": 673,
+      "result_empty": false,
       "is_error": false,
       "call_index": 5,
-      "preceded_by": "get_functions",
-      "followed_by": "get_functions",
-      "time_ms": 481
+      "preceded_by": "get_dependents",
+      "followed_by": "search_codebase",
+      "time_ms": 242
     },
     {
-      "tool": "get_functions",
+      "tool": "search_codebase",
       "args": {
-        "file_path": "packages/utils/slug_copy.py",
-        "hints": false
+        "pattern": "(bulkBilling|searchBilling|bulkMembers|searchMembers|bulkNotifications)",
+        "max_results": 20
       },
-      "result_chars": 34,
-      "result_empty": true,
+      "result_chars": 716,
+      "result_empty": false,
       "is_error": false,
       "call_index": 6,
-      "preceded_by": "get_functions",
-      "followed_by": "get_functions",
-      "time_ms": 523
-    },
-    {
-      "tool": "get_functions",
-      "args": {
-        "file_path": "packages/utils/paginate_copy.py",
-        "hints": false
-      },
-      "result_chars": 56,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 7,
-      "preceded_by": "get_functions",
-      "followed_by": "get_dependents",
-      "time_ms": 38
-    },
-    {
-      "tool": "get_dependents",
-      "args": {
-        "name": "paginate_also",
-        "max_results": 5
-      },
-      "result_chars": 65,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 8,
-      "preceded_by": "get_functions",
-      "followed_by": "get_dependents",
-      "time_ms": 472
-    },
-    {
-      "tool": "get_dependents",
-      "args": {
-        "name": "slugify",
-        "max_results": 5,
-        "project": "tsbench"
-      },
-      "result_chars": 59,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 9,
-      "preceded_by": "get_dependents",
-      "followed_by": "get_dependents",
-      "time_ms": 470
-    },
-    {
-      "tool": "get_dependents",
-      "args": {
-        "name": "constants_default",
-        "max_results": 5
-      },
-      "result_chars": 69,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 10,
-      "preceded_by": "get_dependents",
-      "followed_by": "get_dependents",
-      "time_ms": 219
-    },
-    {
-      "tool": "get_dependents",
-      "args": {
-        "name": "truncate",
-        "max_results": 5
-      },
-      "result_chars": 60,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 11,
-      "preceded_by": "get_dependents",
-      "followed_by": "get_functions",
-      "time_ms": 42
-    },
-    {
-      "tool": "get_functions",
-      "args": {
-        "file_path": "apps/api/services/billing.py",
-        "hints": false,
-        "max_results": 5
-      },
-      "result_chars": 242,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 12,
-      "preceded_by": "get_dependents",
-      "followed_by": "get_dependents",
-      "time_ms": 64
-    },
-    {
-      "tool": "get_dependents",
-      "args": {
-        "name": "validate_invoice_total",
-        "max_results": 5
-      },
-      "result_chars": 74,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 13,
-      "preceded_by": "get_functions",
+      "preceded_by": "find_symbol",
       "followed_by": null,
-      "time_ms": 72
+      "time_ms": 151
     }
   ],
-  "total_context_chars_injected": 5992,
-  "ts_tool_calls_count": 14,
-  "wall_time_seconds": 45.37,
-  "raw_response": "Voici **5 fonctions export\u00e9es jamais appel\u00e9es** dans le projet :\n\n| # | Fonction | Fichier | Ligne |\n|---|----------|---------|-------|\n| 1 | `paginate_also(items, page, page_size)` | `packages/utils/paginate_copy.py` | 6 |\n| 2 | `slugify(value)` | `packages/utils/slug_copy.py` | 4 |\n| 3 | `truncate(value, max_len)` | `apps/api/utils/strings.py` | 6 |\n| 4 | `validate_invoice_total(invoice)` | `apps/api/services/billing.py` | 49 |\n| 5 | `constants_default()` | `apps/web/lib/constants.ts` | 15 |\n\nAucune de ces fonctions n'a de d\u00e9pendant dans le graphe de d\u00e9pendances du projet \u2014 elles constituent du code mort.",
+  "total_context_chars_injected": 6932,
+  "ts_tool_calls_count": 7,
+  "wall_time_seconds": 39.54,
+  "raw_response": "\n\nChacune n'appara\u00eet que dans sa propre d\u00e9claration \u2014 z\u00e9ro appel ailleurs. Voici les 5 :\n\n| # | Fonction | Fichier | Ligne |\n|---|----------|---------|-------|\n| 1 | `bulkBilling` | `apps/web/api/billing.ts` | 51 |\n| 2 | `searchBilling` | `apps/web/api/billing.ts` | 55 |\n| 3 | `bulkMembers` | `apps/web/api/members.ts` | 51 |\n| 4 | `searchMembers` | `apps/web/api/members.ts` | 55 |\n| 5 | `bulkNotifications` | `apps/web/api/notifications.ts` | 51 |\n\nCe sont toutes des fonctions export\u00e9es de type API client (bulk actions et search) qui ne sont import\u00e9es ni appel\u00e9es nulle part dans le projet.",
   "error": null,
   "score": 1,
   "max_score": 2,
-  "timestamp": "2026-04-15T18:39:05.799888+00:00"
+  "timestamp": "2026-04-15T20:46:29.880902+00:00"
 }

@@ -2,17 +2,18 @@
   "task_id": "TASK-014",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 6,
-  "output_tokens": 1298,
-  "cache_creation_input_tokens": 14884,
-  "cache_read_input_tokens": 172827,
-  "total_tokens": 189015,
-  "active_tokens": 16188,
-  "turns_count": 6,
-  "tool_calls_count": 3,
+  "input_tokens": 7,
+  "output_tokens": 636,
+  "cache_creation_input_tokens": 13281,
+  "cache_read_input_tokens": 218759,
+  "total_tokens": 232683,
+  "active_tokens": 13924,
+  "turns_count": 8,
+  "tool_calls_count": 4,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__get_full_context": 1,
+    "mcp__token-savior-recall__get_change_impact": 1,
+    "mcp__token-savior-recall__get_function_source": 1,
     "mcp__token-savior-recall__search_codebase": 1
   },
   "tool_calls_detail": [
@@ -22,13 +23,18 @@
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__get_full_context",
-      "result_chars": 5582,
+      "tool": "mcp__token-savior-recall__get_change_impact",
+      "result_chars": 1224,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 580,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__search_codebase",
-      "result_chars": 2245,
+      "result_chars": 2,
       "is_error": false
     }
   ],
@@ -43,43 +49,60 @@
       "is_error": false,
       "call_index": 0,
       "preceded_by": null,
-      "followed_by": "get_full_context",
-      "time_ms": 128
+      "followed_by": "get_change_impact",
+      "time_ms": 129
     },
     {
-      "tool": "get_full_context",
+      "tool": "get_change_impact",
       "args": {
-        "name": "hub_util",
-        "depth": 2
+        "name": "hub_util"
       },
-      "result_chars": 5582,
+      "result_chars": 1224,
       "result_empty": false,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
+      "followed_by": "get_function_source",
+      "time_ms": 551
+    },
+    {
+      "tool": "get_function_source",
+      "args": {
+        "names": [
+          "hub_util",
+          "do_it_0",
+          "do_it_1"
+        ],
+        "level": 0
+      },
+      "result_chars": 580,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 2,
+      "preceded_by": "get_change_impact",
       "followed_by": "search_codebase",
-      "time_ms": 597
+      "time_ms": 263
     },
     {
       "tool": "search_codebase",
       "args": {
-        "pattern": "hub_util\\("
+        "pattern": "hub_util\\(.*payload\\s*="
       },
-      "result_chars": 2245,
-      "result_empty": false,
+      "result_chars": 2,
+      "result_empty": true,
       "is_error": false,
-      "call_index": 2,
-      "preceded_by": "get_full_context",
+      "call_index": 3,
+      "preceded_by": "get_function_source",
       "followed_by": null,
-      "time_ms": 494
+      "time_ms": 166
     }
   ],
-  "total_context_chars_injected": 7887,
-  "ts_tool_calls_count": 3,
-  "wall_time_seconds": 31.23,
-  "raw_response": "Tous les appels passent l'argument **par position** (`hub_util(payload)`), pas par nom (`hub_util(payload=...)`). Renommer le param\u00e8tre `payload` \u2192 `context` ne cassera donc **rien \u00e0 l'ex\u00e9cution**.\n\nVoici le r\u00e9sum\u00e9 complet :\n\n---\n\n**Aucun site d'appel ne casse \u00e0 l'ex\u00e9cution.** Les 20 appelants passent tous l'argument par position :\n\n| Fichier | Fonction | Appel |\n|---|---|---|\n| `apps/api/callers/caller_hub_util_00.py:6` | `do_it_0` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_01.py:6` | `do_it_1` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_02.py:6` | `do_it_2` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_03.py:6` | `do_it_3` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_04.py:6` | `do_it_4` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_05.py:6` | `do_it_5` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_06.py:6` | `do_it_6` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_07.py:6` | `do_it_7` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_08.py:6` | `do_it_8` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_09.py:6` | `do_it_9` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_10.py:6` | `do_it_10` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_11.py:6` | `do_it_11` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_12.py:6` | `do_it_12` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_13.py:6` | `do_it_13` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_14.py:6` | `do_it_14` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_15.py:6` | `do_it_15` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_16.py:6` | `do_it_16` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_17.py:6` | `do_it_17` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_18.py:6` | `do_it_18` | `hub_util(payload)` |\n| `apps/api/callers/caller_hub_util_19.py:6` | `do_it_19` | `hub_util(payload)` |\n\nPuisque **aucun** appelant n'utilise `hub_util(payload=...)` (argument nomm\u00e9), le renommage du param\u00e8tre `payload` \u2192 `context` est **r\u00e9tro-compatible** et ne provoque aucune casse. Le seul risque serait un appel externe non index\u00e9 utilisant `hub_util(payload=val)` \u2014 ce qui n'existe pas dans ce projet.",
+  "total_context_chars_injected": 1866,
+  "ts_tool_calls_count": 4,
+  "wall_time_seconds": 28.24,
+  "raw_response": "Aucun appel n'utilise `payload=` comme argument nomm\u00e9. Tous les appels sont positionnels.\n\n---\n\n## R\u00e9sultat\n\n**Rien ne casse.** Les 20 callers directs (`do_it_0` \u00e0 `do_it_19` dans `apps/api/callers/caller_hub_util_*.py` et `caller_small_util_01.py`) appellent tous `hub_util(payload)` **positionnellement**, jamais avec `hub_util(payload=...)`.\n\nRenommer le param\u00e8tre de `payload: dict` \u2192 `context: dict` dans la signature est donc **r\u00e9tro-compatible** : aucun appelant ne sera cass\u00e9.\n\n**Seul point d'attention** : le corps de `hub_util` utilise `dict(payload)` \u2014 il faudra aussi mettre \u00e0 jour cette r\u00e9f\u00e9rence en `dict(context)`, sinon vous aurez un `NameError` \u00e0 l'ex\u00e9cution.",
   "error": null,
-  "score": 2,
+  "score": 0,
   "max_score": 2,
-  "timestamp": "2026-04-15T18:10:30.860473+00:00"
+  "timestamp": "2026-04-15T20:39:33.096243+00:00"
 }

@@ -3,12 +3,12 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 6,
-  "output_tokens": 387,
-  "cache_creation_input_tokens": 12252,
-  "cache_read_input_tokens": 170524,
-  "total_tokens": 183169,
-  "active_tokens": 12645,
-  "turns_count": 5,
+  "output_tokens": 464,
+  "cache_creation_input_tokens": 12308,
+  "cache_read_input_tokens": 171049,
+  "total_tokens": 183827,
+  "active_tokens": 12778,
+  "turns_count": 6,
   "tool_calls_count": 3,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
@@ -43,7 +43,7 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "get_file_dependents",
-      "time_ms": 110
+      "time_ms": 111
     },
     {
       "tool": "get_file_dependents",
@@ -56,7 +56,7 @@
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": "get_file_dependents",
-      "time_ms": 585
+      "time_ms": 674
     },
     {
       "tool": "get_file_dependents",
@@ -69,15 +69,15 @@
       "call_index": 2,
       "preceded_by": "get_file_dependents",
       "followed_by": null,
-      "time_ms": 84
+      "time_ms": 45
     }
   ],
   "total_context_chars_injected": 116,
   "ts_tool_calls_count": 3,
-  "wall_time_seconds": 21.31,
-  "raw_response": "Il y a une **d\u00e9pendance circulaire** entre ces deux fichiers :\n\n- **Direct** : `apps/api/cycles/mod_b.py` importe depuis `mod_a.py`\n- **Transitif** : `mod_b.py` \u2192 `mod_a.py` (cycle ferm\u00e9, pas de propagation au-del\u00e0)\n\n**Seul `apps/api/cycles/mod_b.py`** est susceptible d'\u00eatre affect\u00e9 en aval par vos modifications \u00e0 `mod_a.py`. Aucun autre fichier du projet n'importe depuis ces deux modules.",
+  "wall_time_seconds": 21.99,
+  "raw_response": "Il y a une **d\u00e9pendance circulaire** entre ces deux fichiers :\n\n- **Direct** : `apps/api/cycles/mod_b.py` importe depuis `mod_a.py`\n- **Transitif** : `mod_b.py` est lui-m\u00eame import\u00e9 par `mod_a.py` (cycle)\n\nAucun autre fichier du projet n'importe depuis `mod_a.py` ou `mod_b.py`. L'impact en aval est donc **limit\u00e9 \u00e0 `apps/api/cycles/mod_b.py`**, mais attention au couplage circulaire \u2014 une modification de `mod_a` peut casser `mod_b`, qui \u00e0 son tour affecte `mod_a`.",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T18:10:52.185078+00:00"
+  "timestamp": "2026-04-15T20:39:55.090321+00:00"
 }

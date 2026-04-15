@@ -2,17 +2,17 @@
   "task_id": "TASK-025",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 5,
-  "output_tokens": 436,
-  "cache_creation_input_tokens": 12310,
-  "cache_read_input_tokens": 124214,
-  "total_tokens": 136965,
-  "active_tokens": 12751,
-  "turns_count": 4,
-  "tool_calls_count": 2,
+  "input_tokens": 6,
+  "output_tokens": 747,
+  "cache_creation_input_tokens": 13991,
+  "cache_read_input_tokens": 171967,
+  "total_tokens": 186711,
+  "active_tokens": 14744,
+  "turns_count": 6,
+  "tool_calls_count": 3,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__find_hotspots": 1
+    "mcp__token-savior-recall__find_hotspots": 2
   },
   "tool_calls_detail": [
     {
@@ -22,7 +22,12 @@
     },
     {
       "tool": "mcp__token-savior-recall__find_hotspots",
-      "result_chars": 1583,
+      "result_chars": 844,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__find_hotspots",
+      "result_chars": 2564,
       "is_error": false
     }
   ],
@@ -38,28 +43,41 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "find_hotspots",
-      "time_ms": 138
+      "time_ms": 126
     },
     {
       "tool": "find_hotspots",
       "args": {
-        "max_results": 20
+        "max_results": 10
       },
-      "result_chars": 1583,
+      "result_chars": 844,
       "result_empty": false,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
+      "followed_by": "find_hotspots",
+      "time_ms": 940
+    },
+    {
+      "tool": "find_hotspots",
+      "args": {
+        "max_results": 30
+      },
+      "result_chars": 2564,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 2,
+      "preceded_by": "find_hotspots",
       "followed_by": null,
-      "time_ms": 779
+      "time_ms": 134
     }
   ],
-  "total_context_chars_injected": 1643,
-  "ts_tool_calls_count": 2,
-  "wall_time_seconds": 22.24,
-  "raw_response": "Voici les **3 fonctions les plus complexes** du code applicatif (`apps/` et `packages/`), en excluant `bench.py` et `generate.py` :\n\n| # | Score | Fonction | Fichier | Branches | Profondeur |\n|---|-------|----------|---------|----------|------------|\n| 1 | **44.4** | `authenticate_multi_factor()` | `apps/api/services/complex_auth.py:3` | 15 | 3 |\n| 2 | **44.4** | `route_webhook_event()` | `apps/api/services/complex_routing.py:3` | 15 | 3 |\n| 3 | **44.4** | `reconcile_payments()` | `apps/api/services/complex_billing.py:3` | 15 | 3 |\n\nCes trois fonctions ont un score identique (44.4) avec 33 lignes et 15 branches chacune. Juste derri\u00e8re se trouvent `orchestrate_nightly_job()` (worker, m\u00eame score) et `validate_contract()` (score 36.9, 12 branches).",
+  "total_context_chars_injected": 3468,
+  "ts_tool_calls_count": 3,
+  "wall_time_seconds": 25.3,
+  "raw_response": "Voici les **3 fonctions les plus complexes** du code applicatif (`apps/` et `packages/`) :\n\n| # | Score | Fonction | Fichier | Lignes | Branches | Profondeur |\n|---|-------|----------|---------|--------|----------|------------|\n| 1 | **44.4** | `reconcile_payments()` | `apps/api/services/complex_billing.py:3` | 33 | 15 | 3 |\n| 2 | **44.4** | `authenticate_multi_factor()` | `apps/api/services/complex_auth.py:3` | 33 | 15 | 3 |\n| 3 | **44.4** | `route_webhook_event()` | `apps/api/services/complex_routing.py:3` | 33 | 15 | 3 |\n\nLes trois ont un score identique (44.4) avec 15 branches chacune. La 4e est `orchestrate_nightly_job()` dans `apps/worker/` avec le m\u00eame score, suivie de `validate_contract()` (36.9) dans `apps/api/utils/`.",
   "error": null,
-  "score": 1,
+  "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T20:15:24.773620+00:00"
+  "timestamp": "2026-04-15T20:46:55.181962+00:00"
 }

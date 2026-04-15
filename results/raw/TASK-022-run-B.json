@@ -2,22 +2,20 @@
   "task_id": "TASK-022",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 11,
-  "output_tokens": 1859,
-  "cache_creation_input_tokens": 17405,
-  "cache_read_input_tokens": 314621,
-  "total_tokens": 333896,
-  "active_tokens": 19275,
-  "turns_count": 20,
-  "tool_calls_count": 15,
+  "input_tokens": 6,
+  "output_tokens": 1042,
+  "cache_creation_input_tokens": 16468,
+  "cache_read_input_tokens": 175178,
+  "total_tokens": 192694,
+  "active_tokens": 17516,
+  "turns_count": 9,
+  "tool_calls_count": 5,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
     "mcp__token-savior-recall__detect_breaking_changes": 1,
-    "mcp__token-savior-recall__get_change_impact": 8,
-    "mcp__token-savior-recall__get_dependents": 2,
-    "mcp__token-savior-recall__find_symbol": 1,
+    "mcp__token-savior-recall__get_changed_symbols": 1,
     "mcp__token-savior-recall__get_function_source": 1,
-    "mcp__token-savior-recall__search_codebase": 1
+    "mcp__token-savior-recall__get_change_impact": 1
   },
   "tool_calls_detail": [
     {
@@ -27,72 +25,22 @@
     },
     {
       "tool": "mcp__token-savior-recall__detect_breaking_changes",
-      "result_chars": 1996,
+      "result_chars": 1945,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__get_change_impact",
-      "result_chars": 69,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_change_impact",
-      "result_chars": 67,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_change_impact",
-      "result_chars": 67,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_change_impact",
-      "result_chars": 71,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_change_impact",
-      "result_chars": 67,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_change_impact",
-      "result_chars": 69,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_change_impact",
-      "result_chars": 59,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_change_impact",
-      "result_chars": 66,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_dependents",
-      "result_chars": 69,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_dependents",
-      "result_chars": 71,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__find_symbol",
-      "result_chars": 735,
+      "tool": "mcp__token-savior-recall__get_changed_symbols",
+      "result_chars": 9745,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 1903,
+      "result_chars": 1023,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__search_codebase",
-      "result_chars": 6102,
+      "tool": "mcp__token-savior-recall__get_change_impact",
+      "result_chars": 69,
       "is_error": false
     }
   ],
@@ -108,20 +56,51 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "detect_breaking_changes",
-      "time_ms": 113
+      "time_ms": 125
     },
     {
       "tool": "detect_breaking_changes",
       "args": {
         "since_ref": "v1"
       },
-      "result_chars": 1996,
+      "result_chars": 1945,
       "result_empty": false,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
+      "followed_by": "get_changed_symbols",
+      "time_ms": 950
+    },
+    {
+      "tool": "get_changed_symbols",
+      "args": {
+        "ref": "v1"
+      },
+      "result_chars": 9745,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 2,
+      "preceded_by": "detect_breaking_changes",
+      "followed_by": "get_function_source",
+      "time_ms": 631
+    },
+    {
+      "tool": "get_function_source",
+      "args": {
+        "names": [
+          "authenticate_user",
+          "calculate_invoice",
+          "buggy_paginate",
+          "charge_customer"
+        ]
+      },
+      "result_chars": 1023,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 3,
+      "preceded_by": "get_changed_symbols",
       "followed_by": "get_change_impact",
-      "time_ms": 699
+      "time_ms": 355
     },
     {
       "tool": "get_change_impact",
@@ -131,186 +110,18 @@
       "result_chars": 69,
       "result_empty": false,
       "is_error": false,
-      "call_index": 2,
-      "preceded_by": "detect_breaking_changes",
-      "followed_by": "get_change_impact",
-      "time_ms": 464
-    },
-    {
-      "tool": "get_change_impact",
-      "args": {
-        "name": "compute_invoice"
-      },
-      "result_chars": 67,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 3,
-      "preceded_by": "get_change_impact",
-      "followed_by": "get_change_impact",
-      "time_ms": 415
-    },
-    {
-      "tool": "get_change_impact",
-      "args": {
-        "name": "delete_webhooks"
-      },
-      "result_chars": 67,
-      "result_empty": false,
-      "is_error": false,
       "call_index": 4,
-      "preceded_by": "get_change_impact",
-      "followed_by": "get_change_impact",
-      "time_ms": 126
-    },
-    {
-      "tool": "get_change_impact",
-      "args": {
-        "name": "bulk_import_members"
-      },
-      "result_chars": 71,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 5,
-      "preceded_by": "get_change_impact",
-      "followed_by": "get_change_impact",
-      "time_ms": 123
-    },
-    {
-      "tool": "get_change_impact",
-      "args": {
-        "name": "charge_customer"
-      },
-      "result_chars": 67,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 6,
-      "preceded_by": "get_change_impact",
-      "followed_by": "get_change_impact",
-      "time_ms": 468
-    },
-    {
-      "tool": "get_change_impact",
-      "args": {
-        "name": "calculate_invoice"
-      },
-      "result_chars": 69,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 7,
-      "preceded_by": "get_change_impact",
-      "followed_by": "get_change_impact",
-      "time_ms": 95
-    },
-    {
-      "tool": "get_change_impact",
-      "args": {
-        "name": "slugify"
-      },
-      "result_chars": 59,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 8,
-      "preceded_by": "get_change_impact",
-      "followed_by": "get_change_impact",
-      "time_ms": 91
-    },
-    {
-      "tool": "get_change_impact",
-      "args": {
-        "name": "buggy_paginate"
-      },
-      "result_chars": 66,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 9,
-      "preceded_by": "get_change_impact",
-      "followed_by": "get_dependents",
-      "time_ms": 31
-    },
-    {
-      "tool": "get_dependents",
-      "args": {
-        "name": "calculate_invoice"
-      },
-      "result_chars": 69,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 10,
-      "preceded_by": "get_change_impact",
-      "followed_by": "get_dependents",
-      "time_ms": 438
-    },
-    {
-      "tool": "get_dependents",
-      "args": {
-        "name": "create_regular_user"
-      },
-      "result_chars": 71,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 11,
-      "preceded_by": "get_dependents",
-      "followed_by": "find_symbol",
-      "time_ms": 995
-    },
-    {
-      "tool": "find_symbol",
-      "args": {
-        "names": [
-          "authenticate_user",
-          "charge_customer",
-          "slugify",
-          "buggy_paginate",
-          "paginate_also"
-        ],
-        "level": 2
-      },
-      "result_chars": 735,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 12,
-      "preceded_by": "get_dependents",
-      "followed_by": "get_function_source",
-      "time_ms": 305
-    },
-    {
-      "tool": "get_function_source",
-      "args": {
-        "names": [
-          "authenticate_user",
-          "buggy_paginate",
-          "paginate_also"
-        ],
-        "level": 0
-      },
-      "result_chars": 1903,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 13,
-      "preceded_by": "find_symbol",
-      "followed_by": "search_codebase",
-      "time_ms": 467
-    },
-    {
-      "tool": "search_codebase",
-      "args": {
-        "pattern": "compute_invoice|bulk_import_members|delete_webhooks"
-      },
-      "result_chars": 6102,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 14,
       "preceded_by": "get_function_source",
       "followed_by": null,
-      "time_ms": 154
+      "time_ms": 114
     }
   ],
-  "total_context_chars_injected": 11471,
-  "ts_tool_calls_count": 15,
-  "wall_time_seconds": 68.24,
-  "raw_response": "Voici les changements v1\u2192v2 class\u00e9s par criticit\u00e9 d\u00e9croissante :\n\n---\n\n### 1. CRITIQUE \u2014 `authenticate_user()` : signature cass\u00e9e\n**Fichier :** `apps/api/services/auth.py:14`\n- Param\u00e8tres `payload` et `user_id` **supprim\u00e9s**, remplac\u00e9s par `credentials`\n- **Le corps r\u00e9f\u00e9rence encore `user_id` et `payload`** \u2192 crash garanti \u00e0 l'ex\u00e9cution (`NameError`)\n- Impact : tout le flux d'authentification est bloqu\u00e9. **Priorit\u00e9 absolue.**\n\n### 2. \u00c9LEV\u00c9E \u2014 `compute_invoice()` \u2192 `calculate_invoice()` : renommage\n**Fichier :** `apps/api/services/billing.py`\n- L'ancienne fonction est supprim\u00e9e, la nouvelle ajout\u00e9e\n- Le corps de `calculate_invoice` r\u00e9f\u00e9rence encore `'compute_invoice'` dans le log (ligne 44) \u2192 incoh\u00e9rence trace/code\n- Tous les appelants (routers billing) doivent \u00eatre mis \u00e0 jour. Les 6 routers billing ont des changements \"body only\" \u2014 \u00e0 v\u00e9rifier qu'ils appellent bien `calculate_invoice`.\n\n### 3. \u00c9LEV\u00c9E \u2014 `bulk_import_members()` : supprim\u00e9e sans remplacement\n**Fichier :** `apps/api/services/members.py:184`\n- Fonction supprim\u00e9e purement. Tout appelant existant cassera.\n- Pas de migration path document\u00e9.\n\n### 4. MOYENNE \u2014 `delete_webhooks()` : supprim\u00e9e du router\n**Fichier :** `apps/api/routers/webhooks.py:121`\n- Endpoint API supprim\u00e9 \u2192 breaking pour les clients REST\n- Les fonctions internes (`soft_delete_webhooks_internal`, `hard_delete_webhooks_internal`) existent encore dans le service.\n\n### 5. MOYENNE \u2014 `create_user()` \u2192 `create_regular_user()` : renommage\n**Fichier :** `apps/api/ambig/mod1.py:4`\n- Renommage simple, mais les appelants doivent migrer.\n\n### 6. FAIBLE \u2014 `slugify()` / `to_slug()` : renommage dans utils\n**Fichiers :** `apps/api/utils/strings.py`, `packages/utils/slug_copy.py`\n- `slugify` supprim\u00e9e de `strings.py`, ajout\u00e9e dans `slug_copy.py` (migration de package)\n- Risque limit\u00e9 si c'est un utilitaire interne.\n\n### 7. FAIBLE \u2014 `buggy_paginate()` / `paginate_also()` : body-only\n- Corrections logiques (ajout de gardes `page_size <= 0` et `> 100`). Non-breaking mais \u00e0 tester pour les r\u00e9gressions de comportement.\n\n---\n\n**Action imm\u00e9diate recommand\u00e9e :** `authenticate_user` est le plus dangereux \u2014 la signature a chang\u00e9 mais le corps utilise encore les anciens param\u00e8tres. C'est un bug, pas juste un breaking change.",
+  "total_context_chars_injected": 12842,
+  "ts_tool_calls_count": 5,
+  "wall_time_seconds": 33.71,
+  "raw_response": "Voici les changements v1\u2192v2 class\u00e9s par criticit\u00e9 d\u00e9croissante :\n\n---\n\n### 1. CRITIQUE \u2014 `authenticate_user()` (auth.py:14)\n**Signature cass\u00e9e** : les params `payload` et `user_id` sont remplac\u00e9s par `credentials`. Tous les appelants existants \u00e9choueront \u00e0 l'ex\u00e9cution. C'est le changement le plus dangereux \u2014 il touche l'authentification, chemin critique de toute l'app.\n\n### 2. CRITIQUE \u2014 `compute_invoice()` supprim\u00e9e \u2192 `calculate_invoice()` (billing.py:14)\nRenommage sans alias. Tout code appelant `compute_invoice()` l\u00e8vera un `AttributeError`. De plus, `validate_invoice_total` appara\u00eet 3 fois (lignes 49, 53, 57) \u2014 potentielle red\u00e9finition accidentelle.\n\n### 3. \u00c9LEV\u00c9 \u2014 `bulk_import_members()` supprim\u00e9e (members.py:184)\nFonction supprim\u00e9e sans remplacement visible. Si un workflow d'import en masse l'utilise, il cassera silencieusement.\n\n### 4. \u00c9LEV\u00c9 \u2014 `delete_webhooks()` supprim\u00e9e (webhooks.py:121)\nEndpoint de suppression retir\u00e9 du routeur. Les clients API recevront un 404/405 au lieu de supprimer.\n\n### 5. MOD\u00c9R\u00c9 \u2014 `slugify()` supprim\u00e9e (strings.py:4) + `to_slug()` supprim\u00e9e (slug_copy.py:4)\nLes deux fonctions de slugification sont retir\u00e9es. `slug_copy.py` ajoute un nouveau `slugify()` mais avec potentiellement un comportement diff\u00e9rent.\n\n### 6. MOD\u00c9R\u00c9 \u2014 `buggy_paginate()` (buggy_pagination.py:5) + `paginate_also()` (paginate_copy.py:6)\nModifications du corps \u2014 risque de r\u00e9gression sur la pagination (off-by-one, pages vides, etc.).\n\n### 7. FAIBLE \u2014 Modifications body-only des 6 routes billing (`list_`, `create_`, `get_`, `update_`, `delete_`, `add_member_to_billing`)\nRefactors internes, pas de changement de signature, mais volume de changements \u00e9lev\u00e9 dans un domaine sensible (facturation).\n\n---\n\n**Recommandation** : prioriser la review sur les points 1-2 (breaking changes d'auth et billing) \u2014 ce sont des cassures silencieuses \u00e0 runtime, sans erreur de compilation.",
   "error": null,
-  "score": 2,
+  "score": 1,
   "max_score": 2,
-  "timestamp": "2026-04-15T18:37:59.007940+00:00"
+  "timestamp": "2026-04-15T20:45:25.013089+00:00"
 }

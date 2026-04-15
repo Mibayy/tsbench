@@ -3,12 +3,12 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 5,
-  "output_tokens": 1140,
-  "cache_creation_input_tokens": 7781,
-  "cache_read_input_tokens": 132888,
-  "total_tokens": 141814,
-  "active_tokens": 8926,
-  "turns_count": 5,
+  "output_tokens": 735,
+  "cache_creation_input_tokens": 6267,
+  "cache_read_input_tokens": 133713,
+  "total_tokens": 140720,
+  "active_tokens": 7007,
+  "turns_count": 4,
   "tool_calls_count": 2,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
@@ -22,7 +22,7 @@
     },
     {
       "tool": "mcp__token-savior-recall__get_changed_symbols",
-      "result_chars": 10391,
+      "result_chars": 6232,
       "is_error": false
     }
   ],
@@ -38,30 +38,28 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "get_changed_symbols",
-      "time_ms": 110
+      "time_ms": 105
     },
     {
       "tool": "get_changed_symbols",
       "args": {
-        "ref": "HEAD~1",
-        "max_files": 40,
-        "max_symbols_per_file": 30
+        "ref": "HEAD~1"
       },
-      "result_chars": 10391,
+      "result_chars": 6232,
       "result_empty": false,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": null,
-      "time_ms": 585
+      "time_ms": 590
     }
   ],
-  "total_context_chars_injected": 10451,
+  "total_context_chars_injected": 6292,
   "ts_tool_calls_count": 2,
-  "wall_time_seconds": 30.98,
-  "raw_response": "Voici le r\u00e9sum\u00e9 des changements depuis `HEAD~1` \u2014 **91 fichiers modifi\u00e9s, 7 ajout\u00e9s, 0 supprim\u00e9s, 133 symboles impact\u00e9s** :\n\n## Python \u2014 Backend API\n\n| Fichier | Symboles modifi\u00e9s | Type |\n|---|---|---|\n| `apps/api/ambig/mod1.py` | `create_regular_user`, `process_event` | mod |\n| `apps/api/config.py` | `Settings` (class) | mod |\n| `apps/api/services/billing.py` | **29 fonctions** : `calculate_invoice`, `validate_invoice_total` (\u00d73), `apply_discount`, `charge_customer`, `refund_payment`, `list_invoices`, `void_invoice` + 20 fonctions `*_billing_internal` (prepare, finalize, audit, notify, enqueue, reconcile, upsert, expand, reduce, snapshot, replay, validate_input, serialize_output, deserialize_input, build_context, emit_metric, rate_limit, retry_with_backoff, batch_process, stream_process) | mod/ajout |\n| `apps/api/utils/buggy_pagination.py` | `buggy_paginate` | mod |\n| `apps/api/utils/strings.py` | `truncate` | mod |\n\n## TypeScript \u2014 API clients (`apps/web/api/`)\n\n5 modules modifi\u00e9s avec le **m\u00eame pattern** chacun (7 fonctions + 1 interface) :\n\n- **billing.ts** : `listBilling`, `getBilling`, `createBilling`, `updateBilling`, `deleteBilling`, `bulkBilling`, `searchBilling` + `BillingQuery`\n- **members.ts** : idem pattern `*Members` + `MembersQuery`\n- **notifications.ts** : idem `*Notifications` + `NotificationsQuery`\n- **sessions.ts** : idem `*Sessions` + `SessionsQuery`\n- **webhooks.ts** : idem `*Webhooks` + `WebhooksQuery`\n\n## TypeScript \u2014 Pages React (`apps/web/app/*/page.tsx`)\n\n**15 pages modifi\u00e9es**, chacune avec 2 symboles : `*Page` (composant) + `*PageState` (interface) :\n> Audit, Billing, Dashboard, ForgotPassword, Invite, Login, Members, Notifications, Pricing, Profile, Reports, Sessions, Settings, Signup, Webhooks\n\n## Shared packages\n\n| Fichier | Symboles | Type |\n|---|---|---|\n| `apps/web/lib/constants.ts` | `constants`, `constants_default`, `constantsOptions`, `constantsResult` | mod |\n| `packages/db/schema.prisma` | `Association`, `Member`, `Invoice` (models) | mod |\n| `packages/utils/paginate_copy.py` | `paginate_also` | mod |\n| `packages/utils/slug_copy.py` | `slugify` | mod |\n\n## Bench tooling (`bench.py`)\n\n19 fonctions modifi\u00e9es : `load_tasks_index`, `load_task_prompt`, `load_expected_answer`, `run_claude`, `parse_stream_json`, `extract_files`, `extract_symbols`, `f1`, `_collect_strings_recursive`, `_keyword_match`, `score_response`, `result_path`, `prewarm_run_b`, `run_task`, `_active`, `_turns`, `_chars`, `generate_report`, `main`\n\n## Donn\u00e9es (results/raw/)\n\n~58 fichiers JSON `TASK-*-run-B.json` modifi\u00e9s (pas de symboles index\u00e9s).",
+  "wall_time_seconds": 24.58,
+  "raw_response": "Voici le r\u00e9sum\u00e9 des changements depuis `HEAD~1` \u2014 **90 fichiers modifi\u00e9s, 8 ajout\u00e9s, 0 supprim\u00e9s**, couvrant **85 symboles** sur les 20 premiers fichiers report\u00e9s :\n\n### Python (`apps/api/`)\n\n| Fichier | Symboles modifi\u00e9s |\n|---|---|\n| `ambig/mod1.py` | `create_regular_user`, `process_event` |\n| `config.py` | classe `Settings` |\n| `services/billing.py` | **20 fonctions** : `_billing_admin_db`, `calculate_invoice`, 4\u00d7 `validate_invoice_total` (surcharges), `apply_discount`, `charge_customer`, `refund_payment`, `list_invoices`, `void_invoice`, + 8 fonctions internes (`prepare_`, `finalize_`, `audit_`, `notify_`, `enqueue_`, `reconcile_`, `upsert_`, `expand_`, `reduce_billing_internal`) |\n| `utils/buggy_pagination.py` | `buggy_paginate` |\n| `utils/strings.py` | `truncate` |\n\n### TypeScript \u2014 API clients (`apps/web/api/`)\n\n5 modules modifi\u00e9s (`billing.ts`, `members.ts`, `notifications.ts`, `sessions.ts`, `webhooks.ts`), chacun avec le m\u00eame pattern : **7 fonctions CRUD** (`list`, `get`, `create`, `update`, `delete`, `bulk`, `search`) + **1 classe Query**.\n\n### TypeScript \u2014 Pages React (`apps/web/app/`)\n\n**11 pages modifi\u00e9es** (audit, billing, dashboard, forgot-password, invite, login, members, notifications, pricing, profile, reports\u2026), chacune avec 2 symboles : la **fonction Page** + la **classe PageState**.\n\n### Packages\n\n`packages/utils/paginate_copy.py` et `packages/utils/slug_copy.py` modifi\u00e9s, plus `packages/db/schema.prisma`.\n\n### Fichiers de r\u00e9sultats\n\n~40 fichiers `results/raw/TASK-*-run-B.json` modifi\u00e9s (donn\u00e9es de benchmark).\n\n**En r\u00e9sum\u00e9** : changement massif sur le service billing Python (20 symboles), mise \u00e0 jour uniforme des 5 API clients TS et 11+ pages React, plus corrections dans les utilitaires pagination/strings.",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T19:52:06.829928+00:00"
+  "timestamp": "2026-04-15T21:06:48.353040+00:00"
 }

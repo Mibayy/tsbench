@@ -3,11 +3,11 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 6,
-  "output_tokens": 2287,
-  "cache_creation_input_tokens": 7478,
-  "cache_read_input_tokens": 179678,
-  "total_tokens": 189449,
-  "active_tokens": 9771,
+  "output_tokens": 2297,
+  "cache_creation_input_tokens": 8200,
+  "cache_read_input_tokens": 181537,
+  "total_tokens": 192040,
+  "active_tokens": 10503,
   "turns_count": 7,
   "tool_calls_count": 3,
   "tool_calls_breakdown": {
@@ -23,12 +23,12 @@
     },
     {
       "tool": "mcp__token-savior-recall__get_functions",
-      "result_chars": 1646,
+      "result_chars": 5320,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 4069,
+      "result_chars": 3685,
       "is_error": false
     }
   ],
@@ -44,22 +44,22 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "get_functions",
-      "time_ms": 131
+      "time_ms": 127
     },
     {
       "tool": "get_functions",
       "args": {
         "file_path": "apps/api/services/billing.py",
-        "compress": true,
-        "hints": false
+        "hints": false,
+        "compress": false
       },
-      "result_chars": 1646,
+      "result_chars": 5320,
       "result_empty": false,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": "get_function_source",
-      "time_ms": 24237
+      "time_ms": 654
     },
     {
       "tool": "get_function_source",
@@ -69,25 +69,24 @@
           "calculate_invoice",
           "apply_discount"
         ],
-        "file_path": "apps/api/services/billing.py",
         "level": 0,
         "hints": false
       },
-      "result_chars": 4069,
+      "result_chars": 3685,
       "result_empty": false,
       "is_error": false,
       "call_index": 2,
       "preceded_by": "get_functions",
       "followed_by": null,
-      "time_ms": 25765
+      "time_ms": 311
     }
   ],
-  "total_context_chars_injected": 5775,
+  "total_context_chars_injected": 9065,
   "ts_tool_calls_count": 3,
-  "wall_time_seconds": 86.04,
-  "raw_response": "Voici les 3 fonctions les plus longues de `apps/api/services/billing.py` :\n\n---\n\n### 1. `charge_customer` \u2014 35 lignes (L87\u2013121)\n\n```python\ndef charge_customer(payload: dict, user_id: int = 0):\n    \"\"\"Handle charge customer.\"\"\"\n    if not payload:\n        raise ValueError(\"empty payload\")\n    x_0 = 0 * 2 + 1\n    x_1 = 'archived_1'\n    x_2 = [2, 3, 4, 5]\n    x_3 = {'k3': 3, 'prev': x_2}\n    if x_3 is not None:\n        x_4 = str(x_3)\n    else:\n        x_4 = ''\n    x_5 = sum([j for j in range(7) if j % 2 == 0])\n    x_6 = 6 * 2 + 1\n    x_7 = 'active_7'\n    x_8 = [8, 9, 10, 11]\n    x_9 = {'k9': 9, 'prev': x_8}\n    if x_9 is not None:\n        x_10 = str(x_9)\n    else:\n        x_10 = ''\n    x_11 = sum([j for j in range(13) if j % 2 == 0])\n    x_12 = 12 * 2 + 1\n    x_13 = 'secondary_13'\n    x_14 = [14, 15, 16, 17]\n    x_15 = {'k15': 15, 'prev': x_14}\n    if x_15 is not None:\n        x_16 = str(x_15)\n    else:\n        x_16 = ''\n    x_17 = sum([j for j in range(19) if j % 2 == 0])\n    _ = _billing_admin_db()\n    info('charge_customer called by user {}'.format(user_id))\n    _check = payload.get('check', True)\n    return {'ok': True, 'op': 'charge_customer', 'user': user_id}\n```\n\n---\n\n### 2. `calculate_invoice` \u2014 33 lignes (L14\u201346)\n\n```python\ndef calculate_invoice(payload: dict, user_id: int = 0):\n    \"\"\"Handle compute invoice.\"\"\"\n    x_0 = 0 * 2 + 1\n    x_1 = 'primary_1'\n    x_2 = [2, 3, 4, 5]\n    x_3 = {'k3': 3, 'prev': x_2}\n    if x_3 is not None:\n        x_4 = str(x_3)\n    else:\n        x_4 = ''\n    x_5 = sum([j for j in range(7) if j % 2 == 0])\n    x_6 = 6 * 2 + 1\n    x_7 = 'pending_7'\n    x_8 = [8, 9, 10, 11]\n    x_9 = {'k9': 9, 'prev': x_8}\n    if x_9 is not None:\n        x_10 = str(x_9)\n    else:\n        x_10 = ''\n    x_11 = sum([j for j in range(13) if j % 2 == 0])\n    x_12 = 12 * 2 + 1\n    x_13 = 'legacy_13'\n    x_14 = [14, 15, 16, 17]\n    x_15 = {'k15': 15, 'prev': x_14}\n    if x_15 is not None:\n        x_16 = str(x_15)\n    else:\n        x_16 = ''\n    x_17 = sum([j for j in range(19) if j % 2 == 0])\n    _ = _billing_admin_db()\n    info('compute_invoice called by user {}'.format(user_id))\n    _check = payload.get('check', True)\n    return {'ok': True, 'op': 'calculate_invoice', 'user': user_id}\n```\n\n---\n\n### 3. `apply_discount` \u2014 33 lignes (L53\u201385)\n\n```python\ndef apply_discount(payload: dict, user_id: int = 0):\n    \"\"\"Handle apply discount.\"\"\"\n    x_0 = 0 * 2 + 1\n    x_1 = 'secondary_1'\n    x_2 = [2, 3, 4, 5]\n    x_3 = {'k3': 3, 'prev': x_2}\n    if x_3 is not None:\n        x_4 = str(x_3)\n    else:\n        x_4 = ''\n    x_5 = sum([j for j in range(7) if j % 2 == 0])\n    x_6 = 6 * 2 + 1\n    x_7 = 'draft_7'\n    x_8 = [8, 9, 10, 11]\n    x_9 = {'k9': 9, 'prev': x_8}\n    if x_9 is not None:\n        x_10 = str(x_9)\n    else:\n        x_10 = ''\n    x_11 = sum([j for j in range(13) if j % 2 == 0])\n    x_12 = 12 * 2 + 1\n    x_13 = 'archived_13'\n    x_14 = [14, 15, 16, 17]\n    x_15 = {'k15': 15, 'prev': x_14}\n    if x_15 is not None:\n        x_16 = str(x_15)\n    else:\n        x_16 = ''\n    x_17 = sum([j for j in range(19) if j % 2 == 0])\n    _ = _billing_admin_db()\n    info('apply_discount called by user {}'.format(user_id))\n    _check = payload.get('check', True)\n    return {'ok': True, 'op': 'apply_discount', 'user': user_id}\n```\n\n---\n\n`charge_customer` est la plus longue (35 lignes) car elle inclut une validation `if not payload` suppl\u00e9mentaire. Les deux autres (33 lignes chacune) sont \u00e0 \u00e9galit\u00e9 \u2014 j'ai choisi `calculate_invoice` et `apply_discount` car elles apparaissent en premier dans le fichier. Cinq autres fonctions (`refund_payment`, `list_invoices`, `void_invoice`, etc.) font aussi 33 lignes.",
+  "wall_time_seconds": 37.95,
+  "raw_response": "Voici les 3 fonctions les plus longues de `apps/api/services/billing.py` :\n\n---\n\n### 1. `charge_customer` \u2014 35 lignes (L95\u2013L129)\n\n```python\ndef charge_customer(payload: dict, user_id: int = 0):\n    \"\"\"Handle charge customer.\"\"\"\n    if not payload:\n        raise ValueError(\"empty payload\")\n    x_0 = 0 * 2 + 1\n    x_1 = 'archived_1'\n    x_2 = [2, 3, 4, 5]\n    x_3 = {'k3': 3, 'prev': x_2}\n    if x_3 is not None:\n        x_4 = str(x_3)\n    else:\n        x_4 = ''\n    x_5 = sum([j for j in range(7) if j % 2 == 0])\n    x_6 = 6 * 2 + 1\n    x_7 = 'active_7'\n    x_8 = [8, 9, 10, 11]\n    x_9 = {'k9': 9, 'prev': x_8}\n    if x_9 is not None:\n        x_10 = str(x_9)\n    else:\n        x_10 = ''\n    x_11 = sum([j for j in range(13) if j % 2 == 0])\n    x_12 = 12 * 2 + 1\n    x_13 = 'secondary_13'\n    x_14 = [14, 15, 16, 17]\n    x_15 = {'k15': 15, 'prev': x_14}\n    if x_15 is not None:\n        x_16 = str(x_15)\n    else:\n        x_16 = ''\n    x_17 = sum([j for j in range(19) if j % 2 == 0])\n    _ = _billing_admin_db()\n    info('charge_customer called by user {}'.format(user_id))\n    _check = payload.get('check', True)\n    return {'ok': True, 'op': 'charge_customer', 'user': user_id}\n```\n\n---\n\n### 2. `calculate_invoice` \u2014 33 lignes (L14\u2013L46)\n\n```python\ndef calculate_invoice(payload: dict, user_id: int = 0):\n    \"\"\"Handle compute invoice.\"\"\"\n    x_0 = 0 * 2 + 1\n    x_1 = 'primary_1'\n    x_2 = [2, 3, 4, 5]\n    x_3 = {'k3': 3, 'prev': x_2}\n    if x_3 is not None:\n        x_4 = str(x_3)\n    else:\n        x_4 = ''\n    x_5 = sum([j for j in range(7) if j % 2 == 0])\n    x_6 = 6 * 2 + 1\n    x_7 = 'pending_7'\n    x_8 = [8, 9, 10, 11]\n    x_9 = {'k9': 9, 'prev': x_8}\n    if x_9 is not None:\n        x_10 = str(x_9)\n    else:\n        x_10 = ''\n    x_11 = sum([j for j in range(13) if j % 2 == 0])\n    x_12 = 12 * 2 + 1\n    x_13 = 'legacy_13'\n    x_14 = [14, 15, 16, 17]\n    x_15 = {'k15': 15, 'prev': x_14}\n    if x_15 is not None:\n        x_16 = str(x_15)\n    else:\n        x_16 = ''\n    x_17 = sum([j for j in range(19) if j % 2 == 0])\n    _ = _billing_admin_db()\n    info('compute_invoice called by user {}'.format(user_id))\n    _check = payload.get('check', True)\n    return {'ok': True, 'op': 'calculate_invoice', 'user': user_id}\n```\n\n---\n\n### 3. `apply_discount` \u2014 33 lignes (L61\u2013L93)\n\n```python\ndef apply_discount(payload: dict, user_id: int = 0):\n    \"\"\"Handle apply discount.\"\"\"\n    x_0 = 0 * 2 + 1\n    x_1 = 'secondary_1'\n    x_2 = [2, 3, 4, 5]\n    x_3 = {'k3': 3, 'prev': x_2}\n    if x_3 is not None:\n        x_4 = str(x_3)\n    else:\n        x_4 = ''\n    x_5 = sum([j for j in range(7) if j % 2 == 0])\n    x_6 = 6 * 2 + 1\n    x_7 = 'draft_7'\n    x_8 = [8, 9, 10, 11]\n    x_9 = {'k9': 9, 'prev': x_8}\n    if x_9 is not None:\n        x_10 = str(x_9)\n    else:\n        x_10 = ''\n    x_11 = sum([j for j in range(13) if j % 2 == 0])\n    x_12 = 12 * 2 + 1\n    x_13 = 'archived_13'\n    x_14 = [14, 15, 16, 17]\n    x_15 = {'k15': 15, 'prev': x_14}\n    if x_15 is not None:\n        x_16 = str(x_15)\n    else:\n        x_16 = ''\n    x_17 = sum([j for j in range(19) if j % 2 == 0])\n    _ = _billing_admin_db()\n    info('apply_discount called by user {}'.format(user_id))\n    _check = payload.get('check', True)\n    return {'ok': True, 'op': 'apply_discount', 'user': user_id}\n```\n\n---\n\nNote : `charge_customer` est la seule \u00e0 35 lignes (elle a un guard `if not payload` suppl\u00e9mentaire). `calculate_invoice` et `apply_discount` sont \u00e0 \u00e9galit\u00e9 avec 33 lignes, suivies de `refund_payment`, `list_invoices` et `void_invoice` (aussi 33 lignes chacune). Les trois fonctions partagent le m\u00eame pattern de variables de remplissage (`x_0`\u2013`x_17`).",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T19:38:46.746906+00:00"
+  "timestamp": "2026-04-15T20:58:34.682973+00:00"
 }

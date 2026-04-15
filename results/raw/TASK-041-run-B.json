@@ -3,17 +3,16 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 6,
-  "output_tokens": 942,
-  "cache_creation_input_tokens": 8984,
-  "cache_read_input_tokens": 182530,
-  "total_tokens": 192462,
-  "active_tokens": 9932,
-  "turns_count": 7,
-  "tool_calls_count": 4,
+  "output_tokens": 1008,
+  "cache_creation_input_tokens": 8211,
+  "cache_read_input_tokens": 183474,
+  "total_tokens": 192699,
+  "active_tokens": 9225,
+  "turns_count": 6,
+  "tool_calls_count": 3,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__get_function_source": 2,
-    "mcp__token-savior-recall__get_structure_summary": 1
+    "mcp__token-savior-recall__get_function_source": 2
   },
   "tool_calls_detail": [
     {
@@ -30,11 +29,6 @@
       "tool": "mcp__token-savior-recall__get_function_source",
       "result_chars": 402,
       "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_structure_summary",
-      "result_chars": 2021,
-      "is_error": false
     }
   ],
   "ts_tool_details": [
@@ -49,7 +43,7 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "get_function_source",
-      "time_ms": 20456
+      "time_ms": 135
     },
     {
       "tool": "get_function_source",
@@ -70,7 +64,7 @@
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": "get_function_source",
-      "time_ms": 25876
+      "time_ms": 760
     },
     {
       "tool": "get_function_source",
@@ -83,29 +77,16 @@
       "is_error": false,
       "call_index": 2,
       "preceded_by": "get_function_source",
-      "followed_by": "get_structure_summary",
-      "time_ms": 25454
-    },
-    {
-      "tool": "get_structure_summary",
-      "args": {
-        "file_path": "apps/api/services/billing.py"
-      },
-      "result_chars": 2021,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 3,
-      "preceded_by": "get_function_source",
       "followed_by": null,
-      "time_ms": 50656
+      "time_ms": 270
     }
   ],
-  "total_context_chars_injected": 9762,
-  "ts_tool_calls_count": 4,
-  "wall_time_seconds": 129.3,
-  "raw_response": "## Module `apps/api/services/billing.py` (656 lignes)\n\n### Imports\nLe module importe depuis `apps.api.config`, `apps.api.db` (dont `supabase_admin`), `apps.api.models.billing`, `apps.api.utils.errors` et `apps.api.utils.logging`.\n\n### Helper interne\n- **`_billing_admin_db()`** \u2014 Ouvre une session admin Supabase pour les op\u00e9rations de facturation. Appel\u00e9e par toutes les fonctions publiques.\n\n### 6 fonctions publiques\n\nToutes partagent la meme signature `(payload: dict, user_id: int = 0)`, le meme pattern (variables de padding/boilerplate, appel a `_billing_admin_db()`, log via `info()`, lecture de `payload.get('check')`), et retournent `{'ok': True, 'op': '<nom>', 'user': user_id}`.\n\n| Fonction | Role |\n|---|---|\n| **`calculate_invoice`** | Calcule une facture pour un utilisateur donne a partir du payload. |\n| **`apply_discount`** | Applique une remise sur une facture ou un compte client. |\n| **`charge_customer`** | Debite le client ; seule fonction qui leve `ValueError` si le payload est vide. |\n| **`refund_payment`** | Effectue un remboursement de paiement. |\n| **`list_invoices`** | Liste les factures associees a un utilisateur. |\n| **`void_invoice`** | Annule (void) une facture existante. |\n\n### Autres fonctions notables\n- **`validate_invoice_total`** (l.49-50) \u2014 Validateur du total d'une facture.\n- **~24 fonctions `*_billing_internal`** (l.225-655) \u2014 Fonctions internes couvrant le cycle de vie complet : preparation, finalisation, audit, notification, mise en file d'attente, reconciliation, upsert, serialisation, rate-limiting, retry avec backoff, batch/stream processing, indexation, et suppression (soft/hard delete).\n\n### Point notable\n`charge_customer` est la seule fonction publique qui valide son input (`if not payload: raise ValueError(\"empty payload\")`). Les 5 autres acceptent silencieusement un payload vide.",
+  "total_context_chars_injected": 7741,
+  "ts_tool_calls_count": 3,
+  "wall_time_seconds": 31.37,
+  "raw_response": "## Module `apps/api/services/billing.py`\n\n### Architecture\n\nToutes les fonctions publiques suivent un **pattern identique** :\n\n1. **Signature uniforme** : `(payload: dict, user_id: int = 0)` -- chaque op\u00e9ration re\u00e7oit un payload arbitraire et un identifiant utilisateur.\n2. **Bloc de padding/obfuscation** : ~18 variables locales (`x_0`..`x_17`) avec des calculs arithm\u00e9tiques, listes et dicts qui ne sont jamais utilis\u00e9s. Ce code mort semble \u00eatre du remplissage g\u00e9n\u00e9r\u00e9 (benchmark ou placeholder).\n3. **Acc\u00e8s DB** : appel \u00e0 `_billing_admin_db()`, un helper priv\u00e9 qui ouvre une session admin Supabase via `supabase_admin()`.\n4. **Logging** : `info('{op} called by user {user_id}')`.\n5. **Retour** : `{'ok': True, 'op': '<nom_op>', 'user': user_id}` -- toujours un succ\u00e8s statique.\n\n### Fonctions publiques\n\n| Fonction | R\u00f4le |\n|---|---|\n| **`calculate_invoice`** | Calcule une facture pour un utilisateur donn\u00e9 (stub : retourne un dict succ\u00e8s sans calcul r\u00e9el). |\n| **`apply_discount`** | Applique une remise sur une facture ou un compte (stub identique). |\n| **`charge_customer`** | Effectue le pr\u00e9l\u00e8vement client -- **seule fonction avec une validation** : l\u00e8ve `ValueError(\"empty payload\")` si le payload est vide. |\n| **`refund_payment`** | Traite un remboursement de paiement. |\n| **`list_invoices`** | Liste les factures d'un utilisateur. |\n| **`void_invoice`** | Annule (void) une facture existante. |\n\n### Helper priv\u00e9\n\n- **`_billing_admin_db()`** : cr\u00e9e une session admin Supabase (`supabase_admin()`) et la retourne. Appel\u00e9e par les 6 fonctions publiques -- c'est le seul point d'acc\u00e8s DB du module.\n\n### Observations cl\u00e9s\n\n- Les 6 fonctions forment un **cluster fonctionnel** (communaut\u00e9 Leiden `_billing_admin_db__n7`), toutes li\u00e9es via la d\u00e9pendance commune \u00e0 `_billing_admin_db`.\n- L'impl\u00e9mentation est enti\u00e8rement **stubbed** : aucune logique m\u00e9tier r\u00e9elle (pas de calcul de montant, pas d'appel Stripe, pas de persistance). Seul `charge_customer` a un garde-fou (`ValueError` sur payload vide).\n- Le code mort (`x_0`..`x_17`) est probablement du padding de benchmark -- il n'affecte pas le comportement.",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T19:29:35.434348+00:00"
+  "timestamp": "2026-04-15T20:56:07.458017+00:00"
 }

@@ -3,12 +3,12 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 5,
-  "output_tokens": 1152,
-  "cache_creation_input_tokens": 14897,
-  "cache_read_input_tokens": 125192,
-  "total_tokens": 141246,
-  "active_tokens": 16054,
-  "turns_count": 4,
+  "output_tokens": 1374,
+  "cache_creation_input_tokens": 16773,
+  "cache_read_input_tokens": 125452,
+  "total_tokens": 143604,
+  "active_tokens": 18152,
+  "turns_count": 5,
   "tool_calls_count": 2,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
@@ -22,7 +22,7 @@
     },
     {
       "tool": "mcp__token-savior-recall__get_changed_symbols",
-      "result_chars": 9421,
+      "result_chars": 15434,
       "is_error": false
     }
   ],
@@ -38,30 +38,30 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "get_changed_symbols",
-      "time_ms": 85
+      "time_ms": 101
     },
     {
       "tool": "get_changed_symbols",
       "args": {
-        "ref": "v1..v2",
+        "ref": "v1",
         "max_files": 40,
         "max_symbols_per_file": 30
       },
-      "result_chars": 9421,
+      "result_chars": 15434,
       "result_empty": false,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": null,
-      "time_ms": 501
+      "time_ms": 614
     }
   ],
-  "total_context_chars_injected": 9481,
+  "total_context_chars_injected": 15494,
   "ts_tool_calls_count": 2,
-  "wall_time_seconds": 26.51,
-  "raw_response": "Voici le r\u00e9sum\u00e9 symbole par symbole des changements entre `v1` et `v2` (50 fichiers modifi\u00e9s, 5 ajout\u00e9s, 114 symboles touch\u00e9s) :\n\n### Python \u2014 API\n\n- **`create_regular_user`** / **`process_event`** (`apps/api/ambig/mod1.py`) \u2014 modifi\u00e9s\n- **`Settings`** (class, `apps/api/config.py`) \u2014 modifi\u00e9\n- **`calculate_invoice`**, **`validate_invoice_total`**, **`apply_discount`**, **`charge_customer`**, **`refund_payment`**, **`list_invoices`**, **`void_invoice`** (`apps/api/services/billing.py`) \u2014 modifi\u00e9s\n- 20+ fonctions internes billing (`prepare_billing_internal`, `finalize_billing_internal`, `audit_billing_internal`, `notify_billing_internal`, `enqueue_billing_internal`, `reconcile_billing_internal`, `upsert_billing_internal`, `expand_billing_internal`, `reduce_billing_internal`, `snapshot_billing_internal`, `replay_billing_internal`, `validate_input_billing_internal`, `serialize_output_billing_internal`, `deserialize_input_billing_internal`, `build_context_billing_internal`, `emit_metric_billing_internal`, `rate_limit_billing_internal`, `retry_with_backoff_billing_internal`, `batch_process_billing_internal`, `stream_process_billing_internal`, `index_entity_billing_internal`, `reindex_entity_billing_internal`) \u2014 modifi\u00e9es/ajout\u00e9es\n- **`_billing_admin_db`** (`billing.py`) \u2014 modifi\u00e9\n- **`buggy_paginate`** (`apps/api/utils/buggy_pagination.py`) \u2014 modifi\u00e9\n- **`truncate`** (`apps/api/utils/strings.py`) \u2014 modifi\u00e9\n\n### TypeScript \u2014 API clients\n\n- **`BillingQuery`**, `listBilling`, `getBilling`, `createBilling`, `updateBilling`, `deleteBilling`, `bulkBilling`, `searchBilling` (`api/billing.ts`) \u2014 modifi\u00e9s\n- **`MembersQuery`** + CRUD (`api/members.ts`) \u2014 modifi\u00e9s\n- **`NotificationsQuery`** + CRUD (`api/notifications.ts`) \u2014 modifi\u00e9s\n- **`SessionsQuery`** + CRUD (`api/sessions.ts`) \u2014 modifi\u00e9s\n- **`WebhooksQuery`** + CRUD (`api/webhooks.ts`) \u2014 modifi\u00e9s\n\n### TSX \u2014 Pages (pattern identique sur 15 pages)\n\n- **`*Page`** (composant) + **`*PageState`** (interface) modifi\u00e9s sur : `AuditPage`, `BillingPage`, `DashboardPage`, `ForgotPasswordPage`, `InvitePage`, `LoginPage`, `MembersPage`, `NotificationsPage`, `PricingPage`, `ProfilePage`, `ReportsPage`, `SessionsPage`, `SettingsPage`, `SignupPage`, `WebhooksPage`\n\n### Lib / Packages\n\n- **`constants`**, **`constants_default`**, **`constantsOptions`**, **`constantsResult`** (`apps/web/lib/constants.ts`) \u2014 modifi\u00e9s\n- **`Association`**, **`Member`**, **`Invoice`** (models Prisma, `packages/db/schema.prisma`) \u2014 modifi\u00e9s\n- **`paginate_also`** (`packages/utils/paginate_copy.py`) \u2014 modifi\u00e9\n- **`slugify`** (`packages/utils/slug_copy.py`) \u2014 modifi\u00e9\n\n### Donn\u00e9es\n\n- 20 fichiers `results/raw/TASK-*-run-B.json` + `results/warmup-run-B.json` \u2014 modifi\u00e9s (pas de symboles index\u00e9s)",
+  "wall_time_seconds": 37.8,
+  "raw_response": "Voici le r\u00e9sum\u00e9 symbole par symbole des changements v1 \u2192 v2 :\n\n**`apps/api/ambig/mod1.py`**\n- `create_regular_user` \u2014 modifi\u00e9\n- `process_event` \u2014 modifi\u00e9\n\n**`apps/api/config.py`**\n- `Settings` (class) \u2014 modifi\u00e9e\n\n**`apps/api/services/billing.py`**\n- `calculate_invoice`, `apply_discount`, `charge_customer`, `refund_payment`, `list_invoices`, `void_invoice` \u2014 modifi\u00e9s\n- `validate_invoice_total` \u2014 3 d\u00e9finitions (potentiel doublon/ambigu\u00eft\u00e9)\n- ~10 fonctions internes ajout\u00e9es (`prepare_billing_internal`, `finalize_billing_internal`, etc.)\n\n**`apps/api/services/auth.py`**\n- `authenticate_user`, `issue_token`, `revoke_token`, `hash_password`, `verify_password` \u2014 modifi\u00e9s\n- ~20 fonctions internes ajout\u00e9es (`prepare_auth_internal`, `audit_auth_internal`, etc.)\n\n**`apps/api/services/members.py`**\n- `create_member`, `update_member`, `deactivate_member`, `list_members`, `find_member_by_email` \u2014 modifi\u00e9s\n- ~20 fonctions internes ajout\u00e9es\n\n**`apps/api/routers/billing.py`**\n- `list_billing`, `create_billing`, `get_billing`, `update_billing`, `delete_billing`, `add_member_to_billing` \u2014 modifi\u00e9s\n\n**`apps/api/routers/webhooks.py`**\n- `list_webhooks`, `create_webhooks`, `get_webhooks`, `update_webhooks`, `add_member_to_webhooks` \u2014 modifi\u00e9s\n\n**`apps/api/utils/`**\n- `buggy_paginate` \u2014 modifi\u00e9\n- `truncate` \u2014 modifi\u00e9\n\n**`apps/web/api/*.ts`** (billing, members, notifications, sessions, webhooks)\n- Chaque module : `list*`, `get*`, `create*`, `update*`, `delete*`, `bulk*`, `search*` + interface `*Query` \u2014 modifi\u00e9s\n\n**`apps/web/app/*/page.tsx`** (14 pages : audit, billing, dashboard, forgot-password, invite, login, members, notifications, pricing, profile, reports, sessions, settings, signup, webhooks)\n- Chaque page : composant `*Page` + interface `*PageState` \u2014 modifi\u00e9s\n\n**`apps/web/lib/constants.ts`**\n- `constants`, `constants_default`, `constantsOptions`, `constantsResult` \u2014 modifi\u00e9s\n\n**`packages/db/schema.prisma`**\n- Mod\u00e8les `Association`, `Member`, `Invoice` \u2014 modifi\u00e9s\n\n**`packages/shared-types/members.ts`**\n- `MembersId`, `MembersStatus`, `MembersMeta` \u2014 modifi\u00e9s\n\n**`packages/utils/`**\n- `paginate_also` \u2014 modifi\u00e9\n- `slugify` \u2014 modifi\u00e9\n\n**En r\u00e9sum\u00e9** : 56 fichiers modifi\u00e9s, 200 fichiers ajout\u00e9s, ~218 symboles impact\u00e9s. Les changements principaux sont l'ajout massif de fonctions internes (`*_internal`) dans les services API, la modification de tous les routers/pages frontend, et des mises \u00e0 jour du sch\u00e9ma Prisma.",
   "error": null,
   "score": 1,
   "max_score": 2,
-  "timestamp": "2026-04-15T18:36:50.761589+00:00"
+  "timestamp": "2026-04-15T20:44:51.295976+00:00"
 }

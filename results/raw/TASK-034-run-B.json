@@ -2,22 +2,18 @@
   "task_id": "TASK-034",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 18,
-  "output_tokens": 2694,
-  "cache_creation_input_tokens": 13064,
-  "cache_read_input_tokens": 684416,
-  "total_tokens": 700192,
-  "active_tokens": 15776,
-  "turns_count": 22,
-  "tool_calls_count": 13,
+  "input_tokens": 8,
+  "output_tokens": 759,
+  "cache_creation_input_tokens": 13852,
+  "cache_read_input_tokens": 265405,
+  "total_tokens": 280024,
+  "active_tokens": 14619,
+  "turns_count": 8,
+  "tool_calls_count": 5,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__get_function_source": 5,
-    "mcp__token-savior-recall__search_codebase": 3,
-    "mcp__token-savior-recall__get_changed_symbols": 1,
-    "mcp__token-savior-recall__reindex": 1,
-    "mcp__token-savior-recall__get_structure_summary": 1,
-    "mcp__token-savior-recall__get_dependents": 1
+    "mcp__token-savior-recall__search_codebase": 1,
+    "mcp__token-savior-recall__get_function_source": 3
   },
   "tool_calls_detail": [
     {
@@ -26,63 +22,23 @@
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 226,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 279,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 576,
-      "is_error": false
-    },
-    {
       "tool": "mcp__token-savior-recall__search_codebase",
-      "result_chars": 1003,
+      "result_chars": 1280,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__search_codebase",
-      "result_chars": 8338,
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 188,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 297,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__get_function_source",
       "result_chars": 302,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_changed_symbols",
-      "result_chars": 6227,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__reindex",
-      "result_chars": 42,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 302,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_structure_summary",
-      "result_chars": 136,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_dependents",
-      "result_chars": 66,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__search_codebase",
-      "result_chars": 1612,
       "is_error": false
     }
   ],
@@ -97,189 +53,71 @@
       "is_error": false,
       "call_index": 0,
       "preceded_by": null,
-      "followed_by": "get_function_source",
-      "time_ms": 121
+      "followed_by": "search_codebase",
+      "time_ms": 128
     },
     {
-      "tool": "get_function_source",
+      "tool": "search_codebase",
       "args": {
-        "name": "paginate",
-        "project": "tsbench"
+        "pattern": "buggy_pagination"
       },
-      "result_chars": 226,
+      "result_chars": 1280,
       "result_empty": false,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": "get_function_source",
-      "time_ms": 902
+      "time_ms": 621
     },
     {
       "tool": "get_function_source",
       "args": {
-        "name": "paginate",
-        "level": 0,
-        "project": "tsbench"
+        "name": "buggy_paginate"
       },
-      "result_chars": 279,
+      "result_chars": 188,
       "result_empty": false,
       "is_error": false,
       "call_index": 2,
-      "preceded_by": "get_function_source",
+      "preceded_by": "search_codebase",
       "followed_by": "get_function_source",
-      "time_ms": 268
+      "time_ms": 267
     },
     {
       "tool": "get_function_source",
       "args": {
-        "name": "paginate",
-        "level": 0,
-        "force_full": true,
-        "project": "tsbench"
+        "name": "buggy_paginate",
+        "level": 0
       },
-      "result_chars": 576,
+      "result_chars": 297,
       "result_empty": false,
       "is_error": false,
       "call_index": 3,
       "preceded_by": "get_function_source",
-      "followed_by": "search_codebase",
-      "time_ms": 287
+      "followed_by": "get_function_source",
+      "time_ms": 308
     },
     {
-      "tool": "search_codebase",
+      "tool": "get_function_source",
       "args": {
-        "pattern": "default_page_size",
-        "project": "tsbench"
+        "name": "buggy_paginate",
+        "level": 0,
+        "force_full": true
       },
-      "result_chars": 1003,
+      "result_chars": 302,
       "result_empty": false,
       "is_error": false,
       "call_index": 4,
       "preceded_by": "get_function_source",
-      "followed_by": "search_codebase",
-      "time_ms": 127
-    },
-    {
-      "tool": "search_codebase",
-      "args": {
-        "pattern": "DEFAULT_PAGE_SIZE",
-        "project": "tsbench"
-      },
-      "result_chars": 8338,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 5,
-      "preceded_by": "search_codebase",
-      "followed_by": "get_function_source",
-      "time_ms": 207
-    },
-    {
-      "tool": "get_function_source",
-      "args": {
-        "name": "buggy_paginate",
-        "level": 0,
-        "force_full": true,
-        "project": "tsbench"
-      },
-      "result_chars": 302,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 6,
-      "preceded_by": "search_codebase",
-      "followed_by": "get_changed_symbols",
-      "time_ms": 252
-    },
-    {
-      "tool": "get_changed_symbols",
-      "args": {
-        "project": "tsbench"
-      },
-      "result_chars": 6227,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 7,
-      "preceded_by": "get_function_source",
-      "followed_by": "reindex",
-      "time_ms": 444
-    },
-    {
-      "tool": "reindex",
-      "args": {
-        "project": "tsbench"
-      },
-      "result_chars": 42,
-      "result_empty": true,
-      "is_error": false,
-      "call_index": 8,
-      "preceded_by": "get_changed_symbols",
-      "followed_by": "get_function_source",
-      "time_ms": 2529
-    },
-    {
-      "tool": "get_function_source",
-      "args": {
-        "name": "buggy_paginate",
-        "level": 0,
-        "force_full": true,
-        "project": "tsbench"
-      },
-      "result_chars": 302,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 9,
-      "preceded_by": "reindex",
-      "followed_by": "get_structure_summary",
-      "time_ms": 280
-    },
-    {
-      "tool": "get_structure_summary",
-      "args": {
-        "file_path": "apps/api/utils/buggy_pagination.py",
-        "project": "tsbench"
-      },
-      "result_chars": 136,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 10,
-      "preceded_by": "get_function_source",
-      "followed_by": "get_dependents",
-      "time_ms": 38
-    },
-    {
-      "tool": "get_dependents",
-      "args": {
-        "name": "buggy_paginate",
-        "project": "tsbench"
-      },
-      "result_chars": 66,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 11,
-      "preceded_by": "get_structure_summary",
-      "followed_by": "search_codebase",
-      "time_ms": 67
-    },
-    {
-      "tool": "search_codebase",
-      "args": {
-        "pattern": "buggy_paginate",
-        "project": "tsbench"
-      },
-      "result_chars": 1612,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 12,
-      "preceded_by": "get_dependents",
       "followed_by": null,
-      "time_ms": 91
+      "time_ms": 258
     }
   ],
-  "total_context_chars_injected": 19169,
-  "ts_tool_calls_count": 13,
-  "wall_time_seconds": 79.09,
-  "raw_response": "Le bug est identifi\u00e9. Voici la r\u00e9ponse :\n\n**Fichier** : `apps/api/utils/buggy_pagination.py`, fonction `buggy_paginate` (ligne 8)\n\n**Bug** : off-by-one dans le calcul de `end`. La ligne est :\n\n```python\nend = start + page_size + 1\n```\n\nau lieu de :\n\n```python\nend = start + page_size\n```\n\nLe `+ 1` fait que le slice `items[start:end]` retourne `page_size + 1` \u00e9l\u00e9ments (11 au lieu de 10). Il suffit de supprimer le `+ 1` pour corriger.",
+  "total_context_chars_injected": 2127,
+  "ts_tool_calls_count": 5,
+  "wall_time_seconds": 29.58,
+  "raw_response": "Le bug est dans **`apps/api/utils/buggy_pagination.py`**, fonction **`buggy_paginate`**, \u00e0 la ligne qui calcule `end` :\n\n```python\nend = start + page_size + 1   # \u2190 off-by-one : le \"+ 1\" est en trop\n```\n\nLe slice `items[start:end]` retourne `page_size + 1` \u00e9l\u00e9ments (11 au lieu de 10).\n\n**Correction :** remplacer par `end = start + page_size`.",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T19:23:22.993342+00:00"
+  "timestamp": "2026-04-15T20:51:48.014372+00:00"
 }

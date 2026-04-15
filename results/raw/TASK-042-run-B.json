@@ -3,12 +3,12 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 5,
-  "output_tokens": 965,
-  "cache_creation_input_tokens": 5895,
-  "cache_read_input_tokens": 133030,
-  "total_tokens": 139895,
-  "active_tokens": 6865,
-  "turns_count": 5,
+  "output_tokens": 862,
+  "cache_creation_input_tokens": 5896,
+  "cache_read_input_tokens": 133739,
+  "total_tokens": 140502,
+  "active_tokens": 6763,
+  "turns_count": 4,
   "tool_calls_count": 2,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
@@ -38,7 +38,7 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "get_functions",
-      "time_ms": 163
+      "time_ms": 139
     },
     {
       "tool": "get_functions",
@@ -54,15 +54,15 @@
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": null,
-      "time_ms": 27181
+      "time_ms": 453
     }
   ],
   "total_context_chars_injected": 4618,
   "ts_tool_calls_count": 2,
-  "wall_time_seconds": 50.86,
-  "raw_response": "Voici les **29 fonctions publiques** de `apps/api/services/auth.py` :\n\n| # | Fonction | Param\u00e8tres |\n|---|----------|------------|\n| 1 | `authenticate_user` | `(credentials)` |\n| 2 | `issue_token` | `(payload, user_id)` |\n| 3 | `revoke_token` | `(payload, user_id)` |\n| 4 | `hash_password` | `(payload, user_id)` |\n| 5 | `verify_password` | `(payload, user_id)` |\n| 6 | `prepare_auth_internal` | `(data)` |\n| 7 | `finalize_auth_internal` | `(data)` |\n| 8 | `audit_auth_internal` | `(data)` |\n| 9 | `notify_auth_internal` | `(data)` |\n| 10 | `enqueue_auth_internal` | `(data)` |\n| 11 | `reconcile_auth_internal` | `(data)` |\n| 12 | `upsert_auth_internal` | `(data)` |\n| 13 | `expand_auth_internal` | `(data)` |\n| 14 | `reduce_auth_internal` | `(data)` |\n| 15 | `snapshot_auth_internal` | `(data)` |\n| 16 | `replay_auth_internal` | `(data)` |\n| 17 | `validate_input_auth_internal` | `(data)` |\n| 18 | `serialize_output_auth_internal` | `(data)` |\n| 19 | `deserialize_input_auth_internal` | `(data)` |\n| 20 | `build_context_auth_internal` | `(data)` |\n| 21 | `emit_metric_auth_internal` | `(data)` |\n| 22 | `rate_limit_auth_internal` | `(data)` |\n| 23 | `retry_with_backoff_auth_internal` | `(data)` |\n| 24 | `batch_process_auth_internal` | `(data)` |\n| 25 | `stream_process_auth_internal` | `(data)` |\n| 26 | `index_entity_auth_internal` | `(data)` |\n| 27 | `reindex_entity_auth_internal` | `(data)` |\n| 28 | `soft_delete_auth_internal` | `(data)` |\n| 29 | `hard_delete_auth_internal` | `(data)` |\n\n1 fonction priv\u00e9e exclue : `_auth_admin_db()`. Le fichier couvre les lignes 8\u2013614 (30 fonctions au total).",
+  "wall_time_seconds": 24.13,
+  "raw_response": "Voici les **29 fonctions publiques** (non-underscore) de `apps/api/services/auth.py` :\n\n| # | Fonction | Param\u00e8tres |\n|---|----------|------------|\n| 1 | `authenticate_user` | `credentials` |\n| 2 | `issue_token` | `payload, user_id` |\n| 3 | `revoke_token` | `payload, user_id` |\n| 4 | `hash_password` | `payload, user_id` |\n| 5 | `verify_password` | `payload, user_id` |\n| 6 | `prepare_auth_internal` | `data` |\n| 7 | `finalize_auth_internal` | `data` |\n| 8 | `audit_auth_internal` | `data` |\n| 9 | `notify_auth_internal` | `data` |\n| 10 | `enqueue_auth_internal` | `data` |\n| 11 | `reconcile_auth_internal` | `data` |\n| 12 | `upsert_auth_internal` | `data` |\n| 13 | `expand_auth_internal` | `data` |\n| 14 | `reduce_auth_internal` | `data` |\n| 15 | `snapshot_auth_internal` | `data` |\n| 16 | `replay_auth_internal` | `data` |\n| 17 | `validate_input_auth_internal` | `data` |\n| 18 | `serialize_output_auth_internal` | `data` |\n| 19 | `deserialize_input_auth_internal` | `data` |\n| 20 | `build_context_auth_internal` | `data` |\n| 21 | `emit_metric_auth_internal` | `data` |\n| 22 | `rate_limit_auth_internal` | `data` |\n| 23 | `retry_with_backoff_auth_internal` | `data` |\n| 24 | `batch_process_auth_internal` | `data` |\n| 25 | `stream_process_auth_internal` | `data` |\n| 26 | `index_entity_auth_internal` | `data` |\n| 27 | `reindex_entity_auth_internal` | `data` |\n| 28 | `soft_delete_auth_internal` | `data` |\n| 29 | `hard_delete_auth_internal` | `data` |\n\nLa seule fonction priv\u00e9e (pr\u00e9fix\u00e9e `_`) exclue est `_auth_admin_db()` (ligne 8, sans param\u00e8tres).",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T19:30:26.302417+00:00"
+  "timestamp": "2026-04-15T20:56:31.591178+00:00"
 }

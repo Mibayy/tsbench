@@ -3,11 +3,11 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 5,
-  "output_tokens": 766,
-  "cache_creation_input_tokens": 5975,
-  "cache_read_input_tokens": 133019,
-  "total_tokens": 139765,
-  "active_tokens": 6746,
+  "output_tokens": 659,
+  "cache_creation_input_tokens": 6034,
+  "cache_read_input_tokens": 133731,
+  "total_tokens": 140429,
+  "active_tokens": 6698,
   "turns_count": 4,
   "tool_calls_count": 2,
   "tool_calls_breakdown": {
@@ -22,7 +22,7 @@
     },
     {
       "tool": "mcp__token-savior-recall__get_entry_points",
-      "result_chars": 4928,
+      "result_chars": 5087,
       "is_error": false
     }
   ],
@@ -38,28 +38,28 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "get_entry_points",
-      "time_ms": 142
+      "time_ms": 105
     },
     {
       "tool": "get_entry_points",
       "args": {
         "max_results": 30
       },
-      "result_chars": 4928,
+      "result_chars": 5087,
       "result_empty": false,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": null,
-      "time_ms": 24410
+      "time_ms": 650
     }
   ],
-  "total_context_chars_injected": 4988,
+  "total_context_chars_injected": 5147,
   "ts_tool_calls_count": 2,
-  "wall_time_seconds": 48.12,
-  "raw_response": "Voici les points d'entr\u00e9e du projet **tsbench**, class\u00e9s par cat\u00e9gorie :\n\n### Handlers d'\u00e9v\u00e9nements externes (score 1.0)\n| Fonction | Fichier |\n|---|---|\n| `handle_postmark_event` | `apps/worker/handlers/postmark.py` |\n| `handle_stripe_event` | `apps/worker/handlers/stripe.py` |\n| `handle_twilio_event` | `apps/worker/handlers/twilio.py` |\n| `handle_slack_event` | `apps/worker/handlers/slack.py` |\n\n### Worker & Tasks (score 0.7)\n| Fonction | Fichier |\n|---|---|\n| `main` | `apps/worker/main.py` |\n| `handle` | `apps/worker/tasks/billing_tasks.py` |\n| `handle` | `apps/worker/tasks/export_tasks.py` |\n| `handle` | `apps/worker/tasks/notification_tasks.py` |\n| `handle` | `apps/worker/tasks/session_tasks.py` |\n| `handle` | `apps/worker/tasks/webhook_tasks.py` |\n| `dispatch_webhook` | `apps/api/services/webhooks.py` |\n| `handle_stripe_event` | `apps/api/services/integrations.py` |\n\n### API (score 0.5)\n| Fonction | Fichier |\n|---|---|\n| `create_app` | `apps/api/main.py` |\n| `Dispatcher.dispatch` | `apps/worker/dispatcher.py` |\n\n### Scripts CLI (score 0.6)\n| Fonction | Fichier |\n|---|---|\n| `main` | `bench.py`, `build_tasks.py`, `generate.py`, `analyze_signals.py`, `breaking_changes.py`, `scripts/backup.py`, `scripts/seed_data.py` |\n\n### Fonctions isol\u00e9es sans appelant (score 0.4)\nLes `do_it_*` dans `apps/api/callers/` et les fonctions de `apps/api/ambig/mod1.py` / `mod2.py` (`create_user`, `create_regular_user`, `process_event`) \u2014 probablement appel\u00e9es dynamiquement ou depuis l'ext\u00e9rieur du code index\u00e9.\n\n**En r\u00e9sum\u00e9** : les vraies racines fonctionnelles sont `create_app` (API), `main` (worker), les 4 handlers webhook, les 5 task handlers, et les 7 scripts CLI.",
+  "wall_time_seconds": 21.25,
+  "raw_response": "Voici les points d'entr\u00e9e du projet **tsbench** (racines du graphe d'appels, score d\u00e9croissant) :\n\n### Handlers d'\u00e9v\u00e9nements externes (score 1.0)\n| Fonction | Fichier |\n|---|---|\n| `handle_slack_event` | `apps/worker/handlers/slack.py` |\n| `handle_stripe_event` | `apps/worker/handlers/stripe.py` |\n| `handle_twilio_event` | `apps/worker/handlers/twilio.py` |\n| `handle_postmark_event` | `apps/worker/handlers/postmark.py` |\n\n### Services API sans appelant interne (score 0.7)\n| Fonction | Fichier |\n|---|---|\n| `dispatch_webhook` | `apps/api/services/webhooks.py` |\n| `handle_stripe_event` | `apps/api/services/integrations.py` |\n\n### Fonctions `main` (score 0.6\u20130.7)\n| Fonction | Fichier |\n|---|---|\n| `main` | `apps/worker/main.py` |\n| `main` | `bench.py` |\n| `main` | `generate.py` |\n| `main` | `build_tasks.py` |\n| `main` | `analyze_signals.py` |\n| `main` | `breaking_changes.py` |\n| `main` | `scripts/seed_data.py` |\n| `main` | `scripts/backup.py` |\n\n### Workers/tasks (score 0.7)\n5 fonctions `handle(payload)` dans `apps/worker/tasks/` (billing, webhook, notification, session, export).\n\n### Autres racines notables\n- `create_app` dans `apps/api/main.py` \u2014 factory de l'application API\n- `Dispatcher.dispatch` dans `apps/worker/dispatcher.py` \u2014 dispatch des t\u00e2ches worker\n- 15 fonctions `do_it_N` dans `apps/api/callers/` \u2014 wrappers d'appels sans appelant interne",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T19:43:07.119475+00:00"
+  "timestamp": "2026-04-15T21:00:33.492854+00:00"
 }

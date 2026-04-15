@@ -3,11 +3,11 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 7,
-  "output_tokens": 691,
-  "cache_creation_input_tokens": 7966,
-  "cache_read_input_tokens": 228720,
-  "total_tokens": 237384,
-  "active_tokens": 8664,
+  "output_tokens": 751,
+  "cache_creation_input_tokens": 10470,
+  "cache_read_input_tokens": 227396,
+  "total_tokens": 238624,
+  "active_tokens": 11228,
   "turns_count": 6,
   "tool_calls_count": 4,
   "tool_calls_breakdown": {
@@ -48,7 +48,7 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "get_full_context",
-      "time_ms": 140
+      "time_ms": 89
     },
     {
       "tool": "get_full_context",
@@ -62,7 +62,7 @@
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": "get_full_context",
-      "time_ms": 25335
+      "time_ms": 455
     },
     {
       "tool": "get_full_context",
@@ -79,7 +79,7 @@
       "call_index": 2,
       "preceded_by": "get_full_context",
       "followed_by": "get_full_context",
-      "time_ms": 25189
+      "time_ms": 50
     },
     {
       "tool": "get_full_context",
@@ -96,15 +96,15 @@
       "call_index": 3,
       "preceded_by": "get_full_context",
       "followed_by": null,
-      "time_ms": 27875
+      "time_ms": 44
     }
   ],
   "total_context_chars_injected": 9479,
   "ts_tool_calls_count": 4,
-  "wall_time_seconds": 114.49,
-  "raw_response": "Voici le call chain complet de `dispatch_webhook` :\n\n```\ndispatch_webhook(payload, user_id)          # apps/api/services/webhooks.py:14\n\u251c\u2500\u2500 _webhooks_admin_db()                    # apps/api/services/webhooks.py:8\n\u2502   \u251c\u2500\u2500 supabase_admin()                    # apps/api/db.py:40        \u2190 acc\u00e8s DB\n\u2502   \u2502   \u2514\u2500\u2500 DBSession(\"postgresql://\u2026admin\") # connexion admin Postgres\n\u2502   \u2514\u2500\u2500 info(\u2026)                             # apps/api/utils/logging.py:12\n\u2502       \u2514\u2500\u2500 log(\"INFO\", msg)               # apps/api/utils/logging.py:5\n\u2502           \u2514\u2500\u2500 print(\u2026)                    # feuille (stub)\n\u251c\u2500\u2500 info(\u2026)                                 # apps/api/utils/logging.py:12\n\u2502   \u2514\u2500\u2500 log(\"INFO\", msg)                   # (idem ci-dessus)\n\u2514\u2500\u2500 payload.get('check', True)              # builtin dict, pas d'appel custom\n```\n\n**Acc\u00e8s DB** : un seul, via `_webhooks_admin_db()` \u2192 `supabase_admin()` qui cr\u00e9e une `DBSession` avec le r\u00f4le `admin` sur PostgreSQL. La session est obtenue mais pas directement utilis\u00e9e par `dispatch_webhook` (le r\u00e9sultat est affect\u00e9 \u00e0 `_` et ignor\u00e9).",
+  "wall_time_seconds": 26.16,
+  "raw_response": "Voici le call chain complet de `dispatch_webhook` :\n\n```\ndispatch_webhook(payload, user_id)          # apps/api/services/webhooks.py:14\n\u251c\u2500\u2500 _webhooks_admin_db()                    # apps/api/services/webhooks.py:8\n\u2502   \u251c\u2500\u2500 supabase_admin()                    # apps/api/db.py:40        \u2190 ACC\u00c8S DB\n\u2502   \u2502   \u2514\u2500\u2500 DBSession(\"postgresql://\u2026admin\") # cr\u00e9e une session DB privil\u00e9gi\u00e9e\n\u2502   \u2514\u2500\u2500 info(\"open admin session\u2026\")         # apps/api/utils/logging.py:12\n\u2502       \u2514\u2500\u2500 log(\"INFO\", msg)                # apps/api/utils/logging.py:5\n\u2502           \u2514\u2500\u2500 print(\u2026)                    # (builtin)\n\u251c\u2500\u2500 info(\"dispatch_webhook called\u2026\")        # apps/api/utils/logging.py:12\n\u2502   \u2514\u2500\u2500 log(\"INFO\", msg)                    # (idem ci-dessus)\n\u2514\u2500\u2500 payload.get(\"check\", True)              # (dict builtin)\n```\n\n**R\u00e9sum\u00e9 :**\n- **1 acc\u00e8s DB** : via `_webhooks_admin_db()` \u2192 `supabase_admin()` qui ouvre une `DBSession` PostgreSQL avec le r\u00f4le `admin`\n- **2 appels de logging** : `info()` \u2192 `log()` \u2192 `print()`\n- La fonction retourne `{'ok': True, 'op': 'dispatch_webhook', 'user': user_id}` \u2014 le r\u00e9sultat de la session DB (`_webhooks_admin_db()`) est r\u00e9cup\u00e9r\u00e9 mais non utilis\u00e9 dans le retour",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T19:35:29.058952+00:00"
+  "timestamp": "2026-04-15T20:57:40.710139+00:00"
 }

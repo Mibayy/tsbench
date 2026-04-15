@@ -3,12 +3,12 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 13,
-  "output_tokens": 1795,
-  "cache_creation_input_tokens": 9742,
-  "cache_read_input_tokens": 408764,
-  "total_tokens": 420314,
-  "active_tokens": 11550,
-  "turns_count": 16,
+  "output_tokens": 1798,
+  "cache_creation_input_tokens": 48041,
+  "cache_read_input_tokens": 368069,
+  "total_tokens": 417921,
+  "active_tokens": 49852,
+  "turns_count": 15,
   "tool_calls_count": 8,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
@@ -50,7 +50,7 @@
     },
     {
       "tool": "mcp__token-savior-recall__search_codebase",
-      "result_chars": 8338,
+      "result_chars": 1355,
       "is_error": false
     },
     {
@@ -71,7 +71,7 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "get_function_source",
-      "time_ms": 193
+      "time_ms": 95
     },
     {
       "tool": "get_function_source",
@@ -84,7 +84,7 @@
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": "get_function_source",
-      "time_ms": 818
+      "time_ms": 862
     },
     {
       "tool": "get_function_source",
@@ -98,7 +98,7 @@
       "call_index": 2,
       "preceded_by": "get_function_source",
       "followed_by": "get_function_source",
-      "time_ms": 237
+      "time_ms": 242
     },
     {
       "tool": "get_function_source",
@@ -113,7 +113,7 @@
       "call_index": 3,
       "preceded_by": "get_function_source",
       "followed_by": "reindex",
-      "time_ms": 282
+      "time_ms": 244
     },
     {
       "tool": "reindex",
@@ -124,7 +124,7 @@
       "call_index": 4,
       "preceded_by": "get_function_source",
       "followed_by": "get_function_source",
-      "time_ms": 2641
+      "time_ms": 2855
     },
     {
       "tool": "get_function_source",
@@ -139,20 +139,20 @@
       "call_index": 5,
       "preceded_by": "reindex",
       "followed_by": "search_codebase",
-      "time_ms": 306
+      "time_ms": 752
     },
     {
       "tool": "search_codebase",
       "args": {
-        "pattern": "DEFAULT_PAGE_SIZE"
+        "pattern": "end = start \\+ page_size"
       },
-      "result_chars": 8338,
+      "result_chars": 1355,
       "result_empty": false,
       "is_error": false,
       "call_index": 6,
       "preceded_by": "get_function_source",
       "followed_by": "replace_symbol_source",
-      "time_ms": 286
+      "time_ms": 113
     },
     {
       "tool": "replace_symbol_source",
@@ -167,15 +167,15 @@
       "call_index": 7,
       "preceded_by": "search_codebase",
       "followed_by": null,
-      "time_ms": 787
+      "time_ms": 51
     }
   ],
-  "total_context_chars_injected": 9717,
+  "total_context_chars_injected": 2734,
   "ts_tool_calls_count": 8,
-  "wall_time_seconds": 58.79,
-  "raw_response": "Corrig\u00e9. La fonction `buggy_paginate` dans `apps/api/utils/buggy_pagination.py` a \u00e9t\u00e9 mise \u00e0 jour : le calcul de `end` est maintenant `start + page_size` (sans le `+ 1`), ce qui retourne exactement `page_size` \u00e9l\u00e9ments (10 par d\u00e9faut) au lieu de 11.",
+  "wall_time_seconds": 153.23,
+  "raw_response": "Correction appliqu\u00e9e.\n\n**Fonction** : `buggy_paginate` dans **`apps/api/utils/buggy_pagination.py`**\n\n**Bug** : `end = start + page_size + 1` retournait `page_size + 1` \u00e9l\u00e9ments (11 au lieu de 10).\n\n**Fix** : `end = start + page_size` \u2014 le `+ 1` superflu a \u00e9t\u00e9 supprim\u00e9, la tranche Python `items[start:end]` retourne d\u00e9sormais exactement `page_size` \u00e9l\u00e9ments.",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T19:53:13.463342+00:00"
+  "timestamp": "2026-04-15T21:04:29.715348+00:00"
 }

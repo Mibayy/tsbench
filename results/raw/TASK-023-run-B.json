@@ -3,11 +3,11 @@
   "run": "B",
   "baseline": "token-savior",
   "input_tokens": 5,
-  "output_tokens": 452,
-  "cache_creation_input_tokens": 12764,
-  "cache_read_input_tokens": 125113,
-  "total_tokens": 138334,
-  "active_tokens": 13221,
+  "output_tokens": 504,
+  "cache_creation_input_tokens": 12821,
+  "cache_read_input_tokens": 125494,
+  "total_tokens": 138824,
+  "active_tokens": 13330,
   "turns_count": 4,
   "tool_calls_count": 2,
   "tool_calls_breakdown": {
@@ -38,7 +38,7 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "detect_breaking_changes",
-      "time_ms": 95
+      "time_ms": 275
     },
     {
       "tool": "detect_breaking_changes",
@@ -51,15 +51,15 @@
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": null,
-      "time_ms": 691
+      "time_ms": 747
     }
   ],
   "total_context_chars_injected": 2005,
   "ts_tool_calls_count": 2,
-  "wall_time_seconds": 21.41,
-  "raw_response": "Oui, il y a **9 breaking changes** entre v1 et v2 :\n\n### Fonctions supprim\u00e9es (6)\n- **`create_user()`** \u2014 `apps/api/ambig/mod1.py` (remplac\u00e9e par `create_regular_user()`)\n- **`delete_webhooks()`** \u2014 `apps/api/routers/webhooks.py`\n- **`compute_invoice()`** \u2014 `apps/api/services/billing.py` (remplac\u00e9e par `calculate_invoice()`)\n- **`bulk_import_members()`** \u2014 `apps/api/services/members.py`\n- **`slugify()`** \u2014 `apps/api/utils/strings.py`\n- **`to_slug()`** \u2014 `packages/utils/slug_copy.py`\n\n### Signature modifi\u00e9e (1)\n- **`authenticate_user()`** \u2014 `apps/api/services/auth.py` : les param\u00e8tres `payload` et `user_id` ont \u00e9t\u00e9 supprim\u00e9s, remplac\u00e9s par un param\u00e8tre `credentials` obligatoire (sans valeur par d\u00e9faut \u2192 les appelants existants casseront)\n\nTous les appelants de ces 7 fonctions doivent \u00eatre mis \u00e0 jour.",
+  "wall_time_seconds": 25.32,
+  "raw_response": "Oui, il y a **9 breaking changes** entre v1 et v2 :\n\n### Fonctions supprim\u00e9es (6)\n- **`create_user()`** \u2014 `apps/api/ambig/mod1.py` (remplac\u00e9e par `create_regular_user()`)\n- **`delete_webhooks()`** \u2014 `apps/api/routers/webhooks.py`\n- **`compute_invoice()`** \u2014 `apps/api/services/billing.py` (remplac\u00e9e par `calculate_invoice()`)\n- **`bulk_import_members()`** \u2014 `apps/api/services/members.py`\n- **`slugify()`** \u2014 `apps/api/utils/strings.py`\n- **`to_slug()`** \u2014 `packages/utils/slug_copy.py` (remplac\u00e9e par `slugify()`)\n\n### Signature modifi\u00e9e (1)\n- **`authenticate_user()`** \u2014 `apps/api/services/auth.py` : les param\u00e8tres `payload` et `user_id` ont \u00e9t\u00e9 supprim\u00e9s, remplac\u00e9s par un param\u00e8tre `credentials` **sans valeur par d\u00e9faut** \u2192 les appelants existants casseront.\n\nEn r\u00e9sum\u00e9 : 6 fonctions supprim\u00e9es, 1 signature cassante, soit des renommages (compute_invoice \u2192 calculate_invoice, create_user \u2192 create_regular_user) et des suppressions s\u00e8ches (delete_webhooks, bulk_import_members).",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T18:38:20.422700+00:00"
+  "timestamp": "2026-04-15T20:45:50.335673+00:00"
 }

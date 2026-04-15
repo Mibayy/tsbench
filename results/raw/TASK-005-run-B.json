@@ -2,17 +2,17 @@
   "task_id": "TASK-005",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 6,
-  "output_tokens": 333,
-  "cache_creation_input_tokens": 46028,
-  "cache_read_input_tokens": 136333,
-  "total_tokens": 182700,
-  "active_tokens": 46367,
-  "turns_count": 5,
-  "tool_calls_count": 3,
+  "input_tokens": 5,
+  "output_tokens": 214,
+  "cache_creation_input_tokens": 12105,
+  "cache_read_input_tokens": 124889,
+  "total_tokens": 137213,
+  "active_tokens": 12324,
+  "turns_count": 4,
+  "tool_calls_count": 2,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__search_codebase": 2
+    "mcp__token-savior-recall__search_codebase": 1
   },
   "tool_calls_detail": [
     {
@@ -22,12 +22,7 @@
     },
     {
       "tool": "mcp__token-savior-recall__search_codebase",
-      "result_chars": 247,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__search_codebase",
-      "result_chars": 466,
+      "result_chars": 546,
       "is_error": false
     }
   ],
@@ -43,43 +38,29 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "search_codebase",
-      "time_ms": 114
+      "time_ms": 92
     },
     {
       "tool": "search_codebase",
       "args": {
-        "pattern": "role.*member|member.*role",
-        "max_results": 20
+        "pattern": "role.*member|Member.*role",
+        "max_results": 10
       },
-      "result_chars": 247,
+      "result_chars": 546,
       "result_empty": false,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
-      "followed_by": "search_codebase",
-      "time_ms": 687
-    },
-    {
-      "tool": "search_codebase",
-      "args": {
-        "pattern": "role\\b.*String|role\\b.*Enum",
-        "max_results": 20
-      },
-      "result_chars": 466,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 2,
-      "preceded_by": "search_codebase",
       "followed_by": null,
-      "time_ms": 72
+      "time_ms": 836
     }
   ],
-  "total_context_chars_injected": 773,
-  "ts_tool_calls_count": 3,
-  "wall_time_seconds": 22.25,
-  "raw_response": "Le r\u00f4le d'un membre est stock\u00e9 dans :\n\n- **Fichier** : `packages/db/schema.prisma`\n- **Table (model)** : `Member`\n- **Colonne** : `role` (type `String`, ligne 22)",
+  "total_context_chars_injected": 606,
+  "ts_tool_calls_count": 2,
+  "wall_time_seconds": 16.31,
+  "raw_response": "Table **`Member`**, colonne **`role`** (type `String`).\n\nFichier de sch\u00e9ma : **`packages/db/schema.prisma`**",
   "error": null,
   "score": 1,
   "max_score": 2,
-  "timestamp": "2026-04-15T18:05:53.735362+00:00"
+  "timestamp": "2026-04-15T20:36:04.355905+00:00"
 }

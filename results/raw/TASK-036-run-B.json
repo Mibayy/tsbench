@@ -2,21 +2,22 @@
   "task_id": "TASK-036",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 14,
-  "output_tokens": 1929,
-  "cache_creation_input_tokens": 11929,
-  "cache_read_input_tokens": 499558,
-  "total_tokens": 513430,
-  "active_tokens": 13872,
-  "turns_count": 17,
-  "tool_calls_count": 10,
+  "input_tokens": 12,
+  "output_tokens": 1808,
+  "cache_creation_input_tokens": 17572,
+  "cache_read_input_tokens": 405329,
+  "total_tokens": 424721,
+  "active_tokens": 19392,
+  "turns_count": 22,
+  "tool_calls_count": 14,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__find_semantic_duplicates": 1,
-    "mcp__token-savior-recall__get_structure_summary": 3,
-    "mcp__token-savior-recall__find_symbol": 1,
+    "mcp__token-savior-recall__find_semantic_duplicates": 2,
+    "mcp__token-savior-recall__find_symbol": 2,
+    "mcp__token-savior-recall__list_files": 1,
+    "mcp__token-savior-recall__get_structure_summary": 5,
     "mcp__token-savior-recall__get_function_source": 2,
-    "mcp__token-savior-recall__search_codebase": 2
+    "mcp__token-savior-recall__search_codebase": 1
   },
   "tool_calls_detail": [
     {
@@ -26,7 +27,22 @@
     },
     {
       "tool": "mcp__token-savior-recall__find_semantic_duplicates",
-      "result_chars": 12877,
+      "result_chars": 5533,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__find_semantic_duplicates",
+      "result_chars": 17815,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__find_symbol",
+      "result_chars": 928,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__list_files",
+      "result_chars": 95,
       "is_error": false
     },
     {
@@ -40,33 +56,38 @@
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__find_symbol",
-      "result_chars": 393,
+      "tool": "mcp__token-savior-recall__get_structure_summary",
+      "result_chars": 96,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 1292,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__search_codebase",
-      "result_chars": 185,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 112,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__search_codebase",
-      "result_chars": 185,
+      "tool": "mcp__token-savior-recall__get_structure_summary",
+      "result_chars": 194,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__get_structure_summary",
       "result_chars": 89,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 1498,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__find_symbol",
+      "result_chars": 807,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 405,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 271,
       "is_error": false
     }
   ],
@@ -82,18 +103,65 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "find_semantic_duplicates",
-      "time_ms": 94
+      "time_ms": 103
     },
     {
       "tool": "find_semantic_duplicates",
       "args": {},
-      "result_chars": 12877,
+      "result_chars": 5533,
       "result_empty": false,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
+      "followed_by": "find_semantic_duplicates",
+      "time_ms": 1431
+    },
+    {
+      "tool": "find_semantic_duplicates",
+      "args": {
+        "min_lines": 4,
+        "max_groups": 30
+      },
+      "result_chars": 17815,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 2,
+      "preceded_by": "find_semantic_duplicates",
+      "followed_by": "find_symbol",
+      "time_ms": 93
+    },
+    {
+      "tool": "find_symbol",
+      "args": {
+        "names": [
+          "paginate",
+          "paginate_results",
+          "slugify",
+          "to_slug",
+          "generate_slug"
+        ],
+        "level": 2
+      },
+      "result_chars": 928,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 3,
+      "preceded_by": "find_semantic_duplicates",
+      "followed_by": "list_files",
+      "time_ms": 409
+    },
+    {
+      "tool": "list_files",
+      "args": {
+        "pattern": "*copy*"
+      },
+      "result_chars": 95,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 4,
+      "preceded_by": "find_symbol",
       "followed_by": "get_structure_summary",
-      "time_ms": 1901
+      "time_ms": 432
     },
     {
       "tool": "get_structure_summary",
@@ -103,10 +171,10 @@
       "result_chars": 133,
       "result_empty": false,
       "is_error": false,
-      "call_index": 2,
-      "preceded_by": "find_semantic_duplicates",
+      "call_index": 5,
+      "preceded_by": "list_files",
       "followed_by": "get_structure_summary",
-      "time_ms": 56
+      "time_ms": 532
     },
     {
       "tool": "get_structure_summary",
@@ -116,88 +184,36 @@
       "result_chars": 79,
       "result_empty": false,
       "is_error": false,
-      "call_index": 3,
-      "preceded_by": "get_structure_summary",
-      "followed_by": "find_symbol",
-      "time_ms": 72
-    },
-    {
-      "tool": "find_symbol",
-      "args": {
-        "names": [
-          "paginate_also",
-          "paginate",
-          "slugify"
-        ],
-        "level": 2
-      },
-      "result_chars": 393,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 4,
-      "preceded_by": "get_structure_summary",
-      "followed_by": "get_function_source",
-      "time_ms": 323
-    },
-    {
-      "tool": "get_function_source",
-      "args": {
-        "names": [
-          "paginate_also",
-          "paginate",
-          "slugify"
-        ],
-        "level": 0
-      },
-      "result_chars": 1292,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 5,
-      "preceded_by": "find_symbol",
-      "followed_by": "search_codebase",
-      "time_ms": 259
-    },
-    {
-      "tool": "search_codebase",
-      "args": {
-        "pattern": "def slugify"
-      },
-      "result_chars": 185,
-      "result_empty": false,
-      "is_error": false,
       "call_index": 6,
-      "preceded_by": "get_function_source",
-      "followed_by": "get_function_source",
-      "time_ms": 693
+      "preceded_by": "get_structure_summary",
+      "followed_by": "get_structure_summary",
+      "time_ms": 464
     },
     {
-      "tool": "get_function_source",
+      "tool": "get_structure_summary",
       "args": {
-        "name": "slugify",
-        "file_path": "generate.py",
-        "level": 0
+        "file_path": "packages/utils/date_copy.py"
       },
-      "result_chars": 112,
+      "result_chars": 96,
       "result_empty": false,
       "is_error": false,
       "call_index": 7,
-      "preceded_by": "search_codebase",
-      "followed_by": "search_codebase",
-      "time_ms": 317
+      "preceded_by": "get_structure_summary",
+      "followed_by": "get_structure_summary",
+      "time_ms": 461
     },
     {
-      "tool": "search_codebase",
+      "tool": "get_structure_summary",
       "args": {
-        "pattern": "def slugify",
-        "max_results": 5
+        "file_path": "apps/api/utils/pagination.py"
       },
-      "result_chars": 185,
+      "result_chars": 194,
       "result_empty": false,
       "is_error": false,
       "call_index": 8,
-      "preceded_by": "get_function_source",
+      "preceded_by": "get_structure_summary",
       "followed_by": "get_structure_summary",
-      "time_ms": 80
+      "time_ms": 286
     },
     {
       "tool": "get_structure_summary",
@@ -208,17 +224,86 @@
       "result_empty": false,
       "is_error": false,
       "call_index": 9,
-      "preceded_by": "search_codebase",
+      "preceded_by": "get_structure_summary",
+      "followed_by": "get_function_source",
+      "time_ms": 66
+    },
+    {
+      "tool": "get_function_source",
+      "args": {
+        "names": [
+          "paginate",
+          "paginate_also",
+          "slugify",
+          "day_start"
+        ],
+        "level": 0
+      },
+      "result_chars": 1498,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 10,
+      "preceded_by": "get_structure_summary",
+      "followed_by": "find_symbol",
+      "time_ms": 339
+    },
+    {
+      "tool": "find_symbol",
+      "args": {
+        "names": [
+          "make_slug",
+          "normalize_slug",
+          "start_of_day",
+          "truncate_date"
+        ],
+        "level": 2
+      },
+      "result_chars": 807,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 11,
+      "preceded_by": "get_function_source",
+      "followed_by": "get_function_source",
+      "time_ms": 505
+    },
+    {
+      "tool": "get_function_source",
+      "args": {
+        "names": [
+          "start_of_day",
+          "truncate"
+        ],
+        "level": 0
+      },
+      "result_chars": 405,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 12,
+      "preceded_by": "find_symbol",
+      "followed_by": "search_codebase",
+      "time_ms": 509
+    },
+    {
+      "tool": "search_codebase",
+      "args": {
+        "pattern": "def.*slug",
+        "max_results": 10
+      },
+      "result_chars": 271,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 13,
+      "preceded_by": "get_function_source",
       "followed_by": null,
-      "time_ms": 283
+      "time_ms": 118
     }
   ],
-  "total_context_chars_injected": 15405,
-  "ts_tool_calls_count": 10,
-  "wall_time_seconds": 66.97,
-  "raw_response": "Pas de `slugify` dans `strings.py`. Voici le r\u00e9sum\u00e9 final :\n\n---\n\n**Oui, il y a des fonctions s\u00e9mantiquement dupliqu\u00e9es.** Voici les paires trouv\u00e9es :\n\n### 1. `paginate` / `paginate_also`\n| | Fichier | Ligne |\n|---|---|---|\n| `paginate` | `apps/api/utils/pagination.py` | :5 |\n| `paginate_also` | `packages/utils/paginate_copy.py` | :6 |\n\nM\u00eame logique exacte (slice une liste, clamp le `page_size`, retourne un dict `{items, page, page_size, total}`). Les seules diff\u00e9rences sont le nom de la fonction et la source du `page_size` par d\u00e9faut (`settings.default_page_size` vs `DEFAULT_PAGE_SIZE`). La docstring de `paginate_also` confirme explicitement que c'est un duplicata.\n\n### 2. `slugify` / `slugify`\n| | Fichier | Ligne |\n|---|---|---|\n| `slugify` | `generate.py` | :611 |\n| `slugify` | `packages/utils/slug_copy.py` | :4 |\n\nM\u00eame nom, m\u00eame signature (`value: str -> str`). Le fichier `slug_copy.py` est une copie manifeste (nom du fichier).\n\n---\n\n**Recommandation** : supprimer les fichiers `*_copy.py` et consolider vers les originaux (`apps/api/utils/pagination.py` et le `slugify` canonique).",
+  "total_context_chars_injected": 28003,
+  "ts_tool_calls_count": 14,
+  "wall_time_seconds": 74.92,
+  "raw_response": "Oui, il y a **3 paires de fonctions s\u00e9mantiquement dupliqu\u00e9es** dans le projet :\n\n| # | Fonction A | Fonction B | Diff\u00e9rence |\n|---|-----------|-----------|------------|\n| 1 | `paginate` (`apps/api/utils/pagination.py:5`) | `paginate_also` (`packages/utils/paginate_copy.py:6`) | M\u00eame logique de pagination par tranche. Seule diff : la source de `page_size` par d\u00e9faut (config settings vs constante hardcod\u00e9e \u00e0 100). |\n| 2 | `start_of_day` (`apps/api/utils/dates.py:5`) | `day_start` (`packages/utils/date_copy.py:5`) | **Strictement identiques** \u2014 `dt.replace(hour=0, minute=0, second=0, microsecond=0)`. |\n| 3 | `slugify` (`packages/utils/slug_copy.py:4`) | `slugify` (`generate.py:611`) | M\u00eame nom, m\u00eame signature \u2014 les deux font `\"-\".join(value.lower().split())`. |\n\nLes fichiers `packages/utils/*_copy.py` sont clairement des copies conscientes (les docstrings le disent explicitement : *\"duplicate of\u2026\"*). Ce sont de bons candidats pour \u00eatre supprim\u00e9s et remplac\u00e9s par des imports vers les originaux.",
   "error": null,
   "score": 1,
   "max_score": 2,
-  "timestamp": "2026-04-15T19:24:55.601341+00:00"
+  "timestamp": "2026-04-15T20:53:40.832470+00:00"
 }

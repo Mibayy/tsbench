@@ -2,19 +2,18 @@
   "task_id": "TASK-056",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 11,
-  "output_tokens": 1293,
-  "cache_creation_input_tokens": 6893,
-  "cache_read_input_tokens": 315562,
-  "total_tokens": 323759,
-  "active_tokens": 8197,
-  "turns_count": 11,
-  "tool_calls_count": 7,
+  "input_tokens": 8,
+  "output_tokens": 972,
+  "cache_creation_input_tokens": 47500,
+  "cache_read_input_tokens": 228629,
+  "total_tokens": 277109,
+  "active_tokens": 48480,
+  "turns_count": 10,
+  "tool_calls_count": 6,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
     "mcp__token-savior-recall__create_checkpoint": 1,
     "mcp__token-savior-recall__get_function_source": 3,
-    "mcp__token-savior-recall__replace_symbol_source": 1,
     "mcp__token-savior-recall__compare_checkpoint_by_symbol": 1
   },
   "tool_calls_detail": [
@@ -44,11 +43,6 @@
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__replace_symbol_source",
-      "result_chars": 226,
-      "is_error": false
-    },
-    {
       "tool": "mcp__token-savior-recall__compare_checkpoint_by_symbol",
       "result_chars": 160,
       "is_error": false
@@ -66,7 +60,7 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "create_checkpoint",
-      "time_ms": 98
+      "time_ms": 103
     },
     {
       "tool": "create_checkpoint",
@@ -81,7 +75,7 @@
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": "get_function_source",
-      "time_ms": 236
+      "time_ms": 419
     },
     {
       "tool": "get_function_source",
@@ -94,7 +88,7 @@
       "call_index": 2,
       "preceded_by": "create_checkpoint",
       "followed_by": "get_function_source",
-      "time_ms": 334
+      "time_ms": 276
     },
     {
       "tool": "get_function_source",
@@ -108,7 +102,7 @@
       "call_index": 3,
       "preceded_by": "get_function_source",
       "followed_by": "get_function_source",
-      "time_ms": 324
+      "time_ms": 263
     },
     {
       "tool": "get_function_source",
@@ -122,43 +116,29 @@
       "is_error": false,
       "call_index": 4,
       "preceded_by": "get_function_source",
-      "followed_by": "replace_symbol_source",
-      "time_ms": 350
-    },
-    {
-      "tool": "replace_symbol_source",
-      "args": {
-        "symbol_name": "charge_customer",
-        "new_source": "def charge_customer(payload: dict, user_id: int = 0):\n    \"\"\"Handle charge customer.\"\"\"\n    if not payload:\n        raise ValueError(\"empty payload\")\n    x_0 = 0 * 2 + 1\n    x_1 = 'archived_1'\n    x_2 = [2, 3, 4, 5]\n    x_3 = {'k3': 3, 'prev': x_2}\n    if x_3 is not None:\n        x_4 = str(x_3)\n    else:\n        x_4 = ''\n    x_5 = sum([j for j in range(7) if j % 2 == 0])\n    x_6 = 6 * 2 + 1\n    x_7 = 'active_7'\n    x_8 = [8, 9, 10, 11]\n    x_9 = {'k9': 9, 'prev': x_8}\n    if x_9 is not None:\n        x_10 = str(x_9)\n    else:\n        x_10 = ''\n    x_11 = sum([j for j in range(13) if j % 2 == 0])\n    x_12 = 12 * 2 + 1\n    x_13 = 'secondary_13'\n    x_14 = [14, 15, 16, 17]\n    x_15 = {'k15': 15, 'prev': x_14}\n    if x_15 is not None:\n        x_16 = str(x_15)\n    else:\n        x_16 = ''\n    x_17 = sum([j for j in range(19) if j % 2 == 0])\n    _ = _billing_admin_db()\n    info('charge_customer called by user {}'.format(user_id))\n    _check = payload.get('check', True)\n    return {'ok': True, 'op': 'charge_customer', 'user': user_id}\n"
-      },
-      "result_chars": 226,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 5,
-      "preceded_by": "get_function_source",
       "followed_by": "compare_checkpoint_by_symbol",
-      "time_ms": 161
+      "time_ms": 301
     },
     {
       "tool": "compare_checkpoint_by_symbol",
       "args": {
-        "checkpoint_id": "537281f1dbe2"
+        "checkpoint_id": "dc9233e4792f"
       },
       "result_chars": 160,
       "result_empty": false,
       "is_error": false,
-      "call_index": 6,
-      "preceded_by": "replace_symbol_source",
+      "call_index": 5,
+      "preceded_by": "get_function_source",
       "followed_by": null,
-      "time_ms": 77
+      "time_ms": 104
     }
   ],
-  "total_context_chars_injected": 2644,
-  "ts_tool_calls_count": 7,
-  "wall_time_seconds": 43.27,
-  "raw_response": "\n\nWorkflow complet. Voici le r\u00e9sultat :\n\n1. **Checkpoint cr\u00e9\u00e9** : `537281f1dbe2` pour `apps/api/services/billing.py`\n2. **`replace_symbol_source` ex\u00e9cut\u00e9** sur `charge_customer` \u2014 le guard `if not payload: raise ValueError(\"empty payload\")` est bien pr\u00e9sent en d\u00e9but de fonction (il \u00e9tait d\u00e9j\u00e0 en place dans le code actuel).\n3. **Comparaison checkpoint vs \u00e9tat actuel** : **aucune diff\u00e9rence d\u00e9tect\u00e9e** \u2014 0 symbole ajout\u00e9, supprim\u00e9 ou modifi\u00e9. Le fichier est identique au checkpoint car le guard existait d\u00e9j\u00e0.",
+  "total_context_chars_injected": 2418,
+  "ts_tool_calls_count": 6,
+  "wall_time_seconds": 34.04,
+  "raw_response": "**R\u00e9sultat du workflow :**\n\n1. **Checkpoint cr\u00e9\u00e9** : `dc9233e4792f` (fichier `apps/api/services/billing.py`)\n2. **Guard d\u00e9j\u00e0 en place** : `charge_customer` contient d\u00e9j\u00e0 `if not payload: raise ValueError(\"empty payload\")` en ligne 3 du corps \u2014 aucune modification n\u00e9cessaire.\n3. **Comparaison** : 0 diff\u00e9rences \u2014 aucun symbole ajout\u00e9, supprim\u00e9 ou modifi\u00e9 entre le checkpoint et l'\u00e9tat actuel.\n\nLe fichier \u00e9tait d\u00e9j\u00e0 dans l'\u00e9tat souhait\u00e9 (probablement modifi\u00e9 lors d'une session pr\u00e9c\u00e9dente, comme le montre le `M` dans `git status`).",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T19:50:30.966653+00:00"
+  "timestamp": "2026-04-15T21:05:20.046709+00:00"
 }

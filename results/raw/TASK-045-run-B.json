@@ -2,17 +2,17 @@
   "task_id": "TASK-045",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 7,
-  "output_tokens": 402,
-  "cache_creation_input_tokens": 5588,
-  "cache_read_input_tokens": 224968,
-  "total_tokens": 230965,
-  "active_tokens": 5997,
-  "turns_count": 6,
-  "tool_calls_count": 4,
+  "input_tokens": 5,
+  "output_tokens": 232,
+  "cache_creation_input_tokens": 4557,
+  "cache_read_input_tokens": 133582,
+  "total_tokens": 138376,
+  "active_tokens": 4794,
+  "turns_count": 4,
+  "tool_calls_count": 2,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__search_codebase": 3
+    "mcp__token-savior-recall__get_file_dependents": 1
   },
   "tool_calls_detail": [
     {
@@ -21,18 +21,8 @@
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__search_codebase",
-      "result_chars": 2,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__search_codebase",
-      "result_chars": 207,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__search_codebase",
-      "result_chars": 2986,
+      "tool": "mcp__token-savior-recall__get_file_dependents",
+      "result_chars": 49,
       "is_error": false
     }
   ],
@@ -47,55 +37,29 @@
       "is_error": false,
       "call_index": 0,
       "preceded_by": null,
-      "followed_by": "search_codebase",
-      "time_ms": 153
+      "followed_by": "get_file_dependents",
+      "time_ms": 100
     },
     {
-      "tool": "search_codebase",
+      "tool": "get_file_dependents",
       "args": {
-        "pattern": "from apps\\.api\\.services\\.auth|import apps\\.api\\.services\\.auth"
+        "file_path": "apps/api/services/auth.py"
       },
-      "result_chars": 2,
+      "result_chars": 49,
       "result_empty": true,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
-      "followed_by": "search_codebase",
-      "time_ms": 25582
-    },
-    {
-      "tool": "search_codebase",
-      "args": {
-        "pattern": "apps\\.api\\.services\\.auth"
-      },
-      "result_chars": 207,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 2,
-      "preceded_by": "search_codebase",
-      "followed_by": "search_codebase",
-      "time_ms": 23542
-    },
-    {
-      "tool": "search_codebase",
-      "args": {
-        "pattern": "from apps\\.api\\.services|services\\.auth"
-      },
-      "result_chars": 2986,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 3,
-      "preceded_by": "search_codebase",
       "followed_by": null,
-      "time_ms": 25559
+      "time_ms": 562
     }
   ],
-  "total_context_chars_injected": 3255,
-  "ts_tool_calls_count": 4,
-  "wall_time_seconds": 111.64,
-  "raw_response": "Les fichiers qui importent `auth` depuis `apps.api.services` (via `from apps.api.services import auth`) sont :\n\n1. **`apps/api/routers/auth.py`**\n2. **`tests/test_auth.py`**\n\nCe sont les deux seuls fichiers Python du projet qui importent depuis `apps.api.services.auth`.",
+  "total_context_chars_injected": 109,
+  "ts_tool_calls_count": 2,
+  "wall_time_seconds": 16.01,
+  "raw_response": "Voici les fichiers Python qui importent depuis `apps.api.services.auth` :\n\n1. **`apps/api/routers/auth.py`**\n2. **`tests/test_auth.py`**\n\nCe sont les deux seuls fichiers importateurs dans le projet.",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T19:37:20.700982+00:00"
+  "timestamp": "2026-04-15T20:57:56.728242+00:00"
 }
