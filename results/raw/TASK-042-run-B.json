@@ -1,0 +1,68 @@
+{
+  "task_id": "TASK-042",
+  "run": "B",
+  "baseline": "token-savior",
+  "input_tokens": 8,
+  "output_tokens": 1702,
+  "cache_creation_input_tokens": 6983,
+  "cache_read_input_tokens": 172289,
+  "total_tokens": 180982,
+  "active_tokens": 8693,
+  "turns_count": 13,
+  "tool_calls_count": 8,
+  "tool_calls_breakdown": {
+    "mcp__token-savior-recall__switch_project": 1,
+    "mcp__token-savior-recall__get_functions": 1,
+    "mcp__token-savior-recall__get_function_source": 6
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "mcp__token-savior-recall__switch_project",
+      "result_chars": 60,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_functions",
+      "result_chars": 4558,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 71,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 64,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 66,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 68,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 72,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 72,
+      "is_error": false
+    }
+  ],
+  "total_context_chars_injected": 5031,
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 40.91,
+  "raw_response": "Voici les 29 fonctions publiques (non-underscore) de `apps/api/services/auth.py` :\n\n| # | Signature | Lignes |\n|---|-----------|--------|\n| 1 | `authenticate_user(credentials)` | 14\u201346 |\n| 2 | `issue_token(payload, user_id)` | 48\u201380 |\n| 3 | `revoke_token(payload, user_id)` | 82\u2013114 |\n| 4 | `hash_password(payload, user_id)` | 116\u2013148 |\n| 5 | `verify_password(payload, user_id)` | 150\u2013182 |\n| 6 | `prepare_auth_internal(data)` | 184\u2013200 |\n| 7 | `finalize_auth_internal(data)` | 202\u2013218 |\n| 8 | `audit_auth_internal(data)` | 220\u2013236 |\n| 9 | `notify_auth_internal(data)` | 238\u2013254 |\n| 10 | `enqueue_auth_internal(data)` | 256\u2013272 |\n| 11 | `reconcile_auth_internal(data)` | 274\u2013290 |\n| 12 | `upsert_auth_internal(data)` | 292\u2013308 |\n| 13 | `expand_auth_internal(data)` | 310\u2013326 |\n| 14 | `reduce_auth_internal(data)` | 328\u2013344 |\n| 15 | `snapshot_auth_internal(data)` | 346\u2013362 |\n| 16 | `replay_auth_internal(data)` | 364\u2013380 |\n| 17 | `validate_input_auth_internal(data)` | 382\u2013398 |\n| 18 | `serialize_output_auth_internal(data)` | 400\u2013416 |\n| 19 | `deserialize_input_auth_internal(data)` | 418\u2013434 |\n| 20 | `build_context_auth_internal(data)` | 436\u2013452 |\n| 21 | `emit_metric_auth_internal(data)` | 454\u2013470 |\n| 22 | `rate_limit_auth_internal(data)` | 472\u2013488 |\n| 23 | `retry_with_backoff_auth_internal(data)` | 490\u2013506 |\n| 24 | `batch_process_auth_internal(data)` | 508\u2013524 |\n| 25 | `stream_process_auth_internal(data)` | 526\u2013542 |\n| 26 | `index_entity_auth_internal(data)` | 544\u2013560 |\n| 27 | `reindex_entity_auth_internal(data)` | 562\u2013578 |\n| 28 | `soft_delete_auth_internal(data)` | 580\u2013596 |\n| 29 | `hard_delete_auth_internal(data)` | 598\u2013614 |\n\nAucune annotation de type n'est utilis\u00e9e. La seule fonction priv\u00e9e (pr\u00e9fix\u00e9e `_`) exclue est `_auth_admin_db()` (lignes 8\u201312).",
+  "error": null,
+  "score": 2,
+  "max_score": 2,
+  "timestamp": "2026-04-15T06:23:12.106470+00:00"
+}

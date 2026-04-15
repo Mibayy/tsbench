@@ -1,0 +1,58 @@
+{
+  "task_id": "TASK-013",
+  "run": "B",
+  "baseline": "token-savior",
+  "input_tokens": 9,
+  "output_tokens": 479,
+  "cache_creation_input_tokens": 44208,
+  "cache_read_input_tokens": 261889,
+  "total_tokens": 306585,
+  "active_tokens": 44696,
+  "turns_count": 7,
+  "tool_calls_count": 6,
+  "tool_calls_breakdown": {
+    "mcp__token-savior__switch_project": 1,
+    "mcp__token-savior__find_symbol": 1,
+    "mcp__token-savior__get_dependencies": 4
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "mcp__token-savior__switch_project",
+      "result_chars": 60,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior__find_symbol",
+      "result_chars": 95,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior__get_dependencies",
+      "result_chars": 128,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior__get_dependencies",
+      "result_chars": 128,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior__get_dependencies",
+      "result_chars": 126,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior__get_dependencies",
+      "result_chars": 2,
+      "is_error": false
+    }
+  ],
+  "total_context_chars_injected": 539,
+  "ts_tool_calls_count": 6,
+  "wall_time_seconds": 50.59,
+  "raw_response": "Cha\u00eene d'appels compl\u00e8te dans `apps/api/chains/gamma.py` :\n\n```\ngamma_entry  \u2192  gamma_middle  \u2192  gamma_inner  \u2192  gamma_leaf\n```\n\n`gamma_leaf` (ligne 15) est la fonction feuille \u2014 elle n'appelle aucune autre fonction du projet.",
+  "error": null,
+  "score": 2,
+  "max_score": 2,
+  "timestamp": "2026-04-14T22:56:14.817032+00:00"
+}

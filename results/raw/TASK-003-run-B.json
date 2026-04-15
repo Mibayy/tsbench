@@ -1,0 +1,48 @@
+{
+  "task_id": "TASK-003",
+  "run": "B",
+  "baseline": "token-savior",
+  "input_tokens": 11,
+  "output_tokens": 408,
+  "cache_creation_input_tokens": 11210,
+  "cache_read_input_tokens": 92245,
+  "total_tokens": 103874,
+  "active_tokens": 11629,
+  "turns_count": 6,
+  "tool_calls_count": 4,
+  "tool_calls_breakdown": {
+    "ToolSearch": 2,
+    "mcp__token-savior__switch_project": 1,
+    "mcp__token-savior__get_env_usage": 1
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "ToolSearch",
+      "result_chars": 76,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior__switch_project",
+      "result_chars": 60,
+      "is_error": false
+    },
+    {
+      "tool": "ToolSearch",
+      "result_chars": 75,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior__get_env_usage",
+      "result_chars": 1902,
+      "is_error": false
+    }
+  ],
+  "total_context_chars_injected": 2113,
+  "ts_tool_calls_count": 2,
+  "wall_time_seconds": 20.04,
+  "raw_response": "`SECRET_UNDECLARED_TOKEN` est utilis\u00e9e dans :\n\n- **Fichier** : `apps/api/utils/secret_reader.py`\n- **Fonction** : `load_secret_config` (ligne 8)\n\nElle est lue via `os.environ.get(\"SECRET_UNDECLARED_TOKEN\", \"\")`.",
+  "error": null,
+  "score": 1,
+  "max_score": 2,
+  "timestamp": "2026-04-14T21:37:31.072599+00:00"
+}

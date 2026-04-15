@@ -1,0 +1,31 @@
+{
+  "task_id": "TASK-014",
+  "run": "A",
+  "baseline": "plain",
+  "input_tokens": 4,
+  "output_tokens": 971,
+  "cache_creation_input_tokens": 26257,
+  "cache_read_input_tokens": 20882,
+  "total_tokens": 48114,
+  "active_tokens": 27232,
+  "turns_count": 4,
+  "tool_calls_count": 1,
+  "tool_calls_breakdown": {
+    "Grep": 1
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "Grep",
+      "result_chars": 12668,
+      "is_error": false
+    }
+  ],
+  "total_context_chars_injected": 12668,
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 21.59,
+  "raw_response": "Tous les appels passent `payload` comme argument positionnel, donc le renommage du param\u00e8tre ne casse pas les appels positionnels. Mais si un appelant utilise `hub_util(payload=...)` comme keyword argument, \u00e7a casserait. V\u00e9rifions rapidement que tous passent bien en positionnel \u2014 c'est le cas : chaque caller fait `hub_util(payload)` o\u00f9 `payload` est une variable locale.\n\n**20 fichiers appellent `hub_util`** et devront \u00eatre v\u00e9rifi\u00e9s :\n\n| # | Fichier |\n|---|---------|\n| 00 | `apps/api/callers/caller_hub_util_00.py` |\n| 01 | `apps/api/callers/caller_hub_util_01.py` |\n| 02 | `apps/api/callers/caller_hub_util_02.py` |\n| 03 | `apps/api/callers/caller_hub_util_03.py` |\n| 04 | `apps/api/callers/caller_hub_util_04.py` |\n| 05 | `apps/api/callers/caller_hub_util_05.py` |\n| 06 | `apps/api/callers/caller_hub_util_06.py` |\n| 07 | `apps/api/callers/caller_hub_util_07.py` |\n| 08 | `apps/api/callers/caller_hub_util_08.py` |\n| 09 | `apps/api/callers/caller_hub_util_09.py` |\n| 10 | `apps/api/callers/caller_hub_util_10.py` |\n| 11 | `apps/api/callers/caller_hub_util_11.py` |\n| 12 | `apps/api/callers/caller_hub_util_12.py` |\n| 13 | `apps/api/callers/caller_hub_util_13.py` |\n| 14 | `apps/api/callers/caller_hub_util_14.py` |\n| 15 | `apps/api/callers/caller_hub_util_15.py` |\n| 16 | `apps/api/callers/caller_hub_util_16.py` |\n| 17 | `apps/api/callers/caller_hub_util_17.py` |\n| 18 | `apps/api/callers/caller_hub_util_18.py` |\n| 19 | `apps/api/callers/caller_hub_util_19.py` |\n\n**Ce qui casse concr\u00e8tement :** tous ces fichiers appellent `hub_util(payload)` en positionnel \u2014 le renommage du param\u00e8tre seul (`payload` \u2192 `context`) ne casse pas ces appels. En revanche, si vous changez aussi le **nom de l'argument attendu dans le corps** de `hub_util` (par ex. les r\u00e9f\u00e9rences \u00e0 `payload[\"key\"]` deviennent `context[\"key\"]`), il faut mettre \u00e0 jour la d\u00e9finition dans `packages/utils/targeted.py:15` uniquement. Les 20 callers n'ont pas besoin de modification car ils passent l'argument en positionnel.",
+  "error": null,
+  "score": 2,
+  "max_score": 2,
+  "timestamp": "2026-04-14T21:57:33.896916+00:00"
+}

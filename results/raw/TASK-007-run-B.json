@@ -1,0 +1,54 @@
+{
+  "task_id": "TASK-007",
+  "run": "B",
+  "baseline": "token-savior",
+  "input_tokens": 12,
+  "output_tokens": 522,
+  "cache_creation_input_tokens": 10871,
+  "cache_read_input_tokens": 113704,
+  "total_tokens": 125109,
+  "active_tokens": 11405,
+  "turns_count": 7,
+  "tool_calls_count": 5,
+  "tool_calls_breakdown": {
+    "ToolSearch": 2,
+    "mcp__token-savior__switch_project": 1,
+    "mcp__token-savior__get_dependents": 1,
+    "mcp__token-savior__find_symbol": 1
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "ToolSearch",
+      "result_chars": 149,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior__switch_project",
+      "result_chars": 60,
+      "is_error": false
+    },
+    {
+      "tool": "ToolSearch",
+      "result_chars": 76,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior__get_dependents",
+      "result_chars": 135,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior__find_symbol",
+      "result_chars": 128,
+      "is_error": false
+    }
+  ],
+  "total_context_chars_injected": 548,
+  "ts_tool_calls_count": 3,
+  "wall_time_seconds": 24.54,
+  "raw_response": "`lonely_util` n'a qu'**un seul call site** :\n\n| Fichier | Fonction appelante | Ligne |\n|---|---|---|\n| `apps/api/callers/caller_lonely_util_00.py` | `do_it_0` | 4\u20136 |\n\nLa fonction est d\u00e9finie dans `packages/utils/targeted.py` (lignes 3\u20135) et n'est appel\u00e9e nulle part ailleurs dans le projet.",
+  "error": null,
+  "score": 2,
+  "max_score": 2,
+  "timestamp": "2026-04-14T21:39:47.922608+00:00"
+}

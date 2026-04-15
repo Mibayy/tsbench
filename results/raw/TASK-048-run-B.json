@@ -1,0 +1,43 @@
+{
+  "task_id": "TASK-048",
+  "run": "B",
+  "baseline": "token-savior",
+  "input_tokens": 5,
+  "output_tokens": 514,
+  "cache_creation_input_tokens": 4688,
+  "cache_read_input_tokens": 127622,
+  "total_tokens": 132829,
+  "active_tokens": 5207,
+  "turns_count": 5,
+  "tool_calls_count": 3,
+  "tool_calls_breakdown": {
+    "mcp__token-savior-recall__switch_project": 1,
+    "mcp__token-savior-recall__memory_search": 1,
+    "mcp__token-savior-recall__get_file_dependents": 1
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "mcp__token-savior-recall__switch_project",
+      "result_chars": 60,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__memory_search",
+      "result_chars": 32,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_file_dependents",
+      "result_chars": 467,
+      "is_error": false
+    }
+  ],
+  "total_context_chars_injected": 559,
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 21.16,
+  "raw_response": "Fichiers qui importent `apps/api/config.py` (hors cache interne) :\n\n| # | Fichier |\n|---|---------|\n| 1 | `apps/api/main.py` |\n| 2 | `apps/api/services/audit.py` |\n| 3 | `apps/api/services/auth.py` |\n| 4 | `apps/api/services/billing.py` |\n| 5 | `apps/api/services/exports.py` |\n| 6 | `apps/api/services/integrations.py` |\n| 7 | `apps/api/services/members.py` |\n| 8 | `apps/api/services/notifications.py` |\n| 9 | `apps/api/services/reports.py` |\n| 10 | `apps/api/services/sessions.py` |\n| 11 | `apps/api/services/webhooks.py` |\n| 12 | `apps/api/utils/logging.py` |\n| 13 | `apps/api/utils/pagination.py` |\n\n**13 fichiers** d\u00e9pendent de ce module \u2014 principalement les services m\u00e9tier et quelques utilitaires.",
+  "error": null,
+  "score": 2,
+  "max_score": 2,
+  "timestamp": "2026-04-15T06:57:08.676478+00:00"
+}

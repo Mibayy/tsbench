@@ -56,7 +56,7 @@
   {
     "id": "TASK-007",
     "slug": "callers-exhaustive-1",
-    "category": "d\u00e9pendants",
+    "category": "dépendants",
     "difficulty": "easy",
     "ground_truth_refs": [
       "CALLER-001"
@@ -66,7 +66,7 @@
   {
     "id": "TASK-008",
     "slug": "callers-exhaustive-3",
-    "category": "d\u00e9pendants",
+    "category": "dépendants",
     "difficulty": "easy",
     "ground_truth_refs": [
       "CALLER-002"
@@ -76,7 +76,7 @@
   {
     "id": "TASK-009",
     "slug": "callers-exhaustive-8",
-    "category": "d\u00e9pendants",
+    "category": "dépendants",
     "difficulty": "medium",
     "ground_truth_refs": [
       "CALLER-003"
@@ -86,7 +86,7 @@
   {
     "id": "TASK-010",
     "slug": "callers-exhaustive-20",
-    "category": "d\u00e9pendants",
+    "category": "dépendants",
     "difficulty": "hard",
     "ground_truth_refs": [
       "CALLER-004"
@@ -418,5 +418,169 @@
     "difficulty": "hard",
     "ground_truth_refs": [],
     "scoring": "boolean_with_evidence"
+  },
+  {
+    "id": "TASK-041",
+    "slug": "explain-billing-module",
+    "category": "heavy_read",
+    "difficulty": "hard",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-042",
+    "slug": "list-auth-public-functions",
+    "category": "heavy_read",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-043",
+    "slug": "multi-param-functions",
+    "category": "heavy_read",
+    "difficulty": "hard",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-044",
+    "slug": "dispatch-webhook-chain",
+    "category": "heavy_read",
+    "difficulty": "hard",
+    "ground_truth_refs": [],
+    "scoring": "chain_match"
+  },
+  {
+    "id": "TASK-045",
+    "slug": "auth-importers",
+    "category": "heavy_read",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "list_f1"
+  },
+  {
+    "id": "TASK-046",
+    "slug": "billing-hotspots",
+    "category": "heavy_read",
+    "difficulty": "hard",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-047",
+    "slug": "file-deps-graph",
+    "category": "navigation",
+    "difficulty": "easy",
+    "ground_truth_refs": [],
+    "scoring": "set_match_strict"
+  },
+  {
+    "id": "TASK-048",
+    "slug": "file-dependents-reverse",
+    "category": "navigation",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "set_match_loose"
+  },
+  {
+    "id": "TASK-049",
+    "slug": "call-chain-deep",
+    "category": "call_chain",
+    "difficulty": "hard",
+    "ground_truth_refs": ["CHAIN-001"],
+    "scoring": "chain_match",
+    "disallowed_tools": ["get_dependencies", "get_dependents"]
+  },
+  {
+    "id": "TASK-050",
+    "slug": "backward-slice",
+    "category": "navigation",
+    "difficulty": "hard",
+    "ground_truth_refs": ["HOTSPOT-001"],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-051",
+    "slug": "entry-points",
+    "category": "navigation",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-052",
+    "slug": "community-detection",
+    "category": "audit",
+    "difficulty": "hard",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-053",
+    "slug": "semantic-duplicates",
+    "category": "audit",
+    "difficulty": "medium",
+    "ground_truth_refs": ["DUP-001", "DUP-002", "DUP-003"],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-054",
+    "slug": "fix-buggy-paginate",
+    "category": "edit",
+    "difficulty": "medium",
+    "ground_truth_refs": ["BUG-001"],
+    "scoring": "edit_quality",
+    "disallowed_tools": ["Edit", "Write"]
+  },
+  {
+    "id": "TASK-055",
+    "slug": "insert-near-symbol",
+    "category": "edit",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "edit_quality",
+    "disallowed_tools": ["Edit", "Write"]
+  },
+  {
+    "id": "TASK-056",
+    "slug": "checkpoint-restore",
+    "category": "edit",
+    "difficulty": "hard",
+    "ground_truth_refs": [],
+    "scoring": "edit_quality",
+    "disallowed_tools": ["Edit", "Write"]
+  },
+  {
+    "id": "TASK-057",
+    "slug": "impacted-tests",
+    "category": "testing",
+    "difficulty": "medium",
+    "ground_truth_refs": ["HEAVY-READ-045"],
+    "scoring": "set_match_loose"
+  },
+  {
+    "id": "TASK-058",
+    "slug": "performance-hotspots",
+    "category": "audit",
+    "difficulty": "medium",
+    "ground_truth_refs": ["HOTSPOT-001", "HOTSPOT-002", "HOTSPOT-003", "HOTSPOT-004", "HOTSPOT-005"],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-059",
+    "slug": "git-status",
+    "category": "git",
+    "difficulty": "easy",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-060",
+    "slug": "changed-symbols-since-ref",
+    "category": "git",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
   }
 ]

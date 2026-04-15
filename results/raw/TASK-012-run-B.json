@@ -1,0 +1,58 @@
+{
+  "task_id": "TASK-012",
+  "run": "B",
+  "baseline": "token-savior",
+  "input_tokens": 9,
+  "output_tokens": 474,
+  "cache_creation_input_tokens": 5152,
+  "cache_read_input_tokens": 300945,
+  "total_tokens": 306580,
+  "active_tokens": 5635,
+  "turns_count": 7,
+  "tool_calls_count": 6,
+  "tool_calls_breakdown": {
+    "mcp__token-savior__switch_project": 1,
+    "mcp__token-savior__find_symbol": 1,
+    "mcp__token-savior__get_dependencies": 4
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "mcp__token-savior__switch_project",
+      "result_chars": 60,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior__find_symbol",
+      "result_chars": 93,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior__get_dependencies",
+      "result_chars": 125,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior__get_dependencies",
+      "result_chars": 125,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior__get_dependencies",
+      "result_chars": 123,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior__get_dependencies",
+      "result_chars": 2,
+      "is_error": false
+    }
+  ],
+  "total_context_chars_injected": 528,
+  "ts_tool_calls_count": 6,
+  "wall_time_seconds": 28.01,
+  "raw_response": "Cha\u00eene d'appels compl\u00e8te dans `apps/api/chains/beta.py` :\n\n```\nbeta_entry \u2192 beta_middle \u2192 beta_inner \u2192 beta_leaf\n```\n\n`beta_leaf` (ligne 15) est la fonction feuille \u2014 elle n'a aucune d\u00e9pendance sortante.",
+  "error": null,
+  "score": 2,
+  "max_score": 2,
+  "timestamp": "2026-04-14T22:55:24.217703+00:00"
+}

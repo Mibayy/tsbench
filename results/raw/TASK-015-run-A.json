@@ -1,0 +1,25 @@
+{
+  "task_id": "TASK-015",
+  "run": "A",
+  "baseline": "plain",
+  "input_tokens": 4,
+  "output_tokens": 564,
+  "cache_creation_input_tokens": 9338,
+  "cache_read_input_tokens": 33209,
+  "total_tokens": 43115,
+  "tool_calls_count": 13,
+  "tool_calls_breakdown": {
+    "Agent": 1,
+    "Read": 3,
+    "Grep": 6,
+    "Glob": 2,
+    "Bash": 1
+  },
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 116.35,
+  "raw_response": "Seul **un fichier applicatif** est affect\u00e9 :\n\n| Profondeur | Fichier | Raison |\n|---|---|---|\n| directe | `apps/api/cycles/mod_b.py` | Importe `mod_a` et appelle `a_leaf()` |\n\n`mod_a` et `mod_b` forment un **cycle d'imports mutuels** (`mod_a \u2192 mod_b \u2192 mod_a`), mais ce cycle est isol\u00e9 : aucun autre module de l'application n'importe `mod_a` ni `mod_b`. Le `__init__.py` du package `cycles` ne r\u00e9exporte rien, et il n'y a pas d'import dynamique dans le projet.\n\nEn r\u00e9sum\u00e9 : la zone d'impact se limite \u00e0 `mod_b.py`.",
+  "error": null,
+  "score": 0,
+  "max_score": 2,
+  "timestamp": "2026-04-14T20:55:20.611132+00:00"
+}

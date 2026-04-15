@@ -1,0 +1,58 @@
+{
+  "task_id": "TASK-011",
+  "run": "B",
+  "baseline": "token-savior",
+  "input_tokens": 9,
+  "output_tokens": 484,
+  "cache_creation_input_tokens": 9523,
+  "cache_read_input_tokens": 296574,
+  "total_tokens": 306590,
+  "active_tokens": 10016,
+  "turns_count": 7,
+  "tool_calls_count": 6,
+  "tool_calls_breakdown": {
+    "mcp__token-savior__switch_project": 1,
+    "mcp__token-savior__find_symbol": 1,
+    "mcp__token-savior__get_dependencies": 4
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "mcp__token-savior__switch_project",
+      "result_chars": 60,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior__find_symbol",
+      "result_chars": 95,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior__get_dependencies",
+      "result_chars": 128,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior__get_dependencies",
+      "result_chars": 128,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior__get_dependencies",
+      "result_chars": 126,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior__get_dependencies",
+      "result_chars": 2,
+      "is_error": false
+    }
+  ],
+  "total_context_chars_injected": 539,
+  "ts_tool_calls_count": 6,
+  "wall_time_seconds": 32.74,
+  "raw_response": "Cha\u00eene d'appels compl\u00e8te dans `apps/api/chains/alpha.py` :\n\n```\nalpha_entry (L3) \u2192 alpha_middle (L7) \u2192 alpha_inner (L11) \u2192 alpha_leaf (L15)\n```\n\n`alpha_leaf` est la fonction feuille \u2014 elle n'appelle aucune autre fonction du projet.",
+  "error": null,
+  "score": 2,
+  "max_score": 2,
+  "timestamp": "2026-04-14T22:54:56.200195+00:00"
+}

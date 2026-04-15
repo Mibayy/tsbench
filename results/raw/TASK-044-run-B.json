@@ -1,0 +1,89 @@
+{
+  "task_id": "TASK-044",
+  "run": "B",
+  "baseline": "token-savior",
+  "input_tokens": 12,
+  "output_tokens": 1418,
+  "cache_creation_input_tokens": 8375,
+  "cache_read_input_tokens": 351323,
+  "total_tokens": 361128,
+  "active_tokens": 9805,
+  "turns_count": 15,
+  "tool_calls_count": 12,
+  "tool_calls_breakdown": {
+    "mcp__token-savior-recall__switch_project": 1,
+    "mcp__token-savior-recall__memory_search": 1,
+    "mcp__token-savior-recall__get_function_source": 5,
+    "mcp__token-savior-recall__get_dependencies": 5
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "mcp__token-savior-recall__switch_project",
+      "result_chars": 60,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__memory_search",
+      "result_chars": 32,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 980,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_dependencies",
+      "result_chars": 177,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 170,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 48,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_dependencies",
+      "result_chars": 155,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_dependencies",
+      "result_chars": 81,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 171,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 292,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_dependencies",
+      "result_chars": 492,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_dependencies",
+      "result_chars": 2,
+      "is_error": false
+    }
+  ],
+  "total_context_chars_injected": 2660,
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 42.78,
+  "raw_response": "Voici le call chain complet de `dispatch_webhook` :\n\n```\ndispatch_webhook(payload, user_id)          # apps/api/services/webhooks.py\n\u251c\u2500\u2500 _webhooks_admin_db()                    # apps/api/services/webhooks.py:8\n\u2502   \u251c\u2500\u2500 supabase_admin()                    # apps/api/db.py:40\n\u2502   \u2502   \u2514\u2500\u2500 DBSession.__init__(url)         # apps/api/db.py:7  [acc\u00e8s DB \u2014 postgresql://localhost/tsbench?role=admin]\n\u2502   \u2514\u2500\u2500 info(msg)                           # apps/api/utils/logging.py:12\n\u2502       \u2514\u2500\u2500 log(level, message)             # apps/api/utils/logging.py:5  [feuille \u2014 print()]\n\u2514\u2500\u2500 info(msg)                               # apps/api/utils/logging.py:12\n    \u2514\u2500\u2500 log(level, message)                 # apps/api/utils/logging.py:5  [feuille \u2014 print()]\n```\n\n**R\u00e9sum\u00e9 :**\n\n- **Appels directs** : `_webhooks_admin_db()` et `info()`\n- **Acc\u00e8s DB** : via `_webhooks_admin_db()` \u2192 `supabase_admin()` \u2192 `DBSession(\"postgresql://...?role=admin\")` \u2014 ouvre une session DB privil\u00e9gi\u00e9e\n- **Logging** : `info()` \u2192 `log()` \u2192 `print()` (stub, pas d'I/O externe)\n- **Feuilles** : `log()` et `DBSession.__init__()` sont les terminaux de la cha\u00eene\n- `DBSession` expose aussi `query`, `add`, `commit`, `rollback`, `close`, mais aucune de ces m\u00e9thodes n'est appel\u00e9e dans ce chemin \u2014 seule la session est cr\u00e9\u00e9e et retourn\u00e9e",
+  "error": null,
+  "score": 2,
+  "max_score": 2,
+  "timestamp": "2026-04-15T06:24:31.132490+00:00"
+}

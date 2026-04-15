@@ -1,0 +1,65 @@
+{
+  "task_id": "TASK-054",
+  "run": "B",
+  "baseline": "token-savior",
+  "input_tokens": 12,
+  "output_tokens": 1778,
+  "cache_creation_input_tokens": 6885,
+  "cache_read_input_tokens": 346444,
+  "total_tokens": 355119,
+  "active_tokens": 8675,
+  "turns_count": 14,
+  "tool_calls_count": 7,
+  "tool_calls_breakdown": {
+    "mcp__token-savior-recall__switch_project": 1,
+    "mcp__token-savior-recall__get_function_source": 3,
+    "mcp__token-savior-recall__reindex": 1,
+    "mcp__token-savior-recall__search_codebase": 1,
+    "mcp__token-savior-recall__replace_symbol_source": 1
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "mcp__token-savior-recall__switch_project",
+      "result_chars": 60,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 201,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__reindex",
+      "result_chars": 42,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 211,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 201,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 1355,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__replace_symbol_source",
+      "result_chars": 188,
+      "is_error": false
+    }
+  ],
+  "total_context_chars_injected": 2258,
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 60.14,
+  "raw_response": "\n\nCorrection appliqu\u00e9e.\n\n**Fonction** : `buggy_paginate` dans **`apps/api/utils/buggy_pagination.py`**\n\n**Bug** : `end = start + page_size + 1` retournait 11 items au lieu de 10 (off-by-one).\n\n**Fix** : `end = start + page_size` \u2014 suppression du `+ 1` superflu.",
+  "error": null,
+  "score": 2,
+  "max_score": 2,
+  "timestamp": "2026-04-15T07:45:40.399487+00:00"
+}

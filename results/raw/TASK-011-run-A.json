@@ -1,0 +1,37 @@
+{
+  "task_id": "TASK-011",
+  "run": "A",
+  "baseline": "plain",
+  "input_tokens": 5,
+  "output_tokens": 266,
+  "cache_creation_input_tokens": 8949,
+  "cache_read_input_tokens": 54735,
+  "total_tokens": 63955,
+  "active_tokens": 9220,
+  "turns_count": 4,
+  "tool_calls_count": 2,
+  "tool_calls_breakdown": {
+    "Grep": 1,
+    "Read": 1
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "Grep",
+      "result_chars": 797,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 567,
+      "is_error": false
+    }
+  ],
+  "total_context_chars_injected": 1364,
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 13.76,
+  "raw_response": "Cha\u00eene d'appels compl\u00e8te :\n\n**`alpha_entry` \u2192 `alpha_middle` \u2192 `alpha_inner` \u2192 `alpha_leaf`**\n\n`alpha_leaf` est la fonction feuille : elle retourne directement `{'leaf': 'alpha_leaf'}` sans d\u00e9l\u00e9guer \u00e0 aucune autre fonction.",
+  "error": null,
+  "score": 1,
+  "max_score": 2,
+  "timestamp": "2026-04-14T21:56:45.920222+00:00"
+}

@@ -1,0 +1,43 @@
+{
+  "task_id": "TASK-047",
+  "run": "B",
+  "baseline": "token-savior",
+  "input_tokens": 5,
+  "output_tokens": 288,
+  "cache_creation_input_tokens": 4572,
+  "cache_read_input_tokens": 127624,
+  "total_tokens": 132489,
+  "active_tokens": 4865,
+  "turns_count": 5,
+  "tool_calls_count": 3,
+  "tool_calls_breakdown": {
+    "mcp__token-savior-recall__switch_project": 1,
+    "mcp__token-savior-recall__memory_search": 1,
+    "mcp__token-savior-recall__get_file_dependencies": 1
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "mcp__token-savior-recall__switch_project",
+      "result_chars": 60,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__memory_search",
+      "result_chars": 32,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_file_dependencies",
+      "result_chars": 120,
+      "is_error": false
+    }
+  ],
+  "total_context_chars_injected": 212,
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 18.76,
+  "raw_response": "Les imports locaux de `apps/api/services/auth.py` sont :\n\n1. `apps/api/config.py`\n2. `apps/api/db.py`\n3. `apps/api/models/auth.py`\n4. `apps/api/utils/errors.py`\n5. `apps/api/utils/logging.py`",
+  "error": null,
+  "score": 2,
+  "max_score": 2,
+  "timestamp": "2026-04-15T06:56:47.511056+00:00"
+}

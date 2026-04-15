@@ -1,0 +1,53 @@
+{
+  "task_id": "TASK-045",
+  "run": "B",
+  "baseline": "token-savior",
+  "input_tokens": 8,
+  "output_tokens": 455,
+  "cache_creation_input_tokens": 44629,
+  "cache_read_input_tokens": 219650,
+  "total_tokens": 264742,
+  "active_tokens": 45092,
+  "turns_count": 6,
+  "tool_calls_count": 5,
+  "tool_calls_breakdown": {
+    "mcp__token-savior-recall__switch_project": 1,
+    "mcp__token-savior-recall__get_file_dependents": 1,
+    "mcp__token-savior-recall__search_codebase": 3
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "mcp__token-savior-recall__switch_project",
+      "result_chars": 60,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_file_dependents",
+      "result_chars": 72,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 262,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 573,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__search_codebase",
+      "result_chars": 635,
+      "is_error": false
+    }
+  ],
+  "total_context_chars_injected": 1602,
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 28.27,
+  "raw_response": "Deux fichiers importent depuis `apps.api.services.auth` :\n\n1. **`apps/api/routers/auth.py`** \u2014 `from apps.api.services import auth as svc`\n2. **`tests/test_auth.py`** \u2014 `from apps.api.services import auth as svc`",
+  "error": null,
+  "score": 2,
+  "max_score": 2,
+  "timestamp": "2026-04-15T06:24:59.411316+00:00"
+}

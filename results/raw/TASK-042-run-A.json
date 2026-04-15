@@ -1,0 +1,31 @@
+{
+  "task_id": "TASK-042",
+  "run": "A",
+  "baseline": "plain",
+  "input_tokens": 4,
+  "output_tokens": 595,
+  "cache_creation_input_tokens": 18068,
+  "cache_read_input_tokens": 33480,
+  "total_tokens": 52147,
+  "active_tokens": 18667,
+  "turns_count": 2,
+  "tool_calls_count": 1,
+  "tool_calls_breakdown": {
+    "Read": 1
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "Read",
+      "result_chars": 18895,
+      "is_error": false
+    }
+  ],
+  "total_context_chars_injected": 18895,
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 23.96,
+  "raw_response": "Voici les 29 fonctions publiques de `apps/api/services/auth.py` :\n\n1. `authenticate_user(credentials: dict)`\n2. `issue_token(payload: dict, user_id: int = 0)`\n3. `revoke_token(payload: dict, user_id: int = 0)`\n4. `hash_password(payload: dict, user_id: int = 0)`\n5. `verify_password(payload: dict, user_id: int = 0)`\n6. `prepare_auth_internal(data: dict)`\n7. `finalize_auth_internal(data: dict)`\n8. `audit_auth_internal(data: dict)`\n9. `notify_auth_internal(data: dict)`\n10. `enqueue_auth_internal(data: dict)`\n11. `reconcile_auth_internal(data: dict)`\n12. `upsert_auth_internal(data: dict)`\n13. `expand_auth_internal(data: dict)`\n14. `reduce_auth_internal(data: dict)`\n15. `snapshot_auth_internal(data: dict)`\n16. `replay_auth_internal(data: dict)`\n17. `validate_input_auth_internal(data: dict)`\n18. `serialize_output_auth_internal(data: dict)`\n19. `deserialize_input_auth_internal(data: dict)`\n20. `build_context_auth_internal(data: dict)`\n21. `emit_metric_auth_internal(data: dict)`\n22. `rate_limit_auth_internal(data: dict)`\n23. `retry_with_backoff_auth_internal(data: dict)`\n24. `batch_process_auth_internal(data: dict)`\n25. `stream_process_auth_internal(data: dict)`\n26. `index_entity_auth_internal(data: dict)`\n27. `reindex_entity_auth_internal(data: dict)`\n28. `soft_delete_auth_internal(data: dict)`\n29. `hard_delete_auth_internal(data: dict)`\n\nLa seule fonction priv\u00e9e (pr\u00e9fix\u00e9e `_`) exclue est `_auth_admin_db()`.",
+  "error": null,
+  "score": 2,
+  "max_score": 2,
+  "timestamp": "2026-04-14T21:58:23.973236+00:00"
+}

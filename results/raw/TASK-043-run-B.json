@@ -1,0 +1,109 @@
+{
+  "task_id": "TASK-043",
+  "run": "B",
+  "baseline": "token-savior",
+  "input_tokens": 8,
+  "output_tokens": 2166,
+  "cache_creation_input_tokens": 17576,
+  "cache_read_input_tokens": 166294,
+  "total_tokens": 186044,
+  "active_tokens": 19750,
+  "turns_count": 18,
+  "tool_calls_count": 16,
+  "tool_calls_breakdown": {
+    "mcp__token-savior-recall__switch_project": 1,
+    "mcp__token-savior-recall__memory_search": 1,
+    "mcp__token-savior-recall__list_files": 1,
+    "mcp__token-savior-recall__get_functions": 13
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "mcp__token-savior-recall__switch_project",
+      "result_chars": 60,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__memory_search",
+      "result_chars": 32,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__list_files",
+      "result_chars": 465,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_functions",
+      "result_chars": 1443,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_functions",
+      "result_chars": 1466,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_functions",
+      "result_chars": 1598,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_functions",
+      "result_chars": 52,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_functions",
+      "result_chars": 45,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_functions",
+      "result_chars": 46,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_functions",
+      "result_chars": 1492,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_functions",
+      "result_chars": 1637,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_functions",
+      "result_chars": 1552,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_functions",
+      "result_chars": 1696,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_functions",
+      "result_chars": 1510,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_functions",
+      "result_chars": 1578,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_functions",
+      "result_chars": 1576,
+      "is_error": false
+    }
+  ],
+  "total_context_chars_injected": 16248,
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 36.24,
+  "raw_response": "\n\nVoici les fonctions publiques (non-underscore, non-`internal`) avec **plus d'un param\u00e8tre**, fichier par fichier :\n\n### `audit.py`\n| Fonction | Signature |\n|---|---|\n| `log_action` | `(payload, user_id)` |\n| `query_logs` | `(payload, user_id)` |\n| `purge_old_logs` | `(payload, user_id)` |\n| `export_audit_trail` | `(payload, user_id)` |\n\n### `auth.py`\n| Fonction | Signature |\n|---|---|\n| `issue_token` | `(payload, user_id)` |\n| `revoke_token` | `(payload, user_id)` |\n| `hash_password` | `(payload, user_id)` |\n| `verify_password` | `(payload, user_id)` |\n\n### `billing.py`\n| Fonction | Signature |\n|---|---|\n| `calculate_invoice` | `(payload, user_id)` |\n| `apply_discount` | `(payload, user_id)` |\n| `charge_customer` | `(payload, user_id)` |\n| `refund_payment` | `(payload, user_id)` |\n| `list_invoices` | `(payload, user_id)` |\n| `void_invoice` | `(payload, user_id)` |\n\n### `exports.py`\n| Fonction | Signature |\n|---|---|\n| `start_export` | `(payload, user_id)` |\n| `poll_export` | `(payload, user_id)` |\n| `download_export` | `(payload, user_id)` |\n| `cancel_export` | `(payload, user_id)` |\n\n### `integrations.py`\n| Fonction | Signature |\n|---|---|\n| `connect_stripe` | `(payload, user_id)` |\n| `sync_stripe_customers` | `(payload, user_id)` |\n| `disconnect_stripe` | `(payload, user_id)` |\n| `handle_stripe_event` | `(payload, user_id)` |\n\n### `members.py`\n| Fonction | Signature |\n|---|---|\n| `create_member` | `(payload, user_id)` |\n| `update_member` | `(payload, user_id)` |\n| `deactivate_member` | `(payload, user_id)` |\n| `list_members` | `(payload, user_id)` |\n| `find_member_by_email` | `(payload, user_id)` |\n\n### `notifications.py`\n| Fonction | Signature |\n|---|---|\n| `send_email` | `(payload, user_id)` |\n| `send_sms` | `(payload, user_id)` |\n| `render_template` | `(payload, user_id)` |\n| `queue_notification` | `(payload, user_id)` |\n| `list_notifications` | `(payload, user_id)` |\n\n### `reports.py`\n| Fonction | Signature |\n|---|---|\n| `generate_monthly_report` | `(payload, user_id)` |\n| `generate_ytd_report` | `(payload, user_id)` |\n| `export_csv` | `(payload, user_id)` |\n| `aggregate_metrics` | `(payload, user_id)` |\n\n### `sessions.py`\n| Fonction | Signature |\n|---|---|\n| `create_session` | `(payload, user_id)` |\n| `validate_session` | `(payload, user_id)` |\n| `revoke_session` | `(payload, user_id)` |\n| `extend_session` | `(payload, user_id)` |\n| `list_user_sessions` | `(payload, user_id)` |\n\n### `webhooks.py`\n| Fonction | Signature |\n|---|---|\n| `dispatch_webhook` | `(payload, user_id)` |\n| `retry_webhook` | `(payload, user_id)` |\n| `verify_signature` | `(payload, user_id)` |\n| `register_webhook` | `(payload, user_id)` |\n| `list_webhooks` | `(payload, user_id)` |\n\n---\n\nLes 3 fichiers `complex_*.py` n'ont chacun qu'une seule fonction publique \u00e0 **un seul param\u00e8tre** (`data`), donc exclues. `authenticate_user(credentials)` dans `auth.py` est aussi exclue (1 seul param\u00e8tre).\n\n**Total : 47 fonctions publiques \u00e0 2 param\u00e8tres `(payload, user_id)`**, r\u00e9parties sur 10 fichiers.",
+  "error": null,
+  "score": 2,
+  "max_score": 2,
+  "timestamp": "2026-04-15T06:23:48.346048+00:00"
+}

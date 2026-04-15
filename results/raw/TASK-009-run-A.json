@@ -1,0 +1,31 @@
+{
+  "task_id": "TASK-009",
+  "run": "A",
+  "baseline": "plain",
+  "input_tokens": 4,
+  "output_tokens": 342,
+  "cache_creation_input_tokens": 43814,
+  "cache_read_input_tokens": 0,
+  "total_tokens": 44160,
+  "active_tokens": 44160,
+  "turns_count": 2,
+  "tool_calls_count": 1,
+  "tool_calls_breakdown": {
+    "Grep": 1
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "Grep",
+      "result_chars": 5231,
+      "is_error": false
+    }
+  ],
+  "total_context_chars_injected": 5231,
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 11.18,
+  "raw_response": "Voici les **8 fichiers** qui appellent `medium_util` (import\u00e9e depuis `packages/utils/targeted`) :\n\n1. `apps/api/callers/caller_medium_util_00.py`\n2. `apps/api/callers/caller_medium_util_01.py`\n3. `apps/api/callers/caller_medium_util_02.py`\n4. `apps/api/callers/caller_medium_util_03.py`\n5. `apps/api/callers/caller_medium_util_04.py`\n6. `apps/api/callers/caller_medium_util_05.py`\n7. `apps/api/callers/caller_medium_util_06.py`\n8. `apps/api/callers/caller_medium_util_07.py`\n\nLa fonction est **d\u00e9finie** dans `packages/utils/targeted.py:11`. Chaque caller l'importe via `from packages.utils.targeted import medium_util` et l'invoque une fois.",
+  "error": null,
+  "score": 2,
+  "max_score": 2,
+  "timestamp": "2026-04-14T21:56:18.568644+00:00"
+}

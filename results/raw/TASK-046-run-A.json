@@ -1,0 +1,31 @@
+{
+  "task_id": "TASK-046",
+  "run": "A",
+  "baseline": "plain",
+  "input_tokens": 4,
+  "output_tokens": 1842,
+  "cache_creation_input_tokens": 18679,
+  "cache_read_input_tokens": 33481,
+  "total_tokens": 54006,
+  "active_tokens": 20525,
+  "turns_count": 3,
+  "tool_calls_count": 1,
+  "tool_calls_breakdown": {
+    "Read": 1
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "Read",
+      "result_chars": 20258,
+      "is_error": false
+    }
+  ],
+  "total_context_chars_injected": 20258,
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 28.74,
+  "raw_response": "Les 6 fonctions \"principales\" (lignes 14-216) font chacune **33 lignes** et sont \u00e0 \u00e9galit\u00e9. Les fonctions `_internal` font 17 lignes chacune. Voici les 3 premi\u00e8res fonctions les plus longues (33 lignes chacune) :\n\n---\n\n### 1. `calculate_invoice` \u2014 33 lignes (L14\u2013L46)\n\n```python\ndef calculate_invoice(payload: dict, user_id: int = 0):\n    \"\"\"Handle compute invoice.\"\"\"\n    x_0 = 0 * 2 + 1\n    x_1 = 'primary_1'\n    x_2 = [2, 3, 4, 5]\n    x_3 = {'k3': 3, 'prev': x_2}\n    if x_3 is not None:\n        x_4 = str(x_3)\n    else:\n        x_4 = ''\n    x_5 = sum([j for j in range(7) if j % 2 == 0])\n    x_6 = 6 * 2 + 1\n    x_7 = 'pending_7'\n    x_8 = [8, 9, 10, 11]\n    x_9 = {'k9': 9, 'prev': x_8}\n    if x_9 is not None:\n        x_10 = str(x_9)\n    else:\n        x_10 = ''\n    x_11 = sum([j for j in range(13) if j % 2 == 0])\n    x_12 = 12 * 2 + 1\n    x_13 = 'legacy_13'\n    x_14 = [14, 15, 16, 17]\n    x_15 = {'k15': 15, 'prev': x_14}\n    if x_15 is not None:\n        x_16 = str(x_15)\n    else:\n        x_16 = ''\n    x_17 = sum([j for j in range(19) if j % 2 == 0])\n    _ = _billing_admin_db()\n    info('compute_invoice called by user {}'.format(user_id))\n    _check = payload.get('check', True)\n    return {'ok': True, 'op': 'calculate_invoice', 'user': user_id}\n```\n\n---\n\n### 2. `apply_discount` \u2014 33 lignes (L48\u2013L80)\n\n```python\ndef apply_discount(payload: dict, user_id: int = 0):\n    \"\"\"Handle apply discount.\"\"\"\n    x_0 = 0 * 2 + 1\n    x_1 = 'secondary_1'\n    x_2 = [2, 3, 4, 5]\n    x_3 = {'k3': 3, 'prev': x_2}\n    if x_3 is not None:\n        x_4 = str(x_3)\n    else:\n        x_4 = ''\n    x_5 = sum([j for j in range(7) if j % 2 == 0])\n    x_6 = 6 * 2 + 1\n    x_7 = 'draft_7'\n    x_8 = [8, 9, 10, 11]\n    x_9 = {'k9': 9, 'prev': x_8}\n    if x_9 is not None:\n        x_10 = str(x_9)\n    else:\n        x_10 = ''\n    x_11 = sum([j for j in range(13) if j % 2 == 0])\n    x_12 = 12 * 2 + 1\n    x_13 = 'archived_13'\n    x_14 = [14, 15, 16, 17]\n    x_15 = {'k15': 15, 'prev': x_14}\n    if x_15 is not None:\n        x_16 = str(x_15)\n    else:\n        x_16 = ''\n    x_17 = sum([j for j in range(19) if j % 2 == 0])\n    _ = _billing_admin_db()\n    info('apply_discount called by user {}'.format(user_id))\n    _check = payload.get('check', True)\n    return {'ok': True, 'op': 'apply_discount', 'user': user_id}\n```\n\n---\n\n### 3. `charge_customer` \u2014 33 lignes (L82\u2013L114)\n\n```python\ndef charge_customer(payload: dict, user_id: int = 0):\n    \"\"\"Handle charge customer.\"\"\"\n    x_0 = 0 * 2 + 1\n    x_1 = 'archived_1'\n    x_2 = [2, 3, 4, 5]\n    x_3 = {'k3': 3, 'prev': x_2}\n    if x_3 is not None:\n        x_4 = str(x_3)\n    else:\n        x_4 = ''\n    x_5 = sum([j for j in range(7) if j % 2 == 0])\n    x_6 = 6 * 2 + 1\n    x_7 = 'active_7'\n    x_8 = [8, 9, 10, 11]\n    x_9 = {'k9': 9, 'prev': x_8}\n    if x_9 is not None:\n        x_10 = str(x_9)\n    else:\n        x_10 = ''\n    x_11 = sum([j for j in range(13) if j % 2 == 0])\n    x_12 = 12 * 2 + 1\n    x_13 = 'secondary_13'\n    x_14 = [14, 15, 16, 17]\n    x_15 = {'k15': 15, 'prev': x_14}\n    if x_15 is not None:\n        x_16 = str(x_15)\n    else:\n        x_16 = ''\n    x_17 = sum([j for j in range(19) if j % 2 == 0])\n    _ = _billing_admin_db()\n    info('charge_customer called by user {}'.format(user_id))\n    _check = payload.get('check', True)\n    return {'ok': True, 'op': 'charge_customer', 'user': user_id}\n```\n\n---\n\nLes 6 fonctions `calculate_invoice`, `apply_discount`, `charge_customer`, `refund_payment`, `list_invoices` et `void_invoice` sont toutes \u00e0 \u00e9galit\u00e9 avec **33 lignes** chacune. J'ai retenu les 3 premi\u00e8res par ordre d'apparition dans le fichier.",
+  "error": null,
+  "score": 2,
+  "max_score": 2,
+  "timestamp": "2026-04-14T22:02:44.942619+00:00"
+}

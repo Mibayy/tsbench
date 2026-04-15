@@ -1,0 +1,43 @@
+{
+  "task_id": "TASK-051",
+  "run": "B",
+  "baseline": "token-savior",
+  "input_tokens": 5,
+  "output_tokens": 909,
+  "cache_creation_input_tokens": 6178,
+  "cache_read_input_tokens": 127708,
+  "total_tokens": 134800,
+  "active_tokens": 7092,
+  "turns_count": 6,
+  "tool_calls_count": 3,
+  "tool_calls_breakdown": {
+    "mcp__token-savior-recall__switch_project": 1,
+    "mcp__token-savior-recall__memory_search": 1,
+    "mcp__token-savior-recall__get_entry_points": 1
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "mcp__token-savior-recall__switch_project",
+      "result_chars": 60,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__memory_search",
+      "result_chars": 32,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_entry_points",
+      "result_chars": 4976,
+      "is_error": false
+    }
+  ],
+  "total_context_chars_injected": 5068,
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 23.08,
+  "raw_response": "Voici les points d'entr\u00e9e du projet **tsbench**, class\u00e9s par cat\u00e9gorie :\n\n### Handlers d'\u00e9v\u00e9nements (score 1.0) \u2014 racines absolues\n| Fonction | Fichier |\n|---|---|\n| `handle_twilio_event` | `apps/worker/handlers/twilio.py:6` |\n| `handle_slack_event` | `apps/worker/handlers/slack.py:6` |\n| `handle_postmark_event` | `apps/worker/handlers/postmark.py:6` |\n| `handle_stripe_event` | `apps/worker/handlers/stripe.py:6` |\n\n### Fonctions `main` \u2014 points d'entr\u00e9e CLI\n| Fonction | Fichier |\n|---|---|\n| `main` | `apps/worker/main.py:5` |\n| `main` | `bench.py:706` |\n| `main` | `build_tasks.py:675` |\n| `main` | `breaking_changes.py:205` |\n| `main` | `generate.py:1958` |\n| `main` | `scripts/seed_data.py:3` |\n| `main` | `scripts/backup.py:3` |\n\n### Handlers de t\u00e2ches worker (score 0.7) \u2014 invoqu\u00e9s par le dispatcher\n| Fonction | Fichier |\n|---|---|\n| `handle` | `apps/worker/tasks/webhook_tasks.py:3` |\n| `handle` | `apps/worker/tasks/session_tasks.py:3` |\n| `handle` | `apps/worker/tasks/export_tasks.py:3` |\n| `handle` | `apps/worker/tasks/notification_tasks.py:3` |\n| `handle` | `apps/worker/tasks/billing_tasks.py:3` |\n\n### Autres racines notables\n| Fonction | Fichier | Raison |\n|---|---|---|\n| `create_app` | `apps/api/main.py:19` | Factory WSGI/ASGI, aucun appelant interne |\n| `Dispatcher.dispatch` | `apps/worker/dispatcher.py:20` | Dispatching des t\u00e2ches, aucun appelant interne |\n| `handle_stripe_event` | `apps/api/services/integrations.py:116` | Handler Stripe c\u00f4t\u00e9 API |\n| `dispatch_webhook` | `apps/api/services/webhooks.py:14` | \u00c9mission de webhooks |\n\nLes fonctions `do_it_*` dans `apps/api/callers/` sont aussi des racines (aucun appelant), mais ce sont des utilitaires de benchmark, pas des points d'entr\u00e9e applicatifs.",
+  "error": null,
+  "score": 2,
+  "max_score": 2,
+  "timestamp": "2026-04-15T06:58:20.212351+00:00"
+}

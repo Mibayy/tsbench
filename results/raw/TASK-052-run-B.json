@@ -1,0 +1,94 @@
+{
+  "task_id": "TASK-052",
+  "run": "B",
+  "baseline": "token-savior",
+  "input_tokens": 8,
+  "output_tokens": 2004,
+  "cache_creation_input_tokens": 15833,
+  "cache_read_input_tokens": 167338,
+  "total_tokens": 185183,
+  "active_tokens": 17845,
+  "turns_count": 16,
+  "tool_calls_count": 13,
+  "tool_calls_breakdown": {
+    "mcp__token-savior-recall__switch_project": 1,
+    "mcp__token-savior-recall__memory_search": 1,
+    "mcp__token-savior-recall__get_leiden_stats": 1,
+    "mcp__token-savior-recall__get_community": 10
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "mcp__token-savior-recall__switch_project",
+      "result_chars": 60,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__memory_search",
+      "result_chars": 32,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_leiden_stats",
+      "result_chars": 515,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_community",
+      "result_chars": 2875,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_community",
+      "result_chars": 2058,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_community",
+      "result_chars": 1374,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_community",
+      "result_chars": 1392,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_community",
+      "result_chars": 1146,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_community",
+      "result_chars": 831,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_community",
+      "result_chars": 1911,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_community",
+      "result_chars": 1329,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_community",
+      "result_chars": 1265,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_community",
+      "result_chars": 1268,
+      "is_error": false
+    }
+  ],
+  "total_context_chars_injected": 16056,
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 51.62,
+  "raw_response": "\n\nVoici les **10 plus grandes communaut\u00e9s** du projet (139 au total, 1255 symboles couverts, modularit\u00e9 Q=0.46) :\n\n---\n\n### 1. `find_dead_code` (43 symboles)\n**Th\u00e8me : D\u00e9tection de code mort**\nSymboles cl\u00e9s : `find_dead_code`, `TestBasicDeadCode`, `TestEntryPoints`, `TestFrameworkAndDispatchHeuristics`\nLogique de d\u00e9tection des symboles sans appelants, avec heuristiques pour exclure les entry points (main, routes, fixtures, d\u00e9corateurs Spring/Click, etc.)\n\n### 2. `annotate_python` (43 symboles)\n**Th\u00e8me : Parseur AST Python**\nSymboles cl\u00e9s : `annotate_python`, `_extract_class_info`, `_extract_function_info`, `_base_name`, `_decorator_name`\nExtraction de fonctions, classes, imports, d\u00e9corateurs, fonctions async et cas limites (erreurs de syntaxe, imports relatifs).\n\n### 3. `annotate_typescript` (34 symboles)\n**Th\u00e8me : Parseur TypeScript/TSX**\nSymboles cl\u00e9s : `annotate_typescript`, `_find_arrow_body_start`, `_find_brace_end`, `_join_until_paren_close`\nD\u00e9tection de fonctions (arrow, async, export), classes, interfaces, type aliases.\n\n### 4. `analyze_docker` (34 symboles)\n**Th\u00e8me : Analyse Dockerfile & Docker Compose**\nSymboles cl\u00e9s : `analyze_docker`, `_extract_base_images`, `_extract_stages`, `_extract_env_arg_vars`, `_extract_compose_services`\nAudit d'images de base, ports expos\u00e9s, variables d'environnement, multi-stage builds, warning sur tag `latest`.\n\n### 5. `annotate_java` (33 symboles)\n**Th\u00e8me : Parseur Java + d\u00e9tection de breaking changes**\nSymboles cl\u00e9s : `annotate_java`, `BreakingChange`, `ChangeType`, `_compare_java_sources`, `_java_api_signature_map`\nExtraction de classes/m\u00e9thodes/records Java, support sealed types, generics, et comparaison d'API pour d\u00e9tecter les changements cassants.\n\n### 6. `annotate_json` (32 symboles)\n**Th\u00e8me : Parseur structurel JSON**\nSymboles cl\u00e9s : `annotate_json`, `TestJsonNestedObject`, `TestJsonSchemaRefs`, `TestJsonN8NWorkflow`\nExtraction de sections JSON imbriqu\u00e9es, gestion des `$ref`, workflows n8n, cap de profondeur.\n\n### 7. `annotate_hcl` (30 symboles)\n**Th\u00e8me : Parseur HCL (Terraform)**\nSymboles cl\u00e9s : `annotate_hcl`, `_count_close_braces`, `TestHclResourceBlock`, `TestHclVariableBlock`\nExtraction de blocs `resource`, `variable`, `output`, paires cl\u00e9-valeur imbriqu\u00e9es.\n\n### 8. `FunctionInfo` (28 symboles)\n**Th\u00e8me : Mod\u00e8le de donn\u00e9es & moteur de requ\u00eates**\nSymboles cl\u00e9s : `FunctionInfo`, `ClassInfo`, `ProjectQueryEngine`, `build_dependency_graph`, `get_cluster_for_symbol`, `analyze_symbol_semantics`\nStructures de donn\u00e9es centrales pour symboles, graphe de d\u00e9pendances, r\u00e9solution de cha\u00eenes d'appels et clustering.\n\n### 9. `annotate_xml` (28 symboles)\n**Th\u00e8me : Parseur XML**\nSymboles cl\u00e9s : `annotate_xml`, `TestXmlNamespaceStripping`, `TestXmlAttributes`, `TestXmlNestedLevels`\nExtraction d'\u00e9l\u00e9ments XML avec gestion des namespaces, attributs distinctifs (id/name/type), cap de profondeur.\n\n### 10. `_ProjectSlot` (27 symboles)\n**Th\u00e8me : Dispatch MCP / handlers de projet**\nSymboles cl\u00e9s : `_ProjectSlot`, `_prep`, `_hm_set_project_root`, et 20+ handlers (`_h_find_dead_code`, `_h_analyze_docker`, `_h_create_checkpoint`, etc.)\nPoint d'entr\u00e9e des outils MCP : routing des requ\u00eates vers les fonctions d'analyse, checkpoints, tests impact\u00e9s, \u00e9dition de symboles.\n\n---\n\n**R\u00e9sum\u00e9 architectural** : Le projet est un serveur MCP d'analyse de code multi-langage. Les communaut\u00e9s se r\u00e9partissent en **parseurs par langage** (Python, TS, Java, JSON, HCL, XML), des **analyseurs transversaux** (dead code, Docker), un **mod\u00e8le de donn\u00e9es central** (FunctionInfo/ClassInfo + query engine), et une **couche de dispatch MCP** (_ProjectSlot + handlers).",
+  "error": null,
+  "score": 2,
+  "max_score": 2,
+  "timestamp": "2026-04-15T06:59:11.837501+00:00"
+}

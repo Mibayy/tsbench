@@ -1,0 +1,59 @@
+{
+  "task_id": "TASK-004",
+  "run": "B",
+  "baseline": "token-savior",
+  "input_tokens": 15,
+  "output_tokens": 554,
+  "cache_creation_input_tokens": 12749,
+  "cache_read_input_tokens": 134627,
+  "total_tokens": 147945,
+  "active_tokens": 13318,
+  "turns_count": 9,
+  "tool_calls_count": 6,
+  "tool_calls_breakdown": {
+    "ToolSearch": 3,
+    "mcp__token-savior__switch_project": 1,
+    "mcp__token-savior__get_routes": 1,
+    "mcp__token-savior__search_codebase": 1
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "ToolSearch",
+      "result_chars": 76,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior__switch_project",
+      "result_chars": 60,
+      "is_error": false
+    },
+    {
+      "tool": "ToolSearch",
+      "result_chars": 72,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior__get_routes",
+      "result_chars": 1633,
+      "is_error": false
+    },
+    {
+      "tool": "ToolSearch",
+      "result_chars": 77,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior__search_codebase",
+      "result_chars": 2590,
+      "is_error": false
+    }
+  ],
+  "total_context_chars_injected": 4508,
+  "ts_tool_calls_count": 3,
+  "wall_time_seconds": 32.55,
+  "raw_response": "Le fichier qui g\u00e8re la route `POST /api/billing` est **`apps/api/routers/billing.py`** (ligne 7, handler `create_billing`).",
+  "error": null,
+  "score": 1,
+  "max_score": 2,
+  "timestamp": "2026-04-14T21:38:03.623265+00:00"
+}

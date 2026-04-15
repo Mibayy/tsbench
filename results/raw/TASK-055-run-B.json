@@ -1,0 +1,49 @@
+{
+  "task_id": "TASK-055",
+  "run": "B",
+  "baseline": "token-savior",
+  "input_tokens": 6,
+  "output_tokens": 442,
+  "cache_creation_input_tokens": 43745,
+  "cache_read_input_tokens": 130049,
+  "total_tokens": 174242,
+  "active_tokens": 44193,
+  "turns_count": 7,
+  "tool_calls_count": 4,
+  "tool_calls_breakdown": {
+    "mcp__token-savior-recall__switch_project": 1,
+    "mcp__token-savior-recall__memory_search": 1,
+    "mcp__token-savior-recall__find_symbol": 1,
+    "mcp__token-savior-recall__insert_near_symbol": 1
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "mcp__token-savior-recall__switch_project",
+      "result_chars": 60,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__memory_search",
+      "result_chars": 32,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__find_symbol",
+      "result_chars": 70,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__insert_near_symbol",
+      "result_chars": 184,
+      "is_error": false
+    }
+  ],
+  "total_context_chars_injected": 346,
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 23.44,
+  "raw_response": "Fonction `validate_invoice_total` ins\u00e9r\u00e9e apr\u00e8s `calculate_invoice` \u00e0 la ligne 47 de `apps/api/services/billing.py`. Elle retourne `True` si `invoice[\"total\"] > 0`, `False` sinon.",
+  "error": null,
+  "score": 2,
+  "max_score": 2,
+  "timestamp": "2026-04-15T06:53:14.849380+00:00"
+}

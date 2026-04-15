@@ -1,0 +1,68 @@
+{
+  "task_id": "TASK-044",
+  "run": "A",
+  "baseline": "plain",
+  "input_tokens": 4,
+  "output_tokens": 661,
+  "cache_creation_input_tokens": 22820,
+  "cache_read_input_tokens": 20880,
+  "total_tokens": 44365,
+  "active_tokens": 23485,
+  "turns_count": 10,
+  "tool_calls_count": 8,
+  "tool_calls_breakdown": {
+    "Agent": 1,
+    "Read": 6,
+    "Glob": 1
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "Glob",
+      "result_chars": 2754,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 19252,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 1046,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 479,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 335,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 879,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 884,
+      "is_error": false
+    },
+    {
+      "tool": "Agent",
+      "result_chars": 5160,
+      "is_error": false
+    }
+  ],
+  "total_context_chars_injected": 30789,
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 55.7,
+  "raw_response": "Voici le call chain complet de `dispatch_webhook` :\n\n```\ndispatch_webhook (webhooks.py:14)\n\u251c\u2500\u2500 _webhooks_admin_db() (webhooks.py:8)\n\u2502   \u251c\u2500\u2500 supabase_admin() (db.py:40)          \u2190 seul acc\u00e8s DB (ouvre un DBSession admin)\n\u2502   \u2502   \u2514\u2500\u2500 DBSession.__init__() (db.py:6)\n\u2502   \u2514\u2500\u2500 info('open admin session\u2026') (logging.py:12)\n\u2502       \u2514\u2500\u2500 log(\"INFO\", \u2026) (logging.py:5)\n\u2502           \u251c\u2500\u2500 settings.log_level (config.py:20)\n\u2502           \u2514\u2500\u2500 print()\n\u251c\u2500\u2500 info('dispatch_webhook called\u2026') (logging.py:12)\n\u2502   \u2514\u2500\u2500 log(\"INFO\", \u2026)  \u2014 m\u00eame chemin que ci-dessus\n\u2514\u2500\u2500 payload.get('check', True)  \u2014 dict built-in\n```\n\n**Acc\u00e8s DB** : un seul point \u2014 `supabase_admin()` (`db.py:40`) qui instancie un `DBSession` sur `postgresql://localhost/tsbench?role=admin`. La session est affect\u00e9e \u00e0 `_` et **jamais utilis\u00e9e** (aucun query/insert/update).\n\n**Imports non utilis\u00e9s dans ce chemin** : `models/webhooks.py`, `utils/errors.py` (`NotFoundError`, `ValidationError`) \u2014 import\u00e9s mais jamais appel\u00e9s par `dispatch_webhook`.\n\nEn r\u00e9sum\u00e9 : la fonction est un stub \u2014 elle ouvre une session DB admin qu'elle jette imm\u00e9diatement, logge l'appel, et lit une cl\u00e9 du payload sans exploiter le r\u00e9sultat.",
+  "error": null,
+  "score": 2,
+  "max_score": 2,
+  "timestamp": "2026-04-14T22:01:58.937110+00:00"
+}

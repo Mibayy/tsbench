@@ -1,0 +1,67 @@
+{
+  "task_id": "TASK-050",
+  "run": "B",
+  "baseline": "token-savior",
+  "input_tokens": 8,
+  "output_tokens": 944,
+  "cache_creation_input_tokens": 6001,
+  "cache_read_input_tokens": 261707,
+  "total_tokens": 268660,
+  "active_tokens": 6953,
+  "turns_count": 10,
+  "tool_calls_count": 7,
+  "tool_calls_breakdown": {
+    "mcp__token-savior-recall__switch_project": 1,
+    "mcp__token-savior-recall__memory_search": 1,
+    "mcp__token-savior-recall__find_symbol": 1,
+    "mcp__token-savior-recall__get_function_source": 1,
+    "mcp__token-savior-recall__get_dependencies": 1,
+    "mcp__token-savior-recall__get_relevance_cluster": 1,
+    "mcp__token-savior-recall__get_backward_slice": 1
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "mcp__token-savior-recall__switch_project",
+      "result_chars": 60,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__memory_search",
+      "result_chars": 32,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__find_symbol",
+      "result_chars": 78,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 748,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_dependencies",
+      "result_chars": 2,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_relevance_cluster",
+      "result_chars": 916,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_backward_slice",
+      "result_chars": 905,
+      "is_error": false
+    }
+  ],
+  "total_context_chars_injected": 2741,
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 32.52,
+  "raw_response": "Voici l'analyse compl\u00e8te :\n\n## Backward slice de `reconcile_payments`\n\n**La fonction est enti\u00e8rement auto-contenue** \u2014 elle n'a **aucune d\u00e9pendance externe** (0 import, 0 appel de fonction, 0 variable globale). Le graphe de d\u00e9pendances (RWR) confirme un score de 0.0 pour tous les voisins.\n\n### Symboles internes influen\u00e7ant `return result` (ligne 35)\n\nLe backward slice sur `result` (30.3% de r\u00e9duction, 23/33 lignes) identifie ces flux de donn\u00e9es :\n\n| Variable | R\u00f4le |\n|----------|------|\n| `result` | Accumulateur principal \u2014 initialis\u00e9 \u00e0 `0` (l.5), mut\u00e9 par toutes les branches |\n| `items` | `list(range(10))` (l.6) \u2014 alimente les deux boucles `for` |\n| `it_1` | It\u00e9rateur de la 1\u00e8re boucle (l.11-15) \u2014 conditionne `result +=/-=` |\n| `it_5` | It\u00e9rateur de la 2\u00e8me boucle (l.30-34) \u2014 conditionne `result +=/-=` |\n| `data` | Param\u00e8tre d'entr\u00e9e \u2014 **jamais utilis\u00e9** (dead parameter) |\n\n### Conclusion\n\nAucun symbole externe n'influence `reconcile_payments`, ni directement ni transitivement. La fonction est un \u00eelot de calcul isol\u00e9 avec un param\u00e8tre `data: dict` mort.",
+  "error": null,
+  "score": 1,
+  "max_score": 2,
+  "timestamp": "2026-04-15T06:57:57.123563+00:00"
+}

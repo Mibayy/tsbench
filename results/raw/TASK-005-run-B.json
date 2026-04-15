@@ -1,0 +1,58 @@
+{
+  "task_id": "TASK-005",
+  "run": "B",
+  "baseline": "token-savior",
+  "input_tokens": 11,
+  "output_tokens": 701,
+  "cache_creation_input_tokens": 12737,
+  "cache_read_input_tokens": 137218,
+  "total_tokens": 150667,
+  "active_tokens": 13449,
+  "turns_count": 11,
+  "tool_calls_count": 6,
+  "tool_calls_breakdown": {
+    "ToolSearch": 1,
+    "mcp__token-savior__switch_project": 1,
+    "mcp__token-savior__search_codebase": 4
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "ToolSearch",
+      "result_chars": 226,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior__switch_project",
+      "result_chars": 60,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior__search_codebase",
+      "result_chars": 239,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior__search_codebase",
+      "result_chars": 587,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior__search_codebase",
+      "result_chars": 369,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior__search_codebase",
+      "result_chars": 1470,
+      "is_error": false
+    }
+  ],
+  "total_context_chars_injected": 2951,
+  "ts_tool_calls_count": 5,
+  "wall_time_seconds": 32.83,
+  "raw_response": "Le r\u00f4le d'un membre d'association est stock\u00e9 dans :\n\n- **Table (mod\u00e8le)** : `Member`\n- **Colonne (champ)** : `role` (type `String`)\n- **Fichier de sch\u00e9ma** : `packages/db/schema.prisma`",
+  "error": null,
+  "score": 1,
+  "max_score": 2,
+  "timestamp": "2026-04-14T22:32:06.691643+00:00"
+}

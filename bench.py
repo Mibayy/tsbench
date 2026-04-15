@@ -93,7 +93,7 @@ def load_expected_answer(task_id: str) -> dict:
 
 # ---------- claude invocation ----------
 
-def run_claude(prompt: str, run: str) -> dict:
+def run_claude(prompt: str, run: str, extra_disallowed: list[str] | None = None) -> dict:
     """Invoke claude -p with stream-json output. Returns parsed metrics."""
     mcp_config = TS_MCP_CONFIG if run == "B" else EMPTY_MCP_CONFIG
     mcp_config_str = json.dumps(mcp_config)
@@ -110,7 +110,10 @@ def run_claude(prompt: str, run: str) -> dict:
     ]
     if run == "B":
         cmd += ["--append-system-prompt", SYSTEM_PROMPT_TS]
-        cmd += ["--disallowedTools", "Read,Grep,Glob"]
+        base_disallowed = ["Read", "Grep", "Glob"]
+        if extra_disallowed:
+            base_disallowed = list(dict.fromkeys(base_disallowed + extra_disallowed))
+        cmd += ["--disallowedTools", ",".join(base_disallowed)]
     cmd += ["-p", prompt]
 
     env = os.environ.copy()
@@ -416,9 +419,11 @@ def run_task(task_id: str, run: str, force: bool = False) -> dict | None:
     tasks_index = {t["id"]: t for t in load_tasks_index()}
     scoring = tasks_index[task_id]["scoring"]
 
+    extra_disallowed = tasks_index[task_id].get("disallowed_tools")
+
     print(f"[{task_id} | Run {run}] starting...")
     sys.stdout.flush()
-    metrics = run_claude(prompt, run)
+    metrics = run_claude(prompt, run, extra_disallowed=extra_disallowed)
 
     score, max_score = score_response(scoring, expected, metrics["raw_response"])
 

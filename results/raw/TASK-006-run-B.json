@@ -1,0 +1,49 @@
+{
+  "task_id": "TASK-006",
+  "run": "B",
+  "baseline": "token-savior",
+  "input_tokens": 9,
+  "output_tokens": 742,
+  "cache_creation_input_tokens": 11692,
+  "cache_read_input_tokens": 92543,
+  "total_tokens": 104986,
+  "active_tokens": 12443,
+  "turns_count": 6,
+  "tool_calls_count": 4,
+  "tool_calls_breakdown": {
+    "ToolSearch": 1,
+    "mcp__token-savior__switch_project": 1,
+    "mcp__token-savior__find_symbol": 1,
+    "mcp__token-savior__get_dependents": 1
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "ToolSearch",
+      "result_chars": 225,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior__switch_project",
+      "result_chars": 60,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior__find_symbol",
+      "result_chars": 125,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior__get_dependents",
+      "result_chars": 1452,
+      "is_error": false
+    }
+  ],
+  "total_context_chars_injected": 1862,
+  "ts_tool_calls_count": 3,
+  "wall_time_seconds": 28.96,
+  "raw_response": "Le composant `<Sidebar>` est d\u00e9fini dans `apps/web/components/Sidebar.tsx` et import\u00e9 par **15 pages** :\n\n| Fichier | Composant |\n|---|---|\n| `apps/web/app/audit/page.tsx` | `AuditPage` |\n| `apps/web/app/billing/page.tsx` | `BillingPage` |\n| `apps/web/app/dashboard/page.tsx` | `DashboardPage` |\n| `apps/web/app/forgot-password/page.tsx` | `ForgotPasswordPage` |\n| `apps/web/app/invite/page.tsx` | `InvitePage` |\n| `apps/web/app/login/page.tsx` | `LoginPage` |\n| `apps/web/app/members/page.tsx` | `MembersPage` |\n| `apps/web/app/notifications/page.tsx` | `NotificationsPage` |\n| `apps/web/app/pricing/page.tsx` | `PricingPage` |\n| `apps/web/app/profile/page.tsx` | `ProfilePage` |\n| `apps/web/app/reports/page.tsx` | `ReportsPage` |\n| `apps/web/app/sessions/page.tsx` | `SessionsPage` |\n| `apps/web/app/settings/page.tsx` | `SettingsPage` |\n| `apps/web/app/signup/page.tsx` | `SignupPage` |\n| `apps/web/app/webhooks/page.tsx` | `WebhooksPage` |\n\nToutes ces pages se trouvent sous `apps/web/app/` et utilisent `<Sidebar>` dans leur rendu.",
+  "error": null,
+  "score": 0,
+  "max_score": 2,
+  "timestamp": "2026-04-14T21:39:23.376134+00:00"
+}

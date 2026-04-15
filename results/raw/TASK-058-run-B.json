@@ -1,0 +1,43 @@
+{
+  "task_id": "TASK-058",
+  "run": "B",
+  "baseline": "token-savior",
+  "input_tokens": 5,
+  "output_tokens": 571,
+  "cache_creation_input_tokens": 5465,
+  "cache_read_input_tokens": 127427,
+  "total_tokens": 133468,
+  "active_tokens": 6041,
+  "turns_count": 5,
+  "tool_calls_count": 3,
+  "tool_calls_breakdown": {
+    "mcp__token-savior-recall__switch_project": 1,
+    "mcp__token-savior-recall__memory_search": 1,
+    "mcp__token-savior-recall__find_hotspots": 1
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "mcp__token-savior-recall__switch_project",
+      "result_chars": 60,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__memory_search",
+      "result_chars": 32,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__find_hotspots",
+      "result_chars": 1588,
+      "is_error": false
+    }
+  ],
+  "total_context_chars_injected": 1680,
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 19.4,
+  "raw_response": "After filtering out `bench.py` and `generate.py`, here are the top 5 in `apps/`:\n\n| # | Score | Lines | Branches | Depth | Fonction |\n|---|-------|-------|----------|-------|----------|\n| 1 | 44.4 | 33 | 15 | 3 | `apps/api/services/complex_billing.py:3` \u2014 `reconcile_payments()` |\n| 2 | 44.4 | 33 | 15 | 3 | `apps/api/services/complex_routing.py:3` \u2014 `route_webhook_event()` |\n| 3 | 44.4 | 33 | 15 | 3 | `apps/api/services/complex_auth.py:3` \u2014 `authenticate_multi_factor()` |\n| 4 | 44.4 | 33 | 15 | 3 | `apps/worker/tasks/complex_pipeline.py:3` \u2014 `orchestrate_nightly_job()` |\n| 5 | 36.9 | 28 | 12 | 3 | `apps/api/utils/complex_validation.py:3` \u2014 `validate_contract()` |\n\nLes 4 premi\u00e8res sont quasi-identiques en profil (33 lignes, 15 branches, profondeur 3, score 44.4). `validate_contract()` se distingue par moins de branches (12) et moins de lignes (28), mais une complexit\u00e9 encore notable.",
+  "error": null,
+  "score": 2,
+  "max_score": 2,
+  "timestamp": "2026-04-15T07:45:59.802840+00:00"
+}

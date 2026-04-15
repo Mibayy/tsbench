@@ -1,0 +1,54 @@
+{
+  "task_id": "TASK-008",
+  "run": "B",
+  "baseline": "token-savior",
+  "input_tokens": 12,
+  "output_tokens": 857,
+  "cache_creation_input_tokens": 22439,
+  "cache_read_input_tokens": 104163,
+  "total_tokens": 127471,
+  "active_tokens": 23308,
+  "turns_count": 9,
+  "tool_calls_count": 5,
+  "tool_calls_breakdown": {
+    "ToolSearch": 2,
+    "mcp__token-savior__switch_project": 1,
+    "mcp__token-savior__get_dependents": 1,
+    "mcp__token-savior__search_codebase": 1
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "ToolSearch",
+      "result_chars": 225,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior__switch_project",
+      "result_chars": 60,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior__get_dependents",
+      "result_chars": 818,
+      "is_error": false
+    },
+    {
+      "tool": "ToolSearch",
+      "result_chars": 77,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior__search_codebase",
+      "result_chars": 439,
+      "is_error": false
+    }
+  ],
+  "total_context_chars_injected": 1619,
+  "ts_tool_calls_count": 3,
+  "wall_time_seconds": 28.03,
+  "raw_response": "Voici la liste exhaustive des fichiers qui **appellent** `small_util` (hors sa d\u00e9finition) :\n\n| # | Fichier | Ligne |\n|---|---------|-------|\n| 1 | `apps/api/callers/caller_small_util_00.py` | 6 |\n| 2 | `apps/api/callers/caller_small_util_01.py` | 6 |\n| 3 | `apps/api/callers/caller_small_util_02.py` | 6 |\n\n3 call sites, tous sous la forme `return small_util(payload)`. La fonction est d\u00e9finie dans `packages/utils/targeted.py:7`.",
+  "error": null,
+  "score": 2,
+  "max_score": 2,
+  "timestamp": "2026-04-14T21:40:15.951915+00:00"
+}

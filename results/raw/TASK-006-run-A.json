@@ -1,0 +1,36 @@
+{
+  "task_id": "TASK-006",
+  "run": "A",
+  "baseline": "plain",
+  "input_tokens": 4,
+  "output_tokens": 383,
+  "cache_creation_input_tokens": 21482,
+  "cache_read_input_tokens": 20843,
+  "total_tokens": 42712,
+  "active_tokens": 21869,
+  "turns_count": 4,
+  "tool_calls_count": 2,
+  "tool_calls_breakdown": {
+    "Grep": 2
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "Grep",
+      "result_chars": 477,
+      "is_error": false
+    },
+    {
+      "tool": "Grep",
+      "result_chars": 509,
+      "is_error": false
+    }
+  ],
+  "total_context_chars_injected": 986,
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 13.28,
+  "raw_response": "15 fichiers importent et utilisent `<Sidebar>` \u2014 tous des pages dans `apps/web/app/` :\n\n- `audit/page.tsx`\n- `billing/page.tsx`\n- `dashboard/page.tsx`\n- `forgot-password/page.tsx`\n- `invite/page.tsx`\n- `login/page.tsx`\n- `members/page.tsx`\n- `notifications/page.tsx`\n- `pricing/page.tsx`\n- `profile/page.tsx`\n- `reports/page.tsx`\n- `sessions/page.tsx`\n- `settings/page.tsx`\n- `signup/page.tsx`\n- `webhooks/page.tsx`\n\nLe composant lui-m\u00eame est d\u00e9fini dans `apps/web/components/Sidebar.tsx`.",
+  "error": null,
+  "score": 0,
+  "max_score": 2,
+  "timestamp": "2026-04-14T21:55:47.637694+00:00"
+}

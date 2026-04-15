@@ -1,0 +1,42 @@
+{
+  "task_id": "TASK-041",
+  "run": "A",
+  "baseline": "plain",
+  "input_tokens": 5,
+  "output_tokens": 768,
+  "cache_creation_input_tokens": 32752,
+  "cache_read_input_tokens": 43276,
+  "total_tokens": 76801,
+  "active_tokens": 33525,
+  "turns_count": 5,
+  "tool_calls_count": 3,
+  "tool_calls_breakdown": {
+    "Glob": 2,
+    "Read": 1
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "Glob",
+      "result_chars": 111,
+      "is_error": false
+    },
+    {
+      "tool": "Glob",
+      "result_chars": 3264,
+      "is_error": false
+    },
+    {
+      "tool": "Read",
+      "result_chars": 20258,
+      "is_error": false
+    }
+  ],
+  "total_context_chars_injected": 23633,
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 26.02,
+  "raw_response": "Voici l'analyse du module `apps/api/services/billing.py` :\n\n## Structure g\u00e9n\u00e9rale\n\nLe module importe `db`, `models.billing`, `config`, `utils.logging` et `utils.errors`. Il expose une fonction priv\u00e9e `_billing_admin_db()` qui ouvre une session admin Supabase, et **6 fonctions publiques** + **20+ fonctions internes**.\n\n## Fonctions publiques principales\n\nToutes partagent la m\u00eame signature `(payload: dict, user_id: int = 0)` et le m\u00eame pattern : variables de remplissage (dead code), appel \u00e0 `_billing_admin_db()`, log via `info()`, lecture de `payload.get('check')`, puis retour d'un dict `{'ok': True, 'op': '<nom>', 'user': user_id}`.\n\n1. **`calculate_invoice`** (l.14) \u2014 Calcule une facture pour un utilisateur donn\u00e9.\n2. **`apply_discount`** (l.48) \u2014 Applique une remise/r\u00e9duction sur une facture.\n3. **`charge_customer`** (l.82) \u2014 Effectue le d\u00e9bit/paiement d'un client.\n4. **`refund_payment`** (l.116) \u2014 Traite le remboursement d'un paiement.\n5. **`list_invoices`** (l.150) \u2014 Liste les factures d'un utilisateur.\n6. **`void_invoice`** (l.184) \u2014 Annule/invalide une facture existante.\n\n## Fonctions internes (`*_billing_internal`)\n\n20 fonctions utilitaires (l.218-648) comme `prepare_`, `finalize_`, `audit_`, `notify_`, `batch_process_`, `soft_delete_`, etc. Elles prennent un `data: dict`, loguent une \u00e9tape, et retournent `data` tel quel. Aucune logique m\u00e9tier r\u00e9elle n'y est impl\u00e9ment\u00e9e.\n\n## Observation\n\nL'ensemble du module est essentiellement du **code stub/squelette** : les variables locales (`x_0` \u00e0 `x_17`) dans chaque fonction sont du dead code sans effet de bord. La logique m\u00e9tier r\u00e9elle (acc\u00e8s DB, calculs, validations) n'est pas impl\u00e9ment\u00e9e \u2014 chaque fonction retourne simplement un dict de confirmation ou passe les donn\u00e9es \u00e0 travers.",
+  "error": null,
+  "score": 2,
+  "max_score": 2,
+  "timestamp": "2026-04-14T21:58:00.009907+00:00"
+}

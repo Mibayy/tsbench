@@ -1,0 +1,61 @@
+{
+  "task_id": "TASK-056",
+  "run": "B",
+  "baseline": "token-savior",
+  "input_tokens": 7,
+  "output_tokens": 1186,
+  "cache_creation_input_tokens": 45310,
+  "cache_read_input_tokens": 175423,
+  "total_tokens": 221926,
+  "active_tokens": 46503,
+  "turns_count": 10,
+  "tool_calls_count": 6,
+  "tool_calls_breakdown": {
+    "mcp__token-savior-recall__switch_project": 1,
+    "mcp__token-savior-recall__memory_search": 1,
+    "mcp__token-savior-recall__get_function_source": 1,
+    "mcp__token-savior-recall__create_checkpoint": 1,
+    "mcp__token-savior-recall__replace_symbol_source": 1,
+    "mcp__token-savior-recall__compare_checkpoint_by_symbol": 1
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "mcp__token-savior-recall__switch_project",
+      "result_chars": 60,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__memory_search",
+      "result_chars": 32,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_function_source",
+      "result_chars": 979,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__create_checkpoint",
+      "result_chars": 89,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__replace_symbol_source",
+      "result_chars": 187,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__compare_checkpoint_by_symbol",
+      "result_chars": 177,
+      "is_error": false
+    }
+  ],
+  "total_context_chars_injected": 1524,
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 26.44,
+  "raw_response": "Les 3 \u00e9tapes sont termin\u00e9es. Voici le r\u00e9sum\u00e9 :\n\n| \u00c9tape | R\u00e9sultat |\n|-------|----------|\n| **1. Checkpoint** | `b36e6a690e68` cr\u00e9\u00e9 pour `apps/api/services/billing.py` |\n| **2. Modification** | Guard `if not payload: raise ValueError(\"empty payload\")` ajout\u00e9 en t\u00eate de `charge_customer` (+2 lignes) |\n| **3. Comparaison** | 1 fichier modifi\u00e9, 1 symbole chang\u00e9 : `charge_customer` (0 ajout\u00e9, 0 supprim\u00e9) |",
+  "error": null,
+  "score": 2,
+  "max_score": 2,
+  "timestamp": "2026-04-15T06:53:41.297362+00:00"
+}

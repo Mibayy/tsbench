@@ -1,0 +1,43 @@
+{
+  "task_id": "TASK-002",
+  "run": "B",
+  "baseline": "token-savior",
+  "input_tokens": 8,
+  "output_tokens": 375,
+  "cache_creation_input_tokens": 10439,
+  "cache_read_input_tokens": 71923,
+  "total_tokens": 82745,
+  "active_tokens": 10822,
+  "turns_count": 5,
+  "tool_calls_count": 3,
+  "tool_calls_breakdown": {
+    "ToolSearch": 1,
+    "mcp__token-savior__switch_project": 1,
+    "mcp__token-savior__get_dependents": 1
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "ToolSearch",
+      "result_chars": 152,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior__switch_project",
+      "result_chars": 60,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior__get_dependents",
+      "result_chars": 328,
+      "is_error": false
+    }
+  ],
+  "total_context_chars_injected": 540,
+  "ts_tool_calls_count": 2,
+  "wall_time_seconds": 17.58,
+  "raw_response": "Voici les 3 fichiers qui appellent `small_util` :\n\n1. `apps/api/callers/caller_lonely_util_00.py` (fonction `do_it_0`)\n2. `apps/api/callers/caller_hub_util_01.py` (fonction `do_it_1`)\n3. `apps/api/callers/caller_hub_util_02.py` (fonction `do_it_2`)",
+  "error": null,
+  "score": 2,
+  "max_score": 2,
+  "timestamp": "2026-04-14T21:37:11.025335+00:00"
+}

@@ -1,0 +1,37 @@
+{
+  "task_id": "TASK-049",
+  "run": "B",
+  "baseline": "token-savior",
+  "input_tokens": 5,
+  "output_tokens": 243,
+  "cache_creation_input_tokens": 4679,
+  "cache_read_input_tokens": 127423,
+  "total_tokens": 132350,
+  "active_tokens": 4927,
+  "turns_count": 4,
+  "tool_calls_count": 2,
+  "tool_calls_breakdown": {
+    "mcp__token-savior-recall__switch_project": 1,
+    "mcp__token-savior-recall__get_call_chain": 1
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "mcp__token-savior-recall__switch_project",
+      "result_chars": 60,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__get_call_chain",
+      "result_chars": 241,
+      "is_error": false
+    }
+  ],
+  "total_context_chars_injected": 301,
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 15.92,
+  "raw_response": "Chemin complet dans `apps/api/chains/alpha.py` :\n\n```\nalpha_entry (L3) \u2192 alpha_middle (L7) \u2192 alpha_inner (L11) \u2192 alpha_leaf (L15)\n```",
+  "error": null,
+  "score": 2,
+  "max_score": 2,
+  "timestamp": "2026-04-15T06:57:24.597580+00:00"
+}

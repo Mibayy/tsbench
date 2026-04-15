@@ -1,0 +1,43 @@
+{
+  "task_id": "TASK-053",
+  "run": "B",
+  "baseline": "token-savior",
+  "input_tokens": 5,
+  "output_tokens": 598,
+  "cache_creation_input_tokens": 6972,
+  "cache_read_input_tokens": 127636,
+  "total_tokens": 135211,
+  "active_tokens": 7575,
+  "turns_count": 6,
+  "tool_calls_count": 3,
+  "tool_calls_breakdown": {
+    "mcp__token-savior-recall__switch_project": 1,
+    "mcp__token-savior-recall__memory_search": 1,
+    "mcp__token-savior-recall__find_semantic_duplicates": 1
+  },
+  "tool_calls_detail": [
+    {
+      "tool": "mcp__token-savior-recall__switch_project",
+      "result_chars": 60,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__memory_search",
+      "result_chars": 32,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__find_semantic_duplicates",
+      "result_chars": 6226,
+      "is_error": false
+    }
+  ],
+  "total_context_chars_injected": 6318,
+  "ts_tool_calls_count": 0,
+  "wall_time_seconds": 28.53,
+  "raw_response": "Aucune vraie paire de doublons s\u00e9mantiques trouv\u00e9e. Les 30 groupes d\u00e9tect\u00e9s sont tous des copies identiques entre les fichiers source et le r\u00e9pertoire `.token-savior-checkpoints/` (sauvegardes automatiques) \u2014 m\u00eame nom, m\u00eame fichier, m\u00eame code.\n\n**R\u00e9sultat : 0 paire de fonctions s\u00e9mantiquement dupliqu\u00e9es** (fonctions avec des noms diff\u00e9rents mais un corps identique apr\u00e8s normalisation AST).\n\nLe projet ne contient pas de fonctions qui font la m\u00eame chose sous des noms diff\u00e9rents.",
+  "error": null,
+  "score": 2,
+  "max_score": 2,
+  "timestamp": "2026-04-15T06:59:40.371272+00:00"
+}
