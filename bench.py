@@ -394,6 +394,29 @@ def f1(expected: set, got: set) -> float:
     return 2 * precision * recall / (precision + recall)
 
 
+def _collect_strings_recursive(obj: object) -> list[str]:
+    """Recursively extract all string values from a nested dict/list structure."""
+    out: list[str] = []
+    if isinstance(obj, str):
+        out.append(obj)
+    elif isinstance(obj, dict):
+        for v in obj.values():
+            out.extend(_collect_strings_recursive(v))
+    elif isinstance(obj, list):
+        for item in obj:
+            out.extend(_collect_strings_recursive(item))
+    return out
+
+
+def _keyword_match(candidate: str, text: str) -> bool:
+    """Check if the main keywords of candidate appear in text (word-level, not substring)."""
+    words = [w.lower() for w in re.split(r"[\s,;:.()\[\]{}/]+", candidate) if len(w) >= 3]
+    if not words:
+        return candidate.lower() in text
+    hits = sum(1 for w in words if w in text)
+    return hits >= len(words) * 0.6
+
+
 def score_response(scoring: str, expected: dict, response: str) -> tuple[int, int]:
     """Return (score, max_score)."""
     max_score = 2
@@ -402,7 +425,6 @@ def score_response(scoring: str, expected: dict, response: str) -> tuple[int, in
     text = response.lower()
 
     if scoring == "exact_match":
-        # Look for file + symbol (+ optionally line)
         exp_file = (expected.get("file") or "").lower()
         exp_symbol = (expected.get("symbol") or expected.get("type") or "").lower()
         has_file = exp_file and exp_file in text
@@ -414,8 +436,6 @@ def score_response(scoring: str, expected: dict, response: str) -> tuple[int, in
         return 0, max_score
 
     if scoring in ("list_f1", "set_match_strict", "set_match_loose"):
-        # Cycle-detection tasks: expected_cycles is list[list[file]].
-        # Each inner list is one cycle. Score = fraction of cycles fully mentioned.
         exp_cycles = expected.get("expected_cycles")
         if exp_cycles:
             cycles_hit = 0
@@ -440,14 +460,28 @@ def score_response(scoring: str, expected: dict, response: str) -> tuple[int, in
                 return 1, max_score
             return 0, max_score
 
-        exp_list = (
-            expected.get("expected_files")
-            or expected.get("expected_breaks")
-            or expected.get("files")
-            or expected.get("items")
-            or expected.get("chain")
-            or []
-        )
+        _known_keys = ("expected_files", "expected_breaks", "files", "items", "chain")
+        exp_list = None
+        for k in _known_keys:
+            exp_list = expected.get(k)
+            if exp_list:
+                break
+
+        if not exp_list:
+            all_strings = _collect_strings_recursive(expected)
+            if all_strings:
+                exp_list = all_strings
+
+        if not exp_list:
+            min_count = expected.get("min_expected_count")
+            if min_count and isinstance(min_count, int):
+                got_files = extract_files(response)
+                if len(got_files) >= min_count:
+                    return 2, max_score
+                if len(got_files) >= min_count * 0.5:
+                    return 1, max_score
+                return 0, max_score
+
         if not exp_list:
             return 0, max_score
         exp_set = {str(x).lower() for x in exp_list}
@@ -458,7 +492,6 @@ def score_response(scoring: str, expected: dict, response: str) -> tuple[int, in
         if hits == 0:
             return 0, max_score
         recall = hits / len(exp_set)
-        # Precision hard to measure from free text; approximate with recall
         if recall >= 0.95:
             return 2, max_score
         if recall >= 0.5:
@@ -466,16 +499,13 @@ def score_response(scoring: str, expected: dict, response: str) -> tuple[int, in
         return 0, max_score
 
     if scoring in ("contains_all", "diff_review", "chain_match", "boolean_with_evidence", "free_form_rubric", "edit_quality", "impact_set"):
-        # Collect candidate expected strings from the dict
-        candidates: list[str] = []
-        for v in expected.values():
-            if isinstance(v, str):
-                candidates.append(v)
-            elif isinstance(v, list):
-                candidates.extend(str(x) for x in v)
+        candidates = _collect_strings_recursive(expected)
         if not candidates:
             return 0, max_score
-        hits = sum(1 for c in candidates if c.lower() in text)
+        if scoring == "boolean_with_evidence":
+            hits = sum(1 for c in candidates if _keyword_match(c, text))
+        else:
+            hits = sum(1 for c in candidates if c.lower() in text)
         ratio = hits / len(candidates)
         if ratio >= 0.9:
             return 2, max_score
