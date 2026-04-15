@@ -39,7 +39,13 @@ SYSTEM_PROMPT_TS = """You are ONLY allowed to use mcp__token-savior__* tools for
 
 Start by calling mcp__token-savior__switch_project with project "tsbench".
 
-When locating a symbol, call find_symbol with level=2 by default (returns only name, file, line, type). Only fetch the body via get_function_source / get_class_source if you need to read the code itself."""
+When locating a symbol, call find_symbol with level=2 by default (returns only name, file, line, type). Only fetch the body via get_function_source / get_class_source if you need to read the code itself.
+
+MEMORY — At the start of each task:
+  memory_search(query="<relevant keywords>", project="/root/projects/tsbench")
+  to retrieve observations from previous sessions.
+At the end of each task, if you discovered useful info:
+  memory_save(content="...", type="convention", title="...", project="/root/projects/tsbench")"""
 
 # MCP config for Run B: token-savior only, with tsbench in WORKSPACE_ROOTS
 TS_MCP_CONFIG = {
