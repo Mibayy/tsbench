@@ -44,7 +44,7 @@ When locating a symbol, call find_symbol with level=2 by default (returns only n
 # MCP config for Run B: token-savior only, with tsbench in WORKSPACE_ROOTS
 TS_MCP_CONFIG = {
     "mcpServers": {
-        "token-savior": {
+        "token-savior-recall": {
             "type": "stdio",
             "command": "/root/.local/token-savior-venv/bin/python",
             "args": ["-m", "token_savior.server"],
@@ -114,6 +114,8 @@ def run_claude(prompt: str, run: str) -> dict:
     # pays 1-2 ToolSearch calls per task to fetch schemas on first use. This
     # removes that overhead entirely (ToolSearch count -> 0).
     env["ENABLE_TOOL_SEARCH"] = "false"
+    if run == "B":
+        env["CLAUDE_PROJECT_ROOT"] = "/root/projects/tsbench"
 
     start = time.time()
     try:
