@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Token Savior Benchmark</title>
-<meta name="description" content="Token Savior benchmark: 60 tasks, real numbers. -81% context injected, 56% to 85% accuracy.">
+<meta name="description" content="Token Savior benchmark: 60 tasks, real numbers. -84% context injected, 56% to 96% accuracy.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap" rel="stylesheet">
@@ -188,7 +188,7 @@ footer p{font-size:.7rem;color:var(--text3)}
 <section class="hero">
   <h1><span class="grad">Less context,</span><br>better answers.</h1>
   <p>Token Savior replaces raw file reads with structural queries. Measured across 60 real coding tasks against baseline Claude Code tools.</p>
-  <div class="meta">Claude Sonnet 4 &middot; April 2026 &middot; tsbench v1.0</div>
+  <div class="meta">Claude Sonnet 4 &middot; April 2026 &middot; tsbench v1.0 &middot; token-savior v2.5.1</div>
 </section>
 
 <!-- STATS -->
@@ -202,7 +202,7 @@ footer p{font-size:.7rem;color:var(--text3)}
     <div class="lbl">Accuracy</div>
   </div>
   <div class="stat">
-    <div class="val" id="c3">0 / 2</div>
+    <div class="val" id="c3">0 / 0</div>
     <div class="lbl">Won / Lost</div>
   </div>
   <div class="stat">
@@ -268,8 +268,8 @@ footer p{font-size:.7rem;color:var(--text3)}
     </div>
     <div class="bar-row">
       <div class="bar-name" style="color:var(--green2)">TS</div>
-      <div class="bar-track"><div class="bar-fill ts anim-bar" data-w="19" style="width:0">272,724</div></div>
-      <div class="bar-val winner">273K</div>
+      <div class="bar-track"><div class="bar-fill ts anim-bar" data-w="16" style="width:0">234,805</div></div>
+      <div class="bar-val winner">235K</div>
     </div>
   </div>
 
@@ -282,8 +282,8 @@ footer p{font-size:.7rem;color:var(--text3)}
     </div>
     <div class="bar-row">
       <div class="bar-name" style="color:var(--green2)">TS</div>
-      <div class="bar-track"><div class="bar-fill ts anim-bar" data-w="85" style="width:0">102 / 120</div></div>
-      <div class="bar-val winner">85%</div>
+      <div class="bar-track"><div class="bar-fill ts anim-bar" data-w="96" style="width:0">115 / 120</div></div>
+      <div class="bar-val winner">96%</div>
     </div>
   </div>
 
@@ -296,8 +296,8 @@ footer p{font-size:.7rem;color:var(--text3)}
     </div>
     <div class="bar-row">
       <div class="bar-name" style="color:var(--green2)">TS</div>
-      <div class="bar-track"><div class="bar-fill ts anim-bar" data-w="69" style="width:0">506</div></div>
-      <div class="bar-val winner">506</div>
+      <div class="bar-track"><div class="bar-fill ts anim-bar" data-w="59" style="width:0">435</div></div>
+      <div class="bar-val winner">435</div>
     </div>
   </div>
 </section>
@@ -321,7 +321,7 @@ footer p{font-size:.7rem;color:var(--text3)}
     <div class="step">
       <div class="step-n">Step 3</div>
       <h3>Result</h3>
-      <p>81% fewer characters but better-structured information. The signal-to-noise ratio improves, and accuracy goes up.</p>
+      <p>84% fewer characters but better-structured information. The signal-to-noise ratio improves, and accuracy jumps from 56% to 96%.</p>
     </div>
   </div>
 </section>
@@ -356,19 +356,19 @@ footer p{font-size:.7rem;color:var(--text3)}
   <div class="limits-list">
     <div class="limit-item">
       <div class="limit-icon">!</div>
-      <div class="limit-text"><strong>MCP overhead on micro-tasks.</strong> Each TS call adds ~4K tokens of MCP schema. For tasks needing a single Grep, the fixed cost makes Run B more expensive. 5 tasks affected.</div>
+      <div class="limit-text"><strong>active_tokens +29% cumulés.</strong> The 84% chars reduction is offset by the MCP schema cache_creation cost. TS still wins active on 28/59 tasks (heavy_read, audit, impact, navigation), but loses on micro-tasks where the fixed schema cost dominates.</div>
     </div>
     <div class="limit-item">
       <div class="limit-icon">!</div>
-      <div class="limit-text"><strong>2 tasks lost on score.</strong> TASK-014 (impact) and TASK-026 (dead code) score 0/2 with TS vs 2/2 baseline. Different tool outputs surfaced different symbols.</div>
+      <div class="limit-text"><strong>call_chain category +88% wall time.</strong> Structural <code>get_call_chain</code> queries are slower per-call than Grep heuristics. Score still climbs from 5/8 to 8/8, so the trade-off is correctness over latency.</div>
     </div>
     <div class="limit-item">
       <div class="limit-icon">!</div>
-      <div class="limit-text"><strong>Simple lookups are slower.</strong> Single-symbol localisation is ~40% slower due to MCP round-trip latency: <code>switch_project</code> + <code>find_symbol</code> ~6s vs one Grep at ~3s.</div>
+      <div class="limit-text"><strong>Simple localisation +24% wall.</strong> Single-symbol lookups pay MCP round-trip latency: <code>switch_project</code> + <code>find_symbol</code> ~6s vs one Grep at ~3s. Score still improves (1.17 → 1.83) thanks to fewer false negatives.</div>
     </div>
     <div class="limit-item">
       <div class="limit-icon">!</div>
-      <div class="limit-text"><strong>active_tokens only -3.6%.</strong> The 81% chars reduction is diluted by cache_creation (MCP schema). Real savings show on heavy-read and audit tasks where raw file dumps dominate.</div>
+      <div class="limit-text"><strong>0 net score regressions.</strong> TS wins 32 tasks, ties 28, loses 0. 21 tasks are flat-out impossible without TS (score 0/2 baseline → ≥1/2 with TS), spanning config, infra, audit, debug, cross-language.</div>
     </div>
   </div>
 </section>
@@ -385,7 +385,7 @@ footer p{font-size:.7rem;color:var(--text3)}
 
 </div>
 
-<footer><p>Built with Claude Code &middot; Token Savior v2.4.0</p></footer>
+<footer><p>Built with Claude Code &middot; Token Savior v2.5.1</p></footer>
 
 <script>
 // ── COUNTER ANIMATIONS ──
@@ -405,10 +405,10 @@ let statsAnimated = false;
 function fireCounters() {
   if (statsAnimated) return;
   statsAnimated = true;
-  animateValue(document.getElementById('c1'), 0, 81, '-', '%', 1200);
-  animateValue(document.getElementById('c2'), 56, 85, '', '%', 1200);
-  animateValue(document.getElementById('c3'), 0, 27, '', ' / 2', 1200);
-  animateValue(document.getElementById('c4'), 0, 12, '', '', 1000);
+  animateValue(document.getElementById('c1'), 0, 84, '-', '%', 1200);
+  animateValue(document.getElementById('c2'), 56, 96, '', '%', 1200);
+  animateValue(document.getElementById('c3'), 0, 32, '', ' / 0', 1200);
+  animateValue(document.getElementById('c4'), 0, 21, '', '', 1000);
 }
 const statsObs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) fireCounters(); });
@@ -441,21 +441,21 @@ setTimeout(() => {
 // ── CATEGORY TABLE ──
 const cats = [
   { c:"heavy_read",n:6,sa:"9/12",sb:"12/12",wa:"51.8s",wb:"29.8s",aA:"124K",aB:"63K",chA:"310K",chB:"48K" },
-  { c:"testing",n:3,sa:"2/6",sb:"6/6",wa:"28.4s",wb:"23.1s",aA:"55K",aB:"31K",chA:"4.8K",chB:"0.8K" },
+  { c:"testing",n:3,sa:"2/6",sb:"6/6",wa:"28.4s",wb:"23.1s",aA:"55K",aB:"31K",chA:"4.8K",chB:"0.9K" },
   { c:"config",n:3,sa:"0/6",sb:"6/6",wa:"25.4s",wb:"30.3s",aA:"30K",aB:"48K",chA:"5.2K",chB:"21K" },
   { c:"cross-lang",n:2,sa:"0/4",sb:"4/4",wa:"26.9s",wb:"26.4s",aA:"20K",aB:"20K",chA:"2.0K",chB:"6.3K" },
-  { c:"navigation",n:4,sa:"5/8",sb:"7/8",wa:"34.3s",wb:"24.8s",aA:"96K",aB:"23K",chA:"69K",chB:"8.5K" },
+  { c:"navigation",n:4,sa:"5/8",sb:"8/8",wa:"34.3s",wb:"20.2s",aA:"96K",aB:"36K",chA:"69K",chB:"7.4K" },
   { c:"call_chain",n:4,sa:"5/8",sb:"8/8",wa:"13.7s",wb:"25.7s",aA:"50K",aB:"79K",chA:"4.8K",chB:"2.2K" },
   { c:"git",n:2,sa:"4/4",sb:"4/4",wa:"79.3s",wb:"22.1s",aA:"24K",aB:"13K",chA:"12K",chB:"9.5K" },
   { c:"dependants",n:4,sa:"8/8",sb:"8/8",wa:"11.1s",wb:"19.0s",aA:"94K",aB:"56K",chA:"23K",chB:"3.0K" },
-  { c:"audit",n:6,sa:"8/12",sb:"9/12",wa:"110.3s",wb:"38.9s",aA:"116K",aB:"80K",chA:"796K",chB:"45K" },
-  { c:"edit",n:7,sa:"12/14",sb:"12/14",wa:"87.5s",wb:"64.1s",aA:"130K",aB:"220K",chA:"69K",chB:"38K" },
-  { c:"impact",n:3,sa:"2/6",sb:"3/6",wa:"50.9s",wb:"21.2s",aA:"70K",aB:"39K",chA:"13K",chB:"2.2K" },
-  { c:"debug",n:3,sa:"3/6",sb:"5/6",wa:"47.0s",wb:"47.5s",aA:"44K",aB:"43K",chA:"128K",chB:"35K" },
-  { c:"review",n:3,sa:"2/6",sb:"4/6",wa:"94.3s",wb:"32.3s",aA:"35K",aB:"49K",chA:"58K",chB:"30K" },
-  { c:"onboarding",n:2,sa:"0/4",sb:"2/4",wa:"43.6s",wb:"31.2s",aA:"30K",aB:"23K",chA:"47K",chB:"10K" },
-  { c:"infra",n:2,sa:"0/4",sb:"2/4",wa:"57.0s",wb:"30.9s",aA:"29K",aB:"29K",chA:"2.9K",chB:"7.3K" },
-  { c:"localisation",n:6,sa:"7/12",sb:"10/12",wa:"14.9s",wb:"18.2s",aA:"84K",aB:"177K",chA:"7.0K",chB:"5.7K" },
+  { c:"audit",n:6,sa:"8/12",sb:"11/12",wa:"110.3s",wb:"32.5s",aA:"116K",aB:"81K",chA:"626K",chB:"50K" },
+  { c:"edit",n:7,sa:"12/14",sb:"14/14",wa:"87.5s",wb:"46.0s",aA:"130K",aB:"391K",chA:"69K",chB:"25K" },
+  { c:"impact",n:3,sa:"2/6",sb:"6/6",wa:"50.9s",wb:"18.5s",aA:"70K",aB:"38K",chA:"13K",chB:"1.6K" },
+  { c:"debug",n:3,sa:"3/6",sb:"6/6",wa:"47.0s",wb:"30.7s",aA:"44K",aB:"94K",chA:"128K",chB:"18K" },
+  { c:"review",n:3,sa:"2/6",sb:"5/6",wa:"94.3s",wb:"22.6s",aA:"35K",aB:"40K",chA:"58K",chB:"5.4K" },
+  { c:"onboarding",n:2,sa:"0/4",sb:"2/4",wa:"43.6s",wb:"28.9s",aA:"30K",aB:"45K",chA:"47K",chB:"12K" },
+  { c:"infra",n:2,sa:"0/4",sb:"4/4",wa:"57.0s",wb:"39.3s",aA:"29K",aB:"46K",chA:"2.9K",chB:"23K" },
+  { c:"localisation",n:6,sa:"7/12",sb:"11/12",wa:"14.9s",wb:"18.5s",aA:"84K",aB:"249K",chA:"7.0K",chB:"8.1K" },
 ];
 
 function ps(s){const p=s.split('/');return parseInt(p[0])/parseInt(p[1])}
