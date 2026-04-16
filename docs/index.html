@@ -3,191 +3,178 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Token Savior - Benchmark Results</title>
+<title>Token Savior Benchmark</title>
 <meta name="description" content="Token Savior benchmark: 60 tasks, real numbers. -81% context injected, 56% to 85% accuracy.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&family=Geist+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#09090b;--surface:#111114;--surface2:#18181b;--border:#27272a;
-  --text:#fafafa;--text2:#a1a1aa;--muted:#52525b;
-  --accent:#8b5cf6;--accent2:#a78bfa;--accent-glow:rgba(139,92,246,.15);
-  --green:#10b981;--green2:#34d399;--red:#ef4444;--amber:#f59e0b;
-  --radius:16px;
+  --bg:#0c0c0d;--bg2:#141415;--surface:#1a1a1c;--surface2:#222224;
+  --border:#2a2a2d;--border2:#333336;
+  --text:#ededed;--text2:#888;--text3:#555;
+  --purple:#8b5cf6;--purple2:#a78bfa;--purple-bg:rgba(139,92,246,.08);
+  --green:#22c55e;--green2:#4ade80;--green-bg:rgba(34,197,94,.06);
+  --red:#ef4444;--red2:#f87171;--red-bg:rgba(239,68,68,.06);
+  --amber:#eab308;
 }
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'Space Mono',monospace;line-height:1.7;-webkit-font-smoothing:antialiased}
-.container{max-width:1040px;margin:0 auto;padding:0 24px}
-a{color:var(--accent2);text-decoration:none;transition:color .2s}
-a:hover{color:var(--text)}
-
-/* Animations */
-@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes slideRight{from{width:0}to{width:var(--target)}}
-@keyframes glow{0%,100%{opacity:.4}50%{opacity:1}}
-.fade-up{opacity:0;animation:fadeUp .8s ease forwards}
-.fade-up.d1{animation-delay:.1s}.fade-up.d2{animation-delay:.2s}
-.fade-up.d3{animation-delay:.3s}.fade-up.d4{animation-delay:.4s}
-.fade-up.d5{animation-delay:.5s}.fade-up.d6{animation-delay:.6s}
-
-/* Intersection observer driven */
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--bg);color:var(--text);font-family:'Geist',system-ui,-apple-system,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+.w{max-width:720px;margin:0 auto;padding:0 20px}
+a{color:var(--purple2);text-decoration:none}
+a:hover{text-decoration:underline}
+code{font-family:'Geist Mono',monospace;font-size:.85em;background:var(--surface);border:1px solid var(--border);padding:1px 5px;border-radius:4px}
 
 /* ── NAV ── */
-nav{position:fixed;top:0;width:100%;z-index:100;padding:16px 0;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);background:rgba(9,9,11,.7);border-bottom:1px solid transparent;transition:border-color .3s}
-nav.scrolled{border-bottom-color:var(--border)}
-nav .inner{display:flex;justify-content:space-between;align-items:center;max-width:1040px;margin:0 auto;padding:0 24px}
-nav .logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;letter-spacing:-0.5px}
-nav .links{display:flex;gap:24px}
-nav .links a{color:var(--text2);font-size:.7rem;text-transform:uppercase;letter-spacing:1.5px;transition:color .2s}
+nav{position:sticky;top:0;z-index:50;background:rgba(12,12,13,.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 20px}
+nav .inner{max-width:720px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:48px}
+nav .mark{font-weight:700;font-size:.875rem;letter-spacing:-.02em}
+nav .links{display:flex;gap:20px}
+nav .links a{color:var(--text2);font-size:.8rem;text-decoration:none;transition:color .15s}
 nav .links a:hover{color:var(--text)}
 
 /* ── HERO ── */
-.hero{padding:140px 0 80px;text-align:center;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(139,92,246,.08) 0%,transparent 70%);pointer-events:none}
-.hero .badge{display:inline-block;padding:6px 16px;border-radius:100px;background:var(--accent-glow);border:1px solid rgba(139,92,246,.2);font-size:.65rem;color:var(--accent2);text-transform:uppercase;letter-spacing:2px;margin-bottom:24px}
-.hero h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2.8rem,7vw,5rem);letter-spacing:-3px;line-height:1;margin-bottom:16px;background:linear-gradient(135deg,#fff 0%,#a78bfa 50%,#8b5cf6 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero .sub{color:var(--text2);font-size:.85rem;max-width:480px;margin:0 auto;line-height:1.8}
-.hero .sub strong{color:var(--text)}
+.hero{padding:80px 0 48px;border-bottom:1px solid var(--border)}
+.hero h1{font-size:clamp(2rem,5.5vw,3.2rem);font-weight:900;letter-spacing:-.04em;line-height:1.1;margin-bottom:12px}
+.hero h1 .grad{background:linear-gradient(135deg,var(--purple) 0%,var(--purple2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{color:var(--text2);font-size:.95rem;line-height:1.7;max-width:520px}
+.hero .meta{margin-top:16px;font-size:.75rem;color:var(--text3);font-family:'Geist Mono',monospace}
 
-/* ── METRICS GRID ── */
-.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-radius:var(--radius);overflow:hidden;margin:64px 0}
-.metric{background:var(--surface);padding:40px 24px;text-align:center;position:relative;transition:background .3s}
-.metric:hover{background:var(--surface2)}
-.metric .number{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2rem,4vw,3rem);line-height:1;margin-bottom:8px}
-.metric .number .counter{display:inline-block}
-.metric .number .unit{font-size:.6em;color:var(--accent2)}
-.metric .number.purple{color:var(--accent2)}
-.metric .number.green{color:var(--green2)}
-.metric .number.white{color:var(--text)}
-.metric .label{font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:2px;line-height:1.4}
-.metric::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:0;height:2px;background:var(--accent);transition:width .3s}
-.metric:hover::after{width:60%}
+/* ── STATS ROW ── */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--border)}
+.stat{padding:28px 0;text-align:center;border-right:1px solid var(--border)}
+.stat:last-child{border-right:none}
+.stat .val{font-size:clamp(1.5rem,3.5vw,2rem);font-weight:800;letter-spacing:-.03em;line-height:1}
+.stat .val.purple{color:var(--purple2)}
+.stat .val.green{color:var(--green2)}
+.stat .lbl{font-size:.7rem;color:var(--text3);margin-top:6px;text-transform:uppercase;letter-spacing:.06em}
+
+/* ── SECTION TITLES ── */
+.section{padding:48px 0;border-bottom:1px solid var(--border)}
+.section:last-of-type{border-bottom:none}
+.stitle{font-size:.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;font-weight:500}
+.sh{font-size:1.25rem;font-weight:700;letter-spacing:-.02em;margin-bottom:20px}
+
+/* ── HORIZONTAL BAR CHARTS (Bun-style) ── */
+.bench-group{margin-bottom:28px}
+.bench-group .bench-label{font-size:.75rem;color:var(--text2);margin-bottom:8px;display:flex;justify-content:space-between;align-items:baseline}
+.bench-group .bench-label .bench-desc{color:var(--text3);font-size:.7rem}
+.bar-row{display:flex;align-items:center;gap:10px;margin-bottom:5px;height:28px}
+.bar-row .bar-name{width:90px;font-size:.7rem;color:var(--text2);text-align:right;flex-shrink:0;font-family:'Geist Mono',monospace}
+.bar-row .bar-track{flex:1;height:22px;background:var(--surface);border-radius:4px;overflow:hidden;position:relative}
+.bar-row .bar-fill{height:100%;border-radius:4px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:.65rem;font-weight:600;color:rgba(255,255,255,.9);min-width:fit-content;transition:width 1s cubic-bezier(.16,1,.3,1)}
+.bar-fill.baseline{background:var(--red);background:linear-gradient(90deg,#dc2626,var(--red2))}
+.bar-fill.ts{background:var(--green);background:linear-gradient(90deg,#16a34a,var(--green2))}
+.bar-row .bar-val{width:80px;font-size:.7rem;color:var(--text2);font-family:'Geist Mono',monospace;flex-shrink:0}
+.bar-row .winner{font-weight:700;color:var(--green2)}
 
 /* ── HERO CASE ── */
-.hero-case{margin:80px 0;padding:48px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);position:relative;overflow:hidden}
-.hero-case::before{content:'';position:absolute;top:0;right:0;width:300px;height:300px;background:radial-gradient(circle,rgba(16,185,129,.06) 0%,transparent 70%);pointer-events:none}
-.hero-case .tag{font-size:.6rem;color:var(--green);text-transform:uppercase;letter-spacing:2px;margin-bottom:8px}
-.hero-case h2{font-family:'Syne',sans-serif;font-weight:700;font-size:1.5rem;margin-bottom:8px;letter-spacing:-0.5px}
-.hero-case .desc{font-size:.8rem;color:var(--text2);margin-bottom:32px}
-.comparison{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:32px}
-.side{padding:24px;border-radius:12px;position:relative}
-.side.a{background:rgba(239,68,68,.04);border:1px solid rgba(239,68,68,.12)}
-.side.b{background:rgba(16,185,129,.04);border:1px solid rgba(16,185,129,.12)}
-.side .side-label{font-size:.6rem;text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;display:flex;align-items:center;gap:6px}
-.side.a .side-label{color:var(--red)}
-.side.b .side-label{color:var(--green)}
-.side .side-label .dot{width:6px;height:6px;border-radius:50%;display:inline-block}
-.side.a .dot{background:var(--red)}
-.side.b .dot{background:var(--green)}
-.side .stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.side .stat-value{font-family:'Syne',sans-serif;font-weight:700;font-size:1.3rem;color:var(--text)}
-.side .stat-key{font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+.case{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:24px;margin-top:8px}
+.case .case-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;flex-wrap:wrap;gap:8px}
+.case .case-tag{font-size:.65rem;font-weight:600;color:var(--green);text-transform:uppercase;letter-spacing:.08em;background:var(--green-bg);border:1px solid rgba(34,197,94,.15);padding:3px 8px;border-radius:4px}
+.case .case-title{font-size:1rem;font-weight:700;margin-top:4px}
+.case .case-desc{font-size:.8rem;color:var(--text2);margin-bottom:20px}
+.case .case-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.case .side{padding:16px;border-radius:6px}
+.case .side-a{background:var(--red-bg);border:1px solid rgba(239,68,68,.1)}
+.case .side-b{background:var(--green-bg);border:1px solid rgba(34,197,94,.1)}
+.case .side-tag{font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+.side-a .side-tag{color:var(--red2)}
+.side-b .side-tag{color:var(--green2)}
+.case .side dl{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px}
+.case .side dt{font-size:.6rem;color:var(--text3);text-transform:uppercase;letter-spacing:.05em}
+.case .side dd{font-size:1rem;font-weight:700;margin:0 0 4px}
 
-.bars{display:flex;flex-direction:column;gap:16px}
-.bar-row{display:flex;align-items:center;gap:16px}
-.bar-name{font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;width:80px;flex-shrink:0;text-align:right}
-.bar-tracks{flex:1;display:flex;flex-direction:column;gap:4px}
-.bar-track{height:10px;background:var(--surface2);border-radius:5px;overflow:hidden;position:relative}
-.bar-fill{height:100%;border-radius:5px;transition:width 1.2s cubic-bezier(.22,1,.36,1)}
-.bar-fill.a{background:linear-gradient(90deg,var(--red),#f87171)}
-.bar-fill.b{background:linear-gradient(90deg,var(--green),var(--green2))}
-.bar-nums{font-size:.6rem;color:var(--text2);width:90px;flex-shrink:0;text-align:left}
-
-/* ── HOW IT WORKS ── */
-.how{margin:80px 0}
-.how h2{font-family:'Syne',sans-serif;font-weight:700;font-size:1.5rem;text-align:center;margin-bottom:48px;letter-spacing:-0.5px}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-radius:var(--radius);overflow:hidden}
-.step{background:var(--surface);padding:36px 28px;position:relative}
-.step:hover{background:var(--surface2)}
-.step .step-num{font-family:'Syne',sans-serif;font-weight:800;font-size:2.5rem;color:var(--accent);opacity:.3;position:absolute;top:16px;right:20px}
-.step h3{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;margin-bottom:8px;letter-spacing:-0.3px}
-.step p{font-size:.75rem;color:var(--text2);line-height:1.7}
-.step code{background:var(--surface2);border:1px solid var(--border);padding:2px 6px;border-radius:4px;font-size:.7rem;color:var(--accent2)}
+/* ── HOW ── */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-radius:8px;overflow:hidden}
+.step{background:var(--bg2);padding:24px 20px}
+.step .step-n{font-size:.65rem;font-weight:600;color:var(--purple);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+.step h3{font-size:.9rem;font-weight:700;margin-bottom:6px}
+.step p{font-size:.8rem;color:var(--text2);line-height:1.6}
 
 /* ── CATEGORY TABLE ── */
-.categories{margin:80px 0}
-.categories h2{font-family:'Syne',sans-serif;font-weight:700;font-size:1.5rem;text-align:center;margin-bottom:12px;letter-spacing:-0.5px}
-.categories .sub{text-align:center;font-size:.75rem;color:var(--text2);margin-bottom:36px}
-.cat-grid{display:flex;flex-direction:column;gap:1px;background:var(--border);border-radius:var(--radius);overflow:hidden}
-.cat-header{display:grid;grid-template-columns:140px 50px 70px 70px 80px 1fr;gap:0;padding:12px 20px;background:var(--surface);font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px}
-.cat-row{display:grid;grid-template-columns:140px 50px 70px 70px 80px 1fr;gap:0;padding:14px 20px;background:var(--surface);cursor:pointer;transition:background .2s;align-items:center}
-.cat-row:hover{background:var(--surface2)}
-.cat-row .name{font-weight:700;font-size:.8rem}
-.cat-row .n{font-size:.75rem;color:var(--text2)}
-.cat-row .score{font-family:'Syne',sans-serif;font-weight:700;font-size:.85rem}
-.cat-row .delta{font-size:.75rem;font-weight:700}
-.cat-row .delta.pos{color:var(--green)}
-.cat-row .delta.neg{color:var(--red)}
-.cat-row .delta.zero{color:var(--muted)}
-.cat-row .bar-mini{height:6px;background:var(--surface2);border-radius:3px;overflow:hidden;position:relative}
-.cat-row .bar-mini-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+.cat-table{width:100%;border-collapse:collapse;font-size:.8rem}
+.cat-table thead th{text-align:left;padding:8px 6px;font-size:.65rem;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;font-weight:500;border-bottom:1px solid var(--border)}
+.cat-table thead th:not(:first-child){text-align:right}
+.cat-table tbody td{padding:10px 6px;border-bottom:1px solid var(--border);vertical-align:middle}
+.cat-table tbody td:not(:first-child){text-align:right;font-family:'Geist Mono',monospace;font-size:.75rem}
+.cat-table tbody tr:hover{background:var(--surface)}
+.cat-table .cat-name{font-weight:600}
+.cat-table .pos{color:var(--green2)}
+.cat-table .neg{color:var(--red2)}
+.cat-table .eq{color:var(--text3)}
+.cat-table .score-b{font-weight:700}
+/* mini bar inside table */
+.mini-bar{display:inline-block;height:4px;border-radius:2px;vertical-align:middle;margin-right:6px}
+.mini-bar-a{background:var(--red)}
+.mini-bar-b{background:var(--green)}
 
-.cat-details{max-height:0;overflow:hidden;transition:max-height .4s ease;background:var(--bg)}
-.cat-details.open{max-height:600px}
-.cat-details-inner{padding:16px 20px;font-size:.7rem;color:var(--text2);line-height:1.8}
-.cat-details-inner .detail-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.cat-details-inner .detail-item .dv{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;color:var(--text)}
-.cat-details-inner .detail-item .dk{font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+/* expandable details */
+.cat-details{display:none;background:var(--bg2);padding:12px 6px 12px 20px}
+.cat-details.open{display:table-row}
+.cat-details td{padding:8px 6px;font-size:.7rem;color:var(--text2);border-bottom:1px solid var(--border)}
+.detail-grid{display:flex;gap:24px;flex-wrap:wrap}
+.detail-grid .di{min-width:100px}
+.detail-grid .dv{font-family:'Geist Mono',monospace;font-weight:600;color:var(--text);font-size:.8rem}
+.detail-grid .dk{font-size:.6rem;color:var(--text3);text-transform:uppercase;letter-spacing:.05em}
 
 /* ── LIMITS ── */
-.limits{margin:80px 0}
-.limits h2{font-family:'Syne',sans-serif;font-weight:700;font-size:1.5rem;text-align:center;margin-bottom:36px;letter-spacing:-0.5px}
-.limits-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border-radius:var(--radius);overflow:hidden}
-.limit-card{background:var(--surface);padding:28px 24px}
-.limit-card h3{font-size:.8rem;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px}
-.limit-card h3 .icon{color:var(--amber);font-size:1rem}
-.limit-card p{font-size:.7rem;color:var(--text2);line-height:1.7}
+.limits-list{display:flex;flex-direction:column;gap:0}
+.limit-item{padding:16px 0;border-bottom:1px solid var(--border);display:flex;gap:12px;align-items:flex-start}
+.limit-item:last-child{border-bottom:none}
+.limit-icon{color:var(--amber);font-size:.7rem;font-weight:700;background:rgba(234,179,8,.1);border:1px solid rgba(234,179,8,.15);padding:2px 6px;border-radius:4px;flex-shrink:0;margin-top:2px;font-family:'Geist Mono',monospace}
+.limit-text{font-size:.8rem;color:var(--text2);line-height:1.6}
+.limit-text strong{color:var(--text);font-weight:600}
 
 /* ── CTA ── */
-.cta{text-align:center;margin:80px 0;padding:64px 24px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);position:relative;overflow:hidden}
-.cta::before{content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:400px;height:400px;background:radial-gradient(circle,rgba(139,92,246,.1) 0%,transparent 60%);pointer-events:none}
-.cta h2{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.5rem,4vw,2.2rem);margin-bottom:12px;letter-spacing:-1px}
-.cta p{font-size:.8rem;color:var(--text2);margin-bottom:28px}
-.cta .buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:10px;font-family:'Space Mono',monospace;font-size:.75rem;font-weight:700;text-decoration:none;transition:all .2s}
-.btn-primary{background:var(--accent);color:#fff;border:1px solid var(--accent)}
-.btn-primary:hover{background:#7c3aed;color:#fff;transform:translateY(-1px);box-shadow:0 8px 24px rgba(139,92,246,.25)}
-.btn-ghost{background:transparent;color:var(--text2);border:1px solid var(--border)}
-.btn-ghost:hover{color:var(--text);border-color:var(--muted);transform:translateY(-1px)}
+.cta{text-align:center;padding:48px 0 64px}
+.cta h2{font-size:1.5rem;font-weight:800;letter-spacing:-.03em;margin-bottom:8px}
+.cta p{color:var(--text2);font-size:.85rem;margin-bottom:24px}
+.cta .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border-radius:6px;font-family:'Geist',sans-serif;font-size:.8rem;font-weight:600;text-decoration:none;transition:all .15s}
+.btn-p{background:var(--purple);color:#fff}
+.btn-p:hover{background:#7c3aed;text-decoration:none;transform:translateY(-1px)}
+.btn-s{background:transparent;color:var(--text2);border:1px solid var(--border)}
+.btn-s:hover{color:var(--text);border-color:var(--text3);text-decoration:none;transform:translateY(-1px)}
 
 /* ── FOOTER ── */
-footer{padding:40px 0;border-top:1px solid var(--border);text-align:center}
-footer p{font-size:.65rem;color:var(--muted)}
-footer a{color:var(--muted)}
-footer a:hover{color:var(--text2)}
+footer{border-top:1px solid var(--border);padding:24px 0;text-align:center}
+footer p{font-size:.7rem;color:var(--text3)}
 
 /* ── RESPONSIVE ── */
-@media(max-width:768px){
-  .metrics{grid-template-columns:repeat(2,1fr)}
-  .comparison{grid-template-columns:1fr}
+@media(max-width:640px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .stat:nth-child(2){border-right:none}
+  .stat:nth-child(1),.stat:nth-child(2){border-bottom:1px solid var(--border)}
   .steps{grid-template-columns:1fr}
-  .limits-grid{grid-template-columns:1fr}
-  .cat-header,.cat-row{grid-template-columns:100px 40px 60px 60px 60px 1fr;padding:10px 12px;font-size:.65rem}
-  .hero{padding:120px 0 60px}
+  .case .case-grid{grid-template-columns:1fr}
+  .bar-row .bar-name{width:64px;font-size:.6rem}
+  .bar-row .bar-val{width:60px;font-size:.6rem}
+  nav .links{gap:12px}
+  nav .links a{font-size:.7rem}
+  .hero{padding:48px 0 32px}
+  .section{padding:32px 0}
+  .cat-table{font-size:.7rem}
+  .cat-table thead th,.cat-table tbody td{padding:8px 4px}
+  .cat-table .hide-mobile{display:none}
 }
-@media(max-width:480px){
-  .metrics{grid-template-columns:1fr 1fr}
-  .metric{padding:24px 16px}
-  .metric .number{font-size:1.8rem}
-  .bar-name{width:60px;font-size:.55rem}
-  .bar-nums{width:70px;font-size:.55rem}
+@media(max-width:380px){
+  .stats{grid-template-columns:1fr 1fr}
+  .stat{padding:20px 0}
+  .stat .val{font-size:1.3rem}
+  nav .links a:nth-child(n+3){display:none}
 }
 </style>
 </head>
 <body>
 
-<!-- Nav -->
-<nav id="nav">
+<nav>
   <div class="inner">
-    <div class="logo">token-savior</div>
+    <div class="mark">token-savior</div>
     <div class="links">
-      <a href="#metrics">Results</a>
-      <a href="#hero-case">Hero Case</a>
+      <a href="#results">Results</a>
+      <a href="#case">Hero Case</a>
       <a href="#how">How</a>
       <a href="#categories">Categories</a>
       <a href="#limits">Limits</a>
@@ -195,292 +182,304 @@ footer a:hover{color:var(--text2)}
   </div>
 </nav>
 
-<!-- Hero -->
+<div class="w">
+
+<!-- HERO -->
 <section class="hero">
-  <div class="container">
-    <div class="badge fade-up">Benchmark v1.0</div>
-    <h1 class="fade-up d1">Token Savior</h1>
-    <p class="sub fade-up d2">
-      Measured across <strong>60 tasks</strong>. Real numbers.<br>
-      Claude Sonnet 4 &middot; April 2026
-    </p>
-  </div>
+  <h1><span class="grad">Less context,</span><br>better answers.</h1>
+  <p>Token Savior replaces raw file reads with structural queries. Measured across 60 real coding tasks against baseline Claude Code tools.</p>
+  <div class="meta">Claude Sonnet 4 &middot; April 2026 &middot; tsbench v1.0</div>
 </section>
 
-<!-- Key Metrics -->
-<section class="container" id="metrics">
-  <div class="metrics">
-    <div class="metric reveal">
-      <div class="number green"><span class="counter" data-target="81" data-prefix="-">0</span><span class="unit">%</span></div>
-      <div class="label">Chars injected<br>into context</div>
-    </div>
-    <div class="metric reveal">
-      <div class="number purple"><span class="counter" data-target="85" data-from="56">56</span><span class="unit">%</span></div>
-      <div class="label">Accuracy<br>(from 56%)</div>
-    </div>
-    <div class="metric reveal">
-      <div class="number white"><span class="counter" data-target="27">0</span> <span class="unit">/ 2</span></div>
-      <div class="label">Tasks won<br>vs lost</div>
-    </div>
-    <div class="metric reveal">
-      <div class="number green"><span class="counter" data-target="12">0</span></div>
-      <div class="label">Tasks impossible<br>without TS</div>
-    </div>
+<!-- STATS -->
+<div class="stats" id="results">
+  <div class="stat">
+    <div class="val green" id="c1">0%</div>
+    <div class="lbl">Chars injected</div>
   </div>
-</section>
+  <div class="stat">
+    <div class="val purple" id="c2">56%</div>
+    <div class="lbl">Accuracy</div>
+  </div>
+  <div class="stat">
+    <div class="val" id="c3">0 / 2</div>
+    <div class="lbl">Won / Lost</div>
+  </div>
+  <div class="stat">
+    <div class="val green" id="c4">0</div>
+    <div class="lbl">Impossible w/o TS</div>
+  </div>
+</div>
 
-<!-- Hero Case -->
-<section class="container" id="hero-case">
-  <div class="hero-case reveal">
-    <div class="tag">Best improvement</div>
-    <h2>TASK-043 &mdash; Heavy Read</h2>
-    <p class="desc">Read all functions from 6 large files and summarize architecture patterns.</p>
-    <div class="comparison">
-      <div class="side a">
-        <div class="side-label"><span class="dot"></span> Baseline (Run A)</div>
-        <div class="stats">
-          <div><div class="stat-value">197K</div><div class="stat-key">Chars</div></div>
-          <div><div class="stat-value">159s</div><div class="stat-key">Wall time</div></div>
-          <div><div class="stat-value">13</div><div class="stat-key">Read calls</div></div>
-          <div><div class="stat-value">1/2</div><div class="stat-key">Score</div></div>
-        </div>
+<!-- HERO CASE -->
+<section class="section" id="case">
+  <div class="stitle">Best improvement</div>
+  <h2 class="sh">TASK-043: Heavy Read</h2>
+
+  <div class="case">
+    <div class="case-desc">Read all functions from 6 large files and summarize architecture patterns.</div>
+    <div class="case-grid">
+      <div class="side side-a">
+        <div class="side-tag">Baseline (Run A)</div>
+        <dl>
+          <dt>Chars</dt><dd>196,882</dd>
+          <dt>Time</dt><dd>159.2s</dd>
+          <dt>Calls</dt><dd>13 Reads</dd>
+          <dt>Score</dt><dd>1/2</dd>
+        </dl>
       </div>
-      <div class="side b">
-        <div class="side-label"><span class="dot"></span> Token Savior (Run B)</div>
-        <div class="stats">
-          <div><div class="stat-value">16K</div><div class="stat-key">Chars</div></div>
-          <div><div class="stat-value">43s</div><div class="stat-key">Wall time</div></div>
-          <div><div class="stat-value">6</div><div class="stat-key">Tool calls</div></div>
-          <div><div class="stat-value">2/2</div><div class="stat-key">Score</div></div>
-        </div>
+      <div class="side side-b">
+        <div class="side-tag">Token Savior (Run B)</div>
+        <dl>
+          <dt>Chars</dt><dd>16,416</dd>
+          <dt>Time</dt><dd>42.9s</dd>
+          <dt>Calls</dt><dd>6 queries</dd>
+          <dt>Score</dt><dd>2/2</dd>
+        </dl>
       </div>
     </div>
-    <div class="bars">
+
+    <div class="bench-group">
       <div class="bar-row">
-        <div class="bar-name">Chars</div>
-        <div class="bar-tracks">
-          <div class="bar-track"><div class="bar-fill a animated-bar" data-width="100"></div></div>
-          <div class="bar-track"><div class="bar-fill b animated-bar" data-width="8.3"></div></div>
-        </div>
-        <div class="bar-nums">197K vs 16K</div>
+        <div class="bar-name">Baseline</div>
+        <div class="bar-track"><div class="bar-fill baseline anim-bar" data-w="100" style="width:0">197K chars</div></div>
+        <div class="bar-val">159.2s</div>
       </div>
       <div class="bar-row">
-        <div class="bar-name">Time</div>
-        <div class="bar-tracks">
-          <div class="bar-track"><div class="bar-fill a animated-bar" data-width="100"></div></div>
-          <div class="bar-track"><div class="bar-fill b animated-bar" data-width="27"></div></div>
-        </div>
-        <div class="bar-nums">159s vs 43s</div>
-      </div>
-      <div class="bar-row">
-        <div class="bar-name">Score</div>
-        <div class="bar-tracks">
-          <div class="bar-track"><div class="bar-fill a animated-bar" data-width="50"></div></div>
-          <div class="bar-track"><div class="bar-fill b animated-bar" data-width="100"></div></div>
-        </div>
-        <div class="bar-nums">1/2 vs 2/2</div>
+        <div class="bar-name" style="color:var(--green2)">TS</div>
+        <div class="bar-track"><div class="bar-fill ts anim-bar" data-w="8.3" style="width:0">16K chars</div></div>
+        <div class="bar-val winner">42.9s</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- How it works -->
-<section class="container how" id="how">
-  <h2 class="reveal">How It Works</h2>
-  <div class="steps reveal">
+<!-- BENCHMARK BARS -->
+<section class="section">
+  <div class="stitle">Key comparisons</div>
+  <h2 class="sh">Where Token Savior wins</h2>
+
+  <div class="bench-group">
+    <div class="bench-label">Chars injected into context<span class="bench-desc">cumulative across 60 tasks</span></div>
+    <div class="bar-row">
+      <div class="bar-name">Baseline</div>
+      <div class="bar-track"><div class="bar-fill baseline anim-bar" data-w="100" style="width:0">1,431,624</div></div>
+      <div class="bar-val">1.43M</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-name" style="color:var(--green2)">TS</div>
+      <div class="bar-track"><div class="bar-fill ts anim-bar" data-w="19" style="width:0">272,724</div></div>
+      <div class="bar-val winner">273K</div>
+    </div>
+  </div>
+
+  <div class="bench-group">
+    <div class="bench-label">Score (accuracy)<span class="bench-desc">out of 120 possible points</span></div>
+    <div class="bar-row">
+      <div class="bar-name">Baseline</div>
+      <div class="bar-track"><div class="bar-fill baseline anim-bar" data-w="56" style="width:0">67 / 120</div></div>
+      <div class="bar-val">56%</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-name" style="color:var(--green2)">TS</div>
+      <div class="bar-track"><div class="bar-fill ts anim-bar" data-w="85" style="width:0">102 / 120</div></div>
+      <div class="bar-val winner">85%</div>
+    </div>
+  </div>
+
+  <div class="bench-group">
+    <div class="bench-label">Total turns<span class="bench-desc">LLM round-trips needed</span></div>
+    <div class="bar-row">
+      <div class="bar-name">Baseline</div>
+      <div class="bar-track"><div class="bar-fill baseline anim-bar" data-w="100" style="width:0">733</div></div>
+      <div class="bar-val">733</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-name" style="color:var(--green2)">TS</div>
+      <div class="bar-track"><div class="bar-fill ts anim-bar" data-w="69" style="width:0">506</div></div>
+      <div class="bar-val winner">506</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="how">
+  <div class="stitle">How it works</div>
+  <h2 class="sh">Three steps, no magic</h2>
+
+  <div class="steps">
     <div class="step">
-      <div class="step-num">1</div>
+      <div class="step-n">Step 1</div>
       <h3>Index</h3>
-      <p>Token Savior parses your codebase into a structural graph: functions, classes, imports, dependencies. One call to <code>switch_project</code> loads everything.</p>
+      <p>Token Savior parses your codebase into a structural graph of functions, classes, and dependencies. One call to <code>switch_project</code>.</p>
     </div>
     <div class="step">
-      <div class="step-num">2</div>
+      <div class="step-n">Step 2</div>
       <h3>Query</h3>
-      <p>Instead of reading entire files, the agent queries specific symbols: <code>get_function_source</code>, <code>get_dependents</code>, <code>get_call_chain</code>. Only relevant code enters the context.</p>
+      <p>The agent queries specific symbols instead of reading entire files. <code>get_function_source</code>, <code>get_dependents</code>, <code>get_call_chain</code>.</p>
     </div>
     <div class="step">
-      <div class="step-num">3</div>
+      <div class="step-n">Step 3</div>
       <h3>Result</h3>
-      <p>The LLM sees 81% fewer characters but gets better-structured information. Accuracy goes up because the signal-to-noise ratio improves dramatically.</p>
+      <p>81% fewer characters but better-structured information. The signal-to-noise ratio improves, and accuracy goes up.</p>
     </div>
   </div>
 </section>
 
-<!-- Category Table -->
-<section class="container categories" id="categories">
-  <h2 class="reveal">Results by Category</h2>
-  <p class="sub reveal">Click a row to expand details</p>
-  <div class="cat-grid reveal" id="cat-grid"></div>
+<!-- CATEGORIES -->
+<section class="section" id="categories">
+  <div class="stitle">Breakdown</div>
+  <h2 class="sh">Results by category</h2>
+  <p style="font-size:.75rem;color:var(--text3);margin-bottom:16px">Click a row to expand details.</p>
+
+  <table class="cat-table" id="cat-tbl">
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>N</th>
+        <th>Score A</th>
+        <th>Score B</th>
+        <th>Delta</th>
+        <th class="hide-mobile">Wall A</th>
+        <th class="hide-mobile">Wall B</th>
+      </tr>
+    </thead>
+    <tbody id="cat-body"></tbody>
+  </table>
 </section>
 
-<!-- Honest Limits -->
-<section class="container limits" id="limits">
-  <h2 class="reveal">Honest Limits</h2>
-  <div class="limits-grid reveal">
-    <div class="limit-card">
-      <h3><span class="icon">!</span> MCP overhead on micro-tasks</h3>
-      <p>Each TS call adds ~4K tokens of MCP schema to context. For tasks needing only a single Grep, the fixed cost makes Run B more expensive in active tokens. Affects 5 simple localisation tasks.</p>
+<!-- LIMITS -->
+<section class="section" id="limits">
+  <div class="stitle">Transparency</div>
+  <h2 class="sh">Honest limits</h2>
+
+  <div class="limits-list">
+    <div class="limit-item">
+      <div class="limit-icon">!</div>
+      <div class="limit-text"><strong>MCP overhead on micro-tasks.</strong> Each TS call adds ~4K tokens of MCP schema. For tasks needing a single Grep, the fixed cost makes Run B more expensive. 5 tasks affected.</div>
     </div>
-    <div class="limit-card">
-      <h3><span class="icon">!</span> 2 tasks lost on score</h3>
-      <p>TASK-014 (impact analysis) and TASK-026 (dead code) score 0/2 with TS vs 2/2 baseline. Different tool outputs surfaced different symbols than expected.</p>
+    <div class="limit-item">
+      <div class="limit-icon">!</div>
+      <div class="limit-text"><strong>2 tasks lost on score.</strong> TASK-014 (impact) and TASK-026 (dead code) score 0/2 with TS vs 2/2 baseline. Different tool outputs surfaced different symbols.</div>
     </div>
-    <div class="limit-card">
-      <h3><span class="icon">!</span> Wall time +40% on simple lookups</h3>
-      <p>Single-symbol localisation is slower due to MCP round-trip latency: switch_project + find_symbol takes ~6s vs a single Grep at ~3s.</p>
+    <div class="limit-item">
+      <div class="limit-icon">!</div>
+      <div class="limit-text"><strong>Simple lookups are slower.</strong> Single-symbol localisation is ~40% slower due to MCP round-trip latency: <code>switch_project</code> + <code>find_symbol</code> ~6s vs one Grep at ~3s.</div>
     </div>
-    <div class="limit-card">
-      <h3><span class="icon">!</span> active_tokens only -3.6%</h3>
-      <p>The 81% chars reduction doesn't fully translate because cache_creation (MCP schema) dominates on short tasks. Real savings show on heavy-read and audit tasks.</p>
+    <div class="limit-item">
+      <div class="limit-icon">!</div>
+      <div class="limit-text"><strong>active_tokens only -3.6%.</strong> The 81% chars reduction is diluted by cache_creation (MCP schema). Real savings show on heavy-read and audit tasks where raw file dumps dominate.</div>
     </div>
   </div>
 </section>
 
 <!-- CTA -->
-<section class="container">
-  <div class="cta reveal">
-    <h2>Try Token Savior</h2>
-    <p>Structural code navigation for Claude Code. Less context, better answers.</p>
-    <div class="buttons">
-      <a href="https://github.com/Mibayy/token-savior" class="btn btn-primary">Install Token Savior</a>
-      <a href="https://github.com/Mibayy/tsbench" class="btn btn-ghost">View Benchmark Source</a>
-    </div>
+<section class="cta">
+  <h2>Try Token Savior</h2>
+  <p>Structural code navigation for Claude Code.<br>Less context, better answers.</p>
+  <div class="btns">
+    <a href="https://github.com/Mibayy/token-savior" class="btn btn-p">Install Token Savior</a>
+    <a href="https://github.com/Mibayy/tsbench" class="btn btn-s">View Benchmark Source</a>
   </div>
 </section>
 
-<footer>
-  <div class="container">
-    <p>Built with Claude Code &middot; Token Savior v2.4.0 &middot; <a href="https://github.com/Mibayy/token-savior">GitHub</a></p>
-  </div>
-</footer>
+</div>
+
+<footer><p>Built with Claude Code &middot; Token Savior v2.4.0</p></footer>
 
 <script>
-// ── NAV SCROLL ──
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 20);
-});
-
-// ── INTERSECTION OBSERVER ──
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-      // Animate counters
-      e.target.querySelectorAll('.counter').forEach(animateCounter);
-      // Animate bars
-      e.target.querySelectorAll('.animated-bar').forEach(bar => {
-        bar.style.width = bar.dataset.width + '%';
-      });
-    }
-  });
-}, { threshold: 0.2 });
-
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-// ── COUNTER ANIMATION ──
-function animateCounter(el) {
-  if (el.dataset.animated) return;
-  el.dataset.animated = '1';
-  const target = parseInt(el.dataset.target);
-  const from = parseInt(el.dataset.from || '0');
-  const prefix = el.dataset.prefix || '';
-  const duration = 1200;
+// ── COUNTER ANIMATIONS ──
+function animateValue(el, from, to, prefix, suffix, duration) {
   const start = performance.now();
-
   function tick(now) {
-    const elapsed = now - start;
-    const progress = Math.min(elapsed / duration, 1);
-    const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
-    const current = Math.round(from + (target - from) * eased);
-    el.textContent = prefix + current;
-    if (progress < 1) requestAnimationFrame(tick);
+    const p = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    const v = Math.round(from + (to - from) * ease);
+    el.textContent = prefix + v + suffix;
+    if (p < 1) requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);
 }
 
-// ── CATEGORY DATA ──
-const categories = [
-  { cat:"heavy_read", n:6, sa:"9/12", sb:"12/12", wa:"51.8s", wb:"29.8s", activeA:"124,230", activeB:"63,242", charsA:"310K", charsB:"48K" },
-  { cat:"testing", n:3, sa:"2/6", sb:"6/6", wa:"28.4s", wb:"23.1s", activeA:"55,379", activeB:"30,636", charsA:"4.8K", charsB:"0.8K" },
-  { cat:"config", n:3, sa:"0/6", sb:"6/6", wa:"25.4s", wb:"30.3s", activeA:"30,468", activeB:"48,030", charsA:"5.2K", charsB:"21K" },
-  { cat:"cross-lang", n:2, sa:"0/4", sb:"4/4", wa:"26.9s", wb:"26.4s", activeA:"20,172", activeB:"20,459", charsA:"2.0K", charsB:"6.3K" },
-  { cat:"navigation", n:4, sa:"5/8", sb:"7/8", wa:"34.3s", wb:"24.8s", activeA:"95,725", activeB:"23,164", charsA:"69K", charsB:"8.5K" },
-  { cat:"call_chain", n:4, sa:"5/8", sb:"8/8", wa:"13.7s", wb:"25.7s", activeA:"49,674", activeB:"78,597", charsA:"4.8K", charsB:"2.2K" },
-  { cat:"git", n:2, sa:"4/4", sb:"4/4", wa:"79.3s", wb:"22.1s", activeA:"23,540", activeB:"13,165", charsA:"12K", charsB:"9.5K" },
-  { cat:"dependants", n:4, sa:"8/8", sb:"8/8", wa:"11.1s", wb:"19.0s", activeA:"93,821", activeB:"55,521", charsA:"23K", charsB:"3.0K" },
-  { cat:"audit", n:6, sa:"8/12", sb:"9/12", wa:"110.3s", wb:"38.9s", activeA:"115,832", activeB:"80,311", charsA:"796K", charsB:"45K" },
-  { cat:"edit", n:7, sa:"12/14", sb:"12/14", wa:"87.5s", wb:"64.1s", activeA:"129,584", activeB:"220,202", charsA:"69K", charsB:"38K" },
-  { cat:"impact", n:3, sa:"2/6", sb:"3/6", wa:"50.9s", wb:"21.2s", activeA:"70,133", activeB:"39,156", charsA:"13K", charsB:"2.2K" },
-  { cat:"debug", n:3, sa:"3/6", sb:"5/6", wa:"47.0s", wb:"47.5s", activeA:"43,610", activeB:"42,581", charsA:"128K", charsB:"35K" },
-  { cat:"review", n:3, sa:"2/6", sb:"4/6", wa:"94.3s", wb:"32.3s", activeA:"35,194", activeB:"48,998", charsA:"58K", charsB:"30K" },
-  { cat:"onboarding", n:2, sa:"0/4", sb:"2/4", wa:"43.6s", wb:"31.2s", activeA:"29,522", activeB:"23,485", charsA:"47K", charsB:"10K" },
-  { cat:"infra", n:2, sa:"0/4", sb:"2/4", wa:"57.0s", wb:"30.9s", activeA:"28,825", activeB:"29,361", charsA:"2.9K", charsB:"7.3K" },
-  { cat:"localisation", n:6, sa:"7/12", sb:"10/12", wa:"14.9s", wb:"18.2s", activeA:"84,423", activeB:"176,606", charsA:"7.0K", charsB:"5.7K" },
-];
+let statsAnimated = false;
+const statsObs = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting && !statsAnimated) {
+    statsAnimated = true;
+    animateValue(document.getElementById('c1'), 0, 81, '-', '%', 1200);
+    animateValue(document.getElementById('c2'), 56, 85, '', '%', 1200);
+    animateValue(document.getElementById('c3'), 0, 27, '', ' / 2', 1200);
+    animateValue(document.getElementById('c4'), 0, 12, '', '', 1000);
+  }
+}, { threshold: 0.3 });
+statsObs.observe(document.querySelector('.stats'));
 
-function parseScore(s) {
-  const p = s.split('/');
-  return parseInt(p[0]) / parseInt(p[1]);
-}
-
-// Sort by score improvement
-categories.sort((a, b) => {
-  const da = parseScore(a.sb) - parseScore(a.sa);
-  const db = parseScore(b.sb) - parseScore(b.sa);
-  return db - da;
-});
-
-const grid = document.getElementById('cat-grid');
-
-// Header
-const header = document.createElement('div');
-header.className = 'cat-header';
-header.innerHTML = '<div>Category</div><div>N</div><div>Score A</div><div>Score B</div><div>Delta</div><div>Score B progress</div>';
-grid.appendChild(header);
-
-categories.forEach((r, i) => {
-  const ratioA = parseScore(r.sa);
-  const ratioB = parseScore(r.sb);
-  const diff = ratioB - ratioA;
-  let cls = 'zero', sign = '';
-  if (diff > 0) { cls = 'pos'; sign = '+'; }
-  else if (diff < 0) { cls = 'neg'; }
-  const pct = (diff * 100).toFixed(0);
-
-  const row = document.createElement('div');
-  row.className = 'cat-row';
-  row.innerHTML = `
-    <div class="name">${r.cat}</div>
-    <div class="n">${r.n}</div>
-    <div class="score">${r.sa}</div>
-    <div class="score">${r.sb}</div>
-    <div class="delta ${cls}">${sign}${pct}%</div>
-    <div><div class="bar-mini"><div class="bar-mini-fill" style="width:${ratioB * 100}%"></div></div></div>
-  `;
-  row.addEventListener('click', () => {
-    const details = row.nextElementSibling;
-    if (details && details.classList.contains('cat-details')) {
-      details.classList.toggle('open');
+// ── BAR ANIMATIONS ──
+const barObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.anim-bar').forEach(bar => {
+        bar.style.width = bar.dataset.w + '%';
+      });
+      barObs.unobserve(e.target);
     }
   });
-  grid.appendChild(row);
+}, { threshold: 0.2 });
+document.querySelectorAll('.bench-group, .case').forEach(g => barObs.observe(g));
 
-  const details = document.createElement('div');
-  details.className = 'cat-details';
-  details.innerHTML = `<div class="cat-details-inner">
-    <div class="detail-grid">
-      <div class="detail-item"><div class="dv">${r.wa} / ${r.wb}</div><div class="dk">Wall time A / B</div></div>
-      <div class="detail-item"><div class="dv">${r.charsA} / ${r.charsB}</div><div class="dk">Chars injected A / B</div></div>
-      <div class="detail-item"><div class="dv">${r.activeA} / ${r.activeB}</div><div class="dk">Active tokens A / B</div></div>
-    </div>
-  </div>`;
-  grid.appendChild(details);
-});
+// ── CATEGORY TABLE ──
+const cats = [
+  { c:"heavy_read",n:6,sa:"9/12",sb:"12/12",wa:"51.8s",wb:"29.8s",aA:"124K",aB:"63K",chA:"310K",chB:"48K" },
+  { c:"testing",n:3,sa:"2/6",sb:"6/6",wa:"28.4s",wb:"23.1s",aA:"55K",aB:"31K",chA:"4.8K",chB:"0.8K" },
+  { c:"config",n:3,sa:"0/6",sb:"6/6",wa:"25.4s",wb:"30.3s",aA:"30K",aB:"48K",chA:"5.2K",chB:"21K" },
+  { c:"cross-lang",n:2,sa:"0/4",sb:"4/4",wa:"26.9s",wb:"26.4s",aA:"20K",aB:"20K",chA:"2.0K",chB:"6.3K" },
+  { c:"navigation",n:4,sa:"5/8",sb:"7/8",wa:"34.3s",wb:"24.8s",aA:"96K",aB:"23K",chA:"69K",chB:"8.5K" },
+  { c:"call_chain",n:4,sa:"5/8",sb:"8/8",wa:"13.7s",wb:"25.7s",aA:"50K",aB:"79K",chA:"4.8K",chB:"2.2K" },
+  { c:"git",n:2,sa:"4/4",sb:"4/4",wa:"79.3s",wb:"22.1s",aA:"24K",aB:"13K",chA:"12K",chB:"9.5K" },
+  { c:"dependants",n:4,sa:"8/8",sb:"8/8",wa:"11.1s",wb:"19.0s",aA:"94K",aB:"56K",chA:"23K",chB:"3.0K" },
+  { c:"audit",n:6,sa:"8/12",sb:"9/12",wa:"110.3s",wb:"38.9s",aA:"116K",aB:"80K",chA:"796K",chB:"45K" },
+  { c:"edit",n:7,sa:"12/14",sb:"12/14",wa:"87.5s",wb:"64.1s",aA:"130K",aB:"220K",chA:"69K",chB:"38K" },
+  { c:"impact",n:3,sa:"2/6",sb:"3/6",wa:"50.9s",wb:"21.2s",aA:"70K",aB:"39K",chA:"13K",chB:"2.2K" },
+  { c:"debug",n:3,sa:"3/6",sb:"5/6",wa:"47.0s",wb:"47.5s",aA:"44K",aB:"43K",chA:"128K",chB:"35K" },
+  { c:"review",n:3,sa:"2/6",sb:"4/6",wa:"94.3s",wb:"32.3s",aA:"35K",aB:"49K",chA:"58K",chB:"30K" },
+  { c:"onboarding",n:2,sa:"0/4",sb:"2/4",wa:"43.6s",wb:"31.2s",aA:"30K",aB:"23K",chA:"47K",chB:"10K" },
+  { c:"infra",n:2,sa:"0/4",sb:"2/4",wa:"57.0s",wb:"30.9s",aA:"29K",aB:"29K",chA:"2.9K",chB:"7.3K" },
+  { c:"localisation",n:6,sa:"7/12",sb:"10/12",wa:"14.9s",wb:"18.2s",aA:"84K",aB:"177K",chA:"7.0K",chB:"5.7K" },
+];
 
-// ── ANIMATED BARS (initial state) ──
-document.querySelectorAll('.animated-bar').forEach(bar => {
-  bar.style.width = '0%';
+function ps(s){const p=s.split('/');return parseInt(p[0])/parseInt(p[1])}
+cats.sort((a,b)=>(ps(b.sb)-ps(b.sa))-(ps(a.sb)-ps(a.sa)));
+
+const tbody = document.getElementById('cat-body');
+cats.forEach(r => {
+  const d = ps(r.sb) - ps(r.sa);
+  const pct = (d * 100).toFixed(0);
+  let cls = 'eq', sign = '';
+  if (d > 0) { cls = 'pos'; sign = '+'; }
+  else if (d < 0) { cls = 'neg'; }
+
+  const tr = document.createElement('tr');
+  tr.style.cursor = 'pointer';
+  tr.innerHTML = `
+    <td class="cat-name">${r.c}</td>
+    <td>${r.n}</td>
+    <td>${r.sa}</td>
+    <td class="score-b">${r.sb}</td>
+    <td class="${cls}">${sign}${pct}%</td>
+    <td class="hide-mobile">${r.wa}</td>
+    <td class="hide-mobile">${r.wb}</td>
+  `;
+
+  const detailTr = document.createElement('tr');
+  detailTr.className = 'cat-details';
+  detailTr.innerHTML = `<td colspan="7"><div class="detail-grid">
+    <div class="di"><div class="dv">${r.chA} &rarr; ${r.chB}</div><div class="dk">Chars injected</div></div>
+    <div class="di"><div class="dv">${r.aA} &rarr; ${r.aB}</div><div class="dk">Active tokens</div></div>
+    <div class="di"><div class="dv">${r.wa} &rarr; ${r.wb}</div><div class="dk">Wall time</div></div>
+  </div></td>`;
+
+  tr.addEventListener('click', () => detailTr.classList.toggle('open'));
+  tbody.appendChild(tr);
+  tbody.appendChild(detailTr);
 });
 </script>
 </body>
