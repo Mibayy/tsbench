@@ -91,8 +91,17 @@ To find files that import a given file, use get_file_dependents("file.py") in on
 TOOL CALL LIMIT:
 Maximum 5 tool calls per simple task (locate, read, single-symbol analysis). If you exceed 5 calls, you are over-exploring — stop and answer with what you have.
 
+EDIT WITH CONTEXT:
+edit_context("name") before any complex edit. Returns source + callers + deps + siblings + impacted tests in one call.
+
+ADD A FIELD:
+add_field_to_model("Model", "fieldName", "Type") to add a field. Do not use insert_near_symbol for model fields.
+
 MOVE A SYMBOL:
-find_symbol("name") to locate first, then replace_symbol_source to move. Do not manually explore files to find the symbol.
+move_symbol("name", "target/file.py") to move a symbol and fix all imports. Do not do this manually.
+
+REFACTORING:
+apply_refactoring(type="rename"|"move"|"add_field"|"extract", ...args) for unified refactoring operations.
 
 AFTER AN EMPTY RESULT:
 If find_symbol returns empty → try search_codebase
@@ -565,7 +574,7 @@ def score_response(scoring: str, expected: dict, response: str) -> tuple[int, in
         candidates = _collect_strings_recursive(expected)
         if not candidates:
             return 0, max_score
-        if scoring in ("boolean_with_evidence", "free_form_rubric", "contains_all"):
+        if scoring in ("boolean_with_evidence", "free_form_rubric", "contains_all", "edit_quality"):
             hits = sum(1 for c in candidates if _keyword_match(c, text))
         else:
             hits = sum(1 for c in candidates if c.lower() in text)

@@ -6,6 +6,7 @@ def slugify(value: str) -> str:
     return "-".join(value.lower().split())
 
 
+
 def truncate(value: str, max_len: int = 100) -> str:
     """Truncate a string with ellipsis."""
     if len(value) <= max_len:
