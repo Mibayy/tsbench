@@ -178,6 +178,7 @@ footer p{font-size:.7rem;color:var(--text3)}
       <a href="#how">How</a>
       <a href="#categories">Categories</a>
       <a href="#limits">Limits</a>
+      <a href="#contribute">Contribute</a>
     </div>
   </div>
 </nav>
@@ -370,6 +371,30 @@ footer p{font-size:.7rem;color:var(--text3)}
       <div class="limit-icon">!</div>
       <div class="limit-text"><strong>0 net score regressions.</strong> TS wins 32 tasks, ties 28, loses 0. 21 tasks are flat-out impossible without TS (score 0/2 baseline → ≥1/2 with TS), spanning config, infra, audit, debug, cross-language.</div>
     </div>
+  </div>
+</section>
+
+<!-- CONTRIBUTE -->
+<section class="section" id="contribute">
+  <div class="stitle">Open benchmark</div>
+  <h2 class="sh">Want to contribute?</h2>
+  <p style="font-size:.85rem;color:var(--text2);margin-bottom:16px;line-height:1.7">
+    tsbench is open and reproducible. <code>python generate.py --seed 42</code> gives the same 60-task project every time.
+  </p>
+  <p style="font-size:.85rem;color:var(--text2);margin-bottom:12px;line-height:1.7">Run it on your agent:</p>
+  <ul style="font-size:.8rem;color:var(--text2);margin-bottom:20px;padding-left:20px;line-height:1.8">
+    <li>Codex CLI</li>
+    <li>Gemini CLI</li>
+    <li>Hermes Agent</li>
+    <li>OpenClaw</li>
+    <li>Cursor, Continue, Cline...</li>
+  </ul>
+  <p style="font-size:.85rem;color:var(--text2);margin-bottom:20px;line-height:1.7">
+    If you run the benchmark on another agent and want to submit results, open a PR or issue. We'll add your results to the leaderboard.
+  </p>
+  <div class="btns" style="display:flex;gap:10px;flex-wrap:wrap">
+    <a href="https://github.com/Mibayy/tsbench/issues/new?template=benchmark-submission.md" class="btn btn-p">Submit results &rarr;</a>
+    <a href="https://github.com/Mibayy/tsbench/blob/main/BENCHMARK-SUMMARY.md" class="btn btn-s">Read the methodology &rarr;</a>
   </div>
 </section>
 

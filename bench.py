@@ -13,6 +13,7 @@ import argparse
 import json
 import os
 import re
+import sqlite3
 import subprocess
 import sys
 import time
@@ -432,6 +433,43 @@ def parse_stream_json(stdout, stderr: str, wall: float, rc: int) -> dict:
     }
 
 
+def _empty_metrics(wall: float, error: str, raw: str = "") -> dict:
+    return {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "total_tokens": 0,
+        "active_tokens": 0,
+        "turns_count": 0,
+        "tool_calls_count": 0,
+        "tool_calls_breakdown": {},
+        "tool_calls_detail": [],
+        "ts_tool_details": [],
+        "total_context_chars_injected": 0,
+        "ts_tool_calls_count": 0,
+        "wall_time_seconds": round(wall, 2),
+        "raw_response": raw,
+        "error": error,
+    }
+
+
+def _is_ts_tool(name: str) -> bool:
+    return bool(name) and (name.startswith("mcp__token-savior") or name.startswith("token-savior"))
+
+
+
+
+AGENTS = {
+    "claude": run_claude,
+}
+
+UNSUPPORTED_AGENT_MSG = (
+    "Only claude is supported. Community contributions welcome: "
+    "github.com/Mibayy/tsbench/issues"
+)
+
+
 # ---------- scoring ----------
 
 def extract_files(text: str) -> set[str]:
@@ -639,8 +677,10 @@ def score_response(scoring: str, expected: dict, response: str) -> tuple[int, in
 
 # ---------- checkpoint + runner ----------
 
-def result_path(task_id: str, run: str) -> Path:
-    return RAW_DIR / f"{task_id}-run-{run}.json"
+def result_path(task_id: str, run: str, agent: str = "claude") -> Path:
+    if agent == "claude":
+        return RAW_DIR / f"{task_id}-run-{run}.json"
+    return RAW_DIR / f"{task_id}-run-{run}-{agent}.json"
 
 
 WARMUP_PATH = None  # set lazily to avoid module-load ordering issues
@@ -682,10 +722,10 @@ def prewarm_run_b(force: bool = False) -> None:
     sys.stdout.flush()
 
 
-def run_task(task_id: str, run: str, force: bool = False) -> dict | None:
-    out_path = result_path(task_id, run)
+def run_task(task_id: str, run: str, force: bool = False, agent: str = "claude") -> dict | None:
+    out_path = result_path(task_id, run, agent=agent)
     if out_path.exists() and not force:
-        print(f"[{task_id} | Run {run}] skip (checkpoint exists)")
+        print(f"[{task_id} | Run {run} | {agent}] skip (checkpoint exists)")
         return json.loads(out_path.read_text())
 
     prompt = load_task_prompt(task_id)
@@ -695,15 +735,17 @@ def run_task(task_id: str, run: str, force: bool = False) -> dict | None:
 
     extra_disallowed = tasks_index[task_id].get("disallowed_tools")
 
-    print(f"[{task_id} | Run {run}] starting...")
+    print(f"[{task_id} | Run {run} | {agent}] starting...")
     sys.stdout.flush()
-    metrics = run_claude(prompt, run, extra_disallowed=extra_disallowed)
+    backend = AGENTS[agent]
+    metrics = backend(prompt, run, extra_disallowed=extra_disallowed)
 
     score, max_score = score_response(scoring, expected, metrics["raw_response"])
 
     record = {
         "task_id": task_id,
         "run": run,
+        "agent": agent,
         "baseline": "plain" if run == "A" else "token-savior",
         **metrics,
         "score": score,
@@ -717,7 +759,7 @@ def run_task(task_id: str, run: str, force: bool = False) -> dict | None:
     tb = " ".join(f"{k.replace('mcp__token-savior__','ts:')}×{v}" for k, v in record["tool_calls_breakdown"].items())
     err = f" ERROR={record['error']}" if record.get("error") else ""
     print(
-        f"[{task_id} | Run {run}] done — {record['wall_time_seconds']}s | "
+        f"[{task_id} | Run {run} | {agent}] done — {record['wall_time_seconds']}s | "
         f"tokens: {record['input_tokens']} in + {record['output_tokens']} out "
         f"(cache {record['cache_creation_input_tokens']}c/{record['cache_read_input_tokens']}r) | "
         f"tools: {tb or 'none'} | score: {record['score']}/{record['max_score']}{err}"
@@ -983,11 +1025,20 @@ def main() -> int:
     ap.add_argument("--run", choices=["A", "B", "both"], default="both")
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--report", action="store_true")
+    ap.add_argument(
+        "--agent",
+        default="claude",
+        help="Backend agent harness (default: claude). " + UNSUPPORTED_AGENT_MSG,
+    )
     args = ap.parse_args()
 
     if args.report:
         generate_report()
         return 0
+
+    if args.agent != "claude":
+        print(UNSUPPORTED_AGENT_MSG, file=sys.stderr)
+        return 2
 
     if not args.tasks:
         ap.error("--tasks is required (or use --report)")
@@ -999,15 +1050,15 @@ def main() -> int:
         targets = [t.strip() for t in args.tasks.split(",") if t.strip()]
     runs = ["A", "B"] if args.run == "both" else [args.run]
 
-    if "B" in runs:
+    if "B" in runs and args.agent == "claude":
         prewarm_run_b(force=args.force)
 
     for tid in targets:
         for run in runs:
             try:
-                run_task(tid, run, force=args.force)
+                run_task(tid, run, force=args.force, agent=args.agent)
             except Exception as e:
-                print(f"[{tid} | Run {run}] CRASHED: {e}", file=sys.stderr)
+                print(f"[{tid} | Run {run} | {args.agent}] CRASHED: {e}", file=sys.stderr)
 
     return 0
 
