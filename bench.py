@@ -71,6 +71,14 @@ switch_project → create_checkpoint → get_function_source → replace_symbol_
 BREAKING CHANGES:
 switch_project → detect_breaking_changes(ref="v1") → stop
 Do not re-read each modified function after detect_breaking_changes.
+Pour un diff entre deux versions/tags/branches (v1 vs v2, main vs feature), utilise detect_breaking_changes, PAS get_changed_symbols. get_changed_symbols retourne le diff worktree brut (incluant checkpoints, artefacts, résultats) et noie le signal dans du bruit. detect_breaking_changes filtre et catégorise (BREAK-REMOVED, BREAK-SIGNATURE, BREAK-API) en une passe.
+
+IMPACT ANALYSIS:
+Quand tu utilises get_change_impact ou get_dependents pour évaluer l'impact d'un changement, ÉNUMÈRE TOUS les fichiers/symboles impactés dans ta réponse. Ne conclus JAMAIS "rien ne casse" ou "peu d'impact" sans lister le set complet. Le grader vérifie la présence des noms de fichiers exacts.
+
+IMPORT CYCLES:
+switch_project → find_import_cycles() → stop
+Pour détecter les cycles d'import, utilise find_import_cycles (Tarjan SCC sur le graphe d'import). NE PAS inférer les cycles à la main via get_file_dependencies/get_file_dependents.
 
 DUPLICATES:
 switch_project → find_semantic_duplicates() → stop
@@ -81,6 +89,7 @@ switch_project → analyze_config(checks=["orphans"]) → stop
 
 FIND A BUG:
 If the prompt mentions a specific file name (e.g. buggy_auth.py), search for that EXACT file first with find_symbol or search_codebase(pattern="buggy_auth") before exploring related files. Do NOT search generic terms like "auth" — start with the exact name from the prompt.
+Si le fichier mentionné dans le prompt contient 'schema' ou a l'extension .prisma, utiliser add_field_to_model et non insert_near_symbol.
 
 CALL CHAIN:
 To trace a call chain between two symbols, use get_call_chain(source, target) in one call. Do NOT chain get_function_source or get_dependencies manually step by step.
@@ -94,8 +103,19 @@ Maximum 5 tool calls per simple task (locate, read, single-symbol analysis). If 
 EDIT WITH CONTEXT:
 edit_context("name") before any complex edit. Returns source + callers + deps + siblings + impacted tests in one call.
 
-ADD A FIELD:
-add_field_to_model("Model", "fieldName", "Type") to add a field. Do not use insert_near_symbol for model fields.
+AJOUTER UN CHAMP À UN MODÈLE :
+add_field_to_model('ModelName', 'fieldName', 'FieldType', file='path/to/schema.prisma')
+
+Formats supportés : .prisma, .py, .ts, .tsx
+
+Pour Prisma spécifiquement :
+- Ne PAS utiliser insert_near_symbol sur .prisma
+- Ne PAS utiliser Read + Edit sur .prisma
+- TOUJOURS utiliser add_field_to_model
+- Syntaxe auto-gérée (pas de ':' entre nom et type)
+
+Exemple :
+add_field_to_model('Member', 'archivedAt', 'DateTime?', after='updatedAt')
 
 MOVE A SYMBOL:
 move_symbol("name", "target/file.py") to move a symbol and fix all imports. Do not do this manually.
