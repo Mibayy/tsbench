@@ -2,19 +2,17 @@
   "task_id": "TASK-038",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 5,
-  "output_tokens": 849,
-  "cache_creation_input_tokens": 5384,
-  "cache_read_input_tokens": 133705,
-  "total_tokens": 139943,
-  "active_tokens": 6238,
-  "turns_count": 6,
-  "tool_calls_count": 4,
+  "input_tokens": 8,
+  "output_tokens": 562,
+  "cache_creation_input_tokens": 18287,
+  "cache_read_input_tokens": 175358,
+  "total_tokens": 194215,
+  "active_tokens": 18857,
+  "turns_count": 4,
+  "tool_calls_count": 2,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__get_structure_summary": 1,
-    "mcp__token-savior-recall__get_file_dependencies": 1,
-    "mcp__token-savior-recall__get_file_dependents": 1
+    "mcp__token-savior-recall__get_structure_summary": 1
   },
   "tool_calls_detail": [
     {
@@ -24,17 +22,7 @@
     },
     {
       "tool": "mcp__token-savior-recall__get_structure_summary",
-      "result_chars": 2131,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_file_dependencies",
-      "result_chars": 123,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_file_dependents",
-      "result_chars": 55,
+      "result_chars": 1966,
       "is_error": false
     }
   ],
@@ -50,54 +38,28 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "get_structure_summary",
-      "time_ms": 134
+      "time_ms": 131
     },
     {
       "tool": "get_structure_summary",
       "args": {
         "file_path": "apps/api/services/billing.py"
       },
-      "result_chars": 2131,
+      "result_chars": 1966,
       "result_empty": false,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
-      "followed_by": "get_file_dependencies",
-      "time_ms": 477
-    },
-    {
-      "tool": "get_file_dependencies",
-      "args": {
-        "file_path": "apps/api/services/billing.py"
-      },
-      "result_chars": 123,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 2,
-      "preceded_by": "get_structure_summary",
-      "followed_by": "get_file_dependents",
-      "time_ms": 43
-    },
-    {
-      "tool": "get_file_dependents",
-      "args": {
-        "file_path": "apps/api/services/billing.py"
-      },
-      "result_chars": 55,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 3,
-      "preceded_by": "get_file_dependencies",
       "followed_by": null,
-      "time_ms": 66
+      "time_ms": 421
     }
   ],
-  "total_context_chars_injected": 2369,
-  "ts_tool_calls_count": 4,
-  "wall_time_seconds": 22.95,
-  "raw_response": "## Architecture de `apps/api/services/billing.py`\n\n**Fichier** : 664 lignes, 34 fonctions.\n\n### Responsabilit\u00e9s\n\nModule de service centralisant toute la logique m\u00e9tier de facturation : calcul, paiement, remboursement, et gestion du cycle de vie des factures.\n\n### Fonctions principales (couche publique)\n\n| Fonction | R\u00f4le |\n|---|---|\n| `calculate_invoice(payload, user_id)` | Calcule une facture |\n| `apply_discount(payload, user_id)` | Applique une remise |\n| `charge_customer(payload, user_id)` | Effectue un paiement |\n| `refund_payment(payload, user_id)` | Traite un remboursement |\n| `list_invoices(payload, user_id)` | Liste les factures d'un utilisateur |\n| `void_invoice(payload, user_id)` | Annule une facture |\n\nIl y a aussi 3 surcharges de `validate_invoice_total(invoice)` (lignes 49-58) \u2014 probablement un bug ou du code dupliqu\u00e9.\n\n### Fonctions internes (couche infra, suffixe `_billing_internal`)\n\n~24 fonctions utilitaires couvrant : pr\u00e9paration, finalisation, audit, notification, mise en file d'attente, r\u00e9conciliation, s\u00e9rialisation, rate-limiting, retry, batch/stream processing, soft/hard delete, etc.\n\n### D\u00e9pendances (imports)\n\n- **`apps.api.config`** \u2014 configuration de l'application\n- **`apps.api.db`** \u2014 acc\u00e8s base de donn\u00e9es\n- **`apps.api.models.billing`** \u2014 mod\u00e8les de donn\u00e9es facturation\n- **`apps.api.utils.errors`** \u2014 gestion d'erreurs\n- **`apps.api.utils.logging`** \u2014 logging\n\n### Consommateurs\n\n- **`apps/api/routers/billing.py`** \u2014 routeur HTTP qui expose les endpoints\n- **`tests/test_billing.py`** \u2014 tests unitaires\n\n### Point d'attention\n\nLa triple d\u00e9finition de `validate_invoice_total` (lignes 49, 53, 57) signifie que seule la derni\u00e8re est effective en Python \u2014 les deux premi\u00e8res sont \u00e9cras\u00e9es silencieusement.",
+  "total_context_chars_injected": 2026,
+  "ts_tool_calls_count": 2,
+  "wall_time_seconds": 19.76,
+  "raw_response": "## `apps/api/services/billing.py` (649 lignes)\n\n**Responsabilit\u00e9s** \u2014 service de facturation : calcul, encaissement, remboursement, gestion des factures et helpers internes.\n\n**API publique (6 endpoints)**\n- `calculate_invoice`, `apply_discount`, `charge_customer`, `refund_payment`, `list_invoices`, `void_invoice` \u2014 tous `(payload, user_id)`.\n\n**Helpers internes (~24)** : `prepare/finalize/audit/notify/enqueue/reconcile/upsert/expand/reduce/snapshot/replay_billing_internal`, plus validation, (de)s\u00e9rialisation, m\u00e9triques, rate-limit, retry, batch/stream, indexation, soft/hard delete.\n\n**D\u00e9pendances** : `apps.api.config`, `apps.api.db`, `apps.api.models.billing`, `apps.api.utils.errors`, `apps.api.utils.logging`. Helper priv\u00e9 `_billing_admin_db()` pour l'acc\u00e8s DB admin.",
   "error": null,
   "score": 1,
   "max_score": 2,
-  "timestamp": "2026-04-15T20:54:43.261176+00:00"
+  "timestamp": "2026-04-16T08:32:36.965416+00:00"
 }

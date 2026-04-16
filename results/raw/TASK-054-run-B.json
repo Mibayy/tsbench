@@ -2,19 +2,19 @@
   "task_id": "TASK-054",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 13,
-  "output_tokens": 1798,
-  "cache_creation_input_tokens": 48041,
-  "cache_read_input_tokens": 368069,
-  "total_tokens": 417921,
-  "active_tokens": 49852,
-  "turns_count": 15,
+  "input_tokens": 14,
+  "output_tokens": 1728,
+  "cache_creation_input_tokens": 65647,
+  "cache_read_input_tokens": 512177,
+  "total_tokens": 579566,
+  "active_tokens": 67389,
+  "turns_count": 12,
   "tool_calls_count": 8,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
     "mcp__token-savior-recall__get_function_source": 4,
+    "mcp__token-savior-recall__find_symbol": 1,
     "mcp__token-savior-recall__reindex": 1,
-    "mcp__token-savior-recall__search_codebase": 1,
     "mcp__token-savior-recall__replace_symbol_source": 1
   },
   "tool_calls_detail": [
@@ -35,7 +35,12 @@
     },
     {
       "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 302,
+      "result_chars": 287,
+      "is_error": false
+    },
+    {
+      "tool": "mcp__token-savior-recall__find_symbol",
+      "result_chars": 120,
       "is_error": false
     },
     {
@@ -45,12 +50,7 @@
     },
     {
       "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 302,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__search_codebase",
-      "result_chars": 1355,
+      "result_chars": 287,
       "is_error": false
     },
     {
@@ -71,7 +71,7 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "get_function_source",
-      "time_ms": 95
+      "time_ms": 85
     },
     {
       "tool": "get_function_source",
@@ -84,7 +84,7 @@
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": "get_function_source",
-      "time_ms": 862
+      "time_ms": 739
     },
     {
       "tool": "get_function_source",
@@ -98,7 +98,7 @@
       "call_index": 2,
       "preceded_by": "get_function_source",
       "followed_by": "get_function_source",
-      "time_ms": 242
+      "time_ms": 388
     },
     {
       "tool": "get_function_source",
@@ -107,13 +107,27 @@
         "level": 0,
         "force_full": true
       },
-      "result_chars": 302,
+      "result_chars": 287,
       "result_empty": false,
       "is_error": false,
       "call_index": 3,
       "preceded_by": "get_function_source",
+      "followed_by": "find_symbol",
+      "time_ms": 370
+    },
+    {
+      "tool": "find_symbol",
+      "args": {
+        "name": "buggy_paginate",
+        "level": 0
+      },
+      "result_chars": 120,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 4,
+      "preceded_by": "get_function_source",
       "followed_by": "reindex",
-      "time_ms": 244
+      "time_ms": 270
     },
     {
       "tool": "reindex",
@@ -121,10 +135,10 @@
       "result_chars": 42,
       "result_empty": true,
       "is_error": false,
-      "call_index": 4,
-      "preceded_by": "get_function_source",
+      "call_index": 5,
+      "preceded_by": "find_symbol",
       "followed_by": "get_function_source",
-      "time_ms": 2855
+      "time_ms": 2638
     },
     {
       "tool": "get_function_source",
@@ -133,49 +147,36 @@
         "level": 0,
         "force_full": true
       },
-      "result_chars": 302,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 5,
-      "preceded_by": "reindex",
-      "followed_by": "search_codebase",
-      "time_ms": 752
-    },
-    {
-      "tool": "search_codebase",
-      "args": {
-        "pattern": "end = start \\+ page_size"
-      },
-      "result_chars": 1355,
+      "result_chars": 287,
       "result_empty": false,
       "is_error": false,
       "call_index": 6,
-      "preceded_by": "get_function_source",
+      "preceded_by": "reindex",
       "followed_by": "replace_symbol_source",
-      "time_ms": 113
+      "time_ms": 261
     },
     {
       "tool": "replace_symbol_source",
       "args": {
         "symbol_name": "buggy_paginate",
         "file_path": "apps/api/utils/buggy_pagination.py",
-        "new_source": "def buggy_paginate(items: list, page: int = 1, page_size: int = DEFAULT_PAGE_SIZE) -> list:\n    \"\"\"Return a page of items.\"\"\"\n    start = (page - 1) * page_size\n    end = start + page_size\n    return items[start:end]"
+        "new_source": "def buggy_paginate(items: list, page: int = 1, page_size: int = 10) -> list:\n    \"\"\"Return a page of items.\"\"\"\n    start = (page - 1) * page_size\n    end = start + page_size\n    return items[start:end]\n"
       },
       "result_chars": 188,
       "result_empty": false,
       "is_error": false,
       "call_index": 7,
-      "preceded_by": "search_codebase",
+      "preceded_by": "get_function_source",
       "followed_by": null,
-      "time_ms": 51
+      "time_ms": 461
     }
   ],
-  "total_context_chars_injected": 2734,
+  "total_context_chars_injected": 1469,
   "ts_tool_calls_count": 8,
-  "wall_time_seconds": 153.23,
-  "raw_response": "Correction appliqu\u00e9e.\n\n**Fonction** : `buggy_paginate` dans **`apps/api/utils/buggy_pagination.py`**\n\n**Bug** : `end = start + page_size + 1` retournait `page_size + 1` \u00e9l\u00e9ments (11 au lieu de 10).\n\n**Fix** : `end = start + page_size` \u2014 le `+ 1` superflu a \u00e9t\u00e9 supprim\u00e9, la tranche Python `items[start:end]` retourne d\u00e9sormais exactement `page_size` \u00e9l\u00e9ments.",
+  "wall_time_seconds": 52.26,
+  "raw_response": "Fonction `buggy_paginate` dans `apps/api/utils/buggy_pagination.py` corrig\u00e9e : `end = start + page_size` (slice Python exclusif \u2192 retourne exactement `page_size` items).",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T21:04:29.715348+00:00"
+  "timestamp": "2026-04-16T08:33:54.943958+00:00"
 }

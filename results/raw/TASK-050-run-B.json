@@ -2,20 +2,20 @@
   "task_id": "TASK-050",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 8,
-  "output_tokens": 877,
-  "cache_creation_input_tokens": 5646,
-  "cache_read_input_tokens": 272850,
-  "total_tokens": 279381,
-  "active_tokens": 6531,
-  "turns_count": 8,
+  "input_tokens": 11,
+  "output_tokens": 753,
+  "cache_creation_input_tokens": 18246,
+  "cache_read_input_tokens": 369695,
+  "total_tokens": 388705,
+  "active_tokens": 19010,
+  "turns_count": 7,
   "tool_calls_count": 5,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
+    "mcp__token-savior-recall__get_dependencies": 1,
+    "mcp__token-savior-recall": 1,
     "mcp__token-savior-recall__find_symbol": 1,
-    "mcp__token-savior-recall__get_function_source": 1,
-    "mcp__token-savior-recall__get_full_context": 1,
-    "mcp__token-savior-recall__get_backward_slice": 1
+    "mcp__token-savior-recall__get_full_context": 1
   },
   "tool_calls_detail": [
     {
@@ -24,23 +24,23 @@
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__find_symbol",
-      "result_chars": 113,
+      "tool": "mcp__token-savior-recall__get_dependencies",
+      "result_chars": 2,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 143,
+      "tool": "mcp__token-savior-recall",
+      "result_chars": 88,
+      "is_error": true
+    },
+    {
+      "tool": "mcp__token-savior-recall__find_symbol",
+      "result_chars": 78,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__get_full_context",
       "result_chars": 1015,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_backward_slice",
-      "result_chars": 966,
       "is_error": false
     }
   ],
@@ -55,35 +55,36 @@
       "is_error": false,
       "call_index": 0,
       "preceded_by": null,
-      "followed_by": "find_symbol",
-      "time_ms": 99
+      "followed_by": "get_dependencies",
+      "time_ms": 108
+    },
+    {
+      "tool": "get_dependencies",
+      "args": {
+        "name": "reconcile_payments",
+        "max_results": 0
+      },
+      "result_chars": 2,
+      "result_empty": true,
+      "is_error": false,
+      "call_index": 1,
+      "preceded_by": "switch_project",
+      "followed_by": "mcp__token-savior-recall",
+      "time_ms": 538
     },
     {
       "tool": "find_symbol",
       "args": {
         "name": "reconcile_payments",
-        "level": 0
+        "level": 2
       },
-      "result_chars": 113,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 1,
-      "preceded_by": "switch_project",
-      "followed_by": "get_function_source",
-      "time_ms": 734
-    },
-    {
-      "tool": "get_function_source",
-      "args": {
-        "name": "reconcile_payments"
-      },
-      "result_chars": 143,
+      "result_chars": 78,
       "result_empty": false,
       "is_error": false,
       "call_index": 2,
-      "preceded_by": "find_symbol",
+      "preceded_by": "mcp__token-savior-recall",
       "followed_by": "get_full_context",
-      "time_ms": 292
+      "time_ms": 278
     },
     {
       "tool": "get_full_context",
@@ -95,32 +96,17 @@
       "result_empty": false,
       "is_error": false,
       "call_index": 3,
-      "preceded_by": "get_function_source",
-      "followed_by": "get_backward_slice",
-      "time_ms": 126
-    },
-    {
-      "tool": "get_backward_slice",
-      "args": {
-        "name": "reconcile_payments",
-        "variable": "result",
-        "line": 35
-      },
-      "result_chars": 966,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 4,
-      "preceded_by": "get_full_context",
+      "preceded_by": "find_symbol",
       "followed_by": null,
-      "time_ms": 64
+      "time_ms": 497
     }
   ],
-  "total_context_chars_injected": 2297,
-  "ts_tool_calls_count": 5,
-  "wall_time_seconds": 43.91,
-  "raw_response": "## Backward Slice de `reconcile_payments`\n\n### Symboles externes\n\n**Aucun.** La fonction n'a **z\u00e9ro d\u00e9pendance** externe \u2014 elle n'appelle aucune autre fonction et n'importe aucun module. Son seul param\u00e8tre est `data: dict`, qui n'est d'ailleurs **jamais utilis\u00e9** dans le corps.\n\n### Slice interne (variables influen\u00e7ant `return result`)\n\nLe backward slice sur `result` \u00e0 la ligne 35 identifie **25 lignes sur 33** (r\u00e9duction de 24.2%). Les variables qui influencent directement ou transitivement la valeur retourn\u00e9e sont :\n\n| Variable | R\u00f4le |\n|----------|------|\n| `result` | Accumulateur principal, initialis\u00e9 \u00e0 `0` (l.5) |\n| `items` | `list(range(10))` \u2014 pilote les deux boucles `for` (l.6) |\n| `it_1` | It\u00e9rateur de la 1\u00e8re boucle (l.11-15), modifie `result` selon `% 2` / `% 3` |\n| `it_5` | It\u00e9rateur de la 2\u00e8me boucle (l.30-34), m\u00eame logique |\n\n### Lignes exclues du slice\n\nSeules les lignes 23-24 (`if result == 3: break`) du `while` sont partiellement exclues comme contr\u00f4le de flux, ainsi que la ligne du param\u00e8tre `data` qui n'est jamais lu.\n\n**Conclusion :** `reconcile_payments` est une fonction **enti\u00e8rement auto-contenue** \u2014 aucun symbole externe ne l'influence, ni directement ni transitivement.",
+  "total_context_chars_injected": 1243,
+  "ts_tool_calls_count": 4,
+  "wall_time_seconds": 25.71,
+  "raw_response": "La fonction `reconcile_payments` (apps/api/services/complex_billing.py:3) n'a **aucune d\u00e9pendance externe** : aucun symbole ne l'influence directement ou transitivement.\n\nElle op\u00e8re uniquement sur son param\u00e8tre `data` (non utilis\u00e9) et des litt\u00e9raux internes (`range(10)`, constantes). Aucun appel de fonction, aucun import, aucun symbole projet r\u00e9f\u00e9renc\u00e9.\n\n**Backward slice = \u2205** (ensemble vide).",
   "error": null,
-  "score": 1,
+  "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T21:00:12.234950+00:00"
+  "timestamp": "2026-04-16T08:33:02.684383+00:00"
 }

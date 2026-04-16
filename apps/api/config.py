@@ -3,6 +3,9 @@ import os
 from dataclasses import dataclass
 
 
+
+DEFAULT_PAGE_SIZE = 20
+
 @dataclass
 class Settings:
     database_url: str = os.environ.get("DATABASE_URL", "postgresql://localhost/tsbench")
@@ -14,7 +17,7 @@ class Settings:
     allowed_origins: str = os.environ.get("ALLOWED_ORIGINS", "*")
     # UNDECL-001 / UNDECL-002 planted later
     max_page_size: int = int(os.environ.get("MAX_PAGE_SIZE", "100"))
-    default_page_size: int = int(os.environ.get("DEFAULT_PAGE_SIZE", "50"))
+    default_page_size: int = int(os.environ.get("DEFAULT_PAGE_SIZE", str(DEFAULT_PAGE_SIZE)))
 
 
 settings = Settings()

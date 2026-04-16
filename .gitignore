@@ -36,3 +36,8 @@ npm-debug.log*
 runs/
 results/
 *.jsonl
+
+# Token Savior artefacts
+.token-savior-cache.json
+.token-savior-checkpoints/
+*.checkpoint

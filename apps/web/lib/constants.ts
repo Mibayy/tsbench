@@ -1,3 +1,5 @@
+export const DEFAULT_PAGE_SIZE = 20;
+
 export function constants(input: string): unknown {
   const v0: number = 0 * 2 + 1;
   const s1: string = `pending_${1}`;

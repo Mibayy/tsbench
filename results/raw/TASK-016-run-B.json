@@ -2,12 +2,12 @@
   "task_id": "TASK-016",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 4,
-  "output_tokens": 213,
-  "cache_creation_input_tokens": 12237,
-  "cache_read_input_tokens": 79475,
-  "total_tokens": 91929,
-  "active_tokens": 12454,
+  "input_tokens": 8,
+  "output_tokens": 329,
+  "cache_creation_input_tokens": 17288,
+  "cache_read_input_tokens": 175240,
+  "total_tokens": 192865,
+  "active_tokens": 17625,
   "turns_count": 4,
   "tool_calls_count": 2,
   "tool_calls_breakdown": {
@@ -38,7 +38,7 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "find_impacted_test_files",
-      "time_ms": 306
+      "time_ms": 101
     },
     {
       "tool": "find_impacted_test_files",
@@ -56,15 +56,15 @@
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": null,
-      "time_ms": 673
+      "time_ms": 651
     }
   ],
   "total_context_chars_injected": 251,
   "ts_tool_calls_count": 2,
-  "wall_time_seconds": 13.23,
-  "raw_response": "Le fichier de test \u00e0 rejouer en priorit\u00e9 est :\n\n- **`tests/test_billing.py`** \u2014 il importe directement `apps/api/services/billing.py`.",
+  "wall_time_seconds": 14.14,
+  "raw_response": "Fichier de test \u00e0 rejouer en priorit\u00e9 :\n\n- `tests/test_billing.py` \u2014 il importe `apps/api/services/billing.py` (donc couvre `compute_invoice`).\n\nAucun autre test n'est impact\u00e9.",
   "error": null,
-  "score": 1,
+  "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T20:40:08.325795+00:00"
+  "timestamp": "2026-04-16T08:25:53.638771+00:00"
 }

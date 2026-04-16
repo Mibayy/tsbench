@@ -2,20 +2,17 @@
   "task_id": "TASK-022",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 6,
-  "output_tokens": 1042,
-  "cache_creation_input_tokens": 16468,
-  "cache_read_input_tokens": 175178,
-  "total_tokens": 192694,
-  "active_tokens": 17516,
-  "turns_count": 9,
-  "tool_calls_count": 5,
+  "input_tokens": 8,
+  "output_tokens": 770,
+  "cache_creation_input_tokens": 18071,
+  "cache_read_input_tokens": 175630,
+  "total_tokens": 194479,
+  "active_tokens": 18849,
+  "turns_count": 4,
+  "tool_calls_count": 2,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__detect_breaking_changes": 1,
-    "mcp__token-savior-recall__get_changed_symbols": 1,
-    "mcp__token-savior-recall__get_function_source": 1,
-    "mcp__token-savior-recall__get_change_impact": 1
+    "mcp__token-savior-recall__detect_breaking_changes": 1
   },
   "tool_calls_detail": [
     {
@@ -25,22 +22,7 @@
     },
     {
       "tool": "mcp__token-savior-recall__detect_breaking_changes",
-      "result_chars": 1945,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_changed_symbols",
-      "result_chars": 9745,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 1023,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_change_impact",
-      "result_chars": 69,
+      "result_chars": 1727,
       "is_error": false
     }
   ],
@@ -56,72 +38,28 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "detect_breaking_changes",
-      "time_ms": 125
+      "time_ms": 87
     },
     {
       "tool": "detect_breaking_changes",
       "args": {
         "since_ref": "v1"
       },
-      "result_chars": 1945,
+      "result_chars": 1727,
       "result_empty": false,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
-      "followed_by": "get_changed_symbols",
-      "time_ms": 950
-    },
-    {
-      "tool": "get_changed_symbols",
-      "args": {
-        "ref": "v1"
-      },
-      "result_chars": 9745,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 2,
-      "preceded_by": "detect_breaking_changes",
-      "followed_by": "get_function_source",
-      "time_ms": 631
-    },
-    {
-      "tool": "get_function_source",
-      "args": {
-        "names": [
-          "authenticate_user",
-          "calculate_invoice",
-          "buggy_paginate",
-          "charge_customer"
-        ]
-      },
-      "result_chars": 1023,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 3,
-      "preceded_by": "get_changed_symbols",
-      "followed_by": "get_change_impact",
-      "time_ms": 355
-    },
-    {
-      "tool": "get_change_impact",
-      "args": {
-        "name": "authenticate_user"
-      },
-      "result_chars": 69,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 4,
-      "preceded_by": "get_function_source",
       "followed_by": null,
-      "time_ms": 114
+      "time_ms": 800
     }
   ],
-  "total_context_chars_injected": 12842,
-  "ts_tool_calls_count": 5,
-  "wall_time_seconds": 33.71,
-  "raw_response": "Voici les changements v1\u2192v2 class\u00e9s par criticit\u00e9 d\u00e9croissante :\n\n---\n\n### 1. CRITIQUE \u2014 `authenticate_user()` (auth.py:14)\n**Signature cass\u00e9e** : les params `payload` et `user_id` sont remplac\u00e9s par `credentials`. Tous les appelants existants \u00e9choueront \u00e0 l'ex\u00e9cution. C'est le changement le plus dangereux \u2014 il touche l'authentification, chemin critique de toute l'app.\n\n### 2. CRITIQUE \u2014 `compute_invoice()` supprim\u00e9e \u2192 `calculate_invoice()` (billing.py:14)\nRenommage sans alias. Tout code appelant `compute_invoice()` l\u00e8vera un `AttributeError`. De plus, `validate_invoice_total` appara\u00eet 3 fois (lignes 49, 53, 57) \u2014 potentielle red\u00e9finition accidentelle.\n\n### 3. \u00c9LEV\u00c9 \u2014 `bulk_import_members()` supprim\u00e9e (members.py:184)\nFonction supprim\u00e9e sans remplacement visible. Si un workflow d'import en masse l'utilise, il cassera silencieusement.\n\n### 4. \u00c9LEV\u00c9 \u2014 `delete_webhooks()` supprim\u00e9e (webhooks.py:121)\nEndpoint de suppression retir\u00e9 du routeur. Les clients API recevront un 404/405 au lieu de supprimer.\n\n### 5. MOD\u00c9R\u00c9 \u2014 `slugify()` supprim\u00e9e (strings.py:4) + `to_slug()` supprim\u00e9e (slug_copy.py:4)\nLes deux fonctions de slugification sont retir\u00e9es. `slug_copy.py` ajoute un nouveau `slugify()` mais avec potentiellement un comportement diff\u00e9rent.\n\n### 6. MOD\u00c9R\u00c9 \u2014 `buggy_paginate()` (buggy_pagination.py:5) + `paginate_also()` (paginate_copy.py:6)\nModifications du corps \u2014 risque de r\u00e9gression sur la pagination (off-by-one, pages vides, etc.).\n\n### 7. FAIBLE \u2014 Modifications body-only des 6 routes billing (`list_`, `create_`, `get_`, `update_`, `delete_`, `add_member_to_billing`)\nRefactors internes, pas de changement de signature, mais volume de changements \u00e9lev\u00e9 dans un domaine sensible (facturation).\n\n---\n\n**Recommandation** : prioriser la review sur les points 1-2 (breaking changes d'auth et billing) \u2014 ce sont des cassures silencieuses \u00e0 runtime, sans erreur de compilation.",
+  "total_context_chars_injected": 1787,
+  "ts_tool_calls_count": 2,
+  "wall_time_seconds": 20.72,
+  "raw_response": "Classement par criticit\u00e9 (les plus risqu\u00e9s en haut) :\n\n**\ud83d\udd34 Critique \u2014 signature incompatible sans migration**\n1. `apps/api/services/auth.py:14` `authenticate_user()` \u2014 remplacement de `payload`/`user_id` par `credentials` (requis, sans d\u00e9faut). Tous les appelants existants cassent. **Review auth = priorit\u00e9 absolue**.\n\n**\ud83d\udfe0 Haute \u2014 suppressions avec potentiels renommages silencieux**\n2. `apps/api/services/billing.py:14` `compute_invoice()` supprim\u00e9e \u2192 remplac\u00e9e par `calculate_invoice()` (+ nouveau `validate_invoice_total`). V\u00e9rifier que tous les call sites ont \u00e9t\u00e9 migr\u00e9s.\n3. `apps/api/ambig/mod1.py:4` `create_user()` supprim\u00e9e \u2192 `create_regular_user()` ajout\u00e9e. Renommage ambigu, risque d'appels r\u00e9siduels.\n4. `apps/api/utils/strings.py:4` `slugify()` supprim\u00e9e \u2014 utilitaire probablement largement utilis\u00e9.\n\n**\ud83d\udfe1 Moyenne \u2014 suppressions franches**\n5. `apps/api/routers/webhooks.py:121` `delete_webhooks()` \u2014 endpoint retir\u00e9, impact client externe possible.\n6. `apps/api/services/members.py:184` `bulk_import_members()` \u2014 feature retir\u00e9e.\n\n**\ud83d\udfe2 Faible (refactors internes)** : `billing.py` routers + `charge_customer` + `buggy_paginate` (body only).\n\n**Action** : v\u00e9rifier `get_change_impact` sur `authenticate_user` et `slugify` avant merge.",
   "error": null,
-  "score": 1,
+  "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T20:45:25.013089+00:00"
+  "timestamp": "2026-04-16T09:03:09.834281+00:00"
 }

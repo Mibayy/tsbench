@@ -2,18 +2,17 @@
   "task_id": "TASK-037",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 9,
-  "output_tokens": 1216,
-  "cache_creation_input_tokens": 16022,
-  "cache_read_input_tokens": 218646,
-  "total_tokens": 235893,
-  "active_tokens": 17247,
-  "turns_count": 14,
-  "tool_calls_count": 11,
+  "input_tokens": 13,
+  "output_tokens": 1786,
+  "cache_creation_input_tokens": 24711,
+  "cache_read_input_tokens": 508352,
+  "total_tokens": 534862,
+  "active_tokens": 26510,
+  "turns_count": 10,
+  "tool_calls_count": 7,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
     "mcp__token-savior-recall__get_project_summary": 1,
-    "mcp__token-savior-recall__get_structure_summary": 4,
     "mcp__token-savior-recall__list_files": 5
   },
   "tool_calls_detail": [
@@ -28,23 +27,8 @@
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__get_structure_summary",
-      "result_chars": 41,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_structure_summary",
-      "result_chars": 41,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_structure_summary",
-      "result_chars": 41,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_structure_summary",
-      "result_chars": 38,
+      "tool": "mcp__token-savior-recall__list_files",
+      "result_chars": 1807,
       "is_error": false
     },
     {
@@ -54,17 +38,12 @@
     },
     {
       "tool": "mcp__token-savior-recall__list_files",
-      "result_chars": 1005,
+      "result_chars": 2459,
       "is_error": false
     },
     {
       "tool": "mcp__token-savior-recall__list_files",
-      "result_chars": 1455,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__list_files",
-      "result_chars": 1181,
+      "result_chars": 1209,
       "is_error": false
     },
     {
@@ -85,7 +64,7 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "get_project_summary",
-      "time_ms": 93
+      "time_ms": 88
     },
     {
       "tool": "get_project_summary",
@@ -95,133 +74,86 @@
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
-      "followed_by": "get_structure_summary",
-      "time_ms": 672
-    },
-    {
-      "tool": "get_structure_summary",
-      "args": {
-        "file_path": "apps/api"
-      },
-      "result_chars": 41,
-      "result_empty": true,
-      "is_error": false,
-      "call_index": 2,
-      "preceded_by": "get_project_summary",
-      "followed_by": "get_structure_summary",
-      "time_ms": 484
-    },
-    {
-      "tool": "get_structure_summary",
-      "args": {
-        "file_path": "apps/web"
-      },
-      "result_chars": 41,
-      "result_empty": true,
-      "is_error": false,
-      "call_index": 3,
-      "preceded_by": "get_structure_summary",
-      "followed_by": "get_structure_summary",
-      "time_ms": 527
-    },
-    {
-      "tool": "get_structure_summary",
-      "args": {
-        "file_path": "packages"
-      },
-      "result_chars": 41,
-      "result_empty": true,
-      "is_error": false,
-      "call_index": 4,
-      "preceded_by": "get_structure_summary",
-      "followed_by": "get_structure_summary",
-      "time_ms": 181
-    },
-    {
-      "tool": "get_structure_summary",
-      "args": {
-        "file_path": "infra"
-      },
-      "result_chars": 38,
-      "result_empty": true,
-      "is_error": false,
-      "call_index": 5,
-      "preceded_by": "get_structure_summary",
       "followed_by": "list_files",
-      "time_ms": 47
+      "time_ms": 654
     },
     {
       "tool": "list_files",
       "args": {
-        "pattern": "apps/api/**/*.py"
+        "pattern": "apps/**/*",
+        "max_results": 50
+      },
+      "result_chars": 1807,
+      "result_empty": false,
+      "is_error": false,
+      "call_index": 2,
+      "preceded_by": "get_project_summary",
+      "followed_by": "list_files",
+      "time_ms": 32
+    },
+    {
+      "tool": "list_files",
+      "args": {
+        "pattern": "apps/api/**/*.py",
+        "max_results": 200
       },
       "result_chars": 3514,
       "result_empty": false,
       "is_error": false,
-      "call_index": 6,
-      "preceded_by": "get_structure_summary",
-      "followed_by": "list_files",
-      "time_ms": 511
-    },
-    {
-      "tool": "list_files",
-      "args": {
-        "pattern": "apps/web/**/*.ts"
-      },
-      "result_chars": 1005,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 7,
+      "call_index": 3,
       "preceded_by": "list_files",
       "followed_by": "list_files",
-      "time_ms": 40
+      "time_ms": 49
     },
     {
       "tool": "list_files",
       "args": {
-        "pattern": "apps/web/**/*.tsx"
+        "pattern": "apps/web/**/*",
+        "max_results": 80
       },
-      "result_chars": 1455,
+      "result_chars": 2459,
       "result_empty": false,
       "is_error": false,
-      "call_index": 8,
+      "call_index": 4,
       "preceded_by": "list_files",
       "followed_by": "list_files",
-      "time_ms": 234
+      "time_ms": 65
     },
     {
       "tool": "list_files",
       "args": {
-        "pattern": "packages/**/*"
+        "pattern": "packages/**/*",
+        "max_results": 60
       },
-      "result_chars": 1181,
+      "result_chars": 1209,
       "result_empty": false,
       "is_error": false,
-      "call_index": 9,
+      "call_index": 5,
       "preceded_by": "list_files",
       "followed_by": "list_files",
-      "time_ms": 225
+      "time_ms": 65
     },
     {
       "tool": "list_files",
       "args": {
-        "pattern": "infra/**/*"
+        "pattern": "infra/**/*",
+        "max_results": 30
       },
       "result_chars": 178,
       "result_empty": false,
       "is_error": false,
-      "call_index": 10,
+      "call_index": 6,
       "preceded_by": "list_files",
       "followed_by": null,
-      "time_ms": 42
+      "time_ms": 44
     }
   ],
-  "total_context_chars_injected": 7802,
-  "ts_tool_calls_count": 11,
-  "wall_time_seconds": 39.47,
-  "raw_response": "Voici le r\u00e9sum\u00e9 du code applicatif :\n\n- **Domaine** : plateforme SaaS B2B de gestion d'\u00e9quipe/organisation \u2014 avec authentification, membres, facturation, notifications, webhooks, sessions, rapports et audit.\n\n- **Monorepo structur\u00e9 en 4 couches** : `apps/api` (backend Python), `apps/web` (frontend TypeScript/React), `packages/` (code partag\u00e9), `infra/` (d\u00e9ploiement).\n\n- **Backend Python (`apps/api`)** : architecture en couches classique \u2014 `models/`, `schemas/`, `routers/`, `services/` \u2014 couvrant 10 domaines m\u00e9tier (auth, billing, members, notifications, webhooks, sessions, reports, audit, exports, integrations).\n\n- **Frontend React/Next.js (`apps/web`)** : App Router avec ~17 pages (dashboard, login, signup, billing, members, settings, reports, etc.), ~20 composants UI r\u00e9utilisables, des hooks m\u00e9tier par domaine, et une couche API client (`api/`, `lib/`).\n\n- **Package DB (`packages/db`)** : sch\u00e9ma Prisma, helpers SQL, seeds, triggers, vues, proc\u00e9dures stock\u00e9es, contraintes et health checks.\n\n- **Package utils partag\u00e9s (`packages/utils`)** : utilitaires cross-stack \u2014 cache, circuit breaker, rate limiting, retry, crypto, compression, m\u00e9triques, tracing, s\u00e9rialisation.\n\n- **Types partag\u00e9s (`packages/shared-types`)** : types TypeScript communs (billing, members, sessions, webhooks) consomm\u00e9s par le frontend et potentiellement d'autres clients.\n\n- **Infra (`infra/`)** : d\u00e9ploiement Kubernetes (manifests pour api, web, worker, ingress) et Terraform (IaC cloud).\n\n- **Utilitaires API** : pagination, validation complexe, gestion d'erreurs, logging, helpers de dates et strings \u2014 plus des fichiers explicitement \"buggy\" et \"obsolete\" (probablement pour le benchmark).\n\n- **Patterns avanc\u00e9s** : cha\u00eenes d'appels (`chains/`), graphes de d\u00e9pendances avec cycles (`cycles/`), callers \u00e0 fan-out variable (`callers/`) \u2014 servant de cas de test pour l'analyse statique du projet.",
+  "total_context_chars_injected": 9475,
+  "ts_tool_calls_count": 7,
+  "wall_time_seconds": 38.06,
+  "raw_response": "- **Domaine** : SaaS B2B multi-tenant \u2014 gestion de membres, billing/abonnements, sessions, notifications, webhooks, audit, reports, exports, int\u00e9grations, auth.\n- **Monorepo** \u00e0 3 workspaces principaux : `apps/` (applicatif), `packages/` (code partag\u00e9), `infra/` (d\u00e9ploiement).\n- **Backend Python** (`apps/api/`) organis\u00e9 en couches classiques : `routers/` (HTTP endpoints) \u2192 `services/` (logique m\u00e9tier) \u2192 `models/` (ORM) + `schemas/` (DTOs Pydantic-style) + `utils/` transverses.\n- **Modules m\u00e9tier backend** uniformes sur ~10 domaines (auth, members, billing, sessions, webhooks, notifications, audit, reports, exports, integrations), chacun avec son quadruplet router/service/schema/model.\n- **Frontend Next.js** (`apps/web/`) en App Router : `app/` (pages \u2014 dashboard, login, billing, members, etc.), `components/` (UI r\u00e9utilisable), `hooks/` (SWR/React Query par domaine), `lib/` (apiClient, format, permissions, validation), `types/`.\n- **Package `packages/db`** : sch\u00e9ma Prisma + helpers Python (constraints, indexes, triggers, views, seeds, procedures) \u2014 couche persistance partag\u00e9e.\n- **Package `packages/utils`** : lib transverse bilingue Python+TS (cache, circuit_breaker, crypto, dates, ids, rate_limit, retry, metrics, tracing, sanitization\u2026).\n- **Package `packages/shared-types`** : types TS partag\u00e9s entre front et API (billing, members, sessions, webhooks).\n- **Infra** (`infra/`) : manifests Kubernetes (api, web, worker, ingress) + Terraform (main/variables/outputs).\n- **Bruit volontaire** pour benchmarking de navigation : `apps/api/callers/`, `chains/`, `cycles/`, `ambig/`, et plusieurs fichiers `buggy_*`, `complex_*`, `legacy_*`, `obsolete.py`, `*_copy.py` \u2014 surface con\u00e7ue pour tester recherche, cycles d'import et duplicats s\u00e9mantiques.",
   "error": null,
   "score": 1,
   "max_score": 2,
-  "timestamp": "2026-04-15T20:54:20.306847+00:00"
+  "timestamp": "2026-04-16T08:32:17.205631+00:00"
 }

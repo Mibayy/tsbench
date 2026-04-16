@@ -2,22 +2,17 @@
   "task_id": "TASK-036",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 12,
-  "output_tokens": 1808,
-  "cache_creation_input_tokens": 17572,
-  "cache_read_input_tokens": 405329,
-  "total_tokens": 424721,
-  "active_tokens": 19392,
-  "turns_count": 22,
-  "tool_calls_count": 14,
+  "input_tokens": 8,
+  "output_tokens": 1039,
+  "cache_creation_input_tokens": 70213,
+  "cache_read_input_tokens": 128766,
+  "total_tokens": 200026,
+  "active_tokens": 71260,
+  "turns_count": 4,
+  "tool_calls_count": 2,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__find_semantic_duplicates": 2,
-    "mcp__token-savior-recall__find_symbol": 2,
-    "mcp__token-savior-recall__list_files": 1,
-    "mcp__token-savior-recall__get_structure_summary": 5,
-    "mcp__token-savior-recall__get_function_source": 2,
-    "mcp__token-savior-recall__search_codebase": 1
+    "mcp__token-savior-recall__find_semantic_duplicates": 1
   },
   "tool_calls_detail": [
     {
@@ -27,67 +22,7 @@
     },
     {
       "tool": "mcp__token-savior-recall__find_semantic_duplicates",
-      "result_chars": 5533,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__find_semantic_duplicates",
-      "result_chars": 17815,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__find_symbol",
-      "result_chars": 928,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__list_files",
-      "result_chars": 95,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_structure_summary",
-      "result_chars": 133,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_structure_summary",
-      "result_chars": 79,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_structure_summary",
-      "result_chars": 96,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_structure_summary",
-      "result_chars": 194,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_structure_summary",
-      "result_chars": 89,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 1498,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__find_symbol",
-      "result_chars": 807,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 405,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__search_codebase",
-      "result_chars": 271,
+      "result_chars": 11506,
       "is_error": false
     }
   ],
@@ -103,207 +38,28 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "find_semantic_duplicates",
-      "time_ms": 103
+      "time_ms": 81
     },
     {
       "tool": "find_semantic_duplicates",
-      "args": {},
-      "result_chars": 5533,
+      "args": {
+        "max_groups": 30
+      },
+      "result_chars": 11506,
       "result_empty": false,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
-      "followed_by": "find_semantic_duplicates",
-      "time_ms": 1431
-    },
-    {
-      "tool": "find_semantic_duplicates",
-      "args": {
-        "min_lines": 4,
-        "max_groups": 30
-      },
-      "result_chars": 17815,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 2,
-      "preceded_by": "find_semantic_duplicates",
-      "followed_by": "find_symbol",
-      "time_ms": 93
-    },
-    {
-      "tool": "find_symbol",
-      "args": {
-        "names": [
-          "paginate",
-          "paginate_results",
-          "slugify",
-          "to_slug",
-          "generate_slug"
-        ],
-        "level": 2
-      },
-      "result_chars": 928,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 3,
-      "preceded_by": "find_semantic_duplicates",
-      "followed_by": "list_files",
-      "time_ms": 409
-    },
-    {
-      "tool": "list_files",
-      "args": {
-        "pattern": "*copy*"
-      },
-      "result_chars": 95,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 4,
-      "preceded_by": "find_symbol",
-      "followed_by": "get_structure_summary",
-      "time_ms": 432
-    },
-    {
-      "tool": "get_structure_summary",
-      "args": {
-        "file_path": "packages/utils/paginate_copy.py"
-      },
-      "result_chars": 133,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 5,
-      "preceded_by": "list_files",
-      "followed_by": "get_structure_summary",
-      "time_ms": 532
-    },
-    {
-      "tool": "get_structure_summary",
-      "args": {
-        "file_path": "packages/utils/slug_copy.py"
-      },
-      "result_chars": 79,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 6,
-      "preceded_by": "get_structure_summary",
-      "followed_by": "get_structure_summary",
-      "time_ms": 464
-    },
-    {
-      "tool": "get_structure_summary",
-      "args": {
-        "file_path": "packages/utils/date_copy.py"
-      },
-      "result_chars": 96,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 7,
-      "preceded_by": "get_structure_summary",
-      "followed_by": "get_structure_summary",
-      "time_ms": 461
-    },
-    {
-      "tool": "get_structure_summary",
-      "args": {
-        "file_path": "apps/api/utils/pagination.py"
-      },
-      "result_chars": 194,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 8,
-      "preceded_by": "get_structure_summary",
-      "followed_by": "get_structure_summary",
-      "time_ms": 286
-    },
-    {
-      "tool": "get_structure_summary",
-      "args": {
-        "file_path": "apps/api/utils/strings.py"
-      },
-      "result_chars": 89,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 9,
-      "preceded_by": "get_structure_summary",
-      "followed_by": "get_function_source",
-      "time_ms": 66
-    },
-    {
-      "tool": "get_function_source",
-      "args": {
-        "names": [
-          "paginate",
-          "paginate_also",
-          "slugify",
-          "day_start"
-        ],
-        "level": 0
-      },
-      "result_chars": 1498,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 10,
-      "preceded_by": "get_structure_summary",
-      "followed_by": "find_symbol",
-      "time_ms": 339
-    },
-    {
-      "tool": "find_symbol",
-      "args": {
-        "names": [
-          "make_slug",
-          "normalize_slug",
-          "start_of_day",
-          "truncate_date"
-        ],
-        "level": 2
-      },
-      "result_chars": 807,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 11,
-      "preceded_by": "get_function_source",
-      "followed_by": "get_function_source",
-      "time_ms": 505
-    },
-    {
-      "tool": "get_function_source",
-      "args": {
-        "names": [
-          "start_of_day",
-          "truncate"
-        ],
-        "level": 0
-      },
-      "result_chars": 405,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 12,
-      "preceded_by": "find_symbol",
-      "followed_by": "search_codebase",
-      "time_ms": 509
-    },
-    {
-      "tool": "search_codebase",
-      "args": {
-        "pattern": "def.*slug",
-        "max_results": 10
-      },
-      "result_chars": 271,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 13,
-      "preceded_by": "get_function_source",
       "followed_by": null,
-      "time_ms": 118
+      "time_ms": 1362
     }
   ],
-  "total_context_chars_injected": 28003,
-  "ts_tool_calls_count": 14,
-  "wall_time_seconds": 74.92,
-  "raw_response": "Oui, il y a **3 paires de fonctions s\u00e9mantiquement dupliqu\u00e9es** dans le projet :\n\n| # | Fonction A | Fonction B | Diff\u00e9rence |\n|---|-----------|-----------|------------|\n| 1 | `paginate` (`apps/api/utils/pagination.py:5`) | `paginate_also` (`packages/utils/paginate_copy.py:6`) | M\u00eame logique de pagination par tranche. Seule diff : la source de `page_size` par d\u00e9faut (config settings vs constante hardcod\u00e9e \u00e0 100). |\n| 2 | `start_of_day` (`apps/api/utils/dates.py:5`) | `day_start` (`packages/utils/date_copy.py:5`) | **Strictement identiques** \u2014 `dt.replace(hour=0, minute=0, second=0, microsecond=0)`. |\n| 3 | `slugify` (`packages/utils/slug_copy.py:4`) | `slugify` (`generate.py:611`) | M\u00eame nom, m\u00eame signature \u2014 les deux font `\"-\".join(value.lower().split())`. |\n\nLes fichiers `packages/utils/*_copy.py` sont clairement des copies conscientes (les docstrings le disent explicitement : *\"duplicate of\u2026\"*). Ce sont de bons candidats pour \u00eatre supprim\u00e9s et remplac\u00e9s par des imports vers les originaux.",
+  "total_context_chars_injected": 11566,
+  "ts_tool_calls_count": 2,
+  "wall_time_seconds": 24.61,
+  "raw_response": "Oui, 31 groupes de doublons s\u00e9mantiques. Paires principales :\n\n**Utils r\u00e9ellement dupliqu\u00e9es :**\n- `start_of_day` (apps/api/utils/dates.py:5) \u2194 `day_start` (packages/utils/date_copy.py:5)\n- `slugify` (packages/utils/strings.py:1) \u2194 `to_slug` (packages/utils/slug_copy.py:4)\n\n**DB package (packages/db) :**\n- `procedures_create` \u2194 `constraints_restore`\n- `procedures_rollback` \u2194 `triggers_validate`\n- `procedures_validate` \u2194 `procedures_restore`\n- `reset_rollback` \u2194 `reset_snapshot`\n- `helpers_rollback` \u2194 `triggers_apply`\n- `helpers_validate` \u2194 `triggers_snapshot`\n- `indexes_apply` \u2194 `types_apply`\n- `indexes_rollback` \u2194 `indexes_validate`\n- `health_apply` \u2194 `types_snapshot`\n- `health_restore` \u2194 `views_snapshot`\n- `constraints_apply` \u2194 `seeds_rollback`\n- `seeds_create` \u2194 `seeds_restore`\n- `seeds_snapshot` \u2194 `views_create`\n\n**Groupes massifs (N-uplets) :**\n- Callers `do_it_*` + chains `alpha/beta/gamma_*` + workers `process_step_one` (~46 fonctions)\n- Models CRUD : `__init__`, `save`, `delete`, `to_dict`, `validate`, `mark_dirty` sur Auth/Billing/Session/Notification/Export/Audit/Report/Webhook/Integration/Member (10 classes \u00d7 6 m\u00e9thodes)\n- `*Audit.record` sur les 10 mod\u00e8les\n- Schemas `*Create/Update/Response.__init__` sur les 10 schemas\n- `process_step_two` sur billing/notification/export/webhook/session_tasks\n- `authenticate_multi_factor` \u2194 `route_webhook_event` \u2194 `reconcile_payments` \u2194 `orchestrate_nightly_job`\n- `still_used_helper` \u00d7 4 (legacy_helpers, obsolete, dead_tasks, orphaned)\n- `handle_stripe_event` \u2194 `handle_slack_event` \u2194 `handle_postmark_event` \u2194 `handle_twilio_event`",
   "error": null,
-  "score": 1,
+  "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T20:53:40.832470+00:00"
+  "timestamp": "2026-04-16T09:44:31.692053+00:00"
 }

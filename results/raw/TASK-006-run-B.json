@@ -2,12 +2,12 @@
   "task_id": "TASK-006",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 6,
-  "output_tokens": 562,
-  "cache_creation_input_tokens": 46007,
-  "cache_read_input_tokens": 136840,
-  "total_tokens": 183415,
-  "active_tokens": 46575,
+  "input_tokens": 9,
+  "output_tokens": 676,
+  "cache_creation_input_tokens": 64605,
+  "cache_read_input_tokens": 192265,
+  "total_tokens": 257555,
+  "active_tokens": 65290,
   "turns_count": 5,
   "tool_calls_count": 3,
   "tool_calls_breakdown": {
@@ -44,7 +44,7 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "find_symbol",
-      "time_ms": 100
+      "time_ms": 89
     },
     {
       "tool": "find_symbol",
@@ -58,7 +58,7 @@
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": "get_file_dependents",
-      "time_ms": 746
+      "time_ms": 972
     },
     {
       "tool": "get_file_dependents",
@@ -71,15 +71,15 @@
       "call_index": 2,
       "preceded_by": "find_symbol",
       "followed_by": null,
-      "time_ms": 49
+      "time_ms": 60
     }
   ],
   "total_context_chars_injected": 617,
   "ts_tool_calls_count": 3,
-  "wall_time_seconds": 21.49,
-  "raw_response": "Le composant `<Sidebar>` est d\u00e9fini dans `apps/web/components/Sidebar.tsx:26` et import\u00e9 par **15 pages** :\n\n| Fichier |\n|---|\n| `apps/web/app/audit/page.tsx` |\n| `apps/web/app/billing/page.tsx` |\n| `apps/web/app/dashboard/page.tsx` |\n| `apps/web/app/forgot-password/page.tsx` |\n| `apps/web/app/invite/page.tsx` |\n| `apps/web/app/login/page.tsx` |\n| `apps/web/app/members/page.tsx` |\n| `apps/web/app/notifications/page.tsx` |\n| `apps/web/app/pricing/page.tsx` |\n| `apps/web/app/profile/page.tsx` |\n| `apps/web/app/reports/page.tsx` |\n| `apps/web/app/sessions/page.tsx` |\n| `apps/web/app/settings/page.tsx` |\n| `apps/web/app/signup/page.tsx` |\n| `apps/web/app/webhooks/page.tsx` |\n\nToutes les pages de l'application Next.js sous `apps/web/app/` l'utilisent.",
+  "wall_time_seconds": 22.93,
+  "raw_response": "Le composant `<Sidebar>` est d\u00e9fini dans `apps/web/components/Sidebar.tsx:26` et import\u00e9 par 15 fichiers :\n\n- `apps/web/app/audit/page.tsx`\n- `apps/web/app/billing/page.tsx`\n- `apps/web/app/dashboard/page.tsx`\n- `apps/web/app/forgot-password/page.tsx`\n- `apps/web/app/invite/page.tsx`\n- `apps/web/app/login/page.tsx`\n- `apps/web/app/members/page.tsx`\n- `apps/web/app/notifications/page.tsx`\n- `apps/web/app/pricing/page.tsx`\n- `apps/web/app/profile/page.tsx`\n- `apps/web/app/reports/page.tsx`\n- `apps/web/app/sessions/page.tsx`\n- `apps/web/app/settings/page.tsx`\n- `apps/web/app/signup/page.tsx`\n- `apps/web/app/webhooks/page.tsx`",
   "error": null,
   "score": 1,
   "max_score": 2,
-  "timestamp": "2026-04-15T20:36:25.849422+00:00"
+  "timestamp": "2026-04-16T08:25:18.347277+00:00"
 }

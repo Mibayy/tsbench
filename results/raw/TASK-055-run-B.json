@@ -2,28 +2,22 @@
   "task_id": "TASK-055",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 6,
-  "output_tokens": 387,
-  "cache_creation_input_tokens": 45720,
-  "cache_read_input_tokens": 136109,
-  "total_tokens": 182222,
-  "active_tokens": 46113,
-  "turns_count": 5,
-  "tool_calls_count": 3,
+  "input_tokens": 8,
+  "output_tokens": 366,
+  "cache_creation_input_tokens": 63724,
+  "cache_read_input_tokens": 126706,
+  "total_tokens": 190804,
+  "active_tokens": 64098,
+  "turns_count": 4,
+  "tool_calls_count": 2,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__find_symbol": 1,
     "mcp__token-savior-recall__insert_near_symbol": 1
   },
   "tool_calls_detail": [
     {
       "tool": "mcp__token-savior-recall__switch_project",
       "result_chars": 60,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__find_symbol",
-      "result_chars": 109,
       "is_error": false
     },
     {
@@ -43,46 +37,32 @@
       "is_error": false,
       "call_index": 0,
       "preceded_by": null,
-      "followed_by": "find_symbol",
-      "time_ms": 100
-    },
-    {
-      "tool": "find_symbol",
-      "args": {
-        "name": "calculate_invoice",
-        "level": 2
-      },
-      "result_chars": 109,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 1,
-      "preceded_by": "switch_project",
       "followed_by": "insert_near_symbol",
-      "time_ms": 392
+      "time_ms": 120
     },
     {
       "tool": "insert_near_symbol",
       "args": {
         "symbol_name": "calculate_invoice",
-        "content": "\n\ndef validate_invoice_total(invoice: dict) -> bool:\n    return invoice[\"total\"] > 0\n",
+        "file_path": "apps/api/services/billing.py",
         "position": "after",
-        "file_path": "apps/api/services/billing.py"
+        "content": "\n\ndef validate_invoice_total(invoice: dict) -> bool:\n    return invoice[\"total\"] > 0\n"
       },
       "result_chars": 184,
       "result_empty": false,
       "is_error": false,
-      "call_index": 2,
-      "preceded_by": "find_symbol",
+      "call_index": 1,
+      "preceded_by": "switch_project",
       "followed_by": null,
-      "time_ms": 65
+      "time_ms": 273
     }
   ],
-  "total_context_chars_injected": 353,
-  "ts_tool_calls_count": 3,
-  "wall_time_seconds": 16.28,
-  "raw_response": "Fonction `validate_invoice_total` ins\u00e9r\u00e9e apr\u00e8s `calculate_invoice` \u00e0 la ligne 47 de `apps/api/services/billing.py`. Elle retourne `True` si `invoice[\"total\"] > 0`, `False` sinon.",
+  "total_context_chars_injected": 244,
+  "ts_tool_calls_count": 2,
+  "wall_time_seconds": 15.06,
+  "raw_response": "Inserted `validate_invoice_total` after `calculate_invoice` at line 47 in `apps/api/services/billing.py`.",
   "error": null,
   "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T21:04:46.007635+00:00"
+  "timestamp": "2026-04-16T08:34:10.011123+00:00"
 }

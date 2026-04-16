@@ -1,7 +1,7 @@
 """AMBIG-001 part 1."""
 
 
-def create_user(email: str, role: str = "member") -> dict:
+def create_regular_user(email: str, role: str = "member") -> dict:
     """Create a regular user (AMBIG target 1/2)."""
     return {"email": email, "role": role, "module": "mod1"}
 

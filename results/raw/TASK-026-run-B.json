@@ -2,22 +2,17 @@
   "task_id": "TASK-026",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 13,
-  "output_tokens": 1643,
-  "cache_creation_input_tokens": 15297,
-  "cache_read_input_tokens": 407218,
-  "total_tokens": 424171,
-  "active_tokens": 16953,
-  "turns_count": 24,
-  "tool_calls_count": 18,
+  "input_tokens": 8,
+  "output_tokens": 290,
+  "cache_creation_input_tokens": 17270,
+  "cache_read_input_tokens": 175346,
+  "total_tokens": 192914,
+  "active_tokens": 17568,
+  "turns_count": 4,
+  "tool_calls_count": 2,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__find_cross_project_deps": 1,
-    "mcp__token-savior-recall__get_file_dependencies": 4,
-    "mcp__token-savior-recall__search_codebase": 1,
-    "mcp__token-savior-recall__list_files": 1,
-    "mcp__token-savior-recall__get_functions": 2,
-    "mcp__token-savior-recall__get_imports": 8
+    "mcp__token-savior-recall__find_import_cycles": 1
   },
   "tool_calls_detail": [
     {
@@ -26,88 +21,8 @@
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__find_cross_project_deps",
-      "result_chars": 85,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_file_dependencies",
-      "result_chars": 61,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_file_dependencies",
-      "result_chars": 123,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_file_dependencies",
-      "result_chars": 22,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_file_dependencies",
-      "result_chars": 66,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__search_codebase",
-      "result_chars": 2,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__list_files",
-      "result_chars": 80,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_functions",
-      "result_chars": 309,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_functions",
-      "result_chars": 313,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_imports",
-      "result_chars": 25,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_imports",
-      "result_chars": 25,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_imports",
-      "result_chars": 28,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_imports",
-      "result_chars": 27,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_imports",
-      "result_chars": 51,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_imports",
-      "result_chars": 79,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_imports",
-      "result_chars": 29,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_imports",
-      "result_chars": 43,
+      "tool": "mcp__token-savior-recall__find_import_cycles",
+      "result_chars": 140,
       "is_error": false
     }
   ],
@@ -122,235 +37,27 @@
       "is_error": false,
       "call_index": 0,
       "preceded_by": null,
-      "followed_by": "find_cross_project_deps",
-      "time_ms": 130
+      "followed_by": "find_import_cycles",
+      "time_ms": 127
     },
     {
-      "tool": "find_cross_project_deps",
+      "tool": "find_import_cycles",
       "args": {},
-      "result_chars": 85,
+      "result_chars": 140,
       "result_empty": false,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
-      "followed_by": "get_file_dependencies",
-      "time_ms": 59
-    },
-    {
-      "tool": "get_file_dependencies",
-      "args": {
-        "file_path": "apps/api/ambig/mod1.py"
-      },
-      "result_chars": 61,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 2,
-      "preceded_by": "find_cross_project_deps",
-      "followed_by": "get_file_dependencies",
-      "time_ms": 979
-    },
-    {
-      "tool": "get_file_dependencies",
-      "args": {
-        "file_path": "apps/api/services/billing.py"
-      },
-      "result_chars": 123,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 3,
-      "preceded_by": "get_file_dependencies",
-      "followed_by": "get_file_dependencies",
-      "time_ms": 492
-    },
-    {
-      "tool": "get_file_dependencies",
-      "args": {
-        "file_path": "packages/utils/paginate_copy.py"
-      },
-      "result_chars": 22,
-      "result_empty": true,
-      "is_error": false,
-      "call_index": 4,
-      "preceded_by": "get_file_dependencies",
-      "followed_by": "get_file_dependencies",
-      "time_ms": 323
-    },
-    {
-      "tool": "get_file_dependencies",
-      "args": {
-        "file_path": "packages/utils/slug_copy.py"
-      },
-      "result_chars": 66,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 5,
-      "preceded_by": "get_file_dependencies",
-      "followed_by": "search_codebase",
-      "time_ms": 49
-    },
-    {
-      "tool": "search_codebase",
-      "args": {
-        "pattern": "from apps\\.api\\.ambig|import apps\\.api\\.ambig|from \\.ambig|from ambig"
-      },
-      "result_chars": 2,
-      "result_empty": true,
-      "is_error": false,
-      "call_index": 6,
-      "preceded_by": "get_file_dependencies",
-      "followed_by": "list_files",
-      "time_ms": 179
-    },
-    {
-      "tool": "list_files",
-      "args": {
-        "pattern": "apps/api/ambig/*"
-      },
-      "result_chars": 80,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 7,
-      "preceded_by": "search_codebase",
-      "followed_by": "get_functions",
-      "time_ms": 159
-    },
-    {
-      "tool": "get_functions",
-      "args": {
-        "file_path": "apps/api/ambig/mod1.py"
-      },
-      "result_chars": 309,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 8,
-      "preceded_by": "list_files",
-      "followed_by": "get_functions",
-      "time_ms": 730
-    },
-    {
-      "tool": "get_functions",
-      "args": {
-        "file_path": "apps/api/ambig/mod2.py"
-      },
-      "result_chars": 313,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 9,
-      "preceded_by": "get_functions",
-      "followed_by": "get_imports",
-      "time_ms": 203
-    },
-    {
-      "tool": "get_imports",
-      "args": {
-        "file_path": "apps/api/ambig/mod1.py"
-      },
-      "result_chars": 25,
-      "result_empty": true,
-      "is_error": false,
-      "call_index": 10,
-      "preceded_by": "get_functions",
-      "followed_by": "get_imports",
-      "time_ms": 98
-    },
-    {
-      "tool": "get_imports",
-      "args": {
-        "file_path": "apps/api/ambig/mod2.py"
-      },
-      "result_chars": 25,
-      "result_empty": true,
-      "is_error": false,
-      "call_index": 11,
-      "preceded_by": "get_imports",
-      "followed_by": "get_imports",
-      "time_ms": 262
-    },
-    {
-      "tool": "get_imports",
-      "args": {
-        "file_path": "apps/web/lib/constants.ts"
-      },
-      "result_chars": 28,
-      "result_empty": true,
-      "is_error": false,
-      "call_index": 12,
-      "preceded_by": "get_imports",
-      "followed_by": "get_imports",
-      "time_ms": 810
-    },
-    {
-      "tool": "get_imports",
-      "args": {
-        "file_path": "apps/api/utils/errors.py"
-      },
-      "result_chars": 27,
-      "result_empty": true,
-      "is_error": false,
-      "call_index": 13,
-      "preceded_by": "get_imports",
-      "followed_by": "get_imports",
-      "time_ms": 396
-    },
-    {
-      "tool": "get_imports",
-      "args": {
-        "file_path": "apps/api/config.py"
-      },
-      "result_chars": 51,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 14,
-      "preceded_by": "get_imports",
-      "followed_by": "get_imports",
-      "time_ms": 49
-    },
-    {
-      "tool": "get_imports",
-      "args": {
-        "file_path": "apps/api/db.py"
-      },
-      "result_chars": 79,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 15,
-      "preceded_by": "get_imports",
-      "followed_by": "get_imports",
-      "time_ms": 79
-    },
-    {
-      "tool": "get_imports",
-      "args": {
-        "file_path": "apps/api/models/billing.py"
-      },
-      "result_chars": 29,
-      "result_empty": true,
-      "is_error": false,
-      "call_index": 16,
-      "preceded_by": "get_imports",
-      "followed_by": "get_imports",
-      "time_ms": 497
-    },
-    {
-      "tool": "get_imports",
-      "args": {
-        "file_path": "apps/api/utils/logging.py"
-      },
-      "result_chars": 43,
-      "result_empty": true,
-      "is_error": false,
-      "call_index": 17,
-      "preceded_by": "get_imports",
       "followed_by": null,
-      "time_ms": 477
+      "time_ms": 610
     }
   ],
-  "total_context_chars_injected": 1428,
-  "ts_tool_calls_count": 18,
-  "wall_time_seconds": 59.79,
-  "raw_response": "**Non, il n'y a pas de d\u00e9pendances circulaires dans ce projet.**\n\nL'analyse du graphe d'imports montre que les d\u00e9pendances sont acycliques :\n\n- **Python (`apps/api/`)** : `services/billing.py` \u2192 `config.py`, `db.py`, `models/billing.py`, `utils/errors.py`, `utils/logging.py`. Les modules `config.py` et `db.py` n'importent que des biblioth\u00e8ques standard. `utils/logging.py` \u2192 `config.py` (pas de retour). Aucun cycle.\n- **Python (`packages/utils/`)** : `paginate_copy.py` \u2192 `config.py`. Pas de retour.\n- **TypeScript (`apps/web/`)** : `lib/constants.ts` n'a aucun import interne. Les fichiers API et pages importent depuis `lib/` sans boucle.\n- **`apps/api/ambig/`** : `mod1.py` et `mod2.py` n'importent rien l'un de l'autre.",
+  "total_context_chars_injected": 200,
+  "ts_tool_calls_count": 2,
+  "wall_time_seconds": 21.35,
+  "raw_response": "Oui, 2 cycles d'import d\u00e9tect\u00e9s :\n\n1. `apps/api/cycles/mod_a.py` \u2194 `apps/api/cycles/mod_b.py`\n2. `apps/api/cycles/mod_x.py` \u2192 `mod_y.py` \u2192 `mod_z.py` \u2192 `mod_x.py`",
   "error": null,
-  "score": 0,
+  "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T20:47:54.973368+00:00"
+  "timestamp": "2026-04-16T08:30:21.634799+00:00"
 }

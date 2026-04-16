@@ -2,12 +2,12 @@
   "task_id": "TASK-005",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 5,
-  "output_tokens": 214,
-  "cache_creation_input_tokens": 12105,
-  "cache_read_input_tokens": 124889,
-  "total_tokens": 137213,
-  "active_tokens": 12324,
+  "input_tokens": 8,
+  "output_tokens": 260,
+  "cache_creation_input_tokens": 65506,
+  "cache_read_input_tokens": 128000,
+  "total_tokens": 193774,
+  "active_tokens": 65774,
   "turns_count": 4,
   "tool_calls_count": 2,
   "tool_calls_breakdown": {
@@ -22,7 +22,7 @@
     },
     {
       "tool": "mcp__token-savior-recall__search_codebase",
-      "result_chars": 546,
+      "result_chars": 2983,
       "is_error": false
     }
   ],
@@ -38,29 +38,29 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "search_codebase",
-      "time_ms": 92
+      "time_ms": 101
     },
     {
       "tool": "search_codebase",
       "args": {
-        "pattern": "role.*member|Member.*role",
-        "max_results": 10
+        "pattern": "role",
+        "max_results": 30
       },
-      "result_chars": 546,
+      "result_chars": 2983,
       "result_empty": false,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
       "followed_by": null,
-      "time_ms": 836
+      "time_ms": 571
     }
   ],
-  "total_context_chars_injected": 606,
+  "total_context_chars_injected": 3043,
   "ts_tool_calls_count": 2,
-  "wall_time_seconds": 16.31,
-  "raw_response": "Table **`Member`**, colonne **`role`** (type `String`).\n\nFichier de sch\u00e9ma : **`packages/db/schema.prisma`**",
+  "wall_time_seconds": 16.47,
+  "raw_response": "Table `Member`, colonne `role` \u2014 fichier `packages/db/schema.prisma:22`.",
   "error": null,
-  "score": 1,
+  "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T20:36:04.355905+00:00"
+  "timestamp": "2026-04-16T08:24:55.405797+00:00"
 }

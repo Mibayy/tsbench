@@ -2,20 +2,18 @@
   "task_id": "TASK-018",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 11,
-  "output_tokens": 1070,
-  "cache_creation_input_tokens": 14674,
-  "cache_read_input_tokens": 314612,
-  "total_tokens": 330367,
-  "active_tokens": 15755,
-  "turns_count": 15,
-  "tool_calls_count": 9,
+  "input_tokens": 9,
+  "output_tokens": 710,
+  "cache_creation_input_tokens": 17819,
+  "cache_read_input_tokens": 240070,
+  "total_tokens": 258608,
+  "active_tokens": 18538,
+  "turns_count": 6,
+  "tool_calls_count": 4,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__find_symbol": 1,
-    "mcp__token-savior-recall__search_codebase": 2,
-    "mcp__token-savior-recall__get_structure_summary": 2,
-    "mcp__token-savior-recall__get_class_source": 3
+    "mcp__token-savior-recall__add_field_to_model": 2,
+    "mcp__token-savior-recall__find_symbol": 1
   },
   "tool_calls_detail": [
     {
@@ -24,43 +22,18 @@
       "is_error": false
     },
     {
+      "tool": "mcp__token-savior-recall__add_field_to_model",
+      "result_chars": 88,
+      "is_error": false
+    },
+    {
       "tool": "mcp__token-savior-recall__find_symbol",
-      "result_chars": 1133,
+      "result_chars": 53,
       "is_error": false
     },
     {
-      "tool": "mcp__token-savior-recall__search_codebase",
-      "result_chars": 450,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__search_codebase",
-      "result_chars": 721,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_structure_summary",
-      "result_chars": 336,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_structure_summary",
-      "result_chars": 435,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_class_source",
-      "result_chars": 321,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_class_source",
-      "result_chars": 406,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_class_source",
-      "result_chars": 317,
+      "tool": "mcp__token-savior-recall__add_field_to_model",
+      "result_chars": 90,
       "is_error": false
     }
   ],
@@ -75,135 +48,63 @@
       "is_error": false,
       "call_index": 0,
       "preceded_by": null,
-      "followed_by": "find_symbol",
-      "time_ms": 106
+      "followed_by": "add_field_to_model",
+      "time_ms": 102
     },
     {
-      "tool": "find_symbol",
+      "tool": "add_field_to_model",
       "args": {
-        "names": [
-          "Member",
-          "MemberType"
-        ],
-        "level": 0
+        "model": "Member",
+        "field_name": "archivedAt",
+        "field_type": "DateTime?",
+        "file_path": "packages/db/schema.prisma"
       },
-      "result_chars": 1133,
+      "result_chars": 88,
       "result_empty": false,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
-      "followed_by": "search_codebase",
-      "time_ms": 801
+      "followed_by": "find_symbol",
+      "time_ms": 570
     },
     {
-      "tool": "search_codebase",
+      "tool": "find_symbol",
       "args": {
-        "pattern": "model Member",
-        "max_results": 5
+        "name": "Member",
+        "file_path": "apps/web/types/member.ts",
+        "level": 2
       },
-      "result_chars": 450,
+      "result_chars": 53,
       "result_empty": false,
       "is_error": false,
       "call_index": 2,
-      "preceded_by": "find_symbol",
-      "followed_by": "search_codebase",
-      "time_ms": 400
+      "preceded_by": "add_field_to_model",
+      "followed_by": "add_field_to_model",
+      "time_ms": 382
     },
     {
-      "tool": "search_codebase",
+      "tool": "add_field_to_model",
       "args": {
-        "pattern": "member\\.ts",
-        "max_results": 5
+        "model": "Member",
+        "field_name": "archivedAt",
+        "field_type": "Date | null",
+        "file_path": "apps/web/types/member.ts"
       },
-      "result_chars": 721,
+      "result_chars": 90,
       "result_empty": false,
       "is_error": false,
       "call_index": 3,
-      "preceded_by": "search_codebase",
-      "followed_by": "get_structure_summary",
-      "time_ms": 117
-    },
-    {
-      "tool": "get_structure_summary",
-      "args": {
-        "file_path": "packages/db/schema.prisma"
-      },
-      "result_chars": 336,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 4,
-      "preceded_by": "search_codebase",
-      "followed_by": "get_structure_summary",
-      "time_ms": 273
-    },
-    {
-      "tool": "get_structure_summary",
-      "args": {
-        "file_path": "apps/web/types/member.ts"
-      },
-      "result_chars": 435,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 5,
-      "preceded_by": "get_structure_summary",
-      "followed_by": "get_class_source",
-      "time_ms": 59
-    },
-    {
-      "tool": "get_class_source",
-      "args": {
-        "names": [
-          "Member"
-        ],
-        "file_path": "packages/db/schema.prisma",
-        "level": 0
-      },
-      "result_chars": 321,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 6,
-      "preceded_by": "get_structure_summary",
-      "followed_by": "get_class_source",
-      "time_ms": 367
-    },
-    {
-      "tool": "get_class_source",
-      "args": {
-        "name": "Member",
-        "file_path": "apps/web/types/member.ts",
-        "level": 0
-      },
-      "result_chars": 406,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 7,
-      "preceded_by": "get_class_source",
-      "followed_by": "get_class_source",
-      "time_ms": 238
-    },
-    {
-      "tool": "get_class_source",
-      "args": {
-        "name": "Member",
-        "file_path": "apps/web/types/member.ts",
-        "level": 0,
-        "force_full": true
-      },
-      "result_chars": 317,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 8,
-      "preceded_by": "get_class_source",
+      "preceded_by": "find_symbol",
       "followed_by": null,
-      "time_ms": 263
+      "time_ms": 91
     }
   ],
-  "total_context_chars_injected": 4179,
-  "ts_tool_calls_count": 9,
-  "wall_time_seconds": 33.69,
-  "raw_response": "Les deux fichiers contiennent d\u00e9j\u00e0 le champ `archivedAt` :\n\n- **`packages/db/schema.prisma`** : `archivedAt DateTime?` est pr\u00e9sent sur le mod\u00e8le `Member` (ligne ~26).\n- **`apps/web/types/member.ts`** : `archivedAt: string | null` est pr\u00e9sent sur l'interface `Member`.\n\nLes modifications demand\u00e9es sont d\u00e9j\u00e0 en place \u2014 aucune action n\u00e9cessaire.",
+  "total_context_chars_injected": 291,
+  "ts_tool_calls_count": 4,
+  "wall_time_seconds": 20.91,
+  "raw_response": "Fait.\n\n- `packages/db/schema.prisma` (Member): `archivedAt  DateTime?` ajout\u00e9 ligne 27.\n- `apps/web/types/member.ts` (Member): `archivedAt: Date | null;` ajout\u00e9 ligne 12.",
   "error": null,
-  "score": 1,
+  "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T20:41:18.114276+00:00"
+  "timestamp": "2026-04-16T08:27:06.159560+00:00"
 }

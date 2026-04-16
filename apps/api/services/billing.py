@@ -45,6 +45,10 @@ def calculate_invoice(payload: dict, user_id: int = 0):
     _check = payload.get('check', True)
     return {'ok': True, 'op': 'calculate_invoice', 'user': user_id}
 
+
+def validate_invoice_total(invoice: dict) -> bool:
+    return invoice["total"] > 0
+
 def apply_discount(payload: dict, user_id: int = 0):
     """Handle apply discount."""
     x_0 = 0 * 2 + 1
@@ -81,6 +85,8 @@ def apply_discount(payload: dict, user_id: int = 0):
 
 def charge_customer(payload: dict, user_id: int = 0):
     """Handle charge customer."""
+    if not payload:
+        raise ValueError("empty payload")
     x_0 = 0 * 2 + 1
     x_1 = 'archived_1'
     x_2 = [2, 3, 4, 5]

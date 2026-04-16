@@ -1,13 +1,13 @@
 {
   "kind": "warmup",
   "run": "B",
-  "input_tokens": 4,
-  "output_tokens": 1298,
-  "cache_creation_input_tokens": 10738,
-  "cache_read_input_tokens": 76649,
-  "total_tokens": 88689,
-  "active_tokens": 12040,
-  "turns_count": 4,
+  "input_tokens": 7,
+  "output_tokens": 917,
+  "cache_creation_input_tokens": 64418,
+  "cache_read_input_tokens": 64253,
+  "total_tokens": 129595,
+  "active_tokens": 65342,
+  "turns_count": 3,
   "tool_calls_count": 1,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1
@@ -31,13 +31,13 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": null,
-      "time_ms": 143
+      "time_ms": 2687
     }
   ],
   "total_context_chars_injected": 60,
   "ts_tool_calls_count": 1,
-  "wall_time_seconds": 37.48,
-  "raw_response": "Here are the available **mcp__token-savior-recall__** tools, grouped by category:\n\n### Navigation & Search\n- **find_symbol** \u2014 Locate a symbol (file, line, signature)\n- **get_function_source** \u2014 Get function/method source at varying detail levels\n- **get_class_source** \u2014 Get class source at varying detail levels\n- **get_functions** / **get_classes** \u2014 List functions or classes\n- **get_imports** \u2014 List imports\n- **get_components** \u2014 Detect React components\n- **get_routes** \u2014 Detect Next.js routes\n- **get_entry_points** \u2014 Score likely entry points\n- **search_codebase** \u2014 Regex search across indexed files\n- **list_files** \u2014 List indexed files with glob filtering\n- **get_structure_summary** \u2014 File or project structure overview\n- **get_project_summary** \u2014 High-level project overview\n\n### Dependency & Impact Analysis\n- **get_dependencies** / **get_dependents** \u2014 Direct deps in/out\n- **get_file_dependencies** / **get_file_dependents** \u2014 File-level import graph\n- **get_change_impact** \u2014 Transitive impact of changing a symbol\n- **get_call_chain** \u2014 Shortest path between two symbols\n- **get_relevance_cluster** \u2014 RWR-ranked relevant symbols\n- **get_symbol_cluster** \u2014 Functional cluster via community detection\n- **get_community** / **get_leiden_stats** \u2014 Leiden community info\n- **get_coactive_symbols** \u2014 TCA co-activation pairs\n- **get_edit_context** \u2014 Source + deps + callers in one call\n- **get_backward_slice** \u2014 Minimal lines affecting a variable\n- **find_cross_project_deps** \u2014 Cross-project dependencies\n\n### Editing\n- **replace_symbol_source** \u2014 Replace a symbol's source block\n- **insert_near_symbol** \u2014 Insert content before/after a symbol\n- **apply_symbol_change_and_validate** \u2014 Replace + reindex + run tests\n- **verify_edit** \u2014 Safety check before applying a replacement\n\n### Code Quality\n- **find_hotspots** \u2014 Rank functions by complexity\n- **find_dead_code** \u2014 Unreferenced symbols\n- **find_semantic_duplicates** \u2014 Duplicate functions via AST hashing\n- **find_allocation_hotspots** / **find_performance_hotspots** \u2014 Java-specific\n- **get_duplicate_classes** \u2014 Duplicate Java classes\n- **detect_breaking_changes** \u2014 Breaking API changes vs a git ref\n\n### Git & Changes\n- **get_git_status** \u2014 Structured git status\n- **get_changed_symbols** \u2014 Symbol-level diff\n- **build_commit_summary** / **summarize_patch_by_symbol** \u2014 Symbol-level commit/patch summaries\n- **find_impacted_test_files** \u2014 Infer impacted tests from changes\n- **run_impacted_tests** \u2014 Run those tests\n\n### Checkpoints\n- **create_checkpoint** / **restore_checkpoint** / **delete_checkpoint** / **list_checkpoints** / **prune_checkpoints** / **compare_checkpoint_by_symbol**\n\n### Memory\n- **memory_save** / **memory_search** / **memory_index** / **memory_get** / **memory_delete** / **memory_timeline** / **memory_top** / **memory_why** / **memory_distill** / **memory_doctor** / **memory_consistency** / **memory_quarantine_list** / **memory_archive** / **memory_maintain** / **memory_mode** / **memory_status** / **memory_prompts** / **memory_from_bash** / **memory_roi_stats** / **memory_roi_gc** / **memory_set_global** / **memory_bus_push** / **memory_bus_list**\n\n### Context & Reasoning\n- **pack_context** \u2014 Knapsack-packed context for a query\n- **corpus_build** / **corpus_query** \u2014 Thematic corpus from observations\n- **reasoning_save** / **reasoning_search** / **reasoning_list**\n- **get_feature_files** \u2014 Files matching a feature keyword\n- **get_env_usage** \u2014 Cross-reference env vars\n\n### Config & Infra\n- **analyze_config** \u2014 Audit config files\n- **analyze_docker** \u2014 Analyze Dockerfiles\n- **discover_project_actions** / **run_project_action** \u2014 Detect and run build/test actions\n\n### Stats\n- **get_usage_stats** / **get_session_budget** / **get_dcp_stats** / **get_lattice_stats** / **get_linucb_stats** / **get_tca_stats** / **get_speculation_stats** / **get_warmstart_stats** / **get_call_predictions**\n\n### Project Management\n- **list_projects** / **set_project_root** / **switch_project** / **reindex**\n\nProject switched to **tsbench** (348 files indexed).",
+  "wall_time_seconds": 22.34,
+  "raw_response": "Switched to project `tsbench` (357 files).\n\nAvailable `mcp__token-savior-recall__*` tool categories:\n\n- **Navigation**: `find_symbol`, `search_codebase`, `list_files`, `get_structure_summary`, `get_functions`, `get_classes`, `get_imports`, `get_components`, `get_routes`\n- **Read**: `get_function_source`, `get_class_source`, `get_full_context`, `get_edit_context`, `get_relevance_cluster`, `get_symbol_cluster`, `get_community`\n- **Dependencies**: `get_dependencies`, `get_dependents`, `get_call_chain`, `get_change_impact`, `get_file_dependencies`, `get_file_dependents`, `find_import_cycles`, `find_cross_project_deps`\n- **Edit**: `replace_symbol_source`, `insert_near_symbol`, `add_field_to_model`, `move_symbol`, `apply_refactoring`, `apply_symbol_change_and_validate`, `verify_edit`\n- **Diff/Impact**: `get_changed_symbols`, `detect_breaking_changes`, `summarize_patch_by_symbol`, `build_commit_summary`, `compare_checkpoint_by_symbol`\n- **Quality**: `find_hotspots`, `find_dead_code`, `find_semantic_duplicates`, `find_allocation_hotspots`, `find_performance_hotspots`, `get_duplicate_classes`, `get_entry_points`, `get_backward_slice`\n- **Config/Infra**: `analyze_config`, `analyze_docker`, `get_env_usage`\n- **Checkpoints**: `create_checkpoint`, `list_checkpoints`, `restore_checkpoint`, `compare_checkpoint_by_symbol`, `delete_checkpoint`, `prune_checkpoints`\n- **Tests/Actions**: `find_impacted_test_files`, `run_impacted_tests`, `discover_project_actions`, `run_project_action`\n- **Memory/Reasoning**: `memory_*`, `reasoning_*`, `corpus_*`, `pack_context`\n- **Project/Stats**: `list_projects`, `switch_project`, `set_project_root`, `reindex`, `get_project_summary`, `get_git_status`, plus various stats tools",
   "error": null,
-  "timestamp": "2026-04-15T08:32:49.653535+00:00"
+  "timestamp": "2026-04-16T09:44:07.077057+00:00"
 }

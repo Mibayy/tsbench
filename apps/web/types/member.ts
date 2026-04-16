@@ -9,6 +9,7 @@ export interface Member {
   updatedAt: string;
   createdBy: string;
   archivedAt: string | null;
+  archivedAt: Date | null;
 }
 
 export type MemberStatus = 'active' | 'pending' | 'archived' | 'draft';

@@ -2,19 +2,17 @@
   "task_id": "TASK-014",
   "run": "B",
   "baseline": "token-savior",
-  "input_tokens": 7,
-  "output_tokens": 636,
-  "cache_creation_input_tokens": 13281,
-  "cache_read_input_tokens": 218759,
-  "total_tokens": 232683,
-  "active_tokens": 13924,
-  "turns_count": 8,
-  "tool_calls_count": 4,
+  "input_tokens": 8,
+  "output_tokens": 782,
+  "cache_creation_input_tokens": 7233,
+  "cache_read_input_tokens": 186557,
+  "total_tokens": 194580,
+  "active_tokens": 8023,
+  "turns_count": 4,
+  "tool_calls_count": 2,
   "tool_calls_breakdown": {
     "mcp__token-savior-recall__switch_project": 1,
-    "mcp__token-savior-recall__get_change_impact": 1,
-    "mcp__token-savior-recall__get_function_source": 1,
-    "mcp__token-savior-recall__search_codebase": 1
+    "mcp__token-savior-recall__get_change_impact": 1
   },
   "tool_calls_detail": [
     {
@@ -24,17 +22,7 @@
     },
     {
       "tool": "mcp__token-savior-recall__get_change_impact",
-      "result_chars": 1224,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__get_function_source",
-      "result_chars": 580,
-      "is_error": false
-    },
-    {
-      "tool": "mcp__token-savior-recall__search_codebase",
-      "result_chars": 2,
+      "result_chars": 1222,
       "is_error": false
     }
   ],
@@ -50,59 +38,28 @@
       "call_index": 0,
       "preceded_by": null,
       "followed_by": "get_change_impact",
-      "time_ms": 129
+      "time_ms": 87
     },
     {
       "tool": "get_change_impact",
       "args": {
         "name": "hub_util"
       },
-      "result_chars": 1224,
+      "result_chars": 1222,
       "result_empty": false,
       "is_error": false,
       "call_index": 1,
       "preceded_by": "switch_project",
-      "followed_by": "get_function_source",
-      "time_ms": 551
-    },
-    {
-      "tool": "get_function_source",
-      "args": {
-        "names": [
-          "hub_util",
-          "do_it_0",
-          "do_it_1"
-        ],
-        "level": 0
-      },
-      "result_chars": 580,
-      "result_empty": false,
-      "is_error": false,
-      "call_index": 2,
-      "preceded_by": "get_change_impact",
-      "followed_by": "search_codebase",
-      "time_ms": 263
-    },
-    {
-      "tool": "search_codebase",
-      "args": {
-        "pattern": "hub_util\\(.*payload\\s*="
-      },
-      "result_chars": 2,
-      "result_empty": true,
-      "is_error": false,
-      "call_index": 3,
-      "preceded_by": "get_function_source",
       "followed_by": null,
-      "time_ms": 166
+      "time_ms": 446
     }
   ],
-  "total_context_chars_injected": 1866,
-  "ts_tool_calls_count": 4,
-  "wall_time_seconds": 28.24,
-  "raw_response": "Aucun appel n'utilise `payload=` comme argument nomm\u00e9. Tous les appels sont positionnels.\n\n---\n\n## R\u00e9sultat\n\n**Rien ne casse.** Les 20 callers directs (`do_it_0` \u00e0 `do_it_19` dans `apps/api/callers/caller_hub_util_*.py` et `caller_small_util_01.py`) appellent tous `hub_util(payload)` **positionnellement**, jamais avec `hub_util(payload=...)`.\n\nRenommer le param\u00e8tre de `payload: dict` \u2192 `context: dict` dans la signature est donc **r\u00e9tro-compatible** : aucun appelant ne sera cass\u00e9.\n\n**Seul point d'attention** : le corps de `hub_util` utilise `dict(payload)` \u2014 il faudra aussi mettre \u00e0 jour cette r\u00e9f\u00e9rence en `dict(context)`, sinon vous aurez un `NameError` \u00e0 l'ex\u00e9cution.",
+  "total_context_chars_injected": 1282,
+  "ts_tool_calls_count": 2,
+  "wall_time_seconds": 19.32,
+  "raw_response": "Changer la signature de `hub_util(payload)` \u2192 `hub_util(context)` casse **20 callers directs** dans `apps/api/callers/` :\n\n- `caller_hub_util_00.py` \u2192 `do_it_0`\n- `caller_hub_util_01.py` \u2192 `do_it_1`\n- `caller_hub_util_02.py` \u2192 `do_it_2`\n- `caller_hub_util_03.py` \u2192 `do_it_3`\n- `caller_hub_util_04.py` \u2192 `do_it_4`\n- `caller_hub_util_05.py` \u2192 `do_it_5`\n- `caller_hub_util_06.py` \u2192 `do_it_6`\n- `caller_hub_util_07.py` \u2192 `do_it_7`\n- `caller_hub_util_08.py` \u2192 `do_it_8`\n- `caller_hub_util_09.py` \u2192 `do_it_9`\n- `caller_hub_util_10.py` \u2192 `do_it_10`\n- `caller_hub_util_11.py` \u2192 `do_it_11`\n- `caller_hub_util_12.py` \u2192 `do_it_12`\n- `caller_hub_util_13.py` \u2192 `do_it_13`\n- `caller_hub_util_14.py` \u2192 `do_it_14`\n- `caller_hub_util_15.py` \u2192 `do_it_15`\n- `caller_hub_util_16.py` \u2192 `do_it_16`\n- `caller_hub_util_17.py` \u2192 `do_it_17`\n- `caller_hub_util_18.py` \u2192 `do_it_18`\n- `caller_hub_util_19.py` \u2192 `do_it_19`\n\nTous passent `payload=` en kwarg ou lisent `payload[\"...\"]` \u2014 \u00e0 renommer en `context`. Aucun d\u00e9pendant transitif au-del\u00e0.",
   "error": null,
-  "score": 0,
+  "score": 2,
   "max_score": 2,
-  "timestamp": "2026-04-15T20:39:33.096243+00:00"
+  "timestamp": "2026-04-16T08:59:43.983767+00:00"
 }

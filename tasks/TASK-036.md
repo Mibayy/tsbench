@@ -16,16 +16,6 @@
   "expected_pairs": [
     [
       {
-        "file": "apps/api/utils/pagination.py",
-        "symbol": "paginate"
-      },
-      {
-        "file": "packages/utils/paginate_copy.py",
-        "symbol": "paginate_also"
-      }
-    ],
-    [
-      {
         "file": "apps/api/utils/strings.py",
         "symbol": "slugify"
       },
@@ -45,7 +35,7 @@
       }
     ]
   ],
-  "count": 3
+  "count": 2
 }
 ```
 
@@ -57,4 +47,5 @@
 
 ## Notes pour le juge
 
-3 paires : paginate/paginate_also, slugify/to_slug, start_of_day/day_start.
+2 paires hash-identiques : slugify/to_slug, start_of_day/day_start.
+paginate/paginate_also retirées : default values différents = pas hash-identiques.
