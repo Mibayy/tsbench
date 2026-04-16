@@ -507,7 +507,7 @@ def score_response(scoring: str, expected: dict, response: str) -> tuple[int, in
 
     if scoring == "exact_match":
         file_keys = ("file", "py_file", "ts_file", "schema_file", "from_file", "to_file")
-        symbol_keys = ("symbol", "type", "py_class", "ts_type", "handler", "function", "env_var")
+        symbol_keys = ("symbol", "type", "py_class", "ts_type", "handler", "function", "env_var", "table", "column")
         exp_files = [expected.get(k, "").lower() for k in file_keys if expected.get(k)]
         exp_symbols = [expected.get(k, "").lower() for k in symbol_keys if expected.get(k)]
         has_file = any(f in text for f in exp_files) if exp_files else False
