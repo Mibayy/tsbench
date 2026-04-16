@@ -81,7 +81,8 @@ switch_project → find_import_cycles() → stop
 Pour détecter les cycles d'import, utilise find_import_cycles (Tarjan SCC sur le graphe d'import). NE PAS inférer les cycles à la main via get_file_dependencies/get_file_dependents.
 
 DUPLICATES:
-switch_project → find_semantic_duplicates() → stop
+switch_project → find_semantic_duplicates(max_groups=30) → stop
+TOUJOURS passer max_groups=30 (défaut 30 mais passe-le explicitement). Les paires exactes sont souvent en fin de liste ; sans max_groups=30 tu risques d'en manquer. Énumère TOUTES les paires retournées dans ta réponse (fichier + symbole pour chaque membre), pas juste un résumé.
 Do not verify each duplicate with get_function_source afterwards.
 
 ORPHAN ENV VARS:
