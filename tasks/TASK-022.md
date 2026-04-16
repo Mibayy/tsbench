@@ -14,11 +14,11 @@
 ```json
 {
   "high_risk_expected": [
-    "BREAK-002",
-    "BREAK-003",
-    "BREAK-005"
+    "authenticate_user",
+    "bulk_import_members",
+    "delete_webhooks"
   ],
-  "rationale": "signature/remove/route removal = breaking pour consumers externes"
+  "rationale": "signature/remove/route removal = breaking pour consumers externes (BREAK-002 authenticate_user signature, BREAK-003 bulk_import_members removed, BREAK-005 DELETE /api/webhooks route removed)"
 }
 ```
 
