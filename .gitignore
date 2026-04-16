@@ -41,3 +41,12 @@ results/
 .token-savior-cache.json
 .token-savior-checkpoints/
 *.checkpoint
+
+# OpenClaw workspace (local)
+.openclaw/
+AGENTS.md
+IDENTITY.md
+SOUL.md
+TOOLS.md
+USER.md
+HEARTBEAT.md

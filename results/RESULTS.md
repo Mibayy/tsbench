@@ -1,6 +1,6 @@
 # tsbench — RESULTS
 
-_Generated 2026-04-16T09:50:29.100473+00:00_
+_Generated 2026-04-16T12:20:12.936945+00:00_
 
 ## 1. Résumé exécutif
 
