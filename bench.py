@@ -595,10 +595,13 @@ def score_response(scoring: str, expected: dict, response: str) -> tuple[int, in
 
         if not exp_list:
             return 0, max_score
-        exp_set = {str(x).lower() for x in exp_list}
+        # Require min 3 chars on both sides to avoid noise tokens like "/" or "."
+        # matching every path string in expected via substring check.
+        exp_set = {str(x).lower() for x in exp_list if len(str(x)) >= 3}
         got_files = {f.lower() for f in extract_files(response)}
         got_symbols = {s.lower() for s in extract_symbols(response)}
-        got = got_files | got_symbols | {w.lower() for w in response.split()}
+        got_words = {w.lower() for w in response.split() if len(w) >= 3}
+        got = {g for g in (got_files | got_symbols | got_words) if len(g) >= 3}
         hits = sum(
             1 for e in exp_set
             if any(e in g or g in e for g in got)
