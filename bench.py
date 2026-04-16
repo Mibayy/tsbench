@@ -91,6 +91,9 @@ To find files that import a given file, use get_file_dependents("file.py") in on
 TOOL CALL LIMIT:
 Maximum 5 tool calls per simple task (locate, read, single-symbol analysis). If you exceed 5 calls, you are over-exploring — stop and answer with what you have.
 
+MOVE A SYMBOL:
+find_symbol("name") to locate first, then replace_symbol_source to move. Do not manually explore files to find the symbol.
+
 AFTER AN EMPTY RESULT:
 If find_symbol returns empty → try search_codebase
 If search_codebase returns empty → use Read/Grep (allowed for non-indexed files: .prisma, .sql, .graphql, .proto)

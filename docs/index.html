@@ -7,7 +7,7 @@
 <meta name="description" content="Token Savior benchmark: 60 tasks, real numbers. -81% context injected, 56% to 85% accuracy.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&family=Geist+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -402,16 +402,20 @@ function animateValue(el, from, to, prefix, suffix, duration) {
 }
 
 let statsAnimated = false;
+function fireCounters() {
+  if (statsAnimated) return;
+  statsAnimated = true;
+  animateValue(document.getElementById('c1'), 0, 81, '-', '%', 1200);
+  animateValue(document.getElementById('c2'), 56, 85, '', '%', 1200);
+  animateValue(document.getElementById('c3'), 0, 27, '', ' / 2', 1200);
+  animateValue(document.getElementById('c4'), 0, 12, '', '', 1000);
+}
 const statsObs = new IntersectionObserver(entries => {
-  if (entries[0].isIntersecting && !statsAnimated) {
-    statsAnimated = true;
-    animateValue(document.getElementById('c1'), 0, 81, '-', '%', 1200);
-    animateValue(document.getElementById('c2'), 56, 85, '', '%', 1200);
-    animateValue(document.getElementById('c3'), 0, 27, '', ' / 2', 1200);
-    animateValue(document.getElementById('c4'), 0, 12, '', '', 1000);
-  }
-}, { threshold: 0.3 });
+  entries.forEach(e => { if (e.isIntersecting) fireCounters(); });
+}, { threshold: 0.05 });
 statsObs.observe(document.querySelector('.stats'));
+// Fallback: if stats are already visible on load
+setTimeout(fireCounters, 800);
 
 // ── BAR ANIMATIONS ──
 const barObs = new IntersectionObserver(entries => {
@@ -425,6 +429,14 @@ const barObs = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.2 });
 document.querySelectorAll('.bench-group, .case').forEach(g => barObs.observe(g));
+// Fallback: fire all bars after 1.5s
+setTimeout(() => {
+  document.querySelectorAll('.anim-bar').forEach(bar => {
+    if (bar.style.width === '0%' || bar.style.width === '0') {
+      bar.style.width = bar.dataset.w + '%';
+    }
+  });
+}, 1500);
 
 // ── CATEGORY TABLE ──
 const cats = [
