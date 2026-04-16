@@ -498,6 +498,25 @@ def _keyword_match(candidate: str, text: str) -> bool:
     return hits >= len(words) * 0.6
 
 
+def _path_aware_match(candidate: str, text: str) -> bool:
+    """Return True if candidate matches text, with basename fallback for paths.
+
+    Agents usually strip verbose path prefixes when listing impacted files
+    (e.g. "caller_hub_util_00.py" instead of
+    "apps/api/callers/caller_hub_util_00.py"), so grading on full path alone
+    produces false negatives. When the candidate contains a '/' we also
+    accept a hit on its basename.
+    """
+    cl = candidate.lower()
+    if cl in text:
+        return True
+    if "/" in cl:
+        base = cl.rsplit("/", 1)[-1]
+        if base and base in text:
+            return True
+    return False
+
+
 def score_response(scoring: str, expected: dict, response: str) -> tuple[int, int]:
     """Return (score, max_score)."""
     max_score = 2
@@ -510,7 +529,7 @@ def score_response(scoring: str, expected: dict, response: str) -> tuple[int, in
         symbol_keys = ("symbol", "type", "py_class", "ts_type", "handler", "function", "env_var", "table", "column")
         exp_files = [expected.get(k, "").lower() for k in file_keys if expected.get(k)]
         exp_symbols = [expected.get(k, "").lower() for k in symbol_keys if expected.get(k)]
-        has_file = any(f in text for f in exp_files) if exp_files else False
+        has_file = any(_path_aware_match(f, text) for f in exp_files) if exp_files else False
         has_symbol = any(s in text for s in exp_symbols) if exp_symbols else False
         if has_file and has_symbol:
             return 2, max_score
@@ -519,7 +538,7 @@ def score_response(scoring: str, expected: dict, response: str) -> tuple[int, in
         if not exp_files and not exp_symbols:
             all_strings = _collect_strings_recursive(expected)
             if all_strings:
-                hits = sum(1 for s in all_strings if s.lower() in text)
+                hits = sum(1 for s in all_strings if _path_aware_match(s, text))
                 ratio = hits / len(all_strings)
                 if ratio >= 0.9:
                     return 2, max_score
@@ -580,7 +599,11 @@ def score_response(scoring: str, expected: dict, response: str) -> tuple[int, in
         got_files = {f.lower() for f in extract_files(response)}
         got_symbols = {s.lower() for s in extract_symbols(response)}
         got = got_files | got_symbols | {w.lower() for w in response.split()}
-        hits = sum(1 for e in exp_set if any(e in g or g in e for g in got) or e in text)
+        hits = sum(
+            1 for e in exp_set
+            if any(e in g or g in e for g in got)
+            or _path_aware_match(e, text)
+        )
         if hits == 0:
             return 0, max_score
         recall = hits / len(exp_set)
@@ -596,6 +619,8 @@ def score_response(scoring: str, expected: dict, response: str) -> tuple[int, in
             return 0, max_score
         if scoring in ("boolean_with_evidence", "free_form_rubric", "contains_all", "edit_quality"):
             hits = sum(1 for c in candidates if _keyword_match(c, text))
+        elif scoring == "impact_set":
+            hits = sum(1 for c in candidates if _path_aware_match(c, text))
         else:
             hits = sum(1 for c in candidates if c.lower() in text)
         ratio = hits / len(candidates)
