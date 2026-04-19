@@ -143,18 +143,24 @@ When your answer references any symbol (function, class, module), ALWAYS include
 
 IMPORTANT: Do NOT call memory_search or memory_save. Skip memory entirely."""
 
-# MCP config for Run B: token-savior only, with tsbench in WORKSPACE_ROOTS
+# MCP config for Run B: token-savior only, with tsbench in WORKSPACE_ROOTS.
+# Honors TS_PROFILE env var ("full"|"lean"|"ultra"|"core"|"nav") so the
+# benchmark can A/B different manifest-size profiles.
+_TS_MCP_ENV = {
+    "WORKSPACE_ROOTS": "/root/projects/tsbench",
+    "TOKEN_SAVIOR_CLIENT": "claude-code",
+    "EXCLUDE_EXTRA": "**/.next/**:**/node_modules/**:**/dist/**:**/.git/**:**/coverage/**:**/__pycache__/**",
+}
+if os.environ.get("TS_PROFILE"):
+    _TS_MCP_ENV["TOKEN_SAVIOR_PROFILE"] = os.environ["TS_PROFILE"]
+
 TS_MCP_CONFIG = {
     "mcpServers": {
         "token-savior-recall": {
             "type": "stdio",
             "command": "/root/.local/token-savior-venv/bin/python",
             "args": ["-m", "token_savior.server"],
-            "env": {
-                "WORKSPACE_ROOTS": "/root/projects/tsbench",
-                "TOKEN_SAVIOR_CLIENT": "claude-code",
-                "EXCLUDE_EXTRA": "**/.next/**:**/node_modules/**:**/dist/**:**/.git/**:**/coverage/**:**/__pycache__/**",
-            },
+            "env": _TS_MCP_ENV,
         }
     }
 }
