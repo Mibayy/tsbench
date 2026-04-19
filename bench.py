@@ -31,7 +31,7 @@ RESULTS_DIR = ROOT / "results"
 RAW_DIR = RESULTS_DIR / "raw"
 GT_PATH = ROOT / "GROUND_TRUTH.json"
 
-TIMEOUT_SECONDS = 180
+TIMEOUT_SECONDS = 300
 MAX_TURNS = 30
 
 WARMUP_PROMPT_B = "List available token-savior tools and switch to project tsbench."
