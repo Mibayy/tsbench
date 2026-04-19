@@ -17,7 +17,7 @@
     "payload",
     "user_id",
     "calculate_invoice",
-    "authenticate_user"
+    "apply_discount"
   ]
 }
 ```
@@ -30,4 +30,4 @@
 
 ## Notes pour le juge
 
-Les services déclarent leurs fonctions comme `def xxx(payload: dict, user_id: int = 0):` — toutes les publiques ont 2 paramètres. Baseline : grep/read sur plusieurs fichiers de 600+ lignes. TS : `get_functions` avec filtre arity.
+Les services déclarent leurs fonctions publiques comme `def xxx(payload: dict, user_id: int = 0):` — la plupart ont 2 paramètres (exception : `authenticate_user` a été simplifié à 1 param via BREAK-002). Baseline : grep/read sur plusieurs fichiers de 600+ lignes. TS : `get_functions` avec filtre arity.

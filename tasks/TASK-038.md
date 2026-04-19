@@ -15,7 +15,7 @@
 {
   "module": "apps/api/services/billing.py",
   "key_functions": [
-    "compute_invoice",
+    "calculate_invoice",
     "apply_discount",
     "charge_customer",
     "refund_payment"
@@ -37,4 +37,4 @@
 
 ## Notes pour le juge
 
-Réponse correcte mentionne les fonctions principales et les imports. v2 : compute_invoice est renommé en calculate_invoice.
+Réponse correcte mentionne les fonctions principales et les imports (calculate_invoice a été renommé depuis compute_invoice via BREAK-001).

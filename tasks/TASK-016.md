@@ -7,13 +7,13 @@
 
 ## Prompt (envoyé à l'agent)
 
-> Je viens de modifier la fonction `compute_invoice` dans `apps/api/services/billing.py`. Quels fichiers de test devrais-je rejouer en priorité ?
+> Je viens de modifier la fonction `calculate_invoice` dans `apps/api/services/billing.py`. Quels fichiers de test devrais-je rejouer en priorité ?
 
 ## Réponse attendue
 
 ```json
 {
-  "source_symbol": "compute_invoice",
+  "source_symbol": "calculate_invoice",
   "source_file": "apps/api/services/billing.py",
   "expected_test_files": [
     "tests/test_billing.py"
