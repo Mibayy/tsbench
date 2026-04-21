@@ -1,15 +1,23 @@
-# tsbench — 90-task post-fixes run (2026-04-20)
+# tsbench — 90-task matrix run (2026-04-20)
 
-## Headline
+## Headline — Opus 4.7
 
-|                     | Plain Claude (A) | Token Savior (B) | Δ      |
-|---------------------|-----------------:|-----------------:|-------:|
-| Score               | 120 / 180 (66.7%)| **176 / 180 (97.8%)** | **+31.1pp** |
-| Active tokens       | 1 549 915        | **820 861**      | −47%   |
-| Wall time           | 166 min          | **36 min**       | −78%   |
-| Wins / Ties / Losses| —                | **40 / 48 / 2**  |        |
+|                     | Plain Claude (A) | Token Savior (B) | Δ       |
+|---------------------|-----------------:|-----------------:|--------:|
+| Score               | 141 / 180 (78.3%)| **180 / 180 (100.0%)** | **+21.7pp** |
+| Active tokens       | 1 549 915        | **803 531**      | −48.2%  |
+| Context chars       | 473 752          | **258 329**      | −45.5%  |
+| Wall time           | 165.9 min        | **35.1 min**     | −78.9%  |
+| Wins / Ties / Losses| —                | **25 / 65 / 0**  |         |
 
-## Per-category (Run B)
+## Also measured
+
+| Model       | Base (A)          | Token Savior (B)       | Δpp   |
+|-------------|-------------------|------------------------|------:|
+| Sonnet 4.6  | 156 / 180 (86.7%) | 170 / 180 (94.4%)      | +7.7  |
+| Haiku 4.5   | 151 / 180 (83.9%) | — (not run in this set)|   —   |
+
+## Per-category (Opus + Token Savior)
 
 |                   | Score       | Accuracy |
 |-------------------|------------:|---------:|
@@ -19,15 +27,13 @@
 | code_review       | 10 / 10     | 100.0%   |
 | config_infra      | 8 / 8       | 100.0%   |
 | documentation     | 8 / 8       | 100.0%   |
+| explanation       | 28 / 28     | 100.0%   |
 | git               | 8 / 8       | 100.0%   |
+| navigation        | 14 / 14     | 100.0%   |
 | refactoring       | 22 / 22     | 100.0%   |
 | writing_tests     | 14 / 14     | 100.0%   |
-| navigation        | 13 / 14     | 92.9%    |
-| explanation       | 25 / 28     | 89.3%    |
 
-Remaining misses are all `llm_judge` borderlines where TS correctly identifies
-stub/missing code but the judge penalizes the honest "implementation is stub"
-caveat. Contains-all tasks are saturated.
+Every category saturated. Zero losses across the 90 paired tasks.
 
 ## Fixes landed this run
 
@@ -43,3 +49,4 @@ caveat. Contains-all tasks are saturated.
 10. Vocabulary guidance in agent system prompt (anti-French-synonym, anti-CANNOT_ANSWER on stubs, list all Conventional Commits prefixes, force inline test code)
 
 Model: Claude Opus 4.7 · Methodology and per-task raw results under `results/raw/`.
+Matrix snapshot: `results/matrix.json` (generated 2026-04-20T20:19Z).
