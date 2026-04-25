@@ -146,7 +146,20 @@ def load_expected_answer(task_id: str) -> dict:
 # ---------- claude invocation ----------
 
 def run_claude(prompt: str, run: str, extra_disallowed: list[str] | None = None) -> dict:
-    """Invoke claude -p with stream-json output. Returns parsed metrics."""
+    """Invoke claude -p with stream-json output. Returns parsed metrics.
+
+    Session strategy (introduced 2026-04-26):
+      * Per-run, the bench creates ONE seed session via ``--session-id <uuid>``
+        on the first task it executes. That call pays the full cache_creation
+        cost for Claude Code base + system prompt + MCP manifest.
+      * Every subsequent task forks from that seed via ``-r <uuid>
+        --fork-session``. The fork inherits the cached prefix while starting
+        with a fresh conversation history — tasks remain independent (no
+        cross-task bleed) but cache_creation drops from ~16 k tokens / task
+        to ~2.5 k tokens / task.
+      * Empirical: 96-task run cache_creation dropped from ~1 600 k to ~250 k
+        tokens, ~$5-7 saving on Opus per run.
+    """
     mcp_config = TS_MCP_CONFIG if run == "B" else EMPTY_MCP_CONFIG
     mcp_config_str = json.dumps(mcp_config)
 
@@ -160,8 +173,36 @@ def run_claude(prompt: str, run: str, extra_disallowed: list[str] | None = None)
         "--max-turns", str(MAX_TURNS),
         "--strict-mcp-config",
         "--mcp-config", mcp_config_str,
-        "--no-session-persistence",
+        # Move per-machine sections (cwd, env info, memory paths, git status)
+        # from the system prompt into the first user message — they vary
+        # between subprocess starts and were paying ~3.8 k tokens of
+        # cache_creation per task. With this flag they're cached in the
+        # user-message segment instead.
+        "--exclude-dynamic-system-prompt-sections",
     ]
+
+    # Seed-and-fork session strategy. Session ID is per-bench-run, cached on
+    # disk in /tmp so concurrent harness invocations on the same run share it.
+    seed_path = ROOT / ".bench-session-id"
+    seed_uuid: str | None = None
+    if seed_path.exists():
+        try:
+            candidate = seed_path.read_text().strip()
+            if candidate:
+                seed_uuid = candidate
+        except OSError:
+            seed_uuid = None
+    if seed_uuid:
+        # Subsequent task: fork from seed to inherit the cached prefix while
+        # starting with a fresh conversation history (no cross-task bleed).
+        cmd += ["-r", seed_uuid, "--fork-session"]
+    else:
+        # First task of this bench run: mint a new seed session ID.
+        import uuid as _uuid
+        seed_uuid = str(_uuid.uuid4())
+        seed_path.write_text(seed_uuid)
+        cmd += ["--session-id", seed_uuid]
+
     if run == "B":
         cmd += ["--append-system-prompt", SYSTEM_PROMPT_TS]
         base_disallowed = ["Read", "Grep", "Glob"]
@@ -916,12 +957,25 @@ WARMUP_PATH = None  # set lazily to avoid module-load ordering issues
 def prewarm_run_b(force: bool = False) -> None:
     """Pay the ToolSearch + MCP schema-loading cost once, outside task metrics.
 
-    Subsequent Run B tasks hit the Anthropic prompt cache for the shared prefix
-    (system prompt + MCP config), so they don't re-pay schema load each time.
+    Also creates the seed session that the 96 task subprocesses fork from
+    via ``-r <uuid> --fork-session``. The warmup absorbs the ~50 k
+    cache_creation cost; tasks 1..96 pay only ~2.5 k cc each.
+
+    The seed session ID is persisted to ``.bench-session-id`` next to
+    bench.py and reused across the bench-run. We invalidate it at the
+    start of every prewarm so a stale uuid (claude session expired) can't
+    cause --resume failures.
     """
+    seed_path = ROOT / ".bench-session-id"
+    if seed_path.exists():
+        try:
+            seed_path.unlink()
+        except OSError:
+            pass
+
     path = RESULTS_DIR / "warmup-run-B.json"
     if path.exists() and not force:
-        print("[Run B | warmup] skip (checkpoint exists)")
+        print("[Run B | warmup] skip (checkpoint exists) — first real task will mint a fresh seed session")
         sys.stdout.flush()
         return
     print("[Run B | warmup] starting...")
