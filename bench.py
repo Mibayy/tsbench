@@ -182,7 +182,7 @@ def run_claude(prompt: str, run: str, extra_disallowed: list[str] | None = None)
     ]
 
     # Seed-and-fork session strategy. Session ID is per-bench-run, cached on
-    # disk in /tmp so concurrent harness invocations on the same run share it.
+    # disk so concurrent harness invocations on the same run share it.
     seed_path = ROOT / ".bench-session-id"
     seed_uuid: str | None = None
     if seed_path.exists():
@@ -192,7 +192,8 @@ def run_claude(prompt: str, run: str, extra_disallowed: list[str] | None = None)
                 seed_uuid = candidate
         except OSError:
             seed_uuid = None
-    if seed_uuid:
+    is_fork = seed_uuid is not None
+    if is_fork:
         # Subsequent task: fork from seed to inherit the cached prefix while
         # starting with a fresh conversation history (no cross-task bleed).
         cmd += ["-r", seed_uuid, "--fork-session"]
@@ -204,6 +205,10 @@ def run_claude(prompt: str, run: str, extra_disallowed: list[str] | None = None)
         cmd += ["--session-id", seed_uuid]
 
     if run == "B":
+        # Always append SYSTEM_PROMPT_TS — fork-session creates a NEW session
+        # ID that does NOT automatically inherit the parent's system prompt
+        # injection. Without this, Bash sneaks back in (TASK-033 used Bash×4
+        # in tests, which SYSTEM_PROMPT_TS explicitly forbids).
         cmd += ["--append-system-prompt", SYSTEM_PROMPT_TS]
         base_disallowed = ["Read", "Grep", "Glob"]
         if extra_disallowed:
