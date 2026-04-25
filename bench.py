@@ -816,6 +816,38 @@ def score_response(
             continue
     text = "\n".join(parts).lower()
 
+    if scoring == "value_match":
+        # Generic value-equality check used by data-analysis tasks (TASK-091..).
+        # Walks the expected JSON and checks each literal value (string / int /
+        # float / bool) against the response text. exact_match is file+symbol
+        # oriented so it can't grade {"todo": 132, "fixme": 64} or {"top_country": "BR"}.
+        expected_values: list[str] = []
+
+        def _walk(o):
+            if isinstance(o, dict):
+                for v in o.values():
+                    _walk(v)
+            elif isinstance(o, list):
+                for v in o:
+                    _walk(v)
+            elif isinstance(o, bool):
+                expected_values.append(str(o).lower())
+            elif isinstance(o, (int, float)):
+                expected_values.append(str(o))
+            elif isinstance(o, str) and o:
+                expected_values.append(o.lower())
+
+        _walk(expected)
+        if not expected_values:
+            return 0, max_score
+        hits = sum(1 for v in expected_values if v in text)
+        ratio = hits / len(expected_values)
+        if ratio >= 0.95:
+            return 2, max_score
+        if ratio >= 0.5:
+            return 1, max_score
+        return 0, max_score
+
     if scoring == "exact_match":
         file_keys = ("file", "py_file", "ts_file", "schema_file", "from_file", "to_file")
         symbol_keys = ("symbol", "type", "py_class", "ts_type", "handler", "function", "env_var", "table", "column")

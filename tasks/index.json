@@ -2,7 +2,7 @@
   {
     "id": "TASK-001",
     "slug": "find-function",
-    "category": "localisation",
+    "category": "navigation",
     "difficulty": "easy",
     "ground_truth_refs": [
       "CALLER-001"
@@ -11,52 +11,32 @@
   },
   {
     "id": "TASK-002",
-    "slug": "find-callers",
-    "category": "localisation",
-    "difficulty": "medium",
-    "ground_truth_refs": [
-      "CALLER-002"
-    ],
-    "scoring": "set_match_strict"
+    "slug": "find-route",
+    "category": "navigation",
+    "difficulty": "easy",
+    "ground_truth_refs": [],
+    "scoring": "exact_match"
   },
   {
     "id": "TASK-003",
-    "slug": "find-env-usage",
-    "category": "localisation",
+    "slug": "find-schema-field",
+    "category": "navigation",
     "difficulty": "easy",
-    "ground_truth_refs": [
-      "UNDECL-001"
-    ],
+    "ground_truth_refs": [],
     "scoring": "exact_match"
   },
   {
     "id": "TASK-004",
-    "slug": "find-route",
-    "category": "localisation",
-    "difficulty": "easy",
-    "ground_truth_refs": [],
-    "scoring": "exact_match"
-  },
-  {
-    "id": "TASK-005",
-    "slug": "find-schema-field",
-    "category": "localisation",
-    "difficulty": "easy",
-    "ground_truth_refs": [],
-    "scoring": "exact_match"
-  },
-  {
-    "id": "TASK-006",
     "slug": "find-component-usage",
-    "category": "localisation",
+    "category": "navigation",
     "difficulty": "medium",
     "ground_truth_refs": [],
     "scoring": "set_match_loose"
   },
   {
-    "id": "TASK-007",
+    "id": "TASK-005",
     "slug": "callers-exhaustive-1",
-    "category": "dépendants",
+    "category": "navigation",
     "difficulty": "easy",
     "ground_truth_refs": [
       "CALLER-001"
@@ -64,264 +44,267 @@
     "scoring": "set_match_strict"
   },
   {
-    "id": "TASK-008",
-    "slug": "callers-exhaustive-3",
-    "category": "dépendants",
-    "difficulty": "easy",
-    "ground_truth_refs": [
-      "CALLER-002"
-    ],
+    "id": "TASK-006",
+    "slug": "file-deps-graph",
+    "category": "navigation",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
     "scoring": "set_match_strict"
   },
   {
-    "id": "TASK-009",
-    "slug": "callers-exhaustive-8",
-    "category": "dépendants",
+    "id": "TASK-007",
+    "slug": "entry-points",
+    "category": "navigation",
     "difficulty": "medium",
-    "ground_truth_refs": [
-      "CALLER-003"
-    ],
+    "ground_truth_refs": [],
+    "scoring": "set_match_loose"
+  },
+  {
+    "id": "TASK-008",
+    "slug": "dead-code-audit",
+    "category": "audit",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "set_match_loose"
+  },
+  {
+    "id": "TASK-009",
+    "slug": "cycle-detection",
+    "category": "audit",
+    "difficulty": "hard",
+    "ground_truth_refs": [],
     "scoring": "set_match_strict"
   },
   {
     "id": "TASK-010",
-    "slug": "callers-exhaustive-20",
-    "category": "dépendants",
+    "slug": "semantic-duplicates",
+    "category": "audit",
     "difficulty": "hard",
-    "ground_truth_refs": [
-      "CALLER-004"
-    ],
-    "scoring": "set_match_strict"
+    "ground_truth_refs": [],
+    "scoring": "set_match_loose"
   },
   {
     "id": "TASK-011",
-    "slug": "chain-alpha",
-    "category": "call_chain",
+    "slug": "rename-symbol",
+    "category": "refactoring",
     "difficulty": "medium",
-    "ground_truth_refs": [
-      "CHAIN-001"
-    ],
-    "scoring": "chain_match"
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
   },
   {
     "id": "TASK-012",
-    "slug": "chain-beta",
-    "category": "call_chain",
-    "difficulty": "medium",
-    "ground_truth_refs": [
-      "CHAIN-002"
-    ],
-    "scoring": "chain_match"
+    "slug": "add-field",
+    "category": "refactoring",
+    "difficulty": "easy",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
   },
   {
     "id": "TASK-013",
-    "slug": "chain-gamma",
-    "category": "call_chain",
+    "slug": "extract-constant",
+    "category": "refactoring",
     "difficulty": "medium",
-    "ground_truth_refs": [
-      "CHAIN-003"
-    ],
-    "scoring": "chain_match"
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
   },
   {
     "id": "TASK-014",
-    "slug": "breaking-signature",
-    "category": "impact",
+    "slug": "move-module",
+    "category": "refactoring",
     "difficulty": "hard",
-    "ground_truth_refs": [
-      "CALLER-004"
-    ],
-    "scoring": "impact_set"
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
   },
   {
     "id": "TASK-015",
-    "slug": "file-impact",
-    "category": "impact",
+    "slug": "insert-near-symbol",
+    "category": "refactoring",
     "difficulty": "medium",
-    "ground_truth_refs": [
-      "CYCLE-001"
-    ],
-    "scoring": "set_match_loose"
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
   },
   {
     "id": "TASK-016",
-    "slug": "test-impact",
-    "category": "impact",
+    "slug": "bug-pagination",
+    "category": "bug_fixing",
     "difficulty": "medium",
-    "ground_truth_refs": [
-      "BREAK-001"
-    ],
-    "scoring": "set_match_loose"
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
   },
   {
     "id": "TASK-017",
-    "slug": "rename-symbol",
-    "category": "edit",
+    "slug": "bug-auth",
+    "category": "bug_fixing",
     "difficulty": "hard",
-    "ground_truth_refs": [
-      "AMBIG-001"
-    ],
-    "scoring": "edit_quality"
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
   },
   {
     "id": "TASK-018",
-    "slug": "add-field",
-    "category": "edit",
+    "slug": "dup-detection",
+    "category": "bug_fixing",
     "difficulty": "medium",
     "ground_truth_refs": [],
-    "scoring": "edit_quality"
+    "scoring": "contains_all"
   },
   {
     "id": "TASK-019",
-    "slug": "extract-constant",
-    "category": "edit",
+    "slug": "fix-buggy-paginate",
+    "category": "bug_fixing",
     "difficulty": "medium",
-    "ground_truth_refs": [
-      "BREAK-006"
-    ],
-    "scoring": "edit_quality"
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
   },
   {
     "id": "TASK-020",
-    "slug": "move-module",
-    "category": "edit",
-    "difficulty": "hard",
-    "ground_truth_refs": [
-      "DUP-002"
-    ],
-    "scoring": "edit_quality"
+    "slug": "bug-fix-discount-validation",
+    "category": "bug_fixing",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
   },
   {
     "id": "TASK-021",
-    "slug": "diff-summary",
-    "category": "review",
-    "difficulty": "medium",
-    "ground_truth_refs": [
-      "BREAK-001",
-      "BREAK-002",
-      "BREAK-003",
-      "BREAK-004",
-      "BREAK-005",
-      "BREAK-006"
-    ],
-    "scoring": "set_match_strict"
+    "slug": "project-overview",
+    "category": "explanation",
+    "difficulty": "easy",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
   },
   {
     "id": "TASK-022",
-    "slug": "pr-risk",
-    "category": "review",
-    "difficulty": "hard",
-    "ground_truth_refs": [
-      "BREAK-001",
-      "BREAK-002",
-      "BREAK-003",
-      "BREAK-004",
-      "BREAK-005",
-      "BREAK-006"
-    ],
-    "scoring": "set_match_loose"
+    "slug": "module-overview",
+    "category": "explanation",
+    "difficulty": "easy",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
   },
   {
     "id": "TASK-023",
-    "slug": "breaking-detection",
-    "category": "review",
+    "slug": "explain-billing-module",
+    "category": "explanation",
     "difficulty": "medium",
-    "ground_truth_refs": [
-      "BREAK-001",
-      "BREAK-002",
-      "BREAK-003",
-      "BREAK-004",
-      "BREAK-005",
-      "BREAK-006"
-    ],
-    "scoring": "set_match_strict"
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
   },
   {
     "id": "TASK-024",
-    "slug": "dead-code-audit",
-    "category": "audit",
+    "slug": "list-auth-public-functions",
+    "category": "explanation",
     "difficulty": "medium",
-    "ground_truth_refs": [
-      "DEAD-001",
-      "DEAD-002",
-      "DEAD-003",
-      "DEAD-004",
-      "DEAD-005",
-      "DEAD-006",
-      "DEAD-007",
-      "DEAD-008",
-      "DEAD-009",
-      "DEAD-010",
-      "DEAD-011",
-      "DEAD-012"
-    ],
+    "ground_truth_refs": [],
     "scoring": "set_match_loose"
   },
   {
     "id": "TASK-025",
-    "slug": "hotspot-audit",
-    "category": "audit",
+    "slug": "multi-param-functions",
+    "category": "explanation",
     "difficulty": "medium",
-    "ground_truth_refs": [
-      "HOTSPOT-001",
-      "HOTSPOT-002",
-      "HOTSPOT-003",
-      "HOTSPOT-004",
-      "HOTSPOT-005"
-    ],
-    "scoring": "set_match_strict"
+    "ground_truth_refs": [],
+    "scoring": "set_match_loose"
   },
   {
     "id": "TASK-026",
-    "slug": "cycle-detection",
-    "category": "audit",
+    "slug": "dispatch-webhook-chain",
+    "category": "explanation",
     "difficulty": "medium",
-    "ground_truth_refs": [
-      "CYCLE-001",
-      "CYCLE-002"
-    ],
-    "scoring": "set_match_strict"
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
   },
   {
     "id": "TASK-027",
-    "slug": "orphan-env",
-    "category": "config",
-    "difficulty": "easy",
-    "ground_truth_refs": [
-      "ORPHAN-001",
-      "ORPHAN-002",
-      "ORPHAN-003",
-      "ORPHAN-004"
-    ],
-    "scoring": "set_match_strict"
+    "slug": "auth-importers",
+    "category": "explanation",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "set_match_loose"
   },
   {
     "id": "TASK-028",
-    "slug": "undecl-env",
-    "category": "config",
+    "slug": "billing-hotspots",
+    "category": "explanation",
     "difficulty": "medium",
-    "ground_truth_refs": [
-      "UNDECL-001",
-      "UNDECL-002"
-    ],
-    "scoring": "set_match_strict"
+    "ground_truth_refs": [],
+    "scoring": "set_match_loose"
   },
   {
     "id": "TASK-029",
-    "slug": "secret-detection",
-    "category": "config",
+    "slug": "call-chain-deep",
+    "category": "explanation",
+    "difficulty": "hard",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-030",
+    "slug": "backward-slice",
+    "category": "explanation",
+    "difficulty": "hard",
+    "ground_truth_refs": [],
+    "scoring": "set_match_loose"
+  },
+  {
+    "id": "TASK-031",
+    "slug": "explain-apply-discount-flow",
+    "category": "explanation",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "llm_judge"
+  },
+  {
+    "id": "TASK-032",
+    "slug": "breaking-signature",
+    "category": "code_review",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-033",
+    "slug": "diff-summary",
+    "category": "code_review",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-034",
+    "slug": "pr-risk",
+    "category": "code_review",
+    "difficulty": "hard",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-035",
+    "slug": "breaking-detection",
+    "category": "code_review",
+    "difficulty": "hard",
+    "ground_truth_refs": [],
+    "scoring": "set_match_strict"
+  },
+  {
+    "id": "TASK-036",
+    "slug": "orphan-env",
+    "category": "config_infra",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "set_match_loose"
+  },
+  {
+    "id": "TASK-037",
+    "slug": "undecl-env",
+    "category": "config_infra",
     "difficulty": "medium",
     "ground_truth_refs": [
-      "SECRET-001",
-      "SECRET-002",
-      "SECRET-003"
+      "UNDECL-001"
     ],
     "scoring": "set_match_strict"
   },
   {
-    "id": "TASK-030",
+    "id": "TASK-038",
     "slug": "dockerfile-audit",
-    "category": "infra",
+    "category": "config_infra",
     "difficulty": "easy",
     "ground_truth_refs": [
       "DOCKER-001",
@@ -330,245 +313,15 @@
     "scoring": "set_match_strict"
   },
   {
-    "id": "TASK-031",
-    "slug": "infra-consistency",
-    "category": "infra",
-    "difficulty": "hard",
-    "ground_truth_refs": [],
-    "scoring": "boolean_with_evidence"
-  },
-  {
-    "id": "TASK-032",
-    "slug": "test-selection-unit",
-    "category": "testing",
-    "difficulty": "easy",
-    "ground_truth_refs": [],
-    "scoring": "set_match_strict"
-  },
-  {
-    "id": "TASK-033",
-    "slug": "test-selection-change",
-    "category": "testing",
-    "difficulty": "medium",
-    "ground_truth_refs": [
-      "CHAIN-001"
-    ],
-    "scoring": "free_form_rubric"
-  },
-  {
-    "id": "TASK-034",
-    "slug": "bug-pagination",
-    "category": "debug",
-    "difficulty": "medium",
-    "ground_truth_refs": [
-      "BUG-001"
-    ],
-    "scoring": "exact_match"
-  },
-  {
-    "id": "TASK-035",
-    "slug": "bug-auth",
-    "category": "debug",
-    "difficulty": "medium",
-    "ground_truth_refs": [
-      "BUG-002"
-    ],
-    "scoring": "exact_match"
-  },
-  {
-    "id": "TASK-036",
-    "slug": "dup-detection",
-    "category": "debug",
-    "difficulty": "hard",
-    "ground_truth_refs": [
-      "DUP-001",
-      "DUP-002",
-      "DUP-003"
-    ],
-    "scoring": "set_match_strict"
-  },
-  {
-    "id": "TASK-037",
-    "slug": "project-overview",
-    "category": "onboarding",
-    "difficulty": "easy",
-    "ground_truth_refs": [],
-    "scoring": "free_form_rubric"
-  },
-  {
-    "id": "TASK-038",
-    "slug": "module-overview",
-    "category": "onboarding",
-    "difficulty": "medium",
-    "ground_truth_refs": [],
-    "scoring": "free_form_rubric"
-  },
-  {
     "id": "TASK-039",
-    "slug": "ts-py-type-mapping",
-    "category": "cross-language",
-    "difficulty": "hard",
+    "slug": "infra-consistency",
+    "category": "config_infra",
+    "difficulty": "medium",
     "ground_truth_refs": [],
-    "scoring": "exact_match"
+    "scoring": "contains_all"
   },
   {
     "id": "TASK-040",
-    "slug": "config-consistency",
-    "category": "cross-language",
-    "difficulty": "hard",
-    "ground_truth_refs": [],
-    "scoring": "boolean_with_evidence"
-  },
-  {
-    "id": "TASK-041",
-    "slug": "explain-billing-module",
-    "category": "heavy_read",
-    "difficulty": "hard",
-    "ground_truth_refs": [],
-    "scoring": "contains_all"
-  },
-  {
-    "id": "TASK-042",
-    "slug": "list-auth-public-functions",
-    "category": "heavy_read",
-    "difficulty": "medium",
-    "ground_truth_refs": [],
-    "scoring": "contains_all"
-  },
-  {
-    "id": "TASK-043",
-    "slug": "multi-param-functions",
-    "category": "heavy_read",
-    "difficulty": "hard",
-    "ground_truth_refs": [],
-    "scoring": "contains_all"
-  },
-  {
-    "id": "TASK-044",
-    "slug": "dispatch-webhook-chain",
-    "category": "heavy_read",
-    "difficulty": "hard",
-    "ground_truth_refs": [],
-    "scoring": "chain_match"
-  },
-  {
-    "id": "TASK-045",
-    "slug": "auth-importers",
-    "category": "heavy_read",
-    "difficulty": "medium",
-    "ground_truth_refs": [],
-    "scoring": "list_f1"
-  },
-  {
-    "id": "TASK-046",
-    "slug": "billing-hotspots",
-    "category": "heavy_read",
-    "difficulty": "hard",
-    "ground_truth_refs": [],
-    "scoring": "contains_all"
-  },
-  {
-    "id": "TASK-047",
-    "slug": "file-deps-graph",
-    "category": "navigation",
-    "difficulty": "easy",
-    "ground_truth_refs": [],
-    "scoring": "set_match_strict"
-  },
-  {
-    "id": "TASK-048",
-    "slug": "file-dependents-reverse",
-    "category": "navigation",
-    "difficulty": "medium",
-    "ground_truth_refs": [],
-    "scoring": "set_match_loose"
-  },
-  {
-    "id": "TASK-049",
-    "slug": "call-chain-deep",
-    "category": "call_chain",
-    "difficulty": "hard",
-    "ground_truth_refs": ["CHAIN-001"],
-    "scoring": "chain_match",
-    "disallowed_tools": ["get_dependencies", "get_dependents"]
-  },
-  {
-    "id": "TASK-050",
-    "slug": "backward-slice",
-    "category": "navigation",
-    "difficulty": "hard",
-    "ground_truth_refs": ["HOTSPOT-001"],
-    "scoring": "contains_all"
-  },
-  {
-    "id": "TASK-051",
-    "slug": "entry-points",
-    "category": "navigation",
-    "difficulty": "medium",
-    "ground_truth_refs": [],
-    "scoring": "contains_all"
-  },
-  {
-    "id": "TASK-052",
-    "slug": "community-detection",
-    "category": "audit",
-    "difficulty": "hard",
-    "ground_truth_refs": [],
-    "scoring": "contains_all"
-  },
-  {
-    "id": "TASK-053",
-    "slug": "semantic-duplicates",
-    "category": "audit",
-    "difficulty": "medium",
-    "ground_truth_refs": ["DUP-001", "DUP-002", "DUP-003"],
-    "scoring": "contains_all"
-  },
-  {
-    "id": "TASK-054",
-    "slug": "fix-buggy-paginate",
-    "category": "edit",
-    "difficulty": "medium",
-    "ground_truth_refs": ["BUG-001"],
-    "scoring": "edit_quality",
-    "disallowed_tools": ["Edit", "Write"]
-  },
-  {
-    "id": "TASK-055",
-    "slug": "insert-near-symbol",
-    "category": "edit",
-    "difficulty": "medium",
-    "ground_truth_refs": [],
-    "scoring": "edit_quality",
-    "disallowed_tools": ["Edit", "Write"]
-  },
-  {
-    "id": "TASK-056",
-    "slug": "checkpoint-restore",
-    "category": "edit",
-    "difficulty": "hard",
-    "ground_truth_refs": [],
-    "scoring": "edit_quality",
-    "disallowed_tools": ["Edit", "Write"]
-  },
-  {
-    "id": "TASK-057",
-    "slug": "impacted-tests",
-    "category": "testing",
-    "difficulty": "medium",
-    "ground_truth_refs": ["HEAVY-READ-045"],
-    "scoring": "set_match_loose"
-  },
-  {
-    "id": "TASK-058",
-    "slug": "performance-hotspots",
-    "category": "audit",
-    "difficulty": "medium",
-    "ground_truth_refs": ["HOTSPOT-001", "HOTSPOT-002", "HOTSPOT-003", "HOTSPOT-004", "HOTSPOT-005"],
-    "scoring": "contains_all"
-  },
-  {
-    "id": "TASK-059",
     "slug": "git-status",
     "category": "git",
     "difficulty": "easy",
@@ -576,11 +329,451 @@
     "scoring": "contains_all"
   },
   {
-    "id": "TASK-060",
+    "id": "TASK-041",
     "slug": "changed-symbols-since-ref",
     "category": "git",
     "difficulty": "medium",
     "ground_truth_refs": [],
     "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-042",
+    "slug": "code-gen-slugify",
+    "category": "code_generation",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-043",
+    "slug": "code-gen-lru-cache",
+    "category": "code_generation",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-044",
+    "slug": "code-gen-rate-limiter",
+    "category": "code_generation",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-045",
+    "slug": "code-gen-retry-backoff",
+    "category": "code_generation",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-046",
+    "slug": "code-gen-csv-parser",
+    "category": "code_generation",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-047",
+    "slug": "code-gen-jwt-signer",
+    "category": "code_generation",
+    "difficulty": "hard",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-048",
+    "slug": "code-gen-pagination-helper",
+    "category": "code_generation",
+    "difficulty": "easy",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-049",
+    "slug": "code-gen-validator-email",
+    "category": "code_generation",
+    "difficulty": "easy",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-050",
+    "slug": "code-gen-debounce",
+    "category": "code_generation",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-051",
+    "slug": "code-gen-webhook-sender",
+    "category": "code_generation",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-052",
+    "slug": "code-gen-password-hasher",
+    "category": "code_generation",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-053",
+    "slug": "code-gen-middleware-logger",
+    "category": "code_generation",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-054",
+    "slug": "code-gen-queue-consumer",
+    "category": "code_generation",
+    "difficulty": "hard",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-055",
+    "slug": "code-gen-url-signer",
+    "category": "code_generation",
+    "difficulty": "hard",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-056",
+    "slug": "code-gen-circuit-breaker",
+    "category": "code_generation",
+    "difficulty": "hard",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-057",
+    "slug": "code-gen-json-diff",
+    "category": "code_generation",
+    "difficulty": "hard",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-058",
+    "slug": "code-gen-cli-parser",
+    "category": "code_generation",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-059",
+    "slug": "code-gen-date-range-expander",
+    "category": "code_generation",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-060",
+    "slug": "bug-fix-off-by-one",
+    "category": "bug_fixing",
+    "difficulty": "easy",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-061",
+    "slug": "bug-fix-null-deref",
+    "category": "bug_fixing",
+    "difficulty": "easy",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-062",
+    "slug": "bug-fix-sql-injection",
+    "category": "bug_fixing",
+    "difficulty": "hard",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-063",
+    "slug": "bug-fix-race-condition",
+    "category": "bug_fixing",
+    "difficulty": "hard",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-064",
+    "slug": "bug-fix-wrong-regex",
+    "category": "bug_fixing",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-065",
+    "slug": "bug-fix-memory-leak",
+    "category": "bug_fixing",
+    "difficulty": "hard",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-066",
+    "slug": "bug-fix-timezone",
+    "category": "bug_fixing",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-067",
+    "slug": "bug-fix-rounding",
+    "category": "bug_fixing",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-068",
+    "slug": "refactor-extract-function",
+    "category": "refactoring",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-069",
+    "slug": "refactor-inline-variable",
+    "category": "refactoring",
+    "difficulty": "easy",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-070",
+    "slug": "refactor-sync-to-async",
+    "category": "refactoring",
+    "difficulty": "hard",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-071",
+    "slug": "refactor-split-god-class",
+    "category": "refactoring",
+    "difficulty": "hard",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-072",
+    "slug": "refactor-dedupe-similar",
+    "category": "refactoring",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-073",
+    "slug": "refactor-replace-loop-comprehension",
+    "category": "refactoring",
+    "difficulty": "easy",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-074",
+    "slug": "write-tests-for-slugify",
+    "category": "writing_tests",
+    "difficulty": "easy",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-075",
+    "slug": "write-tests-edge-cases",
+    "category": "writing_tests",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-076",
+    "slug": "write-tests-async-fn",
+    "category": "writing_tests",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-077",
+    "slug": "write-tests-error-paths",
+    "category": "writing_tests",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-078",
+    "slug": "write-tests-integration",
+    "category": "writing_tests",
+    "difficulty": "hard",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-079",
+    "slug": "write-tests-parametrize",
+    "category": "writing_tests",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-080",
+    "slug": "write-tests-mock-dependency",
+    "category": "writing_tests",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-081",
+    "slug": "explain-auth-middleware",
+    "category": "explanation",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "llm_judge"
+  },
+  {
+    "id": "TASK-082",
+    "slug": "explain-data-flow",
+    "category": "explanation",
+    "difficulty": "hard",
+    "ground_truth_refs": [],
+    "scoring": "llm_judge"
+  },
+  {
+    "id": "TASK-083",
+    "slug": "explain-error-propagation",
+    "category": "explanation",
+    "difficulty": "hard",
+    "ground_truth_refs": [],
+    "scoring": "llm_judge"
+  },
+  {
+    "id": "TASK-084",
+    "slug": "security-review-auth",
+    "category": "code_review",
+    "difficulty": "hard",
+    "ground_truth_refs": [],
+    "scoring": "llm_judge"
+  },
+  {
+    "id": "TASK-085",
+    "slug": "write-docstring-function",
+    "category": "documentation",
+    "difficulty": "easy",
+    "ground_truth_refs": [],
+    "scoring": "llm_judge"
+  },
+  {
+    "id": "TASK-086",
+    "slug": "write-module-readme",
+    "category": "documentation",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "llm_judge"
+  },
+  {
+    "id": "TASK-087",
+    "slug": "write-api-reference",
+    "category": "documentation",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "llm_judge"
+  },
+  {
+    "id": "TASK-088",
+    "slug": "document-edge-cases",
+    "category": "documentation",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "llm_judge"
+  },
+  {
+    "id": "TASK-089",
+    "slug": "write-commit-message",
+    "category": "git",
+    "difficulty": "easy",
+    "ground_truth_refs": [],
+    "scoring": "contains_all"
+  },
+  {
+    "id": "TASK-090",
+    "slug": "write-pr-description",
+    "category": "git",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "llm_judge"
+  },
+  {
+    "id": "TASK-091",
+    "slug": "verbose-bash-top-endpoints",
+    "category": "data_analysis",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "value_match"
+  },
+  {
+    "id": "TASK-092",
+    "slug": "verbose-bash-top-ips",
+    "category": "data_analysis",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "value_match"
+  },
+  {
+    "id": "TASK-093",
+    "slug": "large-json-extract",
+    "category": "data_analysis",
+    "difficulty": "easy",
+    "ground_truth_refs": [],
+    "scoring": "value_match"
+  },
+  {
+    "id": "TASK-094",
+    "slug": "count-todos-corpus",
+    "category": "data_analysis",
+    "difficulty": "easy",
+    "ground_truth_refs": [],
+    "scoring": "value_match"
+  },
+  {
+    "id": "TASK-095",
+    "slug": "npm-build-error-extract",
+    "category": "data_analysis",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "value_match"
+  },
+  {
+    "id": "TASK-096",
+    "slug": "sql-dump-top-country",
+    "category": "data_analysis",
+    "difficulty": "medium",
+    "ground_truth_refs": [],
+    "scoring": "value_match"
   }
 ]

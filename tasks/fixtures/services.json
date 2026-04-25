@@ -1,0 +1,961 @@
+{
+  "services": {
+    "svc-000": {
+      "replicas": 8,
+      "cpu_limit": "1000m",
+      "mem_limit_mb": 128,
+      "env_vars": {
+        "VAR_0": "value_0_0",
+        "VAR_1": "value_0_1",
+        "VAR_2": "value_0_2",
+        "VAR_3": "value_0_3",
+        "VAR_4": "value_0_4",
+        "VAR_5": "value_0_5",
+        "VAR_6": "value_0_6",
+        "VAR_7": "value_0_7"
+      },
+      "depends_on": [
+        "svc-036",
+        "svc-046"
+      ],
+      "health_check": {
+        "path": "/health/0",
+        "interval_sec": 30
+      }
+    },
+    "svc-001": {
+      "replicas": 6,
+      "cpu_limit": "100m",
+      "mem_limit_mb": 256,
+      "env_vars": {
+        "VAR_0": "value_1_0",
+        "VAR_1": "value_1_1",
+        "VAR_2": "value_1_2",
+        "VAR_3": "value_1_3",
+        "VAR_4": "value_1_4",
+        "VAR_5": "value_1_5"
+      },
+      "depends_on": [
+        "svc-022",
+        "svc-004"
+      ],
+      "health_check": {
+        "path": "/health/1",
+        "interval_sec": 5
+      }
+    },
+    "svc-002": {
+      "replicas": 5,
+      "cpu_limit": "100m",
+      "mem_limit_mb": 512,
+      "env_vars": {
+        "VAR_0": "value_2_0",
+        "VAR_1": "value_2_1",
+        "VAR_2": "value_2_2",
+        "VAR_3": "value_2_3",
+        "VAR_4": "value_2_4"
+      },
+      "depends_on": [
+        "svc-036"
+      ],
+      "health_check": {
+        "path": "/health/2",
+        "interval_sec": 30
+      }
+    },
+    "svc-003": {
+      "replicas": 7,
+      "cpu_limit": "200m",
+      "mem_limit_mb": 2048,
+      "env_vars": {
+        "VAR_0": "value_3_0",
+        "VAR_1": "value_3_1"
+      },
+      "depends_on": [
+        "svc-045",
+        "svc-020"
+      ],
+      "health_check": {
+        "path": "/health/3",
+        "interval_sec": 30
+      }
+    },
+    "svc-004": {
+      "replicas": 1,
+      "cpu_limit": "500m",
+      "mem_limit_mb": 1024,
+      "env_vars": {
+        "VAR_0": "value_4_0",
+        "VAR_1": "value_4_1"
+      },
+      "depends_on": [
+        "svc-015",
+        "svc-023",
+        "svc-028"
+      ],
+      "health_check": {
+        "path": "/health/4",
+        "interval_sec": 10
+      }
+    },
+    "svc-005": {
+      "replicas": 4,
+      "cpu_limit": "500m",
+      "mem_limit_mb": 256,
+      "env_vars": {
+        "VAR_0": "value_5_0",
+        "VAR_1": "value_5_1"
+      },
+      "depends_on": [
+        "svc-002",
+        "svc-049"
+      ],
+      "health_check": {
+        "path": "/health/5",
+        "interval_sec": 5
+      }
+    },
+    "svc-006": {
+      "replicas": 2,
+      "cpu_limit": "1000m",
+      "mem_limit_mb": 2048,
+      "env_vars": {
+        "VAR_0": "value_6_0",
+        "VAR_1": "value_6_1"
+      },
+      "depends_on": [
+        "svc-032",
+        "svc-009",
+        "svc-012"
+      ],
+      "health_check": {
+        "path": "/health/6",
+        "interval_sec": 10
+      }
+    },
+    "svc-007": {
+      "replicas": 8,
+      "cpu_limit": "500m",
+      "mem_limit_mb": 512,
+      "env_vars": {
+        "VAR_0": "value_7_0",
+        "VAR_1": "value_7_1",
+        "VAR_2": "value_7_2"
+      },
+      "depends_on": [],
+      "health_check": {
+        "path": "/health/7",
+        "interval_sec": 30
+      }
+    },
+    "svc-008": {
+      "replicas": 3,
+      "cpu_limit": "200m",
+      "mem_limit_mb": 128,
+      "env_vars": {
+        "VAR_0": "value_8_0",
+        "VAR_1": "value_8_1",
+        "VAR_2": "value_8_2",
+        "VAR_3": "value_8_3",
+        "VAR_4": "value_8_4"
+      },
+      "depends_on": [
+        "svc-045",
+        "svc-033",
+        "svc-007"
+      ],
+      "health_check": {
+        "path": "/health/8",
+        "interval_sec": 5
+      }
+    },
+    "svc-009": {
+      "replicas": 5,
+      "cpu_limit": "100m",
+      "mem_limit_mb": 2048,
+      "env_vars": {
+        "VAR_0": "value_9_0",
+        "VAR_1": "value_9_1",
+        "VAR_2": "value_9_2",
+        "VAR_3": "value_9_3",
+        "VAR_4": "value_9_4",
+        "VAR_5": "value_9_5",
+        "VAR_6": "value_9_6",
+        "VAR_7": "value_9_7"
+      },
+      "depends_on": [],
+      "health_check": {
+        "path": "/health/9",
+        "interval_sec": 10
+      }
+    },
+    "svc-010": {
+      "replicas": 8,
+      "cpu_limit": "100m",
+      "mem_limit_mb": 128,
+      "env_vars": {
+        "VAR_0": "value_10_0",
+        "VAR_1": "value_10_1",
+        "VAR_2": "value_10_2",
+        "VAR_3": "value_10_3",
+        "VAR_4": "value_10_4",
+        "VAR_5": "value_10_5"
+      },
+      "depends_on": [
+        "svc-001",
+        "svc-036"
+      ],
+      "health_check": {
+        "path": "/health/10",
+        "interval_sec": 10
+      }
+    },
+    "svc-011": {
+      "replicas": 4,
+      "cpu_limit": "500m",
+      "mem_limit_mb": 256,
+      "env_vars": {
+        "VAR_0": "value_11_0",
+        "VAR_1": "value_11_1",
+        "VAR_2": "value_11_2"
+      },
+      "depends_on": [
+        "svc-017",
+        "svc-034"
+      ],
+      "health_check": {
+        "path": "/health/11",
+        "interval_sec": 10
+      }
+    },
+    "svc-012": {
+      "replicas": 8,
+      "cpu_limit": "100m",
+      "mem_limit_mb": 512,
+      "env_vars": {
+        "VAR_0": "value_12_0",
+        "VAR_1": "value_12_1",
+        "VAR_2": "value_12_2"
+      },
+      "depends_on": [
+        "svc-017"
+      ],
+      "health_check": {
+        "path": "/health/12",
+        "interval_sec": 5
+      }
+    },
+    "svc-013": {
+      "replicas": 1,
+      "cpu_limit": "100m",
+      "mem_limit_mb": 256,
+      "env_vars": {
+        "VAR_0": "value_13_0",
+        "VAR_1": "value_13_1",
+        "VAR_2": "value_13_2",
+        "VAR_3": "value_13_3",
+        "VAR_4": "value_13_4",
+        "VAR_5": "value_13_5"
+      },
+      "depends_on": [
+        "svc-035",
+        "svc-020"
+      ],
+      "health_check": {
+        "path": "/health/13",
+        "interval_sec": 10
+      }
+    },
+    "svc-014": {
+      "replicas": 3,
+      "cpu_limit": "500m",
+      "mem_limit_mb": 2048,
+      "env_vars": {
+        "VAR_0": "value_14_0",
+        "VAR_1": "value_14_1",
+        "VAR_2": "value_14_2"
+      },
+      "depends_on": [
+        "svc-004"
+      ],
+      "health_check": {
+        "path": "/health/14",
+        "interval_sec": 10
+      }
+    },
+    "svc-015": {
+      "replicas": 6,
+      "cpu_limit": "1000m",
+      "mem_limit_mb": 128,
+      "env_vars": {
+        "VAR_0": "value_15_0",
+        "VAR_1": "value_15_1",
+        "VAR_2": "value_15_2"
+      },
+      "depends_on": [],
+      "health_check": {
+        "path": "/health/15",
+        "interval_sec": 10
+      }
+    },
+    "svc-016": {
+      "replicas": 1,
+      "cpu_limit": "100m",
+      "mem_limit_mb": 1024,
+      "env_vars": {
+        "VAR_0": "value_16_0",
+        "VAR_1": "value_16_1"
+      },
+      "depends_on": [],
+      "health_check": {
+        "path": "/health/16",
+        "interval_sec": 10
+      }
+    },
+    "svc-017": {
+      "replicas": 7,
+      "cpu_limit": "200m",
+      "mem_limit_mb": 2048,
+      "env_vars": {
+        "VAR_0": "value_17_0",
+        "VAR_1": "value_17_1",
+        "VAR_2": "value_17_2",
+        "VAR_3": "value_17_3",
+        "VAR_4": "value_17_4",
+        "VAR_5": "value_17_5"
+      },
+      "depends_on": [
+        "svc-039",
+        "svc-022",
+        "svc-019"
+      ],
+      "health_check": {
+        "path": "/health/17",
+        "interval_sec": 10
+      }
+    },
+    "svc-018": {
+      "replicas": 4,
+      "cpu_limit": "100m",
+      "mem_limit_mb": 1024,
+      "env_vars": {
+        "VAR_0": "value_18_0",
+        "VAR_1": "value_18_1",
+        "VAR_2": "value_18_2",
+        "VAR_3": "value_18_3",
+        "VAR_4": "value_18_4",
+        "VAR_5": "value_18_5"
+      },
+      "depends_on": [
+        "svc-005"
+      ],
+      "health_check": {
+        "path": "/health/18",
+        "interval_sec": 30
+      }
+    },
+    "svc-019": {
+      "replicas": 8,
+      "cpu_limit": "100m",
+      "mem_limit_mb": 1024,
+      "env_vars": {
+        "VAR_0": "value_19_0",
+        "VAR_1": "value_19_1",
+        "VAR_2": "value_19_2",
+        "VAR_3": "value_19_3"
+      },
+      "depends_on": [
+        "svc-030",
+        "svc-014",
+        "svc-009"
+      ],
+      "health_check": {
+        "path": "/health/19",
+        "interval_sec": 30
+      }
+    },
+    "svc-020": {
+      "replicas": 5,
+      "cpu_limit": "500m",
+      "mem_limit_mb": 1024,
+      "env_vars": {
+        "VAR_0": "value_20_0",
+        "VAR_1": "value_20_1",
+        "VAR_2": "value_20_2"
+      },
+      "depends_on": [
+        "svc-020",
+        "svc-029"
+      ],
+      "health_check": {
+        "path": "/health/20",
+        "interval_sec": 10
+      }
+    },
+    "svc-021": {
+      "replicas": 1,
+      "cpu_limit": "100m",
+      "mem_limit_mb": 1024,
+      "env_vars": {
+        "VAR_0": "value_21_0",
+        "VAR_1": "value_21_1"
+      },
+      "depends_on": [
+        "svc-030",
+        "svc-029"
+      ],
+      "health_check": {
+        "path": "/health/21",
+        "interval_sec": 5
+      }
+    },
+    "svc-022": {
+      "replicas": 5,
+      "cpu_limit": "500m",
+      "mem_limit_mb": 2048,
+      "env_vars": {
+        "VAR_0": "value_22_0",
+        "VAR_1": "value_22_1",
+        "VAR_2": "value_22_2",
+        "VAR_3": "value_22_3",
+        "VAR_4": "value_22_4",
+        "VAR_5": "value_22_5"
+      },
+      "depends_on": [
+        "svc-032"
+      ],
+      "health_check": {
+        "path": "/health/22",
+        "interval_sec": 5
+      }
+    },
+    "svc-023": {
+      "replicas": 7,
+      "cpu_limit": "100m",
+      "mem_limit_mb": 512,
+      "env_vars": {
+        "VAR_0": "value_23_0",
+        "VAR_1": "value_23_1",
+        "VAR_2": "value_23_2",
+        "VAR_3": "value_23_3",
+        "VAR_4": "value_23_4",
+        "VAR_5": "value_23_5"
+      },
+      "depends_on": [],
+      "health_check": {
+        "path": "/health/23",
+        "interval_sec": 10
+      }
+    },
+    "svc-024": {
+      "replicas": 8,
+      "cpu_limit": "1000m",
+      "mem_limit_mb": 2048,
+      "env_vars": {
+        "VAR_0": "value_24_0",
+        "VAR_1": "value_24_1",
+        "VAR_2": "value_24_2",
+        "VAR_3": "value_24_3",
+        "VAR_4": "value_24_4"
+      },
+      "depends_on": [
+        "svc-039"
+      ],
+      "health_check": {
+        "path": "/health/24",
+        "interval_sec": 5
+      }
+    },
+    "svc-025": {
+      "replicas": 3,
+      "cpu_limit": "1000m",
+      "mem_limit_mb": 1024,
+      "env_vars": {
+        "VAR_0": "value_25_0",
+        "VAR_1": "value_25_1"
+      },
+      "depends_on": [
+        "svc-013",
+        "svc-044"
+      ],
+      "health_check": {
+        "path": "/health/25",
+        "interval_sec": 30
+      }
+    },
+    "svc-026": {
+      "replicas": 7,
+      "cpu_limit": "1000m",
+      "mem_limit_mb": 2048,
+      "env_vars": {
+        "VAR_0": "value_26_0",
+        "VAR_1": "value_26_1",
+        "VAR_2": "value_26_2",
+        "VAR_3": "value_26_3",
+        "VAR_4": "value_26_4",
+        "VAR_5": "value_26_5",
+        "VAR_6": "value_26_6",
+        "VAR_7": "value_26_7"
+      },
+      "depends_on": [
+        "svc-034",
+        "svc-044"
+      ],
+      "health_check": {
+        "path": "/health/26",
+        "interval_sec": 5
+      }
+    },
+    "svc-027": {
+      "replicas": 3,
+      "cpu_limit": "100m",
+      "mem_limit_mb": 2048,
+      "env_vars": {
+        "VAR_0": "value_27_0",
+        "VAR_1": "value_27_1",
+        "VAR_2": "value_27_2",
+        "VAR_3": "value_27_3",
+        "VAR_4": "value_27_4",
+        "VAR_5": "value_27_5",
+        "VAR_6": "value_27_6",
+        "VAR_7": "value_27_7"
+      },
+      "depends_on": [
+        "svc-007",
+        "svc-037",
+        "svc-038"
+      ],
+      "health_check": {
+        "path": "/health/27",
+        "interval_sec": 10
+      }
+    },
+    "svc-028": {
+      "replicas": 6,
+      "cpu_limit": "100m",
+      "mem_limit_mb": 1024,
+      "env_vars": {
+        "VAR_0": "value_28_0",
+        "VAR_1": "value_28_1",
+        "VAR_2": "value_28_2"
+      },
+      "depends_on": [
+        "svc-025",
+        "svc-004"
+      ],
+      "health_check": {
+        "path": "/health/28",
+        "interval_sec": 30
+      }
+    },
+    "svc-029": {
+      "replicas": 2,
+      "cpu_limit": "1000m",
+      "mem_limit_mb": 512,
+      "env_vars": {
+        "VAR_0": "value_29_0",
+        "VAR_1": "value_29_1",
+        "VAR_2": "value_29_2",
+        "VAR_3": "value_29_3",
+        "VAR_4": "value_29_4"
+      },
+      "depends_on": [],
+      "health_check": {
+        "path": "/health/29",
+        "interval_sec": 5
+      }
+    },
+    "svc-030": {
+      "replicas": 4,
+      "cpu_limit": "200m",
+      "mem_limit_mb": 2048,
+      "env_vars": {
+        "VAR_0": "value_30_0",
+        "VAR_1": "value_30_1",
+        "VAR_2": "value_30_2",
+        "VAR_3": "value_30_3",
+        "VAR_4": "value_30_4",
+        "VAR_5": "value_30_5",
+        "VAR_6": "value_30_6",
+        "VAR_7": "value_30_7"
+      },
+      "depends_on": [],
+      "health_check": {
+        "path": "/health/30",
+        "interval_sec": 5
+      }
+    },
+    "svc-031": {
+      "replicas": 3,
+      "cpu_limit": "1000m",
+      "mem_limit_mb": 2048,
+      "env_vars": {
+        "VAR_0": "value_31_0",
+        "VAR_1": "value_31_1",
+        "VAR_2": "value_31_2",
+        "VAR_3": "value_31_3"
+      },
+      "depends_on": [
+        "svc-039",
+        "svc-036",
+        "svc-028"
+      ],
+      "health_check": {
+        "path": "/health/31",
+        "interval_sec": 5
+      }
+    },
+    "svc-032": {
+      "replicas": 4,
+      "cpu_limit": "500m",
+      "mem_limit_mb": 512,
+      "env_vars": {
+        "VAR_0": "value_32_0",
+        "VAR_1": "value_32_1",
+        "VAR_2": "value_32_2",
+        "VAR_3": "value_32_3",
+        "VAR_4": "value_32_4",
+        "VAR_5": "value_32_5"
+      },
+      "depends_on": [
+        "svc-027",
+        "svc-045"
+      ],
+      "health_check": {
+        "path": "/health/32",
+        "interval_sec": 10
+      }
+    },
+    "svc-033": {
+      "replicas": 2,
+      "cpu_limit": "100m",
+      "mem_limit_mb": 2048,
+      "env_vars": {
+        "VAR_0": "value_33_0",
+        "VAR_1": "value_33_1",
+        "VAR_2": "value_33_2",
+        "VAR_3": "value_33_3",
+        "VAR_4": "value_33_4",
+        "VAR_5": "value_33_5"
+      },
+      "depends_on": [
+        "svc-008",
+        "svc-018",
+        "svc-003"
+      ],
+      "health_check": {
+        "path": "/health/33",
+        "interval_sec": 10
+      }
+    },
+    "svc-034": {
+      "replicas": 1,
+      "cpu_limit": "100m",
+      "mem_limit_mb": 2048,
+      "env_vars": {
+        "VAR_0": "value_34_0",
+        "VAR_1": "value_34_1",
+        "VAR_2": "value_34_2",
+        "VAR_3": "value_34_3",
+        "VAR_4": "value_34_4",
+        "VAR_5": "value_34_5",
+        "VAR_6": "value_34_6",
+        "VAR_7": "value_34_7"
+      },
+      "depends_on": [
+        "svc-007",
+        "svc-018"
+      ],
+      "health_check": {
+        "path": "/health/34",
+        "interval_sec": 5
+      }
+    },
+    "svc-035": {
+      "replicas": 4,
+      "cpu_limit": "1000m",
+      "mem_limit_mb": 2048,
+      "env_vars": {
+        "VAR_0": "value_35_0",
+        "VAR_1": "value_35_1",
+        "VAR_2": "value_35_2",
+        "VAR_3": "value_35_3",
+        "VAR_4": "value_35_4"
+      },
+      "depends_on": [
+        "svc-045",
+        "svc-024"
+      ],
+      "health_check": {
+        "path": "/health/35",
+        "interval_sec": 10
+      }
+    },
+    "svc-036": {
+      "replicas": 7,
+      "cpu_limit": "1000m",
+      "mem_limit_mb": 2048,
+      "env_vars": {
+        "VAR_0": "value_36_0",
+        "VAR_1": "value_36_1",
+        "VAR_2": "value_36_2"
+      },
+      "depends_on": [
+        "svc-030"
+      ],
+      "health_check": {
+        "path": "/health/36",
+        "interval_sec": 5
+      }
+    },
+    "svc-037": {
+      "replicas": 4,
+      "cpu_limit": "1000m",
+      "mem_limit_mb": 512,
+      "env_vars": {
+        "VAR_0": "value_37_0",
+        "VAR_1": "value_37_1",
+        "VAR_2": "value_37_2",
+        "VAR_3": "value_37_3",
+        "VAR_4": "value_37_4",
+        "VAR_5": "value_37_5",
+        "VAR_6": "value_37_6",
+        "VAR_7": "value_37_7"
+      },
+      "depends_on": [
+        "svc-009",
+        "svc-018",
+        "svc-042"
+      ],
+      "health_check": {
+        "path": "/health/37",
+        "interval_sec": 5
+      }
+    },
+    "svc-038": {
+      "replicas": 3,
+      "cpu_limit": "100m",
+      "mem_limit_mb": 128,
+      "env_vars": {
+        "VAR_0": "value_38_0",
+        "VAR_1": "value_38_1",
+        "VAR_2": "value_38_2",
+        "VAR_3": "value_38_3",
+        "VAR_4": "value_38_4",
+        "VAR_5": "value_38_5",
+        "VAR_6": "value_38_6"
+      },
+      "depends_on": [],
+      "health_check": {
+        "path": "/health/38",
+        "interval_sec": 5
+      }
+    },
+    "svc-039": {
+      "replicas": 8,
+      "cpu_limit": "1000m",
+      "mem_limit_mb": 256,
+      "env_vars": {
+        "VAR_0": "value_39_0",
+        "VAR_1": "value_39_1"
+      },
+      "depends_on": [
+        "svc-041"
+      ],
+      "health_check": {
+        "path": "/health/39",
+        "interval_sec": 10
+      }
+    },
+    "svc-040": {
+      "replicas": 8,
+      "cpu_limit": "1000m",
+      "mem_limit_mb": 2048,
+      "env_vars": {
+        "VAR_0": "value_40_0",
+        "VAR_1": "value_40_1",
+        "VAR_2": "value_40_2"
+      },
+      "depends_on": [
+        "svc-032",
+        "svc-027",
+        "svc-035"
+      ],
+      "health_check": {
+        "path": "/health/40",
+        "interval_sec": 10
+      }
+    },
+    "svc-041": {
+      "replicas": 7,
+      "cpu_limit": "500m",
+      "mem_limit_mb": 256,
+      "env_vars": {
+        "VAR_0": "value_41_0",
+        "VAR_1": "value_41_1",
+        "VAR_2": "value_41_2"
+      },
+      "depends_on": [
+        "svc-038",
+        "svc-000",
+        "svc-036"
+      ],
+      "health_check": {
+        "path": "/health/41",
+        "interval_sec": 10
+      }
+    },
+    "svc-042": {
+      "replicas": 4,
+      "cpu_limit": "500m",
+      "mem_limit_mb": 1024,
+      "env_vars": {
+        "VAR_0": "value_42_0",
+        "VAR_1": "value_42_1",
+        "VAR_2": "value_42_2",
+        "VAR_3": "value_42_3",
+        "VAR_4": "value_42_4",
+        "VAR_5": "value_42_5"
+      },
+      "depends_on": [
+        "svc-002",
+        "svc-036"
+      ],
+      "health_check": {
+        "path": "/health/42",
+        "interval_sec": 10
+      }
+    },
+    "svc-043": {
+      "replicas": 6,
+      "cpu_limit": "100m",
+      "mem_limit_mb": 2048,
+      "env_vars": {
+        "VAR_0": "value_43_0",
+        "VAR_1": "value_43_1",
+        "VAR_2": "value_43_2",
+        "VAR_3": "value_43_3",
+        "VAR_4": "value_43_4"
+      },
+      "depends_on": [],
+      "health_check": {
+        "path": "/health/43",
+        "interval_sec": 5
+      }
+    },
+    "svc-044": {
+      "replicas": 5,
+      "cpu_limit": "1000m",
+      "mem_limit_mb": 2048,
+      "env_vars": {
+        "VAR_0": "value_44_0",
+        "VAR_1": "value_44_1"
+      },
+      "depends_on": [],
+      "health_check": {
+        "path": "/health/44",
+        "interval_sec": 5
+      }
+    },
+    "svc-045": {
+      "replicas": 8,
+      "cpu_limit": "100m",
+      "mem_limit_mb": 2048,
+      "env_vars": {
+        "VAR_0": "value_45_0",
+        "VAR_1": "value_45_1",
+        "VAR_2": "value_45_2",
+        "VAR_3": "value_45_3",
+        "VAR_4": "value_45_4",
+        "VAR_5": "value_45_5",
+        "VAR_6": "value_45_6",
+        "VAR_7": "value_45_7"
+      },
+      "depends_on": [
+        "svc-039",
+        "svc-003"
+      ],
+      "health_check": {
+        "path": "/health/45",
+        "interval_sec": 10
+      }
+    },
+    "svc-046": {
+      "replicas": 1,
+      "cpu_limit": "1000m",
+      "mem_limit_mb": 1024,
+      "env_vars": {
+        "VAR_0": "value_46_0",
+        "VAR_1": "value_46_1",
+        "VAR_2": "value_46_2",
+        "VAR_3": "value_46_3",
+        "VAR_4": "value_46_4",
+        "VAR_5": "value_46_5"
+      },
+      "depends_on": [
+        "svc-036",
+        "svc-046",
+        "svc-021"
+      ],
+      "health_check": {
+        "path": "/health/46",
+        "interval_sec": 10
+      }
+    },
+    "svc-047": {
+      "replicas": 6,
+      "cpu_limit": "500m",
+      "mem_limit_mb": 512,
+      "env_vars": {
+        "VAR_0": "value_47_0",
+        "VAR_1": "value_47_1",
+        "VAR_2": "value_47_2"
+      },
+      "depends_on": [],
+      "health_check": {
+        "path": "/health/47",
+        "interval_sec": 30
+      }
+    },
+    "svc-048": {
+      "replicas": 5,
+      "cpu_limit": "500m",
+      "mem_limit_mb": 128,
+      "env_vars": {
+        "VAR_0": "value_48_0",
+        "VAR_1": "value_48_1",
+        "VAR_2": "value_48_2",
+        "VAR_3": "value_48_3",
+        "VAR_4": "value_48_4",
+        "VAR_5": "value_48_5",
+        "VAR_6": "value_48_6"
+      },
+      "depends_on": [
+        "svc-037",
+        "svc-010",
+        "svc-036"
+      ],
+      "health_check": {
+        "path": "/health/48",
+        "interval_sec": 5
+      }
+    },
+    "svc-049": {
+      "replicas": 5,
+      "cpu_limit": "100m",
+      "mem_limit_mb": 512,
+      "env_vars": {
+        "VAR_0": "value_49_0",
+        "VAR_1": "value_49_1",
+        "VAR_2": "value_49_2",
+        "VAR_3": "value_49_3",
+        "VAR_4": "value_49_4"
+      },
+      "depends_on": [],
+      "health_check": {
+        "path": "/health/49",
+        "interval_sec": 5
+      }
+    }
+  }
+}
