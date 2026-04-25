@@ -161,6 +161,13 @@ def run_claude(prompt: str, run: str, extra_disallowed: list[str] | None = None)
         "--strict-mcp-config",
         "--mcp-config", mcp_config_str,
         "--no-session-persistence",
+        # Move per-machine sections (cwd, env info, memory paths, git status)
+        # from the system prompt into the first user message — they vary
+        # between subprocess starts and were paying ~3.8k tokens of
+        # cache_creation per task. With this flag they're cached in the
+        # user-message segment instead. Empirically validated 2026-04-25:
+        # cc=16 494 -> 12 690 per task (-23 %), -365k tokens / 96-task run.
+        "--exclude-dynamic-system-prompt-sections",
     ]
     if run == "B":
         cmd += ["--append-system-prompt", SYSTEM_PROMPT_TS]
