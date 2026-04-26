@@ -97,14 +97,19 @@ STANDARD VOCABULARY (CRITICAL FOR SCORING — the grader matches ENGLISH technic
 # --run C is now refused at CLI level. If hybrid work resumes, revisit here.
 
 # MCP config for Run B: token-savior only, with tsbench in WORKSPACE_ROOTS.
-# Honors TS_PROFILE env var ("full"|"lean"|"ultra"|"core"|"nav") so the
-# benchmark can A/B different manifest-size profiles.
+# Honors TS_PROFILE env var ("tiny"|"tiny_plus"|"ultra"|"lean"|"core"|"full")
+# so the benchmark can A/B different manifest-size profiles. Default tiny_plus
+# (12 tools, ~2 KT) — Pareto-optimal on tsbench-26/04 (97.4 % score, -42 %
+# active vs lean dégradé). TS_CAPTURE_DISABLED=1 prevents the agent from
+# burning tokens re-fetching sandboxed outputs (TASK-039 saw +40k cache
+# creation on lean dégradé due to capture_get round-trips).
 _TS_MCP_ENV = {
     "WORKSPACE_ROOTS": "/root/projects/tsbench",
     "TOKEN_SAVIOR_CLIENT": "claude-code",
     "EXCLUDE_EXTRA": "**/.next/**:**/node_modules/**:**/dist/**:**/.git/**:**/coverage/**:**/__pycache__/**",
+    "TS_CAPTURE_DISABLED": "1",
 }
-_TS_MCP_ENV["TOKEN_SAVIOR_PROFILE"] = os.environ.get("TS_PROFILE", "lean")
+_TS_MCP_ENV["TOKEN_SAVIOR_PROFILE"] = os.environ.get("TS_PROFILE", "tiny_plus")
 
 TS_MCP_CONFIG = {
     "mcpServers": {
