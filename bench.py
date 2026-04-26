@@ -36,7 +36,7 @@ MAX_TURNS = 30
 
 WARMUP_PROMPT_B = "List available token-savior tools and switch to project tsbench."
 
-SYSTEM_PROMPT_TS = """You are ONLY allowed to use mcp__token-savior__* tools for any code navigation and editing. Calling Read, Grep, Glob, Edit, Write, or Bash for code files is a hard violation. If you cannot answer with mcp__token-savior__* tools alone, say 'CANNOT_ANSWER' and stop.
+SYSTEM_PROMPT_TS = """You are ONLY allowed to use mcp__token-savior__* tools for any code navigation and editing. Calling Read, Grep, Glob, Edit, Write, Bash, or Agent (sub-agent delegation) for code files is a hard violation. NEVER spawn a sub-agent via Agent — do all edits directly in the main session. If you cannot answer with mcp__token-savior__* tools alone, say 'CANNOT_ANSWER' and stop.
 
 Active project: "tsbench" (preset — no switch_project needed). Do NOT call memory_search or memory_save.
 
@@ -68,7 +68,9 @@ LIMITS
 - Cite file paths inline next to each symbol you mention (e.g. `apps/api/services/billing.py::calculate_invoice`). Don't abbreviate to "...and N more".
 - For changelog/version-diff prompts: cross-check detect_breaking_changes against any project-level CHANGELOG/MIGRATION/breaking_changes.py file and cite each BREAK-XXX with its snake_case kind token (rename_function, signature_change, remove_function, route_removed, default_change, type_change, add_function).
 - Stub/missing endpoint: NEVER answer just CANNOT_ANSWER — produce a structured walkthrough (router → service → repository) citing file:line, append "(implementation is stub)".
-- Implement-task: write the FULL code block in your response with the file path requested.
+- Implement-task / code_generation: write the FULL code block in your response. ALWAYS include `import` statements at the top of the block (e.g. `import re`, `import os`) AND mention the target file path explicitly in your response (e.g. a heading `### packages/utils/foo.py` before the code block, or in the prose). The judge looks for both.
+- Rename-task: use `replace_symbol_source` on the function definition + `search_codebase` for callers in the same module/package. NEVER touch same-named symbols in OTHER modules. NEVER delegate to Agent.
+- Add-field task (.prisma + .ts/.py): use `add_field_to_model` directly on each file. ONE call per file. Do NOT delegate to Agent.
 
 CONCISION (CRITICAL): Réponds en moins de 500 tokens output sauf si le prompt demande explicitement du code long. Pas de préambule ("Voici", "Je vais", "Bien sûr"). Pas de récap final. Pas de répétition. Énumère les faits demandés sans paraphrase. Pour les implementations, le code parle — n'ajoute pas de commentaires explicatifs ni de bullet-list "ce que j'ai fait".
 
@@ -221,7 +223,11 @@ def run_claude(prompt: str, run: str, extra_disallowed: list[str] | None = None)
         # is the same content twice = effectively free since the second
         # appearance hits the same cache breakpoint.
         cmd += ["--append-system-prompt", SYSTEM_PROMPT_TS]
-        base_disallowed = ["Read", "Grep", "Glob"]
+        # Ban Agent (sub-agent) tool — bench-26/04 saw agents abandoning
+        # rename/add-field edit tasks by spawning an Agent sub-agent that
+        # lacked MCP context, then returning CANNOT_ANSWER (TASK-011, 012).
+        # Forcing them to use the direct edit primitives lifts those tasks.
+        base_disallowed = ["Read", "Grep", "Glob", "Agent"]
         if extra_disallowed:
             base_disallowed = list(dict.fromkeys(base_disallowed + extra_disallowed))
         cmd += ["--disallowedTools", ",".join(base_disallowed)]
