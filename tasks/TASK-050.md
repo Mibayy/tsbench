@@ -1,31 +1,36 @@
-# TASK-050 -- backward-slice
+# TASK-050 — code-gen-debounce
 
-**Categorie** : navigation
-**Difficulte** : hard
-**Artefact(s) lie(s)** : HOTSPOT-001
+**Catégorie** : code_generation
+**Difficulté** : medium
+**Artefact(s) lié(s)** : —
 **Type de scoring** : `contains_all`
 
-## Prompt (envoye a l'agent)
+## Prompt (envoyé à l'agent)
 
-> Calcule le backward slice de la fonction `reconcile_payments` dans `apps/api/services/complex_billing.py`. Quels symboles influencent directement ou transitivement cette fonction ?
+> Implémente un décorateur `@debounce(wait: float)` dans `packages/utils/debounce.py`. Si la fonction décorée est rappelée avant `wait` secondes, le premier appel est annulé et un nouveau timer démarre. Utilise `threading.Timer`. Donne le code complet avec gestion thread-safe (lock).
 
 ## Réponse attendue
 
 ```json
 {
-  "must_contain": [
-    "reconcile_payments",
-    "complex_billing.py"
+  "expected_tokens": [
+    "def debounce",
+    "wait",
+    "threading.Timer",
+    "cancel()",
+    "Lock",
+    "functools.wraps",
+    "packages/utils/debounce.py"
   ]
 }
 ```
 
 ## Scoring
 
-- **2** : backward slice complet avec symboles influencants
-- **1** : fonction identifiee + quelques dependances
-- **0** : echec
+- **2** : ≥ 6/7 tokens
+- **1** : 3-5/7
+- **0** : < 3/7
 
 ## Notes pour le juge
 
-Teste `get_backward_slice`. Fonction a complexite cyclomatique 14 (HOTSPOT-001). L'analyse de flux de donnees est difficile sans outil structure.
+Piège : oublier le lock → race condition entre cancel et restart. Ou utiliser `asyncio` quand le prompt demande threading.

@@ -1,32 +1,43 @@
-# TASK-056 -- checkpoint-restore
+# TASK-056 — code-gen-circuit-breaker
 
-**Categorie** : edit
-**Difficulte** : hard
-**Artefact(s) lie(s)** :
-**Type de scoring** : `edit_quality`
+**Catégorie** : code_generation
+**Difficulté** : hard
+**Artefact(s) lié(s)** : —
+**Type de scoring** : `contains_all`
 
-## Prompt (envoye a l'agent)
+## Prompt (envoyé à l'agent)
 
-> Workflow complet : 1) Cree un checkpoint du fichier `apps/api/services/billing.py`. 2) Remplace le corps de `charge_customer` pour ajouter un guard `if not payload: raise ValueError("empty payload")` au debut. 3) Compare le checkpoint avec l'etat actuel pour lister les differences.
+> Implémente une classe `CircuitBreaker(failure_threshold: int = 5, reset_timeout: float = 30.0)` dans `packages/utils/circuit.py`. 3 états : CLOSED, OPEN, HALF_OPEN. Méthode `call(fn, *args, **kwargs)` :
+> - CLOSED → exécute, si >= threshold failures consécutives → OPEN
+> - OPEN → lève `CircuitOpenError` immédiatement ; après `reset_timeout` → HALF_OPEN
+> - HALF_OPEN → 1 tentative ; succès → CLOSED, échec → OPEN
+>
+> Thread-safe via `threading.Lock`.
 
 ## Réponse attendue
 
 ```json
 {
-  "must_contain": [
-    "checkpoint",
-    "charge_customer",
-    "billing.py"
+  "expected_tokens": [
+    "class CircuitBreaker",
+    "CLOSED",
+    "OPEN",
+    "HALF_OPEN",
+    "CircuitOpenError",
+    "failure_threshold",
+    "reset_timeout",
+    "threading.Lock",
+    "packages/utils/circuit.py"
   ]
 }
 ```
 
 ## Scoring
 
-- **2** : les 3 etapes completees (checkpoint + edit + compare)
-- **1** : 2/3 etapes completees
-- **0** : <2 etapes
+- **2** : ≥ 7/9 tokens
+- **1** : 4-6/9
+- **0** : < 4/9
 
 ## Notes pour le juge
 
-Teste `create_checkpoint` + `replace_symbol_source` + `compare_checkpoint_by_symbol`. charge_customer est aux lignes 82-114.
+Les 3 états + transition HALF_OPEN sont essentiels. Oublier HALF_OPEN = circuit breaker incomplet.

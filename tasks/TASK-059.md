@@ -1,30 +1,37 @@
-# TASK-059 -- git-status
+# TASK-059 — code-gen-date-range-expander
 
-**Categorie** : git
-**Difficulte** : easy
-**Artefact(s) lie(s)** :
+**Catégorie** : code_generation
+**Difficulté** : medium
+**Artefact(s) lié(s)** : —
 **Type de scoring** : `contains_all`
 
-## Prompt (envoye a l'agent)
+## Prompt (envoyé à l'agent)
 
-> Donne le status git du projet : branche courante, fichiers modifies, fichiers staged, fichiers non-tracked. Utilise l'outil dedie au git status.
+> Implémente `expand_date_range(start: str, end: str, *, step: str = "day") -> list[str]` dans `packages/utils/date_range.py`. `start` et `end` au format ISO `YYYY-MM-DD`. `step` ∈ {"day", "week", "month"}. Retourne la liste des dates (format ISO string) depuis `start` jusqu'à `end` inclus. Utilise `datetime.date`, `timedelta` pour day/week, et `dateutil.relativedelta` pour month. Lève `ValueError` si end < start ou step invalide.
 
 ## Réponse attendue
 
 ```json
 {
-  "must_contain": [
-    "branch"
+  "expected_tokens": [
+    "def expand_date_range",
+    "from datetime import",
+    "timedelta",
+    "relativedelta",
+    "isoformat",
+    "ValueError",
+    "step",
+    "packages/utils/date_range.py"
   ]
 }
 ```
 
 ## Scoring
 
-- **2** : branche + status complet (staged, unstaged, untracked)
-- **1** : branche identifiee mais status partiel
-- **0** : echec
+- **2** : ≥ 6/8 tokens
+- **1** : 3-5/8
+- **0** : < 3/8
 
 ## Notes pour le juge
 
-Teste `get_git_status`. Equivalent structure de `git status` avec parsing JSON.
+`relativedelta(months=1)` pour incrément mensuel (timedelta ne gère pas les mois). Alternative acceptée : calcul manuel du mois suivant.

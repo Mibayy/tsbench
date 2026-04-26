@@ -1,33 +1,37 @@
-# TASK-043 — multi-param-functions
+# TASK-043 — code-gen-lru-cache
 
-**Catégorie** : heavy_read
-**Difficulté** : hard
-**Artefact(s) lié(s)** :
+**Catégorie** : code_generation
+**Difficulté** : medium
+**Artefact(s) lié(s)** : —
 **Type de scoring** : `contains_all`
 
 ## Prompt (envoyé à l'agent)
 
-> Dans le dossier `apps/api/services/`, identifie les fonctions publiques (non-underscore, non-internal) qui acceptent plus d'un paramètre. Donne-moi leur nom et leur signature, file par file.
+> Implémente une classe `LRUCache` en Python avec `get(key)`, `put(key, value)` et capacité max fixée à la construction. Utilise `collections.OrderedDict`. Les accès (get, put) doivent déplacer la clé en queue pour LRU. `get` retourne `None` si absent. Donne le code complet de la classe dans un fichier `packages/utils/lru.py`.
 
 ## Réponse attendue
 
 ```json
 {
-  "must_contain": [
-    "payload",
-    "user_id",
-    "calculate_invoice",
-    "apply_discount"
+  "expected_tokens": [
+    "class LRUCache",
+    "OrderedDict",
+    "def get",
+    "def put",
+    "move_to_end",
+    "popitem",
+    "capacity",
+    "packages/utils/lru.py"
   ]
 }
 ```
 
 ## Scoring
 
-- **2** : liste cohérente avec signatures (payload + user_id visibles, plusieurs fonctions nommées)
-- **1** : réponse partielle
-- **0** : absente
+- **2** : ≥ 7/8 tokens (implémentation correcte avec OrderedDict + LRU eviction)
+- **1** : 4-6/8
+- **0** : < 4/8
 
 ## Notes pour le juge
 
-Les services déclarent leurs fonctions publiques comme `def xxx(payload: dict, user_id: int = 0):` — la plupart ont 2 paramètres (exception : `authenticate_user` a été simplifié à 1 param via BREAK-002). Baseline : grep/read sur plusieurs fichiers de 600+ lignes. TS : `get_functions` avec filtre arity.
+LRU correct implique move_to_end sur get+put et popitem(last=False) pour évincer. Manquer `move_to_end` sur `get` est une erreur classique.

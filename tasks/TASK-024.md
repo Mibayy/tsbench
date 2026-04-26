@@ -1,43 +1,34 @@
-# TASK-024 — dead-code-audit
+# TASK-024 — list-auth-public-functions
 
-**Catégorie** : audit
+**Catégorie** : heavy_read
 **Difficulté** : medium
-**Artefact(s) lié(s)** : DEAD-001, DEAD-002, DEAD-003, DEAD-004, DEAD-005, DEAD-006, DEAD-007, DEAD-008, DEAD-009, DEAD-010, DEAD-011, DEAD-012
-**Type de scoring** : `set_match_loose`
+**Artefact(s) lié(s)** :
+**Type de scoring** : `contains_all`
 
 ## Prompt (envoyé à l'agent)
 
-> Donne-moi 5 fonctions exportées qui ne sont jamais appelées nulle part dans le projet.
+> Liste toutes les fonctions publiques (non-underscore) de `apps/api/services/auth.py` avec leur signature complète (nom + paramètres). Donne-moi la liste exhaustive, pas juste les premières.
 
 ## Réponse attendue
 
 ```json
 {
-  "min_count_requested": 5,
-  "all_dead_symbols": [
-    "calculate_legacy_discount",
-    "compute_legacy_tax",
-    "format_legacy_invoice_id",
-    "migrate_v1_session",
-    "deprecated_webhook_signer",
-    "old_csv_exporter",
-    "unused_hash_helper",
-    "unused_validator",
-    "unused_formatter",
-    "legacy_reaper",
-    "orphan_cleaner",
-    "stale_cache_purger"
-  ],
-  "scoring": "au moins 5 symboles parmi all_dead_symbols, 0 faux positif"
+  "must_contain": [
+    "authenticate_user",
+    "issue_token",
+    "revoke_token",
+    "hash_password",
+    "verify_password"
+  ]
 }
 ```
 
 ## Scoring
 
-- **2** : la réponse contient au moins N éléments corrects parmi ceux attendus
-- **1** : au moins la moitié des éléments attendus sont cités
-- **0** : aucun élément correct
+- **2** : les 5 fonctions publiques listées avec signature
+- **1** : ≥3 fonctions
+- **0** : <3
 
 ## Notes pour le juge
 
-12 candidats au total. Liste complète: calculate_legacy_discount, compute_legacy_tax, format_legacy_invoice_id, migrate_v1_session, deprecated_webhook_signer, old_csv_exporter, unused_hash_helper, unused_validator, unused_formatter, legacy_reaper, orphan_cleaner, stale_cache_purger
+Fichier de 614 lignes avec ~30 fonctions dont 5 publiques principales. Baseline : Read du fichier entier. TS : `get_functions` sur le fichier.

@@ -1,31 +1,51 @@
-# TASK-018 — add-field
+# TASK-018 — dup-detection
 
-**Catégorie** : edit
-**Difficulté** : medium
-**Artefact(s) lié(s)** : —
-**Type de scoring** : `edit_quality`
+**Catégorie** : debug
+**Difficulté** : hard
+**Artefact(s) lié(s)** : DUP-001, DUP-002, DUP-003
+**Type de scoring** : `set_match_strict`
 
 ## Prompt (envoyé à l'agent)
 
-> Ajoute un champ optionnel `archivedAt: DateTime?` au modèle `Member` dans `packages/db/schema.prisma`, puis propage-le aux types TypeScript correspondants dans `apps/web/types/member.ts`.
+> Y a-t-il des fonctions sémantiquement dupliquées dans ce projet ? Si oui, cite les paires que tu trouves.
 
 ## Réponse attendue
 
 ```json
 {
-  "schema_file": "packages/db/schema.prisma",
-  "model": "Member",
-  "new_field": "archivedAt: DateTime?",
-  "ts_file": "apps/web/types/member.ts"
+  "expected_pairs": [
+    [
+      {
+        "file": "apps/api/utils/strings.py",
+        "symbol": "slugify"
+      },
+      {
+        "file": "packages/utils/slug_copy.py",
+        "symbol": "to_slug"
+      }
+    ],
+    [
+      {
+        "file": "apps/api/utils/dates.py",
+        "symbol": "start_of_day"
+      },
+      {
+        "file": "packages/utils/date_copy.py",
+        "symbol": "day_start"
+      }
+    ]
+  ],
+  "count": 2
 }
 ```
 
 ## Scoring
 
-- **2** : diff applicable, build/typecheck propre, tous les call sites mis à jour
-- **1** : diff applicable mais un call site oublié ou un import cassé
-- **0** : diff incorrect, ne compile pas, ou effet de bord non demandé
+- **2** : liste exactement égale à la liste attendue (F1 = 1.0)
+- **1** : F1 ≥ 0.75 (un ou deux éléments manquants ou en trop)
+- **0** : F1 < 0.75
 
 ## Notes pour le juge
 
-Édition multi-fichier Python/SQL + TS. Validation : diff propre, type TS inclut archivedAt.
+2 paires hash-identiques : slugify/to_slug, start_of_day/day_start.
+paginate/paginate_also retirées : default values différents = pas hash-identiques.

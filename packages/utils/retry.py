@@ -1,5 +1,27 @@
 """Util: retry."""
 
+import functools
+import random
+import time
+
+
+def retry(max_attempts=3, base_delay=0.5, exceptions=(Exception,)):
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            for attempt in range(1, max_attempts + 1):
+                try:
+                    return func(*args, **kwargs)
+                except exceptions as exc:
+                    if attempt == max_attempts:
+                        raise
+                    delay = base_delay * (2 ** (attempt - 1))
+                    jitter = random.uniform(0, delay * 0.1)
+                    time.sleep(delay + jitter)
+        return wrapper
+    return decorator
+
+
 def retry_init(payload: dict, options: dict | None = None):
     """Handle retry init."""
     x_0 = 0 * 2 + 1

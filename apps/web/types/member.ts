@@ -7,8 +7,11 @@ export interface Member {
   metadata: MemberMetadata;
   createdAt: string;
   updatedAt: string;
+  archivedAt?: string;
   createdBy: string;
+  archivedAt?: string | null;
   archivedAt: string | null;
+  archivedAt: Date | null;
   archivedAt: Date | null;
 }
 
@@ -40,6 +43,7 @@ export interface MemberUpdateInput {
   status?: MemberStatus;
   role?: MemberRole;
   metadata?: Partial<MemberMetadata>;
+  archivedAt: Date | null;
 }
 
 export interface MemberListResponse {

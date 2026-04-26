@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>tsbench · proposals round 2 · 3D interactive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&family=Instrument+Serif&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#070510;--bg2:#0f0b1d;--surface:#1a1428;--surface2:#221a36;
+  --border:#2a2344;--border2:#3a2e55;
+  --text:#f5f3ff;--text2:#9b94b5;--text3:#5a5270;
+  --purple:#8b5cf6;--purple2:#a78bfa;--purple3:#c4b5fd;
+  --cyan:#22d3ee;--cyan2:#67e8f9;
+  --lime:#a3e635;--lime2:#bef264;
+  --pink:#ec4899;--pink2:#f472b6;
+  --amber:#fbbf24;
+  --red:#ef4444;--red2:#f87171;
+  --green:#22c55e;--green2:#4ade80;
+  --purple-glow:rgba(139,92,246,.35);
+  --cyan-glow:rgba(34,211,238,.3);
+  --lime-glow:rgba(163,230,53,.3);
+}
+html{scroll-behavior:smooth;font-size:16px;scrollbar-width:thin;scrollbar-color:#2a2344 #070510}
+body{background:var(--bg);color:var(--text);font-family:'Geist',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--purple2);text-decoration:none}
+
+/* ambient starfield */
+body::before{content:"";position:fixed;inset:0;background-image:radial-gradient(1px 1px at 20% 30%,#fff,transparent),radial-gradient(1px 1px at 80% 70%,#fff,transparent),radial-gradient(1.5px 1.5px at 40% 80%,#a78bfa,transparent),radial-gradient(1px 1px at 60% 20%,#67e8f9,transparent),radial-gradient(1px 1px at 90% 50%,#fff,transparent),radial-gradient(1.5px 1.5px at 10% 50%,#f472b6,transparent);background-size:400px 400px;opacity:.3;pointer-events:none;z-index:0}
+
+/* ───── GLOBAL NAV ───── */
+.gnav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(7,5,16,.72);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px}
+.gnav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px}
+.gnav .brand{font-weight:800;font-size:.875rem;letter-spacing:-.02em;display:flex;gap:10px;align-items:center}
+.gnav .brand .dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--purple2));box-shadow:0 0 14px var(--cyan-glow);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 14px var(--cyan-glow)}50%{box-shadow:0 0 22px var(--purple-glow)}}
+.gnav .links{display:flex;gap:4px;flex-wrap:wrap}
+.gnav .links a{padding:6px 14px;border-radius:8px;font-size:.78rem;color:var(--text2);transition:all .2s;border:1px solid transparent}
+.gnav .links a:hover{color:var(--text);background:var(--surface);border-color:var(--border)}
+
+/* ───── INTRO ───── */
+.intro{max-width:860px;margin:0 auto;padding:130px 24px 60px;text-align:center;position:relative;z-index:1}
+.intro .tag{display:inline-block;font-family:'Geist Mono',monospace;font-size:.7rem;color:var(--cyan);background:rgba(34,211,238,.08);border:1px solid var(--cyan-glow);padding:5px 14px;border-radius:999px;margin-bottom:22px;text-transform:uppercase;letter-spacing:.08em}
+.intro h1{font-family:'Instrument Serif',serif;font-size:clamp(2.6rem,6.5vw,4.2rem);font-weight:400;letter-spacing:-.03em;line-height:1.02;margin-bottom:20px}
+.intro h1 em{font-style:italic;background:linear-gradient(135deg,var(--cyan),var(--purple2),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.intro p{color:var(--text2);font-size:1.05rem;line-height:1.7;max-width:560px;margin:0 auto}
+
+.legend{margin-top:32px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap;font-size:.72rem;color:var(--text2);font-family:'Geist Mono',monospace}
+.legend .chip{display:flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;border:1px solid var(--border);background:var(--surface)}
+.legend .chip i{width:8px;height:8px;border-radius:50%;font-style:normal}
+
+/* ───── PROPOSAL SHELL ───── */
+.proposal{max-width:1200px;margin:0 auto 90px;padding:0 24px;position:relative;z-index:1}
+.p-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:12px}
+.p-num{font-family:'Geist Mono',monospace;font-size:3rem;font-weight:900;line-height:1;letter-spacing:-.04em;color:var(--border2);background:linear-gradient(180deg,var(--border2),var(--surface));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.p-head h2{font-family:'Instrument Serif',serif;font-size:2.1rem;font-weight:400;letter-spacing:-.02em;margin:-4px 0 6px}
+.p-head .p-sub{color:var(--text2);font-size:.92rem}
+.p-meta{font-family:'Geist Mono',monospace;font-size:.7rem;color:var(--text3);display:flex;gap:14px;flex-wrap:wrap}
+.p-meta b{color:var(--text2);font-weight:500;margin-right:5px}
+
+.mockup{border:1px solid var(--border);border-radius:18px;overflow:hidden;background:linear-gradient(180deg,var(--bg2),var(--bg));position:relative;box-shadow:0 40px 90px -40px rgba(139,92,246,.25),0 0 40px -20px rgba(34,211,238,.1)}
+.mockup-bar{display:flex;align-items:center;gap:8px;padding:11px 16px;background:var(--surface);border-bottom:1px solid var(--border);font-family:'Geist Mono',monospace;font-size:.7rem;color:var(--text3)}
+.mockup-bar .dots{display:flex;gap:5px}
+.mockup-bar .dots i{width:10px;height:10px;border-radius:50%;background:var(--border2);font-style:normal}
+.mockup-bar .dots i:nth-child(1){background:#ff5f57}
+.mockup-bar .dots i:nth-child(2){background:#ffbd2e}
+.mockup-bar .dots i:nth-child(3){background:#28ca42}
+.mockup-bar .url{flex:1;text-align:center;background:var(--bg);padding:5px 12px;border-radius:6px;border:1px solid var(--border);color:var(--text2)}
+
+.mockup-note{margin-top:12px;font-size:.72rem;color:var(--text3);text-align:center;font-family:'Geist Mono',monospace;display:flex;gap:6px;align-items:center;justify-content:center;flex-wrap:wrap}
+.mockup-note .pill{background:var(--surface);border:1px solid var(--border);padding:2px 8px;border-radius:999px;color:var(--cyan)}
+
+/* ══════════════════════════════════════════════════
+   PROPOSITION G — The Token Lab (Three.js)
+   ══════════════════════════════════════════════════ */
+.pG-body{background:radial-gradient(ellipse at 50% 0%,rgba(139,92,246,.12) 0%,transparent 60%),linear-gradient(180deg,#0a0818,#060410);padding:0;position:relative}
+.pG-hero{position:relative;min-height:520px;display:flex;flex-direction:column}
+.pG-canvas{position:absolute;inset:0;cursor:grab}
+.pG-canvas:active{cursor:grabbing}
+.pG-overlay{position:relative;z-index:2;padding:28px 32px 0;pointer-events:none}
+.pG-overlay h3{font-family:'Instrument Serif',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:400;line-height:1.05;letter-spacing:-.02em;max-width:460px;pointer-events:auto}
+.pG-overlay h3 em{font-style:italic;background:linear-gradient(120deg,var(--cyan),var(--purple2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.pG-overlay p{color:var(--text2);font-size:.92rem;max-width:420px;margin-top:10px;pointer-events:auto}
+
+.pG-hud{position:absolute;bottom:16px;left:16px;right:16px;display:flex;justify-content:space-between;gap:12px;z-index:3;pointer-events:none;flex-wrap:wrap}
+.pG-card{background:rgba(15,11,29,.75);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px 16px;min-width:220px;pointer-events:auto;transition:all .2s}
+.pG-card:hover{transform:translateY(-2px);border-color:var(--col,var(--purple))}
+.pG-card.red{--col:var(--red2)}
+.pG-card.green{--col:var(--lime2)}
+.pG-card .t{font-family:'Geist Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:var(--col);margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.pG-card .t i{width:6px;height:6px;border-radius:50%;background:var(--col);box-shadow:0 0 8px var(--col);font-style:normal}
+.pG-card .v{font-family:'Geist Mono',monospace;font-size:1.4rem;font-weight:700;letter-spacing:-.02em}
+.pG-card .s{font-size:.72rem;color:var(--text2);margin-top:2px}
+
+.pG-controls{position:absolute;top:16px;right:16px;display:flex;gap:6px;z-index:3}
+.pG-btn{background:rgba(15,11,29,.8);backdrop-filter:blur(10px);border:1px solid var(--border);color:var(--text2);padding:7px 14px;border-radius:8px;font-family:'Geist Mono',monospace;font-size:.7rem;cursor:pointer;transition:all .15s}
+.pG-btn:hover{color:var(--text);border-color:var(--purple);background:var(--purple-bg)}
+.pG-btn.active{color:var(--lime2);border-color:var(--lime2);background:rgba(163,230,53,.1)}
+
+.pG-tasks{padding:22px 28px 28px;border-top:1px solid var(--border)}
+.pG-tasks h4{font-size:.72rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px;font-family:'Geist Mono',monospace}
+.pG-task-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(52px,1fr));gap:4px}
+.pG-tile{aspect-ratio:1;border-radius:6px;background:linear-gradient(135deg,var(--surface),var(--bg2));border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Geist Mono',monospace;font-size:.55rem;color:var(--text3);cursor:pointer;transition:all .15s;position:relative;overflow:hidden}
+.pG-tile::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,var(--c1,transparent),var(--c2,transparent));opacity:0;transition:opacity .2s}
+.pG-tile:hover{transform:translateY(-2px);color:var(--text);border-color:var(--purple)}
+.pG-tile:hover::before{opacity:.25}
+.pG-tile.won{--c1:var(--lime);--c2:var(--green);color:var(--lime2)}
+.pG-tile.won::before{opacity:.15}
+.pG-tile.impossible{--c1:var(--amber);--c2:#fb923c;color:var(--amber);border-color:rgba(251,191,36,.25)}
+.pG-tile.impossible::before{opacity:.2}
+.pG-tile.active{border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 0 2px var(--cyan-glow)}
+
+/* ══════════════════════════════════════════════════
+   PROPOSITION H — The Score Card (gamifié)
+   ══════════════════════════════════════════════════ */
+.pH-body{background:
+  radial-gradient(ellipse at 25% 30%,rgba(239,68,68,.15) 0%,transparent 50%),
+  radial-gradient(ellipse at 75% 70%,rgba(163,230,53,.15) 0%,transparent 50%),
+  linear-gradient(180deg,#0d0a1a,#070510);padding:32px;position:relative;overflow:hidden}
+.pH-body::before{content:"";position:absolute;inset:0;background-image:linear-gradient(90deg,rgba(139,92,246,.04) 1px,transparent 1px),linear-gradient(0deg,rgba(139,92,246,.04) 1px,transparent 1px);background-size:40px 40px;pointer-events:none}
+
+.pH-vs{position:relative;z-index:2;display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:stretch;margin-bottom:24px}
+.pH-side{padding:22px;border-radius:16px;border:2px solid var(--col,var(--purple));background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));position:relative;overflow:hidden;transition:all .3s}
+.pH-side::before{content:"";position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:conic-gradient(from 0deg,transparent,var(--col),transparent 30%);opacity:.15;animation:pHshine 8s linear infinite}
+@keyframes pHshine{to{transform:rotate(360deg)}}
+.pH-side.red{--col:#ef4444}
+.pH-side.green{--col:#84cc16;box-shadow:0 0 40px -10px var(--col)}
+
+.pH-head{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px}
+.pH-head .who{font-family:'Geist Mono',monospace;font-size:.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:2px}
+.pH-head .name{font-family:'Instrument Serif',serif;font-size:1.5rem;font-weight:400;letter-spacing:-.01em;color:var(--col)}
+.pH-head .medal{font-size:1.5rem;filter:drop-shadow(0 0 8px var(--col))}
+
+.pH-avatar{position:relative;z-index:2;height:140px;margin:0 auto 14px;perspective:400px;display:flex;align-items:center;justify-content:center}
+.pH-avatar svg{width:auto;height:100%;filter:drop-shadow(0 6px 18px var(--col))}
+.pH-avatar .spin{animation:pHspin 12s linear infinite;transform-origin:center}
+.pH-side.green .pH-avatar .spin{animation-duration:8s}
+@keyframes pHspin{to{transform:rotate(360deg)}}
+
+.pH-stats{position:relative;z-index:2;display:flex;flex-direction:column;gap:8px}
+.pH-stat{display:flex;align-items:center;gap:10px;font-size:.78rem}
+.pH-stat .lbl{width:80px;font-family:'Geist Mono',monospace;font-size:.65rem;color:var(--text2);text-transform:uppercase;letter-spacing:.05em}
+.pH-stat .bar{flex:1;height:7px;background:rgba(255,255,255,.05);border-radius:4px;overflow:hidden;position:relative}
+.pH-stat .fill{height:100%;border-radius:4px;background:var(--col);box-shadow:0 0 8px var(--col)}
+.pH-stat .val{width:60px;text-align:right;font-family:'Geist Mono',monospace;font-size:.72rem;color:var(--text);font-weight:700}
+
+.pH-center{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;padding:0 8px}
+.pH-vs-big{font-family:'Instrument Serif',serif;font-size:3.5rem;font-style:italic;font-weight:400;letter-spacing:-.03em;background:linear-gradient(135deg,var(--pink),var(--amber),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:pHvsbounce 2s ease-in-out infinite}
+@keyframes pHvsbounce{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.pH-round{font-family:'Geist Mono',monospace;font-size:.65rem;color:var(--text3);text-transform:uppercase;letter-spacing:.12em}
+
+.pH-radar-box{position:relative;z-index:2;border:1px solid var(--border);border-radius:14px;padding:20px;background:rgba(15,11,29,.5);backdrop-filter:blur(10px);display:grid;grid-template-columns:auto 1fr;gap:24px;margin-bottom:22px;align-items:center}
+.pH-radar{position:relative;width:240px;height:240px;transform-style:preserve-3d;animation:pHfloat 6s ease-in-out infinite}
+@keyframes pHfloat{0%,100%{transform:rotateX(20deg) rotateZ(0)}50%{transform:rotateX(20deg) rotateZ(8deg)}}
+.pH-radar svg{width:100%;height:100%}
+.pH-radar-leg{display:flex;flex-direction:column;gap:14px}
+.pH-radar-leg h5{font-family:'Instrument Serif',serif;font-size:1.3rem;font-weight:400;margin-bottom:4px}
+.pH-radar-leg p{font-size:.8rem;color:var(--text2);margin-bottom:8px}
+.pH-radar-leg .legendA,.pH-radar-leg .legendB{display:flex;align-items:center;gap:8px;font-family:'Geist Mono',monospace;font-size:.72rem;color:var(--text2)}
+.pH-radar-leg .legendA i,.pH-radar-leg .legendB i{width:16px;height:3px;border-radius:2px;font-style:normal}
+.pH-radar-leg .legendA i{background:#ef4444}
+.pH-radar-leg .legendB i{background:#84cc16}
+
+.pH-achievements{position:relative;z-index:2}
+.pH-achievements h4{font-size:.72rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px;font-family:'Geist Mono',monospace;display:flex;align-items:center;gap:8px}
+.pH-achievements h4::after{content:"";flex:1;height:1px;background:var(--border)}
+.pH-ach-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+.pH-ach{padding:14px;border-radius:12px;background:linear-gradient(135deg,var(--col,var(--purple)) 0,transparent 120%);border:1px solid rgba(255,255,255,.08);position:relative;overflow:hidden;cursor:pointer;transition:all .2s}
+.pH-ach:hover{transform:translateY(-3px) scale(1.02);border-color:var(--col,var(--purple))}
+.pH-ach::before{content:attr(data-emoji);position:absolute;top:-8px;right:-6px;font-size:3rem;opacity:.15}
+.pH-ach.a1{--col:rgba(236,72,153,.15)}
+.pH-ach.a2{--col:rgba(251,191,36,.15)}
+.pH-ach.a3{--col:rgba(34,211,238,.15)}
+.pH-ach.a4{--col:rgba(163,230,53,.15)}
+.pH-ach .big{font-family:'Instrument Serif',serif;font-size:1.8rem;font-weight:400;line-height:1;margin-bottom:2px}
+.pH-ach .big.p{color:var(--pink2)}
+.pH-ach .big.a{color:var(--amber)}
+.pH-ach .big.c{color:var(--cyan2)}
+.pH-ach .big.g{color:var(--lime2)}
+.pH-ach .name{font-size:.78rem;color:var(--text);font-weight:600;margin-bottom:2px}
+.pH-ach .desc{font-size:.68rem;color:var(--text3);line-height:1.4}
+
+/* ══════════════════════════════════════════════════
+   PROPOSITION I — The Code Universe (Three.js graph)
+   ══════════════════════════════════════════════════ */
+.pI-body{background:radial-gradient(ellipse at 50% 50%,rgba(34,211,238,.08) 0%,transparent 70%),#05040d;padding:0;position:relative;min-height:640px}
+.pI-stage{position:relative;height:520px;overflow:hidden}
+.pI-canvas{position:absolute;inset:0;cursor:grab}
+.pI-canvas:active{cursor:grabbing}
+
+.pI-side{position:absolute;top:20px;left:20px;z-index:3;max-width:260px;pointer-events:auto}
+.pI-side h3{font-family:'Instrument Serif',serif;font-size:1.7rem;font-weight:400;line-height:1.1;letter-spacing:-.02em;margin-bottom:8px}
+.pI-side h3 em{font-style:italic;color:var(--cyan)}
+.pI-side p{color:var(--text2);font-size:.82rem;margin-bottom:14px}
+
+.pI-tracks{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.pI-track{padding:8px 12px;border-radius:8px;background:rgba(15,11,29,.75);backdrop-filter:blur(10px);border:1px solid var(--border);display:flex;align-items:center;gap:10px;font-size:.72rem;cursor:pointer;transition:all .15s}
+.pI-track:hover{border-color:var(--col)}
+.pI-track.on{border-color:var(--col);background:var(--bg-col)}
+.pI-track i{width:10px;height:10px;border-radius:50%;background:var(--col);box-shadow:0 0 10px var(--col);font-style:normal}
+.pI-track.red{--col:#ef4444;--bg-col:rgba(239,68,68,.1)}
+.pI-track.green{--col:#84cc16;--bg-col:rgba(163,230,53,.1)}
+.pI-track .nm{flex:1;color:var(--text);font-family:'Geist Mono',monospace;font-weight:600}
+.pI-track .num{font-family:'Geist Mono',monospace;color:var(--text2);font-size:.68rem}
+
+.pI-info{position:absolute;bottom:20px;left:20px;z-index:3;padding:14px 16px;background:rgba(15,11,29,.85);backdrop-filter:blur(14px);border:1px solid var(--border);border-radius:12px;font-family:'Geist Mono',monospace;font-size:.72rem;min-width:220px;opacity:0;transition:opacity .2s}
+.pI-info.show{opacity:1}
+.pI-info .nm{color:var(--cyan2);font-weight:700;margin-bottom:2px}
+.pI-info .tp{color:var(--text3);text-transform:uppercase;letter-spacing:.08em;font-size:.62rem;margin-bottom:6px}
+.pI-info .rows div{display:flex;justify-content:space-between;padding:2px 0;font-size:.68rem}
+.pI-info .rows div span:first-child{color:var(--text3)}
+
+.pI-play{position:absolute;bottom:20px;right:20px;z-index:3;padding:12px 18px;background:linear-gradient(135deg,var(--cyan),var(--purple));color:#fff;border:none;border-radius:10px;font-family:'Geist',sans-serif;font-size:.8rem;font-weight:600;cursor:pointer;display:flex;gap:8px;align-items:center;box-shadow:0 10px 24px -6px var(--cyan-glow);transition:all .2s}
+.pI-play:hover{transform:translateY(-2px);box-shadow:0 14px 28px -6px var(--purple-glow)}
+.pI-play.running{background:linear-gradient(135deg,var(--amber),var(--pink));animation:pIflash 1s ease infinite}
+@keyframes pIflash{50%{filter:brightness(1.25)}}
+
+.pI-minimap{position:absolute;top:20px;right:20px;z-index:3;width:140px;height:100px;background:rgba(15,11,29,.75);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:10px;padding:10px;pointer-events:none}
+.pI-minimap .mmt{font-family:'Geist Mono',monospace;font-size:.58rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px}
+.pI-minimap .mmb{display:flex;gap:4px;flex-wrap:wrap}
+.pI-minimap .mmb i{width:8px;height:8px;border-radius:2px;background:var(--surface2);font-style:normal}
+.pI-minimap .mmb i.v{background:var(--cyan)}
+
+.pI-footer{padding:20px 28px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:.75rem;color:var(--text2)}
+.pI-footer .left{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.pI-footer .left span{display:flex;gap:6px;align-items:center;font-family:'Geist Mono',monospace;font-size:.72rem}
+.pI-footer .left span i{width:8px;height:8px;border-radius:2px;font-style:normal}
+
+/* ───── VERDICT ───── */
+.verdict{max-width:960px;margin:60px auto 80px;padding:0 24px;position:relative;z-index:1}
+.verdict-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.verdict-card{padding:22px;border-radius:14px;background:linear-gradient(180deg,var(--bg2),var(--bg));border:1px solid var(--border);position:relative;overflow:hidden;transition:transform .2s,border-color .2s}
+.verdict-card:hover{transform:translateY(-3px);border-color:var(--col,var(--purple))}
+.verdict-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--col,var(--purple))}
+.verdict-card h5{font-family:'Instrument Serif',serif;font-size:1.15rem;margin-bottom:4px;font-weight:400}
+.verdict-card .vfor{font-size:.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;font-family:'Geist Mono',monospace}
+.verdict-card p{font-size:.78rem;color:var(--text2);line-height:1.6}
+.verdict-card.g{--col:var(--purple)}
+.verdict-card.h{--col:var(--pink)}
+.verdict-card.i{--col:var(--cyan)}
+
+.reco{margin-top:28px;padding:24px;border-radius:14px;background:linear-gradient(135deg,rgba(34,211,238,.06),rgba(139,92,246,.08),rgba(236,72,153,.04));border:1px solid var(--border2)}
+.reco .tag{font-family:'Geist Mono',monospace;font-size:.65rem;color:var(--cyan);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+.reco p{font-size:.88rem;line-height:1.6;color:var(--text)}
+.reco p b{color:var(--lime2);font-weight:700}
+
+footer{text-align:center;padding:30px 24px 50px;color:var(--text3);font-size:.72rem;font-family:'Geist Mono',monospace;position:relative;z-index:1}
+footer a{color:var(--text2)}
+
+@media(max-width:860px){
+  .pH-vs{grid-template-columns:1fr;gap:20px}
+  .pH-center{flex-direction:row;justify-content:center}
+  .pH-radar-box{grid-template-columns:1fr;text-align:center}
+  .pH-radar{margin:0 auto}
+  .verdict-grid{grid-template-columns:1fr}
+  .pG-hud{position:relative;flex-direction:column;inset:auto;padding:14px}
+  .pI-side{max-width:200px}
+  .pI-minimap{display:none}
+  .pG-overlay h3{font-size:1.6rem}
+}
+@media(max-width:560px){
+  .gnav .links a:not(:first-child):not(:last-child){display:none}
+  .intro{padding:100px 20px 40px}
+  .proposal{padding:0 14px}
+  .pH-body{padding:20px}
+  .pI-side{max-width:160px}
+  .pI-side h3{font-size:1.2rem}
+  .pI-side p{display:none}
+}
+</style>
+
+<script type="importmap">
+{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}
+</script>
+</head>
+<body>
+
+<nav class="gnav">
+  <div class="gnav-inner">
+    <div class="brand"><span class="dot"></span>tsbench · proposals round 2</div>
+    <div class="links">
+      <a href="./tsbench-proposals.html">← round 1 (A/B/C)</a>
+      <a href="#pG">G · Token Lab</a>
+      <a href="#pH">H · Score Card</a>
+      <a href="#pI">I · Code Universe</a>
+      <a href="#verdict">Verdict</a>
+    </div>
+  </div>
+</nav>
+
+<!-- INTRO -->
+<section class="intro">
+  <span class="tag">round 2 · 3D interactif ludique</span>
+  <h1>Trois univers <em>jouables</em><br>pour le même benchmark.</h1>
+  <p>De la 3D réelle (Three.js), de l'interactif, du ludique. Bouge la souris dans chaque scène, clique, joue. Les chiffres restent lisibles en surimpression.</p>
+  <div class="legend">
+    <span class="chip"><i style="background:var(--purple)"></i>Three.js · WebGL</span>
+    <span class="chip"><i style="background:var(--pink)"></i>gamifié · VS screen</span>
+    <span class="chip"><i style="background:var(--cyan)"></i>graph explorable</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     PROPOSITION G — The Token Lab
+     ═══════════════════════════════════════════════ -->
+<section class="proposal" id="pG">
+  <div class="p-head">
+    <div>
+      <div class="p-num">G</div>
+      <h2>The Token Lab</h2>
+      <div class="p-sub">Scène 3D vivante · deux machines qui travaillent en live · orbite à la souris</div>
+    </div>
+    <div class="p-meta">
+      <span><b>Stack</b>Three.js + R3F</span>
+      <span><b>Effort</b>~3j</span>
+      <span><b>Feel</b>atelier · laboratoire</span>
+    </div>
+  </div>
+
+  <div class="mockup">
+    <div class="mockup-bar">
+      <div class="dots"><i></i><i></i><i></i></div>
+      <div class="url">tsbench.dev · token lab</div>
+      <div>drag · scroll · click</div>
+    </div>
+    <div class="mockup-body pG-body">
+      <div class="pG-hero">
+        <canvas class="pG-canvas" id="pGcanvas"></canvas>
+        <div class="pG-controls">
+          <button class="pG-btn active" data-speed="1">▶ 1x</button>
+          <button class="pG-btn" data-speed="2">2x</button>
+          <button class="pG-btn" id="pGreset">⟳</button>
+        </div>
+        <div class="pG-overlay">
+          <h3>Regarde les <em>tokens</em><br>s'empiler d'un côté,<br>s'organiser de l'autre.</h3>
+          <p>Deux machines, même tâche, même modèle. Laisse la scène tourner, ou fais la tourner à la souris.</p>
+        </div>
+        <div class="pG-hud">
+          <div class="pG-card red">
+            <div class="t"><i></i>baseline · Read/Grep</div>
+            <div class="v" id="pGredVal">0</div>
+            <div class="s">chars injected</div>
+          </div>
+          <div class="pG-card green">
+            <div class="t"><i></i>token savior · MCP</div>
+            <div class="v" id="pGgreenVal">0</div>
+            <div class="s">chars injected</div>
+          </div>
+        </div>
+      </div>
+      <div class="pG-tasks">
+        <h4>60 tâches · clique une pour relancer la scène sur cette tâche</h4>
+        <div class="pG-task-grid" id="pGtasks"></div>
+      </div>
+    </div>
+  </div>
+  <div class="mockup-note">
+    <span class="pill">interactions</span>
+    <span>drag souris pour orbiter · scroll pour zoomer · hover les machines · clic tile = nouvelle tâche</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     PROPOSITION H — The Score Card
+     ═══════════════════════════════════════════════ -->
+<section class="proposal" id="pH">
+  <div class="p-head">
+    <div>
+      <div class="p-num">H</div>
+      <h2>The Score Card</h2>
+      <div class="p-sub">Benchmark gamifié · VS screen · radar 3D · achievements cliquables</div>
+    </div>
+    <div class="p-meta">
+      <span><b>Stack</b>CSS3D + SVG anim</span>
+      <span><b>Effort</b>~1.5j</span>
+      <span><b>Feel</b>arcade · stats RPG</span>
+    </div>
+  </div>
+
+  <div class="mockup">
+    <div class="mockup-bar">
+      <div class="dots"><i></i><i></i><i></i></div>
+      <div class="url">tsbench.dev · score card</div>
+      <div>ROUND 1 · FIGHT</div>
+    </div>
+    <div class="mockup-body pH-body">
+
+      <div class="pH-vs">
+        <div class="pH-side red">
+          <div class="pH-head">
+            <div>
+              <div class="who">challenger</div>
+              <div class="name">Baseline</div>
+            </div>
+            <div class="medal">🥈</div>
+          </div>
+          <div class="pH-avatar">
+            <svg viewBox="-60 -60 120 120">
+              <defs>
+                <radialGradient id="pHred" cx="0" cy="-15">
+                  <stop offset="0" stop-color="#fca5a5"/>
+                  <stop offset="1" stop-color="#991b1b"/>
+                </radialGradient>
+              </defs>
+              <g class="spin">
+                <path d="M 0 -50 L 43 -25 L 43 25 L 0 50 L -43 25 L -43 -25 Z" fill="url(#pHred)" stroke="#ef4444" stroke-width="1.5"/>
+                <path d="M 0 -50 L 0 50" stroke="#ef4444" stroke-width="1" opacity=".3"/>
+                <path d="M -43 -25 L 43 25" stroke="#ef4444" stroke-width="1" opacity=".3"/>
+                <path d="M 43 -25 L -43 25" stroke="#ef4444" stroke-width="1" opacity=".3"/>
+              </g>
+              <g>
+                <circle cx="-12" cy="-5" r="4" fill="#0a0810"/>
+                <circle cx="12" cy="-5" r="4" fill="#0a0810"/>
+                <path d="M -14 12 Q 0 4 14 12" stroke="#0a0810" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+              </g>
+            </svg>
+          </div>
+          <div class="pH-stats">
+            <div class="pH-stat"><span class="lbl">Chars</span><span class="bar"><span class="fill" style="width:100%"></span></span><span class="val">1.4M</span></div>
+            <div class="pH-stat"><span class="lbl">Accuracy</span><span class="bar"><span class="fill" style="width:56%"></span></span><span class="val">56%</span></div>
+            <div class="pH-stat"><span class="lbl">Speed</span><span class="bar"><span class="fill" style="width:55%"></span></span><span class="val">51s</span></div>
+            <div class="pH-stat"><span class="lbl">Precision</span><span class="bar"><span class="fill" style="width:40%"></span></span><span class="val">40%</span></div>
+          </div>
+        </div>
+
+        <div class="pH-center">
+          <div class="pH-vs-big">VS</div>
+          <div class="pH-round">round 1 · 60 tasks</div>
+        </div>
+
+        <div class="pH-side green">
+          <div class="pH-head">
+            <div>
+              <div class="who">champion</div>
+              <div class="name">Token Savior</div>
+            </div>
+            <div class="medal">🏆</div>
+          </div>
+          <div class="pH-avatar">
+            <svg viewBox="-60 -60 120 120">
+              <defs>
+                <radialGradient id="pHgreen" cx="0" cy="-15">
+                  <stop offset="0" stop-color="#bef264"/>
+                  <stop offset="1" stop-color="#365314"/>
+                </radialGradient>
+              </defs>
+              <g class="spin">
+                <circle cx="0" cy="0" r="48" fill="url(#pHgreen)" stroke="#84cc16" stroke-width="1.5"/>
+                <circle cx="0" cy="0" r="48" fill="none" stroke="#a3e635" stroke-width=".5" stroke-dasharray="4 2"/>
+                <g stroke="#a3e635" stroke-width="1" fill="none" opacity=".6">
+                  <line x1="-30" y1="-20" x2="30" y2="-20"/>
+                  <line x1="-35" y1="0" x2="35" y2="0"/>
+                  <line x1="-30" y1="20" x2="30" y2="20"/>
+                </g>
+              </g>
+              <g>
+                <circle cx="-14" cy="-8" r="4" fill="#0a0810"/>
+                <circle cx="14" cy="-8" r="4" fill="#0a0810"/>
+                <path d="M -16 10 Q 0 18 16 10" stroke="#0a0810" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+              </g>
+            </svg>
+          </div>
+          <div class="pH-stats">
+            <div class="pH-stat"><span class="lbl">Chars</span><span class="bar"><span class="fill" style="width:16%"></span></span><span class="val">235K</span></div>
+            <div class="pH-stat"><span class="lbl">Accuracy</span><span class="bar"><span class="fill" style="width:96%"></span></span><span class="val">96%</span></div>
+            <div class="pH-stat"><span class="lbl">Speed</span><span class="bar"><span class="fill" style="width:100%"></span></span><span class="val">28s</span></div>
+            <div class="pH-stat"><span class="lbl">Precision</span><span class="bar"><span class="fill" style="width:98%"></span></span><span class="val">98%</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pH-radar-box">
+        <div class="pH-radar">
+          <svg viewBox="-120 -120 240 240">
+            <defs>
+              <radialGradient id="radarG">
+                <stop offset="0" stop-color="#1a1428" stop-opacity=".9"/>
+                <stop offset="1" stop-color="#0a0810" stop-opacity=".3"/>
+              </radialGradient>
+            </defs>
+            <!-- axes rings -->
+            <g stroke="#382c55" stroke-width=".8" fill="none" opacity=".7">
+              <polygon points="0,-100 95,-31 59,81 -59,81 -95,-31" fill="url(#radarG)"/>
+              <polygon points="0,-75 71,-23 44,61 -44,61 -71,-23" fill="none"/>
+              <polygon points="0,-50 48,-15 29,40 -29,40 -48,-15" fill="none"/>
+              <polygon points="0,-25 24,-8 15,20 -15,20 -24,-8" fill="none"/>
+            </g>
+            <!-- axes lines -->
+            <g stroke="#382c55" stroke-width=".5">
+              <line x1="0" y1="0" x2="0" y2="-100"/>
+              <line x1="0" y1="0" x2="95" y2="-31"/>
+              <line x1="0" y1="0" x2="59" y2="81"/>
+              <line x1="0" y1="0" x2="-59" y2="81"/>
+              <line x1="0" y1="0" x2="-95" y2="-31"/>
+            </g>
+            <!-- baseline area -->
+            <polygon points="0,-56 48,-16 23,32 -35,48 -48,-16" fill="#ef4444" fill-opacity=".2" stroke="#ef4444" stroke-width="1.5"/>
+            <g fill="#ef4444">
+              <circle cx="0" cy="-56" r="3"/>
+              <circle cx="48" cy="-16" r="3"/>
+              <circle cx="23" cy="32" r="3"/>
+              <circle cx="-35" cy="48" r="3"/>
+              <circle cx="-48" cy="-16" r="3"/>
+            </g>
+            <!-- TS area -->
+            <polygon points="0,-96 91,-30 56,77 -44,61 -90,-30" fill="#84cc16" fill-opacity=".2" stroke="#84cc16" stroke-width="1.5"/>
+            <g fill="#a3e635">
+              <circle cx="0" cy="-96" r="3"/>
+              <circle cx="91" cy="-30" r="3"/>
+              <circle cx="56" cy="77" r="3"/>
+              <circle cx="-44" cy="61" r="3"/>
+              <circle cx="-90" cy="-30" r="3"/>
+            </g>
+            <!-- labels -->
+            <g font-family="Geist Mono" font-size="9" fill="#9b94b5" text-anchor="middle">
+              <text x="0" y="-110">accuracy</text>
+              <text x="108" y="-33">speed</text>
+              <text x="66" y="95">precision</text>
+              <text x="-66" y="95">efficiency</text>
+              <text x="-108" y="-33">coverage</text>
+            </g>
+          </svg>
+        </div>
+        <div class="pH-radar-leg">
+          <h5>Radar 5 axes</h5>
+          <p>Même modèle. Seul le toolbelt change. L'aire verte englobe presque totalement l'aire rouge.</p>
+          <div class="legendA"><i></i>Baseline · aire = 0.35</div>
+          <div class="legendB"><i></i>Token Savior · aire = 0.87</div>
+        </div>
+      </div>
+
+      <div class="pH-achievements">
+        <h4>Achievements débloqués</h4>
+        <div class="pH-ach-grid">
+          <div class="pH-ach a1" data-emoji="🔥">
+            <div class="big p">+40</div>
+            <div class="name">Context crusher</div>
+            <div class="desc">Accuracy jump de 56% à 96%</div>
+          </div>
+          <div class="pH-ach a2" data-emoji="🚀">
+            <div class="big a">21</div>
+            <div class="name">Impossible mode</div>
+            <div class="desc">Tâches infaisables sans TS</div>
+          </div>
+          <div class="pH-ach a3" data-emoji="⚡">
+            <div class="big c">-45%</div>
+            <div class="name">Speedrun</div>
+            <div class="desc">Wall time divisé par deux</div>
+          </div>
+          <div class="pH-ach a4" data-emoji="🏆">
+            <div class="big g">32/0</div>
+            <div class="name">Flawless</div>
+            <div class="desc">Wins · losses, jamais perdu</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mockup-note">
+    <span class="pill">interactions</span>
+    <span>stats qui remplissent au scroll · avatars qui tournent · achievements hover · possibilité de cliquer pour voir le détail de chaque stat</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     PROPOSITION I — The Code Universe
+     ═══════════════════════════════════════════════ -->
+<section class="proposal" id="pI">
+  <div class="p-head">
+    <div>
+      <div class="p-num">I</div>
+      <h2>The Code Universe</h2>
+      <div class="p-sub">Graphe 3D navigable · deux satellites agents qui résolvent une tâche en live</div>
+    </div>
+    <div class="p-meta">
+      <span><b>Stack</b>Three.js + force graph</span>
+      <span><b>Effort</b>~3j</span>
+      <span><b>Feel</b>galaxie · exploration</span>
+    </div>
+  </div>
+
+  <div class="mockup">
+    <div class="mockup-bar">
+      <div class="dots"><i></i><i></i><i></i></div>
+      <div class="url">tsbench.dev · code universe</div>
+      <div>206 symbols · 2 agents</div>
+    </div>
+    <div class="mockup-body pI-body">
+      <div class="pI-stage">
+        <canvas class="pI-canvas" id="pIcanvas"></canvas>
+
+        <div class="pI-side">
+          <h3>Un <em>univers</em> de symboles.<br>Deux façons de le traverser.</h3>
+          <p>Le codebase synthétique tsbench en 206 nodes. Drag pour orbiter. Hover un node pour voir son détail. Lance les agents et regarde les chemins.</p>
+          <div class="pI-tracks">
+            <div class="pI-track red on" data-a="base">
+              <i></i><span class="nm">baseline</span><span class="num">reads everything</span>
+            </div>
+            <div class="pI-track green on" data-a="ts">
+              <i></i><span class="nm">token savior</span><span class="num">jumps precisely</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pI-minimap">
+          <div class="mmt">visited · 23/206</div>
+          <div class="mmb" id="pImini"></div>
+        </div>
+
+        <div class="pI-info" id="pIinfo">
+          <div class="nm">UserController.create</div>
+          <div class="tp">class method · apps/api</div>
+          <div class="rows">
+            <div><span>callers</span><span>8</span></div>
+            <div><span>callees</span><span>12</span></div>
+            <div><span>cyclomatic</span><span>6</span></div>
+          </div>
+        </div>
+
+        <button class="pI-play" id="pIplay">▶ Resolve TASK-043</button>
+      </div>
+
+      <div class="pI-footer">
+        <div class="left">
+          <span><i style="background:var(--purple)"></i>classes</span>
+          <span><i style="background:var(--cyan)"></i>functions</span>
+          <span><i style="background:var(--amber)"></i>configs</span>
+          <span><i style="background:var(--pink)"></i>tests</span>
+        </div>
+        <div style="font-family:'Geist Mono',monospace;font-size:.7rem;color:var(--text3)">tsbench v1 · synthetic codebase</div>
+      </div>
+    </div>
+  </div>
+  <div class="mockup-note">
+    <span class="pill">interactions</span>
+    <span>drag pour orbiter · scroll pour zoomer · hover un node · clic sur Resolve lance les 2 trajectoires simultanément</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     VERDICT
+     ═══════════════════════════════════════════════ -->
+<section class="verdict" id="verdict">
+  <div class="p-head" style="border:none;padding:0;margin-bottom:20px">
+    <div>
+      <h2 style="font-family:'Instrument Serif',serif;font-size:2.1rem;font-weight:400">Quel pari ?</h2>
+      <div class="p-sub" style="color:var(--text2);font-size:.92rem">Tradeoffs honnêtes</div>
+    </div>
+  </div>
+
+  <div class="verdict-grid">
+    <div class="verdict-card g">
+      <div class="vfor">G · immersif doux</div>
+      <h5>The Token Lab</h5>
+      <p>La scène 3D raconte tout en 10 secondes même sans lire. Marche en arrière-plan, pas intrusive. Coût: Three.js pèse 600KB, fallback 2D obligatoire mobile.</p>
+    </div>
+    <div class="verdict-card h">
+      <div class="vfor">H · mémorable chic</div>
+      <h5>The Score Card</h5>
+      <p>Gamification lisible instantanément. Radar + VS + achievements sont universels. Pas de WebGL, léger, screenshot-friendly. Risque: paraît moins sérieux pour un public enterprise.</p>
+    </div>
+    <div class="verdict-card i">
+      <div class="vfor">I · jouable profond</div>
+      <h5>The Code Universe</h5>
+      <p>La plus impressionnante si bien faite. Le graphe montre la nature du problème (naviguer dans un codebase) et l'animation montre la solution. Exige un vrai travail de data + perf.</p>
+    </div>
+  </div>
+
+  <div class="reco">
+    <div class="tag">ma recommandation</div>
+    <p>Pour du "clair + ludique + 3D" dans la même page: <b>combine H + I</b>. H comme hero (Score Card VS screen lisible en 5s), puis I plus bas comme section "explore the data" (Code Universe interactif). G reste cohérent mais peut-être redondant si I est déjà là. On peut attaquer H tout de suite (léger), et ajouter I en V2 quand les données nodes/edges sont propres.</p>
+  </div>
+
+  <div style="margin-top:28px;padding:20px;border-radius:12px;background:var(--surface);border:1px solid var(--border);text-align:center">
+    <div style="font-family:'Geist Mono',monospace;font-size:.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px">6 directions au total · 3 sobres · 3 3D ludiques</div>
+    <a href="./tsbench-proposals.html" style="display:inline-block;padding:10px 18px;background:var(--purple);color:#fff;border-radius:8px;font-size:.8rem;font-weight:600">← revoir A · B · C</a>
+  </div>
+</section>
+
+<footer>
+  tsbench proposals · round 2 · <a href="./tsbench-proposals.html">round 1</a> · <a href="./index.html">site actuel</a>
+</footer>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+/* ═══════════════ Proposal G · Token Lab ═══════════════ */
+(function(){
+  const canvas = document.getElementById('pGcanvas');
+  if(!canvas) return;
+
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.Fog(0x070510, 8, 24);
+
+  const host = canvas.parentElement;
+  const renderer = new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+
+  const cam = new THREE.PerspectiveCamera(45,1,.1,100);
+  cam.position.set(0,3,12);
+
+  const controls = new OrbitControls(cam,canvas);
+  controls.enableDamping = true;
+  controls.dampingFactor = .08;
+  controls.minDistance = 6;
+  controls.maxDistance = 20;
+  controls.maxPolarAngle = Math.PI*.55;
+  controls.autoRotate = true;
+  controls.autoRotateSpeed = .5;
+
+  scene.add(new THREE.AmbientLight(0x6a5fa0,.6));
+  const keyL = new THREE.DirectionalLight(0xa78bfa,1.2);
+  keyL.position.set(5,8,5);
+  scene.add(keyL);
+  scene.add(new THREE.PointLight(0xef4444,1.5,10).position.set(-3,2,0));
+  scene.add(new THREE.PointLight(0xa3e635,1.5,10).position.set(3,2,0));
+
+  // floor grid
+  const grid = new THREE.GridHelper(30,30,0x2a2344,0x1a1428);
+  grid.position.y = -.8;
+  scene.add(grid);
+
+  // ── LEFT machine (baseline) ──
+  const mA = new THREE.Group();
+  mA.position.set(-3,0,0);
+  const baseGeo = new THREE.BoxGeometry(2.4,.4,2.4);
+  const baseMatA = new THREE.MeshStandardMaterial({color:0x2a1220,emissive:0x330814,emissiveIntensity:.3,metalness:.3,roughness:.6});
+  mA.add(new THREE.Mesh(baseGeo,baseMatA));
+  const pipeGeo = new THREE.CylinderGeometry(.3,.4,1.6,8);
+  const pipeMatA = new THREE.MeshStandardMaterial({color:0x991b1b,emissive:0xef4444,emissiveIntensity:.4,metalness:.5,roughness:.4});
+  const pipeA = new THREE.Mesh(pipeGeo,pipeMatA);
+  pipeA.position.y = 1;
+  mA.add(pipeA);
+  // messy pile of code blocks
+  const pileA = new THREE.Group();
+  pileA.position.y = 1.8;
+  mA.add(pileA);
+  for(let i=0;i<22;i++){
+    const b = new THREE.Mesh(
+      new THREE.BoxGeometry(.7+Math.random()*.4,.08,.5+Math.random()*.3),
+      new THREE.MeshStandardMaterial({color:new THREE.Color().setHSL(0,.5+Math.random()*.3,.4+Math.random()*.2),emissive:0x661020,emissiveIntensity:.3,roughness:.6})
+    );
+    b.position.set((Math.random()-.5)*.6,i*.1,(Math.random()-.5)*.6);
+    b.rotation.y = (Math.random()-.5)*.4;
+    b.rotation.z = (Math.random()-.5)*.2;
+    pileA.add(b);
+  }
+  scene.add(mA);
+
+  // smoke particles for A
+  const smokeGeo = new THREE.BufferGeometry();
+  const smokeN = 60, smokePos = new Float32Array(smokeN*3);
+  for(let i=0;i<smokeN;i++){
+    smokePos[i*3] = (Math.random()-.5)*1;
+    smokePos[i*3+1] = Math.random()*4+2;
+    smokePos[i*3+2] = (Math.random()-.5)*1;
+  }
+  smokeGeo.setAttribute('position',new THREE.BufferAttribute(smokePos,3));
+  const smokeMat = new THREE.PointsMaterial({color:0xef4444,size:.15,transparent:true,opacity:.4,blending:THREE.AdditiveBlending});
+  const smoke = new THREE.Points(smokeGeo,smokeMat);
+  smoke.position.copy(mA.position);
+  scene.add(smoke);
+
+  // ── RIGHT machine (TS) ──
+  const mB = new THREE.Group();
+  mB.position.set(3,0,0);
+  const baseMatB = new THREE.MeshStandardMaterial({color:0x0a2a1a,emissive:0x0a2818,emissiveIntensity:.25,metalness:.3,roughness:.5});
+  mB.add(new THREE.Mesh(baseGeo,baseMatB));
+  const pedB = new THREE.Mesh(new THREE.CylinderGeometry(.25,.35,.6,8),new THREE.MeshStandardMaterial({color:0x166534,metalness:.5,roughness:.3,emissive:0x14532d,emissiveIntensity:.3}));
+  pedB.position.y = .5;
+  mB.add(pedB);
+  // crystalline graph above pedestal
+  const graph = new THREE.Group();
+  graph.position.y = 1.8;
+  mB.add(graph);
+  const nodes = [
+    [0,0,0],[1,.3,0],[-1,.3,0],[.5,-.4,.9],[-.5,-.4,.9],[.5,-.4,-.9],[-.5,-.4,-.9],[0,1,0]
+  ];
+  const nodeGeo = new THREE.IcosahedronGeometry(.15,0);
+  const nodeMat = new THREE.MeshStandardMaterial({color:0xa3e635,emissive:0x84cc16,emissiveIntensity:.8,metalness:.6,roughness:.2});
+  const nodeMeshes = [];
+  nodes.forEach(([x,y,z])=>{
+    const m = new THREE.Mesh(nodeGeo,nodeMat);
+    m.position.set(x,y,z);
+    graph.add(m);
+    nodeMeshes.push(m);
+  });
+  // edges
+  const edges = [[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[0,7],[1,7],[2,7]];
+  const edgeMat = new THREE.LineBasicMaterial({color:0x84cc16,transparent:true,opacity:.5});
+  edges.forEach(([a,b])=>{
+    const g = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(...nodes[a]),new THREE.Vector3(...nodes[b])]);
+    graph.add(new THREE.Line(g,edgeMat));
+  });
+  // orbiting particles around graph
+  const orbGeo = new THREE.BufferGeometry();
+  const orbN = 40;
+  const orbPos = new Float32Array(orbN*3);
+  for(let i=0;i<orbN;i++){
+    const a = (i/orbN)*Math.PI*2;
+    const r = 1+Math.random()*.6;
+    orbPos[i*3] = Math.cos(a)*r;
+    orbPos[i*3+1] = (Math.random()-.5)*.4;
+    orbPos[i*3+2] = Math.sin(a)*r;
+  }
+  orbGeo.setAttribute('position',new THREE.BufferAttribute(orbPos,3));
+  const orbMat = new THREE.PointsMaterial({color:0xa3e635,size:.08,transparent:true,opacity:.9,blending:THREE.AdditiveBlending});
+  const orb = new THREE.Points(orbGeo,orbMat);
+  graph.add(orb);
+
+  scene.add(mB);
+
+  // token stream between machines (for A → wasted, for B → controlled)
+  const streamGeo = new THREE.BufferGeometry();
+  const streamN = 80;
+  const streamPos = new Float32Array(streamN*3);
+  const streamData = [];
+  for(let i=0;i<streamN;i++){
+    streamData.push({t:Math.random(),speed:.3+Math.random()*.4,side:i%2});
+  }
+  streamGeo.setAttribute('position',new THREE.BufferAttribute(streamPos,3));
+  const streamMat = new THREE.PointsMaterial({color:0xffffff,size:.12,transparent:true,opacity:.85,vertexColors:false,blending:THREE.AdditiveBlending});
+  const stream = new THREE.Points(streamGeo,streamMat);
+  scene.add(stream);
+
+  function resize(){
+    const r = host.getBoundingClientRect();
+    renderer.setSize(r.width,r.height);
+    cam.aspect = r.width/r.height;
+    cam.updateProjectionMatrix();
+  }
+  resize();
+  new ResizeObserver(resize).observe(host);
+
+  // counters
+  const rEl = document.getElementById('pGredVal');
+  const gEl = document.getElementById('pGgreenVal');
+  let rCount = 0, gCount = 0;
+  const rTarget = 1431624, gTarget = 234805;
+
+  let speed = 1;
+  document.querySelectorAll('[data-speed]').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('[data-speed]').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    speed = parseFloat(b.dataset.speed);
+  }));
+  document.getElementById('pGreset').addEventListener('click',()=>{
+    rCount = 0; gCount = 0;
+    rEl.textContent = '0'; gEl.textContent = '0';
+    controls.reset();
+    cam.position.set(0,3,12);
+  });
+
+  const clock = new THREE.Clock();
+  function tick(){
+    const dt = clock.getDelta();
+    const t = clock.elapsedTime;
+
+    // pile wobble
+    pileA.rotation.y = Math.sin(t*.5)*.1;
+    pileA.children.forEach((c,i)=>{
+      c.position.y = i*.1 + Math.sin(t*2+i*.3)*.02;
+    });
+    // smoke drift
+    const sp = smoke.geometry.attributes.position;
+    for(let i=0;i<smokeN;i++){
+      sp.array[i*3+1] += (.01+Math.random()*.015)*speed;
+      if(sp.array[i*3+1] > 6){
+        sp.array[i*3+1] = 2;
+        sp.array[i*3] = (Math.random()-.5)*1;
+        sp.array[i*3+2] = (Math.random()-.5)*1;
+      }
+    }
+    sp.needsUpdate = true;
+
+    // graph rotate
+    graph.rotation.y += .006*speed;
+    nodeMeshes.forEach((n,i)=>n.scale.setScalar(1+Math.sin(t*2+i)*.1));
+    orb.rotation.y -= .02*speed;
+
+    // stream particles
+    const streamArr = stream.geometry.attributes.position.array;
+    streamData.forEach((d,i)=>{
+      d.t += dt*d.speed*speed;
+      if(d.t > 1) d.t -= 1;
+      const isA = d.side===0;
+      if(isA){
+        // chaotic path into A
+        const ang = d.t*Math.PI*2;
+        streamArr[i*3] = -3 + Math.cos(ang)*(2-d.t*1.5);
+        streamArr[i*3+1] = 1+Math.sin(ang*3)*.4;
+        streamArr[i*3+2] = Math.sin(ang)*(1.5-d.t);
+      } else {
+        // clean arc into B
+        const p = d.t;
+        streamArr[i*3] = 3+Math.cos(p*Math.PI*2)*1.3;
+        streamArr[i*3+1] = 1.5+Math.sin(p*Math.PI*2)*.5;
+        streamArr[i*3+2] = Math.sin(p*Math.PI*2)*1.3;
+      }
+    });
+    stream.geometry.attributes.position.needsUpdate = true;
+
+    // counters (slower fill for demo)
+    if(rCount < rTarget) rCount = Math.min(rTarget,rCount+8000*speed);
+    if(gCount < gTarget) gCount = Math.min(gTarget,gCount+1400*speed);
+    rEl.textContent = Math.floor(rCount).toLocaleString();
+    gEl.textContent = Math.floor(gCount).toLocaleString();
+
+    controls.update();
+    renderer.render(scene,cam);
+    requestAnimationFrame(tick);
+  }
+  tick();
+
+  // task tiles
+  const taskHost = document.getElementById('pGtasks');
+  for(let i=1;i<=60;i++){
+    const t = document.createElement('div');
+    t.className = 'pG-tile won';
+    if([7,19,23,29,34,37,41,48,52,55,58].includes(i)){t.classList.add('impossible');t.classList.remove('won');}
+    if(i===43) t.classList.add('active');
+    t.textContent = i;
+    t.addEventListener('click',()=>{
+      document.querySelectorAll('.pG-tile.active').forEach(x=>x.classList.remove('active'));
+      t.classList.add('active');
+      rCount = 0; gCount = 0;
+    });
+    taskHost.appendChild(t);
+  }
+})();
+
+/* ═══════════════ Proposal I · Code Universe ═══════════════ */
+(function(){
+  const canvas = document.getElementById('pIcanvas');
+  if(!canvas) return;
+  const host = canvas.parentElement;
+
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.Fog(0x05040d,15,55);
+
+  const renderer = new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+
+  const cam = new THREE.PerspectiveCamera(50,1,.1,120);
+  cam.position.set(0,8,28);
+
+  const controls = new OrbitControls(cam,canvas);
+  controls.enableDamping = true;
+  controls.dampingFactor = .08;
+  controls.minDistance = 12;
+  controls.maxDistance = 55;
+  controls.autoRotate = true;
+  controls.autoRotateSpeed = .4;
+
+  scene.add(new THREE.AmbientLight(0x5a4a80,.8));
+  scene.add(new THREE.PointLight(0x22d3ee,1.5,50).position.set(0,10,0));
+  scene.add(new THREE.PointLight(0x8b5cf6,1,40).position.set(-15,-5,-10));
+
+  // generate nodes
+  const N = 206;
+  const kinds = [
+    {c:0x8b5cf6,name:'class',tp:'class · apps/web'},
+    {c:0x22d3ee,name:'function',tp:'function · packages'},
+    {c:0xfbbf24,name:'config',tp:'config · infra'},
+    {c:0xec4899,name:'test',tp:'test · tests/'},
+  ];
+  const nodes = [];
+  const nodeNames = ['UserController.create','apiClient.fetch','parseSchema','renderPage','computeStats','validateInput','transformPayload','cacheLookup','sendEmail','logEvent','auth.verify','db.query'];
+  for(let i=0;i<N;i++){
+    const k = kinds[i%kinds.length];
+    const r = 10+Math.random()*6;
+    const theta = Math.random()*Math.PI*2;
+    const phi = (Math.random()-.5)*Math.PI*.7;
+    const x = r*Math.cos(phi)*Math.cos(theta);
+    const y = r*Math.sin(phi);
+    const z = r*Math.cos(phi)*Math.sin(theta);
+    nodes.push({
+      pos:new THREE.Vector3(x,y,z),
+      color:k.c,
+      kind:k.name,
+      tp:k.tp,
+      name:nodeNames[i%nodeNames.length]+((i>>2))
+    });
+  }
+
+  // instanced spheres
+  const nodeGeo = new THREE.SphereGeometry(.25,12,10);
+  const nodeMat = new THREE.MeshStandardMaterial({vertexColors:false,emissive:0xffffff,emissiveIntensity:.6,metalness:.3,roughness:.4});
+  const inst = new THREE.InstancedMesh(nodeGeo,nodeMat,N);
+  const dummy = new THREE.Object3D();
+  const color = new THREE.Color();
+  inst.instanceColor = new THREE.InstancedBufferAttribute(new Float32Array(N*3),3);
+  nodes.forEach((n,i)=>{
+    dummy.position.copy(n.pos);
+    dummy.updateMatrix();
+    inst.setMatrixAt(i,dummy.matrix);
+    color.setHex(n.color);
+    inst.instanceColor.setXYZ(i,color.r,color.g,color.b);
+  });
+  inst.instanceMatrix.needsUpdate = true;
+  scene.add(inst);
+
+  // edges (random chains)
+  const edgeSegments = [];
+  for(let i=0;i<N;i++){
+    const nb = 1+Math.floor(Math.random()*2);
+    for(let j=0;j<nb;j++){
+      const other = (i + 1 + Math.floor(Math.random()*5)) % N;
+      edgeSegments.push(nodes[i].pos,nodes[other].pos);
+    }
+  }
+  const edgeGeo = new THREE.BufferGeometry().setFromPoints(edgeSegments);
+  const edgeMat = new THREE.LineBasicMaterial({color:0x3a2e55,transparent:true,opacity:.3});
+  scene.add(new THREE.LineSegments(edgeGeo,edgeMat));
+
+  // two agents (satellites)
+  const satRed = new THREE.Mesh(
+    new THREE.SphereGeometry(.35,16,12),
+    new THREE.MeshStandardMaterial({color:0xef4444,emissive:0xef4444,emissiveIntensity:1.5,toneMapped:false})
+  );
+  const satGreen = new THREE.Mesh(
+    new THREE.SphereGeometry(.35,16,12),
+    new THREE.MeshStandardMaterial({color:0xa3e635,emissive:0xa3e635,emissiveIntensity:1.5,toneMapped:false})
+  );
+  satRed.position.copy(nodes[0].pos);
+  satGreen.position.copy(nodes[0].pos);
+  scene.add(satRed,satGreen);
+  // glow halos
+  const haloR = new THREE.Mesh(new THREE.SphereGeometry(.7,16,12),new THREE.MeshBasicMaterial({color:0xef4444,transparent:true,opacity:.2}));
+  const haloG = new THREE.Mesh(new THREE.SphereGeometry(.7,16,12),new THREE.MeshBasicMaterial({color:0xa3e635,transparent:true,opacity:.2}));
+  satRed.add(haloR); satGreen.add(haloG);
+
+  // trails
+  function makeTrail(color){
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position',new THREE.BufferAttribute(new Float32Array(120*3),3));
+    const mat = new THREE.LineBasicMaterial({color,transparent:true,opacity:.6});
+    const line = new THREE.Line(geo,mat);
+    return {line,pts:[]};
+  }
+  const trailRed = makeTrail(0xef4444);
+  const trailGreen = makeTrail(0xa3e635);
+  scene.add(trailRed.line,trailGreen.line);
+
+  // agent paths
+  const rngShuffle = (arr)=>arr.map(v=>[Math.random(),v]).sort((a,b)=>a[0]-b[0]).map(v=>v[1]);
+  const redPath = rngShuffle(nodes.slice(0,70)).slice(0,50); // visits many
+  const greenPath = nodes.filter((_,i)=>[0,5,12,22,31,47,65].includes(i)); // few precise jumps
+
+  // minimap dots
+  const mm = document.getElementById('pImini');
+  const mmDots = [];
+  for(let i=0;i<N;i++){
+    const d = document.createElement('i');
+    mm.appendChild(d);
+    mmDots.push(d);
+  }
+
+  // raycaster for hover
+  const ray = new THREE.Raycaster();
+  const mouse = new THREE.Vector2();
+  const info = document.getElementById('pIinfo');
+  canvas.addEventListener('mousemove',(e)=>{
+    const r = canvas.getBoundingClientRect();
+    mouse.x = ((e.clientX-r.left)/r.width)*2-1;
+    mouse.y = -((e.clientY-r.top)/r.height)*2+1;
+    ray.setFromCamera(mouse,cam);
+    const hits = ray.intersectObject(inst);
+    if(hits.length){
+      const id = hits[0].instanceId;
+      const n = nodes[id];
+      info.classList.add('show');
+      info.querySelector('.nm').textContent = n.name;
+      info.querySelector('.tp').textContent = n.kind+' · '+n.tp;
+      const rows = info.querySelectorAll('.rows div span:last-child');
+      rows[0].textContent = 1+Math.floor(Math.random()*15);
+      rows[1].textContent = 1+Math.floor(Math.random()*12);
+      rows[2].textContent = 1+Math.floor(Math.random()*10);
+    } else {
+      info.classList.remove('show');
+    }
+  });
+
+  function resize(){
+    const r = host.getBoundingClientRect();
+    if(!r.width || !r.height) return;
+    renderer.setSize(r.width,r.height,false);
+    cam.aspect = r.width/r.height;
+    cam.updateProjectionMatrix();
+  }
+  resize();
+  new ResizeObserver(resize).observe(host);
+
+  // animation state
+  let running = false;
+  let redIdx = 0, greenIdx = 0, redT = 0, greenT = 0;
+  const playBtn = document.getElementById('pIplay');
+  playBtn.addEventListener('click',()=>{
+    running = !running;
+    playBtn.classList.toggle('running',running);
+    playBtn.textContent = running ? '■ Stop' : '▶ Resolve TASK-043';
+    if(running){
+      redIdx = 0; greenIdx = 0; redT = 0; greenT = 0;
+      trailRed.pts = []; trailGreen.pts = [];
+      mmDots.forEach(d=>d.classList.remove('v'));
+    }
+  });
+
+  const clock = new THREE.Clock();
+  function tick(){
+    const dt = clock.getDelta();
+
+    // spin nodes slightly (breathing)
+    const t = clock.elapsedTime;
+    nodes.forEach((n,i)=>{
+      dummy.position.copy(n.pos);
+      const s = 1+Math.sin(t*1.5+i*.1)*.08;
+      dummy.scale.setScalar(s);
+      dummy.updateMatrix();
+      inst.setMatrixAt(i,dummy.matrix);
+    });
+    inst.instanceMatrix.needsUpdate = true;
+
+    if(running){
+      redT += dt*.9;
+      greenT += dt*.45;
+      if(redT > 1 && redIdx < redPath.length-1){
+        redIdx++; redT = 0;
+        const id = nodes.indexOf(redPath[redIdx]);
+        if(id>=0 && mmDots[id]) mmDots[id].classList.add('v');
+      }
+      if(greenT > 1 && greenIdx < greenPath.length-1){
+        greenIdx++; greenT = 0;
+        const id = nodes.indexOf(greenPath[greenIdx]);
+        if(id>=0 && mmDots[id]) mmDots[id].classList.add('v');
+      }
+      if(redIdx < redPath.length-1){
+        const a = redPath[redIdx].pos;
+        const b = redPath[redIdx+1].pos;
+        satRed.position.lerpVectors(a,b,redT);
+      }
+      if(greenIdx < greenPath.length-1){
+        const a = greenPath[greenIdx].pos;
+        const b = greenPath[greenIdx+1].pos;
+        satGreen.position.lerpVectors(a,b,greenT);
+      }
+      // trail
+      trailRed.pts.push(satRed.position.clone());
+      trailGreen.pts.push(satGreen.position.clone());
+      if(trailRed.pts.length>120) trailRed.pts.shift();
+      if(trailGreen.pts.length>120) trailGreen.pts.shift();
+      [trailRed,trailGreen].forEach(tr=>{
+        const arr = tr.line.geometry.attributes.position.array;
+        tr.pts.forEach((p,i)=>{
+          arr[i*3]=p.x;arr[i*3+1]=p.y;arr[i*3+2]=p.z;
+        });
+        tr.line.geometry.attributes.position.needsUpdate = true;
+        tr.line.geometry.setDrawRange(0,tr.pts.length);
+      });
+
+      if(redIdx >= redPath.length-1 && greenIdx >= greenPath.length-1){
+        running = false;
+        playBtn.classList.remove('running');
+        playBtn.textContent = '▶ Replay TASK-043';
+      }
+    } else {
+      // idle: gentle float
+      satRed.position.y = nodes[0].pos.y + Math.sin(t)*.3;
+      satGreen.position.y = nodes[0].pos.y + Math.cos(t)*.3;
+    }
+
+    controls.update();
+    renderer.render(scene,cam);
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
+</script>
+
+</body>
+</html>

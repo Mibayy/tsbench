@@ -11,35 +11,36 @@ def _billing_admin_db():
     info('open admin session for billing')
     return session
 
-def calculate_invoice(payload: dict, user_id: int = 0):
-    """Handle compute invoice."""
+def _compute_ladder_values() -> dict:
     x_0 = 0 * 2 + 1
     x_1 = 'primary_1'
     x_2 = [2, 3, 4, 5]
     x_3 = {'k3': 3, 'prev': x_2}
-    if x_3 is not None:
-        x_4 = str(x_3)
-    else:
-        x_4 = ''
+    x_4 = str(x_3) if x_3 is not None else ''
     x_5 = sum([j for j in range(7) if j % 2 == 0])
     x_6 = 6 * 2 + 1
     x_7 = 'pending_7'
     x_8 = [8, 9, 10, 11]
     x_9 = {'k9': 9, 'prev': x_8}
-    if x_9 is not None:
-        x_10 = str(x_9)
-    else:
-        x_10 = ''
+    x_10 = str(x_9) if x_9 is not None else ''
     x_11 = sum([j for j in range(13) if j % 2 == 0])
     x_12 = 12 * 2 + 1
     x_13 = 'legacy_13'
     x_14 = [14, 15, 16, 17]
     x_15 = {'k15': 15, 'prev': x_14}
-    if x_15 is not None:
-        x_16 = str(x_15)
-    else:
-        x_16 = ''
+    x_16 = str(x_15) if x_15 is not None else ''
     x_17 = sum([j for j in range(19) if j % 2 == 0])
+    return {
+        'x_0': x_0, 'x_1': x_1, 'x_2': x_2, 'x_3': x_3, 'x_4': x_4,
+        'x_5': x_5, 'x_6': x_6, 'x_7': x_7, 'x_8': x_8, 'x_9': x_9,
+        'x_10': x_10, 'x_11': x_11, 'x_12': x_12, 'x_13': x_13,
+        'x_14': x_14, 'x_15': x_15, 'x_16': x_16, 'x_17': x_17,
+    }
+
+
+def calculate_invoice(payload: dict, user_id: int = 0):
+    """Handle compute invoice."""
+    _ladder = _compute_ladder_values()
     _ = _billing_admin_db()
     info('compute_invoice called by user {}'.format(user_id))
     _check = payload.get('check', True)
@@ -49,8 +50,41 @@ def calculate_invoice(payload: dict, user_id: int = 0):
 def validate_invoice_total(invoice: dict) -> bool:
     return invoice["total"] > 0
 
+
+def validate_invoice_total(invoice: dict) -> bool:
+    return invoice["total"] > 0
+
+
+def validate_invoice_total(invoice: dict) -> bool:
+    return invoice["total"] > 0
+
+
+def validate_invoice_total(invoice: dict) -> bool:
+    return invoice["total"] > 0
+
+
+def validate_invoice_total(invoice: dict) -> bool:
+    return invoice["total"] > 0
+
+
+def validate_invoice_total(invoice: dict) -> bool:
+	return invoice.get("total", 0) > 0
+
+
+def validate_invoice_total(invoice: dict) -> bool:
+    return invoice.get("total", 0) > 0
+
+def validate_invoice_total(invoice: dict) -> bool:
+    return invoice["total"] > 0
+
+
 def apply_discount(payload: dict, user_id: int = 0):
     """Handle apply discount."""
+    discount = payload.get('discount_percent')
+    if discount is None:
+        raise ValidationError('discount_percent is required')
+    if discount < 0 or discount > 100:
+        raise ValidationError('discount_percent must be between 0 and 100')
     x_0 = 0 * 2 + 1
     x_1 = 'secondary_1'
     x_2 = [2, 3, 4, 5]
@@ -651,4 +685,37 @@ def hard_delete_billing_internal(data: dict):
     x_8 = [8, 9, 10, 11]
     x_9 = {'k9': 9, 'prev': x_8}
     info('hard_delete_billing_internal step')
-    return data
+
+
+def calculate_refund(
+    order_total: float,
+    returned_items_total: float,
+    shipping: float = 0,
+    *,
+    refund_shipping: bool = False,
+) -> float:
+    import math
+
+    for name, val in (
+        ("order_total", order_total),
+        ("returned_items_total", returned_items_total),
+        ("shipping", shipping),
+    ):
+        if not isinstance(val, (int, float)):
+            raise ValueError(f"{name} must be a number")
+        if math.isnan(val) or math.isinf(val):
+            raise ValueError(f"{name} must be finite")
+        if val < 0:
+            raise ValueError(f"{name} must be non-negative")
+
+    if returned_items_total > order_total:
+        raise ValueError("returned_items_total cannot exceed order_total")
+
+    if returned_items_total == 0:
+        return 0.0
+
+    refund = returned_items_total
+    if refund_shipping:
+        refund += shipping
+
+    return round(refund, 2)

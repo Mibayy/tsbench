@@ -1,31 +1,43 @@
-# TASK-060 -- changed-symbols-since-ref
+# TASK-060 — bug-fix-off-by-one
 
-**Categorie** : git
-**Difficulte** : medium
-**Artefact(s) lie(s)** :
+**Catégorie** : bug_fixing
+**Difficulté** : easy
+**Artefact(s) lié(s)** : —
 **Type de scoring** : `contains_all`
 
-## Prompt (envoye a l'agent)
+## Prompt (envoyé à l'agent)
 
-> Quels symboles ont change depuis le commit initial du projet (HEAD~1 ou le premier commit) ? Donne un resume par symbole des changements (ajouts, modifications, suppressions).
+> Dans `packages/utils/paginate.py` (fichier fictif pour ce prompt), une fonction `paginate(items, page, per_page)` a ce bug :
+>
+> ```python
+> start = (page - 1) * per_page
+> end = start + per_page - 1   # BUG ici
+> return items[start:end]
+> ```
+>
+> Identifie le bug et donne le fix exact. Indique le fichier et la ligne.
 
 ## Réponse attendue
 
 ```json
 {
-  "must_contain": [
-    "modifi",
-    "fonction"
+  "expected_tokens": [
+    "off-by-one",
+    "end = start + per_page",
+    "start + per_page",
+    "paginate",
+    "per_page",
+    "items[start:end]"
   ]
 }
 ```
 
 ## Scoring
 
-- **2** : liste de symboles changes avec type de changement (added/modified/removed)
-- **1** : quelques symboles mentionnes sans classification
-- **0** : echec
+- **2** : ≥ 4/6 tokens (identifie off-by-one + donne le fix sans le `-1`)
+- **1** : 2-3/6
+- **0** : < 2/6
 
 ## Notes pour le juge
 
-Teste `get_changed_symbols` ou `get_changed_symbols_since_ref`. Resume symbol-level des changements git.
+Python slicing est exclusive sur l'end. `items[start:end]` prend [start, end-1]. Donc `end = start + per_page` donne bien `per_page` items.

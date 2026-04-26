@@ -1,40 +1,40 @@
-# TASK-038 — module-overview
+# TASK-038 — dockerfile-audit
 
-**Catégorie** : onboarding
-**Difficulté** : medium
-**Artefact(s) lié(s)** : —
-**Type de scoring** : `free_form_rubric`
+**Catégorie** : infra
+**Difficulté** : easy
+**Artefact(s) lié(s)** : DOCKER-001, DOCKER-002
+**Type de scoring** : `set_match_strict`
 
 ## Prompt (envoyé à l'agent)
 
-> Explique l'architecture du module `apps/api/services/billing.py` : quelles sont ses responsabilités, ses fonctions principales, et ses dépendances ?
+> Review les Dockerfiles dans `infra/docker/`. Quels sont les problèmes que tu vois ?
 
 ## Réponse attendue
 
 ```json
 {
-  "module": "apps/api/services/billing.py",
-  "key_functions": [
-    "calculate_invoice",
-    "apply_discount",
-    "charge_customer",
-    "refund_payment"
+  "expected_issues": [
+    {
+      "id": "DOCKER-001",
+      "file": "infra/docker/worker.Dockerfile",
+      "issue": "uses python:latest base image"
+    },
+    {
+      "id": "DOCKER-002",
+      "file": "infra/docker/web.Dockerfile",
+      "issue": "exposes unused ports 9229 and 6666"
+    }
   ],
-  "dependencies": [
-    "apps/api/db",
-    "apps/api/models/billing",
-    "apps/api/config",
-    "apps/api/utils/logging"
-  ]
+  "count": 2
 }
 ```
 
 ## Scoring
 
-- **2** : couvre tous les points clés demandés, sans invention
-- **1** : couvre la majorité des points mais en oublie ou invente un détail secondaire
-- **0** : réponse incorrecte, très incomplète, ou hallucinations majeures
+- **2** : liste exactement égale à la liste attendue (F1 = 1.0)
+- **1** : F1 ≥ 0.75 (un ou deux éléments manquants ou en trop)
+- **0** : F1 < 0.75
 
 ## Notes pour le juge
 
-Réponse correcte mentionne les fonctions principales et les imports (calculate_invoice a été renommé depuis compute_invoice via BREAK-001).
+3 Dockerfiles : api (propre), worker (latest tag), web (ports debug exposés).

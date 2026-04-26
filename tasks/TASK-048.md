@@ -1,42 +1,38 @@
-# TASK-048 -- file-dependents-reverse
+# TASK-048 — code-gen-pagination-helper
 
-**Categorie** : navigation
-**Difficulte** : medium
-**Artefact(s) lie(s)** :
-**Type de scoring** : `set_match_loose`
+**Catégorie** : code_generation
+**Difficulté** : easy
+**Artefact(s) lié(s)** : —
+**Type de scoring** : `contains_all`
 
-## Prompt (envoye a l'agent)
+## Prompt (envoyé à l'agent)
 
-> Quels fichiers importent `apps/api/config.py` ? Liste tous les fichiers qui dependent de ce module.
+> Écris une fonction `paginate(items: list, page: int, per_page: int) -> dict` dans `packages/utils/paginate.py`. Retourne un dict `{"items": [...], "page": int, "per_page": int, "total": int, "total_pages": int, "has_next": bool, "has_prev": bool}`. `page` est 1-indexé. Gère les edge cases (page 0, page > total_pages, per_page ≤ 0 → lever `ValueError`).
 
 ## Réponse attendue
 
 ```json
 {
-  "expected_files": [
-    "apps/api/main.py",
-    "apps/api/services/audit.py",
-    "apps/api/services/auth.py",
-    "apps/api/services/billing.py",
-    "apps/api/services/exports.py",
-    "apps/api/services/integrations.py",
-    "apps/api/services/members.py",
-    "apps/api/services/notifications.py",
-    "apps/api/services/reports.py",
-    "apps/api/services/sessions.py",
-    "apps/api/services/webhooks.py",
-    "apps/api/utils/logging.py",
-    "apps/api/utils/pagination.py"
+  "expected_tokens": [
+    "def paginate",
+    "page: int",
+    "per_page: int",
+    "total_pages",
+    "has_next",
+    "has_prev",
+    "ValueError",
+    "math.ceil",
+    "packages/utils/paginate.py"
   ]
 }
 ```
 
 ## Scoring
 
-- **2** : >=12/13 fichiers identifies
-- **1** : >=6 fichiers identifies
-- **0** : <6
+- **2** : ≥ 7/9 tokens
+- **1** : 4-6/9
+- **0** : < 4/9
 
 ## Notes pour le juge
 
-Teste `get_file_dependents`. 13 dependants reels. Le baseline devrait grep `from.*config import` dans tout le projet.
+`math.ceil(total / per_page)` pour total_pages, ou équivalent avec division entière + 1. Erreur classique : off-by-one sur `has_next` (oublier `page >= total_pages`).

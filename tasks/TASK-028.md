@@ -1,32 +1,32 @@
-# TASK-028 — undecl-env
+# TASK-028 — billing-hotspots
 
-**Catégorie** : config
-**Difficulté** : medium
-**Artefact(s) lié(s)** : UNDECL-001, UNDECL-002
-**Type de scoring** : `set_match_strict`
+**Catégorie** : heavy_read
+**Difficulté** : hard
+**Artefact(s) lié(s)** :
+**Type de scoring** : `contains_all`
 
 ## Prompt (envoyé à l'agent)
 
-> Liste les variables d'environnement lues dans le code Python mais absentes de `config/.env.example`.
+> Donne-moi le source complet des 3 fonctions les plus longues (en nombre de lignes) dans `apps/api/services/billing.py`. Pour chacune : nom, nombre de lignes, et le code entier.
 
 ## Réponse attendue
 
 ```json
 {
-  "expected_undeclared": [
-    "SECRET_UNDECLARED_TOKEN",
-    "TSBENCH_HIDDEN_REGION"
-  ],
-  "count": 2
+  "must_contain": [
+    "def",
+    "billing",
+    "payload"
+  ]
 }
 ```
 
 ## Scoring
 
-- **2** : liste exactement égale à la liste attendue (F1 = 1.0)
-- **1** : F1 ≥ 0.75 (un ou deux éléments manquants ou en trop)
-- **0** : F1 < 0.75
+- **2** : 3 fonctions nommées avec source complet visible
+- **1** : 1 ou 2 fonctions avec source
+- **0** : pas de source ou seulement des signatures
 
 ## Notes pour le juge
 
-2 undeclared plantées : SECRET_UNDECLARED_TOKEN, TSBENCH_HIDDEN_REGION (dans apps/api/utils/secret_reader.py).
+Le fichier fait 648 lignes et contient ~30 fonctions. Baseline : Read du fichier entier + comptage manuel. TS : `find_hotspots` ou `get_function_source` ciblé.

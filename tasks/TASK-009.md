@@ -1,30 +1,31 @@
-# TASK-009 — callers-exhaustive-8
+# TASK-009 — cycle-detection
 
-**Catégorie** : dépendants
+**Catégorie** : audit
 **Difficulté** : medium
-**Artefact(s) lié(s)** : CALLER-003
+**Artefact(s) lié(s)** : CYCLE-001, CYCLE-002
 **Type de scoring** : `set_match_strict`
 
 ## Prompt (envoyé à l'agent)
 
-> Donne-moi la liste complète et exhaustive des fichiers qui appellent la fonction `medium_util`. Je veux tous les call sites, pas un échantillon.
+> Y a-t-il des dépendances circulaires (import cycles) dans ce projet ? Si oui, cite-les.
 
 ## Réponse attendue
 
 ```json
 {
-  "symbol": "medium_util",
-  "count": 8,
-  "expected_files": [
-    "apps/api/callers/caller_medium_util_00.py",
-    "apps/api/callers/caller_medium_util_01.py",
-    "apps/api/callers/caller_medium_util_02.py",
-    "apps/api/callers/caller_medium_util_03.py",
-    "apps/api/callers/caller_medium_util_04.py",
-    "apps/api/callers/caller_medium_util_05.py",
-    "apps/api/callers/caller_medium_util_06.py",
-    "apps/api/callers/caller_medium_util_07.py"
-  ]
+  "has_cycles": true,
+  "expected_cycles": [
+    [
+      "apps/api/cycles/mod_a.py",
+      "apps/api/cycles/mod_b.py"
+    ],
+    [
+      "apps/api/cycles/mod_x.py",
+      "apps/api/cycles/mod_y.py",
+      "apps/api/cycles/mod_z.py"
+    ]
+  ],
+  "count": 2
 }
 ```
 
@@ -36,4 +37,4 @@
 
 ## Notes pour le juge
 
-Exactement 8 callers plantés. Test d'exhaustivité — un oubli = F1 < 1.
+2 cycles plantés : mod_a↔mod_b et mod_x→mod_y→mod_z→mod_x.

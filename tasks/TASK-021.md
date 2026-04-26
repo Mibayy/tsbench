@@ -1,61 +1,37 @@
-# TASK-021 — diff-summary
+# TASK-021 — project-overview
 
-**Catégorie** : review
-**Difficulté** : medium
-**Artefact(s) lié(s)** : BREAK-001, BREAK-002, BREAK-003, BREAK-004, BREAK-005, BREAK-006
-**Type de scoring** : `set_match_strict`
+**Catégorie** : onboarding
+**Difficulté** : easy
+**Artefact(s) lié(s)** : —
+**Type de scoring** : `free_form_rubric`
 
 ## Prompt (envoyé à l'agent)
 
-> Résume symbole par symbole tous les changements entre le tag `v1` et le tag `v2`. Je veux une bullet list courte.
+> En ignorant bench.py, generate.py et le dossier tasks/, explique en 10 bullet points maximum ce que fait le code applicatif de ce projet : quel domaine, quelles couches techniques, quels grands modules.
 
 ## Réponse attendue
 
 ```json
 {
-  "expected_changes": [
-    {
-      "id": "BREAK-001",
-      "kind": "rename_function",
-      "from": "compute_invoice",
-      "to": "calculate_invoice"
-    },
-    {
-      "id": "BREAK-002",
-      "kind": "signature_change",
-      "symbol": "authenticate_user"
-    },
-    {
-      "id": "BREAK-003",
-      "kind": "remove_function",
-      "symbol": "bulk_import_members"
-    },
-    {
-      "id": "BREAK-004",
-      "kind": "type_change",
-      "symbol": "MembersStatus"
-    },
-    {
-      "id": "BREAK-005",
-      "kind": "route_removed",
-      "route": "DELETE /api/webhooks/{id}"
-    },
-    {
-      "id": "BREAK-006",
-      "kind": "default_change",
-      "symbol": "DEFAULT_PAGE_SIZE"
-    }
+  "required_topics": [
+    "SaaS / billing / members / sessions / webhooks",
+    "FastAPI backend (apps/api)",
+    "Next.js frontend (apps/web)",
+    "Python worker (apps/worker)",
+    "packages/ monorepo (shared-types, db, utils)",
+    "Prisma schema (packages/db/schema.prisma)",
+    "Docker + k8s + terraform infra"
   ],
-  "expected_count": 6
+  "max_bullets": 10
 }
 ```
 
 ## Scoring
 
-- **2** : liste exactement égale à la liste attendue (F1 = 1.0)
-- **1** : F1 ≥ 0.75 (un ou deux éléments manquants ou en trop)
-- **0** : F1 < 0.75
+- **2** : couvre tous les points clés demandés, sans invention
+- **1** : couvre la majorité des points mais en oublie ou invente un détail secondaire
+- **0** : réponse incorrecte, très incomplète, ou hallucinations majeures
 
 ## Notes pour le juge
 
-6 BREAK-* exactement. Oublier un seul = F1 < 1.
+Test d'économie de tokens : un bon agent doit éviter de lire tous les 290 fichiers.

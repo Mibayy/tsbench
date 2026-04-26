@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>tsbench · 3 design proposals</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&family=Instrument+Serif&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0810;--bg2:#120e1c;--surface:#1a1424;--surface2:#221a2e;
+  --border:#2a2239;--border2:#382c4d;
+  --text:#ededed;--text2:#9a92a8;--text3:#5a5266;
+  --purple:#8b5cf6;--purple2:#a78bfa;--purple3:#c4b5fd;
+  --purple-bg:rgba(139,92,246,.08);--purple-glow:rgba(139,92,246,.25);
+  --green:#22c55e;--green2:#4ade80;--green-bg:rgba(34,197,94,.08);
+  --red:#ef4444;--red2:#f87171;--red-bg:rgba(239,68,68,.08);
+  --amber:#eab308;
+}
+html{scroll-behavior:smooth;font-size:16px;scrollbar-width:thin;scrollbar-color:#2a2239 #0a0810}
+body{background:var(--bg);color:var(--text);font-family:'Geist',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--purple2);text-decoration:none}
+
+/* ───── GLOBAL NAV ───── */
+.gnav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,8,16,.7);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px}
+.gnav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px}
+.gnav .brand{font-weight:800;font-size:.875rem;letter-spacing:-.02em;display:flex;gap:10px;align-items:center}
+.gnav .brand .dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--purple2));box-shadow:0 0 12px var(--purple-glow)}
+.gnav .links{display:flex;gap:4px}
+.gnav .links a{padding:6px 14px;border-radius:6px;font-size:.8rem;color:var(--text2);transition:all .2s;border:1px solid transparent}
+.gnav .links a:hover{color:var(--text);background:var(--surface);border-color:var(--border);text-decoration:none}
+
+/* ───── INTRO ───── */
+.intro{max-width:800px;margin:0 auto;padding:120px 24px 80px;text-align:center}
+.intro .tag{display:inline-block;font-family:'Geist Mono',monospace;font-size:.7rem;color:var(--purple2);background:var(--purple-bg);border:1px solid var(--purple-glow);padding:5px 12px;border-radius:999px;margin-bottom:24px;text-transform:uppercase;letter-spacing:.08em}
+.intro h1{font-family:'Instrument Serif',serif;font-size:clamp(2.5rem,6vw,4rem);font-weight:400;letter-spacing:-.03em;line-height:1.05;margin-bottom:20px}
+.intro h1 em{font-style:italic;background:linear-gradient(135deg,var(--purple2),var(--purple3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.intro p{color:var(--text2);font-size:1.05rem;line-height:1.7;max-width:560px;margin:0 auto}
+.intro .legend{margin-top:40px;display:flex;gap:24px;justify-content:center;flex-wrap:wrap;font-size:.75rem;color:var(--text3);font-family:'Geist Mono',monospace}
+.intro .legend span{display:flex;align-items:center;gap:6px}
+.intro .legend i{width:8px;height:8px;border-radius:2px;font-style:normal}
+
+/* ───── PROPOSAL CARD SHELL ───── */
+.proposal{max-width:1200px;margin:0 auto 80px;padding:0 24px}
+.p-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:12px}
+.p-num{font-family:'Geist Mono',monospace;font-size:3rem;font-weight:900;line-height:1;letter-spacing:-.04em;color:var(--border2)}
+.p-head h2{font-family:'Instrument Serif',serif;font-size:2rem;font-weight:400;letter-spacing:-.02em;margin:-4px 0 6px}
+.p-head .p-sub{color:var(--text2);font-size:.9rem}
+.p-meta{font-family:'Geist Mono',monospace;font-size:.7rem;color:var(--text3);display:flex;gap:14px;flex-wrap:wrap}
+.p-meta span{display:flex;gap:5px;align-items:center}
+.p-meta b{color:var(--text2);font-weight:500}
+
+.mockup{border:1px solid var(--border);border-radius:16px;overflow:hidden;background:var(--bg2);position:relative;box-shadow:0 40px 80px -40px rgba(0,0,0,.6)}
+.mockup-bar{display:flex;align-items:center;gap:8px;padding:10px 16px;background:var(--surface);border-bottom:1px solid var(--border);font-family:'Geist Mono',monospace;font-size:.7rem;color:var(--text3)}
+.mockup-bar .dots{display:flex;gap:5px}
+.mockup-bar .dots i{width:9px;height:9px;border-radius:50%;background:var(--border2);font-style:normal}
+.mockup-bar .url{flex:1;text-align:center;background:var(--bg);padding:4px 10px;border-radius:5px;border:1px solid var(--border)}
+
+.mockup-body{position:relative;min-height:420px}
+
+/* ══════════════════════════════════════════════════
+   PROPOSITION A — The Context Collapse
+   Scrollytelling + 3D particules
+   ══════════════════════════════════════════════════ */
+.pA-body{background:radial-gradient(ellipse at 50% 30%,rgba(139,92,246,.18) 0%,rgba(10,8,16,0) 60%),linear-gradient(180deg,#0a0810 0%,#120e1c 100%);padding:48px 32px 56px;position:relative;overflow:hidden}
+.pA-hero{text-align:center;position:relative;z-index:2}
+.pA-hero h3{font-family:'Instrument Serif',serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:400;letter-spacing:-.03em;line-height:1.05;margin-bottom:12px}
+.pA-hero h3 em{font-style:italic;color:var(--purple2)}
+.pA-hero p{color:var(--text2);font-size:.9rem;max-width:420px;margin:0 auto 28px}
+
+.pA-stage{position:relative;height:300px;margin:20px auto 0;max-width:720px;perspective:800px}
+.pA-particles{position:absolute;inset:0}
+.pA-particles span{position:absolute;font-family:'Geist Mono',monospace;font-size:.65rem;color:var(--red2);opacity:.7;animation:pAfloat 8s infinite ease-in-out;text-shadow:0 0 8px rgba(239,68,68,.3)}
+@keyframes pAfloat{
+  0%,100%{transform:translate3d(0,0,0) rotateY(0deg);opacity:.3}
+  50%{transform:translate3d(var(--dx,20px),var(--dy,-30px),var(--dz,20px)) rotateY(180deg);opacity:.8}
+}
+.pA-graph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;animation:pAreveal 6s infinite ease-in-out}
+@keyframes pAreveal{
+  0%,40%{opacity:0;transform:scale(.9)}
+  60%,90%{opacity:1;transform:scale(1)}
+  100%{opacity:0;transform:scale(1.05)}
+}
+.pA-graph svg{width:100%;height:100%;max-width:520px}
+.pA-node{transform-origin:center;animation:pAnodepulse 2s infinite ease-in-out}
+@keyframes pAnodepulse{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+
+.pA-counter{display:grid;grid-template-columns:1fr 1fr;gap:0;max-width:640px;margin:24px auto 0;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:rgba(26,20,36,.6);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.pA-counter > div{padding:18px 22px;text-align:center}
+.pA-counter > div:first-child{border-right:1px solid var(--border)}
+.pA-counter .lbl{font-size:.65rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;font-family:'Geist Mono',monospace}
+.pA-counter .val{font-size:1.8rem;font-weight:800;font-family:'Geist Mono',monospace;letter-spacing:-.03em}
+.pA-counter .val.bad{color:var(--red2)}
+.pA-counter .val.good{color:var(--green2)}
+.pA-hint{margin-top:24px;text-align:center;color:var(--text3);font-size:.7rem;font-family:'Geist Mono',monospace}
+.pA-hint .arrow{display:inline-block;animation:pAbounce 2s infinite}
+@keyframes pAbounce{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+
+/* ══════════════════════════════════════════════════
+   PROPOSITION B — The Data Room
+   Isometric 3D + glass + counters
+   ══════════════════════════════════════════════════ */
+.pB-body{background:linear-gradient(140deg,#0b0713 0%,#160a22 60%,#0a0810 100%);padding:0;position:relative}
+.pB-hero{display:grid;grid-template-columns:1.1fr 1fr;gap:32px;padding:48px 40px;align-items:center}
+.pB-left h3{font-family:'Instrument Serif',serif;font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:400;line-height:1.1;letter-spacing:-.02em;margin-bottom:10px}
+.pB-left h3 em{font-style:italic;color:var(--purple2)}
+.pB-left p{color:var(--text2);font-size:.82rem;line-height:1.6;margin-bottom:20px;max-width:380px}
+.pB-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
+.pB-stat{padding:14px;border-radius:10px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);position:relative;overflow:hidden}
+.pB-stat::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(167,139,250,.3),transparent)}
+.pB-stat .v{font-size:1.5rem;font-weight:800;letter-spacing:-.03em;font-family:'Geist Mono',monospace}
+.pB-stat .v.g{color:var(--green2)}
+.pB-stat .v.p{color:var(--purple2)}
+.pB-stat .l{font-size:.63rem;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-top:2px}
+.pB-cta{display:flex;gap:10px}
+.pB-btn{padding:10px 18px;border-radius:8px;font-size:.78rem;font-weight:600;border:none;cursor:pointer}
+.pB-btn.p{background:var(--purple);color:#fff}
+.pB-btn.s{background:transparent;color:var(--text2);border:1px solid var(--border)}
+
+.pB-right{position:relative;height:360px}
+.pB-iso{width:100%;height:100%}
+.pB-iso .floatA{animation:pBfloat 4s infinite ease-in-out}
+.pB-iso .floatB{animation:pBfloat 4s infinite ease-in-out reverse}
+@keyframes pBfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.pB-iso .wiggle{animation:pBwiggle 3s infinite ease-in-out}
+@keyframes pBwiggle{0%,100%{transform:rotate(-1deg)}50%{transform:rotate(1deg)}}
+.pB-iso .pulse{animation:pBpulse 2s infinite ease-in-out}
+@keyframes pBpulse{0%,100%{opacity:.6}50%{opacity:1}}
+
+.pB-sankey{padding:32px 40px;border-top:1px solid var(--border)}
+.pB-sankey h4{font-size:.75rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px;font-weight:500}
+.pB-sankey h5{font-family:'Instrument Serif',serif;font-size:1.3rem;margin-bottom:18px;font-weight:400}
+.pB-sankey svg{width:100%;max-width:900px;height:180px;margin:0 auto;display:block}
+.pB-flow{stroke-dasharray:4 4;animation:pBflow 1.5s linear infinite}
+@keyframes pBflow{to{stroke-dashoffset:-16}}
+
+.pB-matrix{padding:28px 40px 40px;border-top:1px solid var(--border)}
+.pB-matrix h4{font-size:.75rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px;font-weight:500}
+.pB-heat{display:grid;grid-template-columns:140px repeat(13,1fr);gap:3px;font-family:'Geist Mono',monospace;font-size:.65rem}
+.pB-heat .hlbl{color:var(--text3);padding:5px 0;display:flex;align-items:center}
+.pB-heat .hcell{aspect-ratio:1;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:.55rem;color:rgba(255,255,255,.85);font-weight:600;transition:transform .2s;cursor:pointer}
+.pB-heat .hcell:hover{transform:scale(1.3);z-index:2;position:relative}
+
+/* ══════════════════════════════════════════════════
+   PROPOSITION C — The Replay
+   Dual terminal interactive
+   ══════════════════════════════════════════════════ */
+.pC-body{background:linear-gradient(180deg,#0a0810 0%,#0f0a18 100%);padding:36px 32px 40px;position:relative}
+.pC-hero{text-align:center;margin-bottom:28px}
+.pC-hero h3{font-family:'Instrument Serif',serif;font-size:clamp(1.6rem,3.5vw,2.2rem);font-weight:400;letter-spacing:-.02em;margin-bottom:6px}
+.pC-hero h3 em{font-style:italic;color:var(--purple2)}
+.pC-hero p{color:var(--text2);font-size:.82rem;max-width:480px;margin:0 auto}
+
+.pC-controls{display:flex;justify-content:center;gap:10px;margin:18px 0 24px;flex-wrap:wrap}
+.pC-play{padding:10px 20px;background:linear-gradient(135deg,var(--purple),var(--purple2));color:#fff;border:none;border-radius:8px;font-family:'Geist',sans-serif;font-size:.82rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:8px;box-shadow:0 8px 24px -6px var(--purple-glow);transition:all .2s}
+.pC-play:hover{transform:translateY(-1px);box-shadow:0 12px 28px -6px var(--purple-glow)}
+.pC-task{font-family:'Geist Mono',monospace;font-size:.72rem;color:var(--text2);background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 14px;display:flex;align-items:center}
+
+.pC-terms{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pC-term{background:#07050b;border:1px solid var(--border);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;min-height:360px}
+.pC-term-head{padding:10px 14px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:linear-gradient(180deg,var(--surface),transparent);font-family:'Geist Mono',monospace;font-size:.7rem}
+.pC-term-head .name{font-weight:700}
+.pC-term-head .name.a{color:var(--red2)}
+.pC-term-head .name.b{color:var(--green2)}
+.pC-term-head .meta{color:var(--text3);font-size:.65rem}
+.pC-term-body{flex:1;padding:14px;font-family:'Geist Mono',monospace;font-size:.7rem;line-height:1.6;color:var(--text2);overflow:hidden;min-height:260px}
+.pC-line{display:block;white-space:pre-wrap;opacity:0}
+.pC-line.on{opacity:1;animation:pCfade .3s ease both}
+@keyframes pCfade{from{opacity:0;transform:translateX(-4px)}to{opacity:1;transform:translateX(0)}}
+.pC-line .tool{color:var(--purple3)}
+.pC-line .bad{color:var(--red2)}
+.pC-line .good{color:var(--green2)}
+.pC-line .dim{color:var(--text3)}
+.pC-term-foot{padding:10px 14px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-family:'Geist Mono',monospace;font-size:.7rem;background:rgba(0,0,0,.2)}
+.pC-term-foot .chars{color:var(--text3)}
+.pC-term-foot .score{font-weight:700}
+
+.pC-tasks{margin-top:28px}
+.pC-tasks h4{font-size:.75rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px}
+.pC-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:5px}
+.pC-tile{aspect-ratio:1;border-radius:5px;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Geist Mono',monospace;font-size:.55rem;color:var(--text3);cursor:pointer;transition:all .15s;position:relative}
+.pC-tile:hover{background:var(--surface2);color:var(--text);border-color:var(--border2);transform:translateY(-1px)}
+.pC-tile.impossible::after{content:"";position:absolute;top:4px;right:4px;width:5px;height:5px;border-radius:50%;background:var(--amber);box-shadow:0 0 6px var(--amber)}
+.pC-tile.hero{background:var(--purple-bg);border-color:var(--purple-glow);color:var(--purple2)}
+
+/* ───── FOOTER / VERDICT ───── */
+.verdict{max-width:900px;margin:60px auto 80px;padding:0 24px}
+.verdict-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.verdict-card{padding:22px;border-radius:12px;background:var(--bg2);border:1px solid var(--border);position:relative;overflow:hidden}
+.verdict-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--col,var(--purple))}
+.verdict-card h5{font-family:'Instrument Serif',serif;font-size:1.1rem;margin-bottom:4px;font-weight:400}
+.verdict-card .vfor{font-size:.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;font-family:'Geist Mono',monospace}
+.verdict-card p{font-size:.78rem;color:var(--text2);line-height:1.6}
+.verdict-card.a{--col:var(--purple)}
+.verdict-card.b{--col:var(--green)}
+.verdict-card.c{--col:var(--amber)}
+
+.reco{margin-top:28px;padding:24px;border-radius:12px;background:linear-gradient(135deg,rgba(139,92,246,.08),rgba(34,197,94,.04));border:1px solid var(--border2)}
+.reco .tag{font-family:'Geist Mono',monospace;font-size:.65rem;color:var(--purple2);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+.reco p{font-size:.88rem;line-height:1.6;color:var(--text)}
+.reco p b{color:var(--green2);font-weight:700}
+
+footer{text-align:center;padding:30px 24px 50px;color:var(--text3);font-size:.72rem;font-family:'Geist Mono',monospace}
+footer a{color:var(--text2)}
+
+/* ───── RESPONSIVE ───── */
+@media(max-width:860px){
+  .pB-hero{grid-template-columns:1fr}
+  .pB-right{height:280px}
+  .pC-terms{grid-template-columns:1fr}
+  .verdict-grid{grid-template-columns:1fr}
+  .pB-heat{grid-template-columns:100px repeat(13,1fr)}
+  .gnav .links a{padding:6px 10px;font-size:.72rem}
+}
+@media(max-width:560px){
+  .gnav .links a:not(:first-child):not(:last-child){display:none}
+  .intro{padding:100px 20px 60px}
+  .proposal{padding:0 16px}
+  .pA-body,.pB-sankey,.pB-matrix,.pC-body{padding-left:20px;padding-right:20px}
+  .pB-hero{padding:30px 20px}
+  .pA-counter{grid-template-columns:1fr}
+  .pA-counter > div:first-child{border-right:none;border-bottom:1px solid var(--border)}
+}
+</style>
+</head>
+<body>
+
+<nav class="gnav">
+  <div class="gnav-inner">
+    <div class="brand"><span class="dot"></span>tsbench · proposals</div>
+    <div class="links">
+      <a href="#intro">Intro</a>
+      <a href="#pA">A · Collapse</a>
+      <a href="#pB">B · Data Room</a>
+      <a href="#pC">C · Replay</a>
+      <a href="#verdict">Verdict</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ─── INTRO ─── -->
+<section class="intro" id="intro">
+  <span class="tag">3 design directions · mockup</span>
+  <h1>Trois façons de <em>montrer</em><br>le même benchmark.</h1>
+  <p>Chaque proposition est une mini maquette jouable. Scroll pour voir les trois versions côte à côte, chacune optimisée pour un public différent.</p>
+  <div class="legend">
+    <span><i style="background:var(--purple)"></i>scrollytelling</span>
+    <span><i style="background:var(--green)"></i>infographie</span>
+    <span><i style="background:var(--amber)"></i>interactif</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     PROPOSITION A
+     ═══════════════════════════════════════════════ -->
+<section class="proposal" id="pA">
+  <div class="p-head">
+    <div>
+      <div class="p-num">A</div>
+      <h2>The Context Collapse</h2>
+      <div class="p-sub">Scrollytelling immersif · 3D narratif · GSAP + R3F</div>
+    </div>
+    <div class="p-meta">
+      <span><b>Stack</b> Next + R3F + GSAP</span>
+      <span><b>Effort</b> ~3j</span>
+      <span><b>Target</b> viralité · Awwwards</span>
+    </div>
+  </div>
+
+  <div class="mockup">
+    <div class="mockup-bar">
+      <div class="dots"><i></i><i></i><i></i></div>
+      <div class="url">tsbench.dev · hero</div>
+      <div>scroll ↓</div>
+    </div>
+    <div class="mockup-body pA-body">
+      <div class="pA-hero">
+        <h3>Less <em>context</em>,<br>better answers.</h3>
+        <p>Regardez le désordre s'effondrer sur lui-même pour devenir une structure.</p>
+      </div>
+      <div class="pA-stage">
+        <div class="pA-particles" id="pAp"></div>
+        <div class="pA-graph">
+          <svg viewBox="0 0 520 300">
+            <defs>
+              <linearGradient id="gA" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#a78bfa"/>
+                <stop offset="1" stop-color="#4ade80"/>
+              </linearGradient>
+              <filter id="gl">
+                <feGaussianBlur stdDeviation="3"/>
+              </filter>
+            </defs>
+            <g stroke="url(#gA)" stroke-width="1" fill="none" opacity=".5">
+              <line x1="260" y1="150" x2="120" y2="80"/>
+              <line x1="260" y1="150" x2="120" y2="220"/>
+              <line x1="260" y1="150" x2="400" y2="80"/>
+              <line x1="260" y1="150" x2="400" y2="220"/>
+              <line x1="120" y1="80" x2="60" y2="140"/>
+              <line x1="400" y1="220" x2="460" y2="150"/>
+              <line x1="400" y1="80" x2="460" y2="40"/>
+            </g>
+            <g fill="url(#gA)" filter="url(#gl)" opacity=".5">
+              <circle cx="260" cy="150" r="14"/>
+              <circle cx="120" cy="80" r="8"/>
+              <circle cx="120" cy="220" r="8"/>
+              <circle cx="400" cy="80" r="8"/>
+              <circle cx="400" cy="220" r="8"/>
+              <circle cx="60" cy="140" r="5"/>
+              <circle cx="460" cy="40" r="5"/>
+              <circle cx="460" cy="150" r="5"/>
+            </g>
+            <g fill="url(#gA)">
+              <circle class="pA-node" cx="260" cy="150" r="10" style="animation-delay:0s"/>
+              <circle class="pA-node" cx="120" cy="80" r="6" style="animation-delay:.2s"/>
+              <circle class="pA-node" cx="120" cy="220" r="6" style="animation-delay:.4s"/>
+              <circle class="pA-node" cx="400" cy="80" r="6" style="animation-delay:.6s"/>
+              <circle class="pA-node" cx="400" cy="220" r="6" style="animation-delay:.8s"/>
+              <circle class="pA-node" cx="60" cy="140" r="4" style="animation-delay:1s"/>
+              <circle class="pA-node" cx="460" cy="40" r="4" style="animation-delay:1.2s"/>
+              <circle class="pA-node" cx="460" cy="150" r="4" style="animation-delay:1.4s"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <div class="pA-counter">
+        <div>
+          <div class="lbl">Baseline chars injected</div>
+          <div class="val bad" id="pAc1">1,431,624</div>
+        </div>
+        <div>
+          <div class="lbl">Token Savior chars injected</div>
+          <div class="val good" id="pAc2">234,805</div>
+        </div>
+      </div>
+
+      <div class="pA-hint">Scrollez pour que le chaos se plie en graphe <span class="arrow">↓</span></div>
+    </div>
+  </div>
+  <p style="margin-top:14px;font-size:.75rem;color:var(--text3);text-align:center;font-family:'Geist Mono',monospace">Dans la vraie version, particules et graphe sont pilotés par le scroll via ScrollTrigger — le WebGL tourne, les compteurs comptent vers leur cible.</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     PROPOSITION B
+     ═══════════════════════════════════════════════ -->
+<section class="proposal" id="pB">
+  <div class="p-head">
+    <div>
+      <div class="p-num">B</div>
+      <h2>The Data Room</h2>
+      <div class="p-sub">Infographie isométrique · glass · lisible en 60s</div>
+    </div>
+    <div class="p-meta">
+      <span><b>Stack</b> HTML + Lottie + GSAP</span>
+      <span><b>Effort</b> ~1j + illustration</span>
+      <span><b>Target</b> conversion dev</span>
+    </div>
+  </div>
+
+  <div class="mockup">
+    <div class="mockup-bar">
+      <div class="dots"><i></i><i></i><i></i></div>
+      <div class="url">tsbench.dev</div>
+      <div>v2.5.1</div>
+    </div>
+    <div class="mockup-body pB-body">
+      <div class="pB-hero">
+        <div class="pB-left">
+          <h3>Moins de <em>context</em>.<br>Même score. Plus vite.</h3>
+          <p>60 tâches, un agent Claude Sonnet, Token Savior MCP face au baseline Claude Code. Mesuré sur tsbench v1.</p>
+          <div class="pB-stats">
+            <div class="pB-stat"><div class="v g">-84%</div><div class="l">Chars injected</div></div>
+            <div class="pB-stat"><div class="v p">56 → 96%</div><div class="l">Accuracy</div></div>
+            <div class="pB-stat"><div class="v g">-45%</div><div class="l">Wall time</div></div>
+            <div class="pB-stat"><div class="v p">21</div><div class="l">Impossible w/o TS</div></div>
+          </div>
+          <div class="pB-cta">
+            <button class="pB-btn p">Read the results ↓</button>
+            <button class="pB-btn s">GitHub</button>
+          </div>
+        </div>
+        <div class="pB-right">
+          <svg class="pB-iso" viewBox="0 0 500 360" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="isoPurp" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#2a1f44"/><stop offset="1" stop-color="#1a1030"/>
+              </linearGradient>
+              <linearGradient id="isoRed" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#5a2535"/><stop offset="1" stop-color="#3a1525"/>
+              </linearGradient>
+              <linearGradient id="isoGreen" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#1a4a2e"/><stop offset="1" stop-color="#0f2e1c"/>
+              </linearGradient>
+              <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#ef4444" stop-opacity=".7"/>
+                <stop offset="1" stop-color="#dc2626" stop-opacity=".9"/>
+              </linearGradient>
+              <linearGradient id="crystal" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#4ade80"/>
+                <stop offset="1" stop-color="#22c55e"/>
+              </linearGradient>
+              <filter id="glow2">
+                <feGaussianBlur stdDeviation="2"/>
+                <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+
+            <!-- ground -->
+            <path d="M 10 240 L 250 360 L 490 240 L 250 120 Z" fill="url(#isoPurp)" opacity=".4"/>
+            <path d="M 250 120 L 250 360" stroke="#2a2239" stroke-width="1" opacity=".5"/>
+
+            <!-- LEFT DESK (baseline) -->
+            <g class="floatA" transform="translate(0,0)">
+              <path d="M 50 210 L 170 270 L 230 240 L 110 180 Z" fill="url(#isoRed)" stroke="#5a2535" stroke-width="1"/>
+              <path d="M 230 240 L 230 260 L 170 290 L 170 270 Z" fill="#2a1020"/>
+              <path d="M 50 210 L 50 230 L 170 290 L 170 270 Z" fill="#3a1525"/>
+
+              <!-- tall stack of papers -->
+              <g class="wiggle" style="transform-origin:140px 210px">
+                <path d="M 100 200 L 160 230 L 200 210 L 140 180 Z" fill="url(#paper)" opacity=".85"/>
+                <path d="M 105 190 L 165 220 L 205 200 L 145 170 Z" fill="url(#paper)" opacity=".8"/>
+                <path d="M 100 180 L 160 210 L 200 190 L 140 160 Z" fill="url(#paper)" opacity=".75"/>
+                <path d="M 105 170 L 165 200 L 205 180 L 145 150 Z" fill="url(#paper)" opacity=".7"/>
+                <path d="M 100 160 L 160 190 L 200 170 L 140 140 Z" fill="url(#paper)" opacity=".65"/>
+                <path d="M 105 150 L 165 180 L 205 160 L 145 130 Z" fill="url(#paper)" opacity=".6"/>
+                <path d="M 100 140 L 160 170 L 200 150 L 140 120 Z" fill="url(#paper)" opacity=".55"/>
+                <path d="M 105 130 L 165 160 L 205 140 L 145 110 Z" fill="url(#paper)" opacity=".5"/>
+                <path d="M 100 120 L 160 150 L 200 130 L 140 100 Z" fill="url(#paper)" opacity=".45"/>
+                <path d="M 105 110 L 165 140 L 205 120 L 145 90 Z" fill="url(#paper)" opacity=".4"/>
+                <path d="M 100 100 L 160 130 L 200 110 L 140 80 Z" fill="url(#paper)" opacity=".35"/>
+                <!-- floating loose pages -->
+                <path d="M 130 70 L 150 80 L 155 70 L 135 60 Z" fill="#ef4444" opacity=".5" class="pulse"/>
+                <path d="M 85 90 L 100 98 L 105 88 L 90 80 Z" fill="#ef4444" opacity=".4" class="pulse" style="animation-delay:.5s"/>
+              </g>
+
+              <text x="140" y="300" text-anchor="middle" font-family="Geist Mono" font-size="9" fill="#f87171" font-weight="700">baseline</text>
+              <text x="140" y="312" text-anchor="middle" font-family="Geist Mono" font-size="8" fill="#9a92a8">197K chars / Read</text>
+            </g>
+
+            <!-- RIGHT DESK (token savior) -->
+            <g class="floatB" transform="translate(0,0)">
+              <path d="M 270 240 L 390 180 L 450 210 L 330 270 Z" fill="url(#isoGreen)" stroke="#1a4a2e" stroke-width="1"/>
+              <path d="M 330 270 L 330 290 L 450 230 L 450 210 Z" fill="#0a2418"/>
+              <path d="M 270 240 L 270 260 L 330 290 L 330 270 Z" fill="#123a22"/>
+
+              <!-- crystalline graph -->
+              <g transform="translate(360,190)">
+                <g stroke="#4ade80" stroke-width="1.2" fill="none" opacity=".7">
+                  <line x1="0" y1="-30" x2="-25" y2="0"/>
+                  <line x1="0" y1="-30" x2="25" y2="0"/>
+                  <line x1="-25" y1="0" x2="0" y2="30"/>
+                  <line x1="25" y1="0" x2="0" y2="30"/>
+                  <line x1="-25" y1="0" x2="-50" y2="-10"/>
+                  <line x1="25" y1="0" x2="50" y2="10"/>
+                </g>
+                <g fill="url(#crystal)" filter="url(#glow2)">
+                  <circle cx="0" cy="-30" r="5" class="pulse"/>
+                  <circle cx="-25" cy="0" r="4" class="pulse" style="animation-delay:.3s"/>
+                  <circle cx="25" cy="0" r="4" class="pulse" style="animation-delay:.6s"/>
+                  <circle cx="0" cy="30" r="4" class="pulse" style="animation-delay:.9s"/>
+                  <circle cx="-50" cy="-10" r="3" class="pulse" style="animation-delay:1.2s"/>
+                  <circle cx="50" cy="10" r="3" class="pulse" style="animation-delay:1.5s"/>
+                </g>
+              </g>
+
+              <text x="360" y="300" text-anchor="middle" font-family="Geist Mono" font-size="9" fill="#4ade80" font-weight="700">token savior</text>
+              <text x="360" y="312" text-anchor="middle" font-family="Geist Mono" font-size="8" fill="#9a92a8">16K chars / 6 queries</text>
+            </g>
+
+            <!-- center arrow -->
+            <g transform="translate(250,195)">
+              <path d="M -12 -6 L 0 0 L -12 6 Z" fill="#a78bfa" opacity=".8"/>
+              <text x="0" y="-14" text-anchor="middle" font-family="Geist Mono" font-size="7" fill="#a78bfa" font-weight="700">-92%</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <div class="pB-sankey">
+        <h4>Flow of tool calls · 60 tasks</h4>
+        <h5>Où partent les tokens ?</h5>
+        <svg viewBox="0 0 800 180">
+          <defs>
+            <linearGradient id="sRed" x1="0" x2="1"><stop offset="0" stop-color="#ef4444"/><stop offset="1" stop-color="#ef4444" stop-opacity=".3"/></linearGradient>
+            <linearGradient id="sGreen" x1="0" x2="1"><stop offset="0" stop-color="#22c55e"/><stop offset="1" stop-color="#22c55e" stop-opacity=".3"/></linearGradient>
+          </defs>
+          <!-- left nodes -->
+          <rect x="20" y="18" width="14" height="60" fill="#ef4444" rx="2"/>
+          <text x="0" y="50" font-family="Geist Mono" font-size="10" fill="#f87171">Read×197</text>
+          <rect x="20" y="92" width="14" height="20" fill="#eab308" rx="2"/>
+          <text x="0" y="108" font-family="Geist Mono" font-size="9" fill="#eab308">Grep×44</text>
+          <rect x="20" y="124" width="14" height="14" fill="#9a92a8" rx="2"/>
+          <text x="0" y="136" font-family="Geist Mono" font-size="9" fill="#9a92a8">Bash×12</text>
+
+          <!-- right nodes -->
+          <rect x="766" y="20" width="14" height="24" fill="#22c55e" rx="2"/>
+          <text x="630" y="35" font-family="Geist Mono" font-size="10" fill="#4ade80">get_function_source×38</text>
+          <rect x="766" y="52" width="14" height="20" fill="#22c55e" rx="2"/>
+          <text x="630" y="66" font-family="Geist Mono" font-size="10" fill="#4ade80">get_dependents×24</text>
+          <rect x="766" y="80" width="14" height="16" fill="#22c55e" rx="2"/>
+          <text x="630" y="92" font-family="Geist Mono" font-size="10" fill="#4ade80">search_codebase×19</text>
+          <rect x="766" y="104" width="14" height="12" fill="#22c55e" rx="2"/>
+          <text x="650" y="114" font-family="Geist Mono" font-size="10" fill="#4ade80">find_symbol×15</text>
+          <rect x="766" y="124" width="14" height="14" fill="#22c55e" rx="2"/>
+          <text x="640" y="135" font-family="Geist Mono" font-size="10" fill="#4ade80">get_full_context×11</text>
+
+          <!-- flows -->
+          <path class="pB-flow" d="M 34 48 C 280 48 520 32 766 32" stroke="url(#sGreen)" stroke-width="22" fill="none" opacity=".35"/>
+          <path class="pB-flow" d="M 34 48 C 280 48 520 62 766 62" stroke="url(#sGreen)" stroke-width="18" fill="none" opacity=".3" style="animation-delay:.3s"/>
+          <path class="pB-flow" d="M 34 48 C 280 48 520 88 766 88" stroke="url(#sGreen)" stroke-width="14" fill="none" opacity=".25" style="animation-delay:.6s"/>
+          <path class="pB-flow" d="M 34 102 C 280 102 520 110 766 110" stroke="url(#sGreen)" stroke-width="10" fill="none" opacity=".3" style="animation-delay:.9s"/>
+          <path class="pB-flow" d="M 34 131 C 280 131 520 131 766 131" stroke="url(#sGreen)" stroke-width="12" fill="none" opacity=".25" style="animation-delay:1.2s"/>
+        </svg>
+      </div>
+
+      <div class="pB-matrix">
+        <h4>Category matrix · 13 cat × gain/loss</h4>
+        <div class="pB-heat" id="pBheat"></div>
+      </div>
+    </div>
+  </div>
+  <p style="margin-top:14px;font-size:.75rem;color:var(--text3);text-align:center;font-family:'Geist Mono',monospace">L'illustration iso serait produite en Blender/Spline en résolution supérieure. Ici c'est SVG pour la maquette.</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     PROPOSITION C
+     ═══════════════════════════════════════════════ -->
+<section class="proposal" id="pC">
+  <div class="p-head">
+    <div>
+      <div class="p-num">C</div>
+      <h2>The Replay</h2>
+      <div class="p-sub">Terminaux duel live · preuve au lieu du chiffre</div>
+    </div>
+    <div class="p-meta">
+      <span><b>Stack</b> React + framer + JSON replay</span>
+      <span><b>Effort</b> ~2j + extraction traces</span>
+      <span><b>Target</b> HN · viralité technique</span>
+    </div>
+  </div>
+
+  <div class="mockup">
+    <div class="mockup-bar">
+      <div class="dots"><i></i><i></i><i></i></div>
+      <div class="url">tsbench.dev · replay</div>
+      <div>▶ live</div>
+    </div>
+    <div class="mockup-body pC-body">
+      <div class="pC-hero">
+        <h3>Don't trust the numbers. <em>Watch them run.</em></h3>
+        <p>Les deux agents résolvent la même tâche, en direct, à vitesse accélérée. Cliquez play.</p>
+      </div>
+
+      <div class="pC-controls">
+        <button class="pC-play" id="pCplay">▶ Replay TASK-043</button>
+        <div class="pC-task">task: read & summarize 6 large files</div>
+      </div>
+
+      <div class="pC-terms">
+        <div class="pC-term">
+          <div class="pC-term-head">
+            <span class="name a">● baseline</span>
+            <span class="meta">Claude Sonnet · Read/Grep/Bash only</span>
+          </div>
+          <div class="pC-term-body" id="pCa"></div>
+          <div class="pC-term-foot">
+            <span class="chars" id="pCaC">chars: 0</span>
+            <span class="score" id="pCaS" style="color:var(--text3)">pending</span>
+          </div>
+        </div>
+        <div class="pC-term">
+          <div class="pC-term-head">
+            <span class="name b">● token savior</span>
+            <span class="meta">Claude Sonnet · MCP structural tools</span>
+          </div>
+          <div class="pC-term-body" id="pCb"></div>
+          <div class="pC-term-foot">
+            <span class="chars" id="pCbC">chars: 0</span>
+            <span class="score" id="pCbS" style="color:var(--text3)">pending</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pC-tasks">
+        <h4>Pick another task · 60 in total</h4>
+        <div class="pC-grid" id="pCgrid"></div>
+      </div>
+    </div>
+  </div>
+  <p style="margin-top:14px;font-size:.75rem;color:var(--text3);text-align:center;font-family:'Geist Mono',monospace">Les traces sont déjà dans results/ · il suffit de les convertir en JSON de replay côté client.</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     VERDICT
+     ═══════════════════════════════════════════════ -->
+<section class="verdict" id="verdict">
+  <div class="p-head" style="border:none;padding:0;margin-bottom:20px">
+    <div>
+      <h2 style="font-family:'Instrument Serif',serif;font-size:2rem;font-weight:400">Quel pari ?</h2>
+      <div class="p-sub" style="color:var(--text2);font-size:.9rem">Tradeoffs honnêtes</div>
+    </div>
+  </div>
+
+  <div class="verdict-grid">
+    <div class="verdict-card a">
+      <div class="vfor">A · portfolio piece</div>
+      <h5>The Context Collapse</h5>
+      <p>Le plus risqué techniquement. Donne le meilleur wow. Risque de passer pour "joli mais flou" pour un public dev strict. Parfait si tsbench veut exister aussi comme portfolio de TS.</p>
+    </div>
+    <div class="verdict-card b">
+      <div class="vfor">B · conversion focus</div>
+      <h5>The Data Room</h5>
+      <p>Le plus rapide à livrer, le plus lisible, screenshot-friendly pour X/LinkedIn. Cohérent avec Bun.com et l'esthétique déjà en place. Tradeoff moins unique visuellement.</p>
+    </div>
+    <div class="verdict-card c">
+      <div class="vfor">C · viral technique</div>
+      <h5>The Replay</h5>
+      <p>Unique dans le paysage MCP. "Watch it run" est un pitch fort pour HN. Demande de structurer les traces. Tradeoff: moins de place pour le récit marketing.</p>
+    </div>
+  </div>
+
+  <div class="reco">
+    <div class="tag">ma recommandation</div>
+    <p>Partir sur <b>B (Data Room)</b> comme V2 du site actuel cette semaine, puis ajouter le module replay de <b>C</b> en V3 quand les traces sont extraites. A reste une option si tu veux re-tirer avec du budget temps.</p>
+  </div>
+</section>
+
+<footer>
+  tsbench proposals · <a href="./index.html">voir le site actuel →</a>
+</footer>
+
+<script>
+// ────── Proposal A: floating particles ──────
+(function(){
+  const host = document.getElementById('pAp');
+  const tokens = ['Read(','function','class','import','const','export','return','async','await','this.','new ','=>','{...}',':void',':string','<T>','map(','filter(','useState','render()','dispatch','context','params'];
+  for(let i=0;i<40;i++){
+    const s=document.createElement('span');
+    s.textContent=tokens[Math.floor(Math.random()*tokens.length)];
+    s.style.left=Math.random()*100+'%';
+    s.style.top=Math.random()*100+'%';
+    s.style.setProperty('--dx',(Math.random()*60-30)+'px');
+    s.style.setProperty('--dy',(Math.random()*60-30)+'px');
+    s.style.setProperty('--dz',(Math.random()*40-20)+'px');
+    s.style.animationDelay=(Math.random()*-8)+'s';
+    s.style.animationDuration=(6+Math.random()*4)+'s';
+    host.appendChild(s);
+  }
+})();
+
+// ────── Proposal B: heatmap ──────
+(function(){
+  const host = document.getElementById('pBheat');
+  const cats = ['Localization','Impact analysis','Struct edits','Change review','Dead code','Config audit','Docker audit','Test selection','Debugging','Onboarding','Refactoring','Heavy read','Cross-module'];
+  const cells = [
+    [0,0,2,1,2,1,0,1,2,2,1,1,0], // Baseline score-ish
+    [2,2,2,2,2,2,2,2,2,2,2,2,2]  // TS
+  ];
+  const gains = [38,42,55,28,33,40,30,45,60,25,38,92,50];
+  // header
+  const labelA = document.createElement('div');labelA.className='hlbl';labelA.textContent='';host.appendChild(labelA);
+  cats.forEach(c=>{const h=document.createElement('div');h.className='hlbl';h.style.writingMode='vertical-rl';h.style.transform='rotate(180deg)';h.style.fontSize='.55rem';h.style.justifyContent='flex-start';h.textContent=c;host.appendChild(h);});
+  // baseline row
+  const la=document.createElement('div');la.className='hlbl';la.textContent='Baseline';la.style.color='#f87171';host.appendChild(la);
+  cats.forEach((_,i)=>{
+    const c=document.createElement('div');c.className='hcell';
+    const g=gains[i];
+    c.style.background=`rgba(239,68,68,${.15+(100-g)/200})`;
+    c.textContent=(100-g)+'%';
+    host.appendChild(c);
+  });
+  // TS row
+  const lb=document.createElement('div');lb.className='hlbl';lb.textContent='Token Savior';lb.style.color='#4ade80';host.appendChild(lb);
+  cats.forEach((_,i)=>{
+    const c=document.createElement('div');c.className='hcell';
+    const g=gains[i];
+    c.style.background=`rgba(34,197,94,${.2+g/180})`;
+    c.textContent='+'+g+'%';
+    host.appendChild(c);
+  });
+})();
+
+// ────── Proposal C: replay ──────
+(function(){
+  const aBody = document.getElementById('pCa');
+  const bBody = document.getElementById('pCb');
+  const aC = document.getElementById('pCaC'), aS = document.getElementById('pCaS');
+  const bC = document.getElementById('pCbC'), bS = document.getElementById('pCbS');
+
+  const traceA = [
+    {t:100,l:'<span class="dim">$</span> <span class="tool">Read</span>("apps/web/src/pages/index.tsx")'},
+    {t:300,l:'<span class="dim">→ 32,410 chars</span>'},
+    {t:200,l:'<span class="dim">$</span> <span class="tool">Read</span>("apps/web/src/components/Header.tsx")'},
+    {t:300,l:'<span class="dim">→ 28,150 chars</span>'},
+    {t:200,l:'<span class="dim">$</span> <span class="tool">Read</span>("apps/api/src/routes/user.ts")'},
+    {t:300,l:'<span class="dim">→ 41,220 chars</span>'},
+    {t:200,l:'<span class="dim">$</span> <span class="tool">Read</span>("packages/db/schema.prisma")'},
+    {t:300,l:'<span class="dim">→ 38,800 chars</span>'},
+    {t:200,l:'<span class="dim">$</span> <span class="tool">Read</span>("apps/worker/index.ts")'},
+    {t:300,l:'<span class="dim">→ 29,900 chars</span>'},
+    {t:200,l:'<span class="dim">$</span> <span class="tool">Read</span>("packages/shared-types/index.ts")'},
+    {t:300,l:'<span class="dim">→ 26,402 chars</span>'},
+    {t:500,l:'<span class="bad">⚠ context near limit · summarize...</span>'},
+    {t:400,l:'<span class="bad">partial answer · score 1/2</span>'}
+  ];
+
+  const traceB = [
+    {t:150,l:'<span class="dim">$</span> <span class="tool">get_functions</span>("apps/web/src/pages/index.tsx")'},
+    {t:250,l:'<span class="dim">→ 8 functions · 2,810 chars</span>'},
+    {t:150,l:'<span class="dim">$</span> <span class="tool">get_functions</span>("apps/web/src/components/Header.tsx")'},
+    {t:250,l:'<span class="dim">→ 5 functions · 2,140 chars</span>'},
+    {t:150,l:'<span class="dim">$</span> <span class="tool">get_functions</span>("apps/api/src/routes/user.ts")'},
+    {t:250,l:'<span class="dim">→ 12 functions · 3,820 chars</span>'},
+    {t:150,l:'<span class="dim">$</span> <span class="tool">get_classes</span>("packages/db/schema.prisma")'},
+    {t:250,l:'<span class="dim">→ 4 models · 1,540 chars</span>'},
+    {t:150,l:'<span class="dim">$</span> <span class="tool">get_functions</span>("apps/worker/index.ts")'},
+    {t:250,l:'<span class="dim">→ 6 functions · 2,200 chars</span>'},
+    {t:150,l:'<span class="dim">$</span> <span class="tool">get_functions</span>("packages/shared-types/index.ts")'},
+    {t:250,l:'<span class="dim">→ 10 types · 3,906 chars</span>'},
+    {t:400,l:'<span class="good">✓ structured summary produced</span>'},
+    {t:300,l:'<span class="good">full answer · score 2/2</span>'}
+  ];
+
+  function reset(){
+    aBody.innerHTML='';bBody.innerHTML='';
+    aC.textContent='chars: 0';bC.textContent='chars: 0';
+    aS.textContent='pending';aS.style.color='var(--text3)';
+    bS.textContent='pending';bS.style.color='var(--text3)';
+  }
+
+  function play(trace,bodyEl,charsEl,scoreEl,finalChars,finalScore,color){
+    let i=0;let chars=0;
+    function next(){
+      if(i>=trace.length){
+        charsEl.textContent='chars: '+finalChars.toLocaleString();
+        scoreEl.textContent=finalScore;
+        scoreEl.style.color=color;
+        return;
+      }
+      const step = trace[i];
+      setTimeout(()=>{
+        const el = document.createElement('div');
+        el.className='pC-line on';
+        el.innerHTML=step.l;
+        bodyEl.appendChild(el);
+        bodyEl.scrollTop = bodyEl.scrollHeight;
+        // increment chars
+        chars += Math.floor(finalChars/trace.length);
+        charsEl.textContent='chars: '+chars.toLocaleString();
+        i++;
+        next();
+      }, step.t);
+    }
+    next();
+  }
+
+  document.getElementById('pCplay').addEventListener('click', ()=>{
+    reset();
+    play(traceA, aBody, aC, aS, 196882, '1/2 · 159s', 'var(--red2)');
+    play(traceB, bBody, bC, bS, 16416, '2/2 · 43s', 'var(--green2)');
+  });
+
+  // task grid
+  const grid = document.getElementById('pCgrid');
+  for(let i=1;i<=60;i++){
+    const t=document.createElement('div');t.className='pC-tile';
+    if(i===43){t.classList.add('hero');}
+    if([7,19,23,29,34,37,41,48,52,55,58].includes(i)) t.classList.add('impossible');
+    t.textContent=i;
+    grid.appendChild(t);
+  }
+})();
+</script>
+
+</body>
+</html>

@@ -1,37 +1,32 @@
-# TASK-037 — project-overview
+# TASK-037 — undecl-env
 
-**Catégorie** : onboarding
-**Difficulté** : easy
-**Artefact(s) lié(s)** : —
-**Type de scoring** : `free_form_rubric`
+**Catégorie** : config
+**Difficulté** : medium
+**Artefact(s) lié(s)** : UNDECL-001, UNDECL-002
+**Type de scoring** : `set_match_strict`
 
 ## Prompt (envoyé à l'agent)
 
-> En ignorant bench.py, generate.py et le dossier tasks/, explique en 10 bullet points maximum ce que fait le code applicatif de ce projet : quel domaine, quelles couches techniques, quels grands modules.
+> Liste les variables d'environnement lues dans le code Python mais absentes de `config/.env.example`.
 
 ## Réponse attendue
 
 ```json
 {
-  "required_topics": [
-    "SaaS / billing / members / sessions / webhooks",
-    "FastAPI backend (apps/api)",
-    "Next.js frontend (apps/web)",
-    "Python worker (apps/worker)",
-    "packages/ monorepo (shared-types, db, utils)",
-    "Prisma schema (packages/db/schema.prisma)",
-    "Docker + k8s + terraform infra"
+  "expected_undeclared": [
+    "SECRET_UNDECLARED_TOKEN",
+    "TSBENCH_HIDDEN_REGION"
   ],
-  "max_bullets": 10
+  "count": 2
 }
 ```
 
 ## Scoring
 
-- **2** : couvre tous les points clés demandés, sans invention
-- **1** : couvre la majorité des points mais en oublie ou invente un détail secondaire
-- **0** : réponse incorrecte, très incomplète, ou hallucinations majeures
+- **2** : liste exactement égale à la liste attendue (F1 = 1.0)
+- **1** : F1 ≥ 0.75 (un ou deux éléments manquants ou en trop)
+- **0** : F1 < 0.75
 
 ## Notes pour le juge
 
-Test d'économie de tokens : un bon agent doit éviter de lire tous les 290 fichiers.
+2 undeclared plantées : SECRET_UNDECLARED_TOKEN, TSBENCH_HIDDEN_REGION (dans apps/api/utils/secret_reader.py).

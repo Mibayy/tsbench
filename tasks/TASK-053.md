@@ -1,31 +1,38 @@
-# TASK-053 -- semantic-duplicates
+# TASK-053 — code-gen-middleware-logger
 
-**Categorie** : audit
-**Difficulte** : medium
-**Artefact(s) lie(s)** : DUP-001, DUP-002, DUP-003
+**Catégorie** : code_generation
+**Difficulté** : medium
+**Artefact(s) lié(s)** : —
 **Type de scoring** : `contains_all`
 
-## Prompt (envoye a l'agent)
+## Prompt (envoyé à l'agent)
 
-> Trouve les fonctions semantiquement dupliquees dans le projet (fonctions qui font la meme chose avec des noms differents). Liste les paires de doublons.
+> Implémente une middleware FastAPI `LoggingMiddleware` dans `apps/api/middleware/logging_mw.py` (nouveau fichier). Elle log méthode, path, status, duration_ms pour chaque requête. Utilise `starlette.middleware.base.BaseHTTPMiddleware`. Capture le status même en cas d'exception (log `status=500` puis re-raise).
 
 ## Réponse attendue
 
 ```json
 {
-  "must_contain": [
-    "doublon",
-    "dupli"
+  "expected_tokens": [
+    "class LoggingMiddleware",
+    "BaseHTTPMiddleware",
+    "async def dispatch",
+    "time.perf_counter",
+    "duration_ms",
+    "try",
+    "except",
+    "raise",
+    "apps/api/middleware/logging_mw.py"
   ]
 }
 ```
 
 ## Scoring
 
-- **2** : analyse completee, paires identifiees OU conclusion argumentee qu'il n'y a pas de vrais doublons
-- **1** : analyse partielle
-- **0** : echec
+- **2** : ≥ 7/9 tokens
+- **1** : 4-6/9
+- **0** : < 4/9
 
 ## Notes pour le juge
 
-Teste `find_semantic_duplicates`. 3 paires reelles : paginate~paginate_also (DUP-001), slugify~to_slug (DUP-002), start_of_day~day_start (DUP-003).
+`BaseHTTPMiddleware.dispatch` reçoit `(request, call_next)`. Le try/except autour de `call_next` permet de logger les 500. Oublier de re-raise après log = bug.

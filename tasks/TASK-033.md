@@ -1,29 +1,61 @@
-# TASK-033 — test-selection-change
+# TASK-033 — diff-summary
 
-**Catégorie** : testing
+**Catégorie** : review
 **Difficulté** : medium
-**Artefact(s) lié(s)** : CHAIN-001
-**Type de scoring** : `free_form_rubric`
+**Artefact(s) lié(s)** : BREAK-001, BREAK-002, BREAK-003, BREAK-004, BREAK-005, BREAK-006
+**Type de scoring** : `set_match_strict`
 
 ## Prompt (envoyé à l'agent)
 
-> Je m'apprête à modifier la fonction `alpha_middle` dans `apps/api/chains/alpha.py`. Quels tests devrais-je rejouer en priorité ?
+> Résume symbole par symbole tous les changements entre le tag `v1` et le tag `v2`. Je veux une bullet list courte.
 
 ## Réponse attendue
 
 ```json
 {
-  "source": "apps/api/chains/alpha.py:alpha_middle",
-  "expected_note": "aucun test unitaire ne couvre directement ce module — la bonne réponse est 'aucun test existant ne cible ce fichier, à créer'"
+  "expected_changes": [
+    {
+      "id": "BREAK-001",
+      "kind": "rename_function",
+      "from": "compute_invoice",
+      "to": "calculate_invoice"
+    },
+    {
+      "id": "BREAK-002",
+      "kind": "signature_change",
+      "symbol": "authenticate_user"
+    },
+    {
+      "id": "BREAK-003",
+      "kind": "remove_function",
+      "symbol": "bulk_import_members"
+    },
+    {
+      "id": "BREAK-004",
+      "kind": "type_change",
+      "symbol": "MembersStatus"
+    },
+    {
+      "id": "BREAK-005",
+      "kind": "route_removed",
+      "route": "DELETE /api/webhooks/{id}"
+    },
+    {
+      "id": "BREAK-006",
+      "kind": "default_change",
+      "symbol": "DEFAULT_PAGE_SIZE"
+    }
+  ],
+  "expected_count": 6
 }
 ```
 
 ## Scoring
 
-- **2** : couvre tous les points clés demandés, sans invention
-- **1** : couvre la majorité des points mais en oublie ou invente un détail secondaire
-- **0** : réponse incorrecte, très incomplète, ou hallucinations majeures
+- **2** : liste exactement égale à la liste attendue (F1 = 1.0)
+- **1** : F1 ≥ 0.75 (un ou deux éléments manquants ou en trop)
+- **0** : F1 < 0.75
 
 ## Notes pour le juge
 
-Aucun test ne couvre apps/api/chains/. Tâche piège : répondre 'tests/test_billing.py' au hasard = 0.
+6 BREAK-* exactement. Oublier un seul = F1 < 1.

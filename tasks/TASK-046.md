@@ -1,32 +1,36 @@
-# TASK-046 — billing-hotspots
+# TASK-046 — code-gen-csv-parser
 
-**Catégorie** : heavy_read
-**Difficulté** : hard
-**Artefact(s) lié(s)** :
+**Catégorie** : code_generation
+**Difficulté** : medium
+**Artefact(s) lié(s)** : —
 **Type de scoring** : `contains_all`
 
 ## Prompt (envoyé à l'agent)
 
-> Donne-moi le source complet des 3 fonctions les plus longues (en nombre de lignes) dans `apps/api/services/billing.py`. Pour chacune : nom, nombre de lignes, et le code entier.
+> Implémente une fonction `parse_csv(text: str, *, has_header: bool = True) -> list[dict]` dans `packages/utils/csv_parse.py`. Elle doit utiliser le module `csv` stdlib (pas de dépendance externe). Si `has_header=True`, chaque ligne devient un dict avec les clés du header ; sinon chaque ligne est un dict `{'col_0': ..., 'col_1': ...}`. Gère correctement les valeurs quotées et les virgules dans les quotes.
 
 ## Réponse attendue
 
 ```json
 {
-  "must_contain": [
-    "def",
-    "billing",
-    "payload"
+  "expected_tokens": [
+    "import csv",
+    "def parse_csv",
+    "has_header",
+    "csv.reader",
+    "StringIO",
+    "list[dict]",
+    "packages/utils/csv_parse.py"
   ]
 }
 ```
 
 ## Scoring
 
-- **2** : 3 fonctions nommées avec source complet visible
-- **1** : 1 ou 2 fonctions avec source
-- **0** : pas de source ou seulement des signatures
+- **2** : ≥ 6/7 tokens
+- **1** : 3-5/7
+- **0** : < 3/7
 
 ## Notes pour le juge
 
-Le fichier fait 648 lignes et contient ~30 fonctions. Baseline : Read du fichier entier + comptage manuel. TS : `find_hotspots` ou `get_function_source` ciblé.
+Usage de `csv.DictReader` valide aussi (au lieu de reader + dict manuel). L'important : pas de split(',') naïf.

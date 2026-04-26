@@ -1,31 +1,30 @@
-# TASK-017 — rename-symbol
+# TASK-017 — bug-auth
 
-**Catégorie** : edit
-**Difficulté** : hard
-**Artefact(s) lié(s)** : AMBIG-001
-**Type de scoring** : `edit_quality`
+**Catégorie** : debug
+**Difficulté** : medium
+**Artefact(s) lié(s)** : BUG-002
+**Type de scoring** : `exact_match`
 
 ## Prompt (envoyé à l'agent)
 
-> Renomme la fonction `create_user` définie dans `apps/api/ambig/mod1.py` en `create_regular_user`, en mettant à jour tous ses call sites. Attention : une autre fonction du même nom existe dans `apps/api/ambig/mod2.py` — elle ne doit PAS être touchée.
+> Un pentest a relevé que des mots de passe vides passent la validation d'authentification. Trouve le bug et explique-le.
 
 ## Réponse attendue
 
 ```json
 {
-  "target_file": "apps/api/ambig/mod1.py",
-  "before_symbol": "create_user",
-  "after_symbol": "create_regular_user",
-  "must_not_touch": "apps/api/ambig/mod2.py"
+  "file": "apps/api/utils/buggy_auth.py",
+  "symbol": "buggy_verify_password",
+  "bug_hint": "return True"
 }
 ```
 
 ## Scoring
 
-- **2** : diff applicable, build/typecheck propre, tous les call sites mis à jour
-- **1** : diff applicable mais un call site oublié ou un import cassé
-- **0** : diff incorrect, ne compile pas, ou effet de bord non demandé
+- **2** : fichier + symbole + ligne (±3) corrects
+- **1** : fichier + symbole corrects, ligne hors tolérance
+- **0** : symbole incorrect ou non trouvé
 
 ## Notes pour le juge
 
-Test de précision sur symbole ambigu. Renommer mod2 est une erreur éliminatoire.
+BUG-002 : buggy_verify_password renvoie True si l'un des deux est vide.

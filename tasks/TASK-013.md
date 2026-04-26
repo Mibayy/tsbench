@@ -1,35 +1,30 @@
-# TASK-013 — chain-gamma
+# TASK-013 — extract-constant
 
-**Catégorie** : call_chain
+**Catégorie** : edit
 **Difficulté** : medium
-**Artefact(s) lié(s)** : CHAIN-003
-**Type de scoring** : `chain_match`
+**Artefact(s) lié(s)** : BREAK-006
+**Type de scoring** : `edit_quality`
 
 ## Prompt (envoyé à l'agent)
 
-> À partir de la fonction `gamma_entry`, retrace la chaîne d'appels complète jusqu'à la fonction feuille (celle qui ne délègue plus à personne).
+> Plusieurs modules utilisent le nombre magique `20` comme taille de page par défaut. Extrais-le dans une constante `DEFAULT_PAGE_SIZE` centralisée et mets à jour tous les usages.
 
 ## Réponse attendue
 
 ```json
 {
-  "chain": [
-    "gamma_entry",
-    "gamma_middle",
-    "gamma_inner",
-    "gamma_leaf"
-  ],
-  "file": "apps/api/chains/gamma.py",
-  "depth": 4
+  "magic_number": 20,
+  "constant_name": "DEFAULT_PAGE_SIZE",
+  "min_files_touched": 2
 }
 ```
 
 ## Scoring
 
-- **2** : chaîne complète dans le bon ordre
-- **1** : tous les nœuds corrects mais ordre partiellement faux, ou un nœud manquant
-- **0** : chaîne incorrecte ou incomplète (> 1 manquant)
+- **2** : diff applicable, build/typecheck propre, tous les call sites mis à jour
+- **1** : diff applicable mais un call site oublié ou un import cassé
+- **0** : diff incorrect, ne compile pas, ou effet de bord non demandé
 
 ## Notes pour le juge
 
-Chaîne à 4 niveaux dans apps/api/chains/gamma.py. Ordre important.
+Concerne apps/api/config.py et apps/api/utils/pagination.py au minimum.

@@ -6,6 +6,8 @@ from dataclasses import dataclass
 
 DEFAULT_PAGE_SIZE = 20
 
+DEFAULT_PAGE_SIZE = 20
+
 @dataclass
 class Settings:
     database_url: str = os.environ.get("DATABASE_URL", "postgresql://localhost/tsbench")

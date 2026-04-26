@@ -1,5 +1,6 @@
 import { apiClient } from '../lib/apiClient';
 import { fetcher } from '../lib/fetcher';
+import { DEFAULT_PAGE_SIZE } from '../lib/constants';
 
 export interface SessionsQuery {
   page?: number;
@@ -12,7 +13,7 @@ export interface SessionsQuery {
 
 const DEFAULT_QUERY: SessionsQuery = {
   page: 1,
-  pageSize: 20,
+  pageSize: DEFAULT_PAGE_SIZE,
   sortDir: 'asc',
 };
 

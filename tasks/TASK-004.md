@@ -1,31 +1,30 @@
-# TASK-004 — find-route
+# TASK-004 — find-component-usage
 
 **Catégorie** : localisation
-**Difficulté** : easy
+**Difficulté** : medium
 **Artefact(s) lié(s)** : —
-**Type de scoring** : `exact_match`
+**Type de scoring** : `set_match_loose`
 
 ## Prompt (envoyé à l'agent)
 
-> Quel fichier handle la route `POST /api/billing` dans le backend ?
+> Quels fichiers importent et utilisent le composant React `<Sidebar>` ?
 
 ## Réponse attendue
 
 ```json
 {
-  "file": "apps/api/routers/billing.py",
-  "handler": "create_billing",
-  "method": "POST",
-  "path": "/api/billing"
+  "component": "Sidebar",
+  "imported_in_pattern": "apps/web/app/*/page.tsx",
+  "min_expected_count": 15
 }
 ```
 
 ## Scoring
 
-- **2** : fichier + symbole + ligne (±3) corrects
-- **1** : fichier + symbole corrects, ligne hors tolérance
-- **0** : symbole incorrect ou non trouvé
+- **2** : la réponse contient au moins N éléments corrects parmi ceux attendus
+- **1** : au moins la moitié des éléments attendus sont cités
+- **0** : aucun élément correct
 
 ## Notes pour le juge
 
-Routes définies dans routers/billing.py via ROUTES.append tuples. Handler 'create_billing'.
+Toutes les pages app/*/page.tsx importent Sidebar. ~15 pages + home.

@@ -1,30 +1,37 @@
-# TASK-035 — bug-auth
+# TASK-035 — breaking-detection
 
-**Catégorie** : debug
+**Catégorie** : review
 **Difficulté** : medium
-**Artefact(s) lié(s)** : BUG-002
-**Type de scoring** : `exact_match`
+**Artefact(s) lié(s)** : BREAK-001, BREAK-002, BREAK-003, BREAK-004, BREAK-005, BREAK-006
+**Type de scoring** : `set_match_strict`
 
 ## Prompt (envoyé à l'agent)
 
-> Un pentest a relevé que des mots de passe vides passent la validation d'authentification. Trouve le bug et explique-le.
+> Y a-t-il des breaking changes d'API entre v1 et v2 ? Si oui, lesquels exactement ?
 
 ## Réponse attendue
 
 ```json
 {
-  "file": "apps/api/utils/buggy_auth.py",
-  "symbol": "buggy_verify_password",
-  "bug_hint": "return True"
+  "has_breaking": true,
+  "expected_breaks": [
+    "BREAK-001",
+    "BREAK-002",
+    "BREAK-003",
+    "BREAK-004",
+    "BREAK-005",
+    "BREAK-006"
+  ],
+  "expected_count": 6
 }
 ```
 
 ## Scoring
 
-- **2** : fichier + symbole + ligne (±3) corrects
-- **1** : fichier + symbole corrects, ligne hors tolérance
-- **0** : symbole incorrect ou non trouvé
+- **2** : liste exactement égale à la liste attendue (F1 = 1.0)
+- **1** : F1 ≥ 0.75 (un ou deux éléments manquants ou en trop)
+- **0** : F1 < 0.75
 
 ## Notes pour le juge
 
-BUG-002 : buggy_verify_password renvoie True si l'un des deux est vide.
+Les 6 BREAK-* doivent être cités nommément (ou par description équivalente).

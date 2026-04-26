@@ -23,6 +23,12 @@ model Member {
   associationId Int
   association   Association @relation(fields: [associationId], references: [id])
   createdAt     DateTime @default(now())
+  archivedAt    DateTime?
+  archivedAt  DateTime?
+  archivedAt  DateTime?
+  archivedAt  DateTime?
+  archivedAt  DateTime?
+  archivedAt  DateTime?
   archivedAt  DateTime?
   archivedAt  DateTime?
 }

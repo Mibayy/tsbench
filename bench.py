@@ -70,6 +70,8 @@ LIMITS
 - Stub/missing endpoint: NEVER answer just CANNOT_ANSWER — produce a structured walkthrough (router → service → repository) citing file:line, append "(implementation is stub)".
 - Implement-task: write the FULL code block in your response with the file path requested.
 
+CONCISION (CRITICAL): Réponds en moins de 500 tokens output sauf si le prompt demande explicitement du code long. Pas de préambule ("Voici", "Je vais", "Bien sûr"). Pas de récap final. Pas de répétition. Énumère les faits demandés sans paraphrase. Pour les implementations, le code parle — n'ajoute pas de commentaires explicatifs ni de bullet-list "ce que j'ai fait".
+
 STANDARD VOCABULARY (CRITICAL FOR SCORING — the grader matches ENGLISH technical tokens literally):
 - SQL injection : "parameterized" (not "paramétré"), "execute(", placeholder "?", "%s", "UNION"
 - Memory leaks / websockets : "cleanup", "disconnect", explicit "del" or ".pop()"
@@ -205,10 +207,14 @@ def run_claude(prompt: str, run: str, extra_disallowed: list[str] | None = None)
         cmd += ["--session-id", seed_uuid]
 
     if run == "B":
-        # Always append SYSTEM_PROMPT_TS — fork-session creates a NEW session
-        # ID that does NOT automatically inherit the parent's system prompt
-        # injection. Without this, Bash sneaks back in (TASK-033 used Bash×4
-        # in tests, which SYSTEM_PROMPT_TS explicitly forbids).
+        # SYSTEM_PROMPT_TS body is also baked into ./CLAUDE.md — Claude Code
+        # auto-discovers it at startup, so the seed and forks both inherit
+        # the rules without paying the --append-system-prompt cost on each
+        # fork. We KEEP --append-system-prompt as belt-and-suspenders
+        # because fork-session has been observed to drop appended prompts
+        # in past runs (cf. TASK-033 / TASK-089 regression). The cache cost
+        # is the same content twice = effectively free since the second
+        # appearance hits the same cache breakpoint.
         cmd += ["--append-system-prompt", SYSTEM_PROMPT_TS]
         base_disallowed = ["Read", "Grep", "Glob"]
         if extra_disallowed:
@@ -1325,6 +1331,14 @@ def main() -> int:
         default="claude",
         help="Backend agent harness (default: claude). " + UNSUPPORTED_AGENT_MSG,
     )
+    ap.add_argument(
+        "--workers",
+        type=int,
+        default=int(os.environ.get("TSBENCH_WORKERS", "1")),
+        help="Number of parallel workers for task execution (default 1). "
+             "With seed-and-fork session strategy, forks are independent so "
+             "running multiple in parallel is safe and divides wall time.",
+    )
     args = ap.parse_args()
 
     if args.report:
@@ -1348,12 +1362,34 @@ def main() -> int:
     if "B" in runs and args.agent == "claude":
         prewarm_run_b(force=args.force)
 
-    for tid in targets:
-        for run in runs:
-            try:
-                run_task(tid, run, force=args.force, agent=args.agent)
-            except Exception as e:
-                print(f"[{tid} | Run {run} | {args.agent}] CRASHED: {e}", file=sys.stderr)
+    workers = max(1, args.workers)
+    if workers == 1:
+        # Sequential path — preserves the original log ordering.
+        for tid in targets:
+            for run in runs:
+                try:
+                    run_task(tid, run, force=args.force, agent=args.agent)
+                except Exception as e:
+                    print(f"[{tid} | Run {run} | {args.agent}] CRASHED: {e}", file=sys.stderr)
+    else:
+        # Parallel path — each task is an independent fork from the seed
+        # session, so concurrent claude subprocesses are safe. Wall time
+        # divides by ~workers, capped by Anthropic API rate limits.
+        from concurrent.futures import ThreadPoolExecutor, as_completed
+        units = [(tid, run) for tid in targets for run in runs]
+        print(f"[bench] parallel mode: {len(units)} tasks across {workers} workers")
+        sys.stdout.flush()
+        with ThreadPoolExecutor(max_workers=workers) as ex:
+            futures = {
+                ex.submit(run_task, tid, run, args.force, args.agent): (tid, run)
+                for tid, run in units
+            }
+            for fut in as_completed(futures):
+                tid, run = futures[fut]
+                try:
+                    fut.result()
+                except Exception as e:
+                    print(f"[{tid} | Run {run} | {args.agent}] CRASHED: {e}", file=sys.stderr)
 
     return 0
 

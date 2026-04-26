@@ -1,32 +1,38 @@
-# TASK-055 -- insert-near-symbol
+# TASK-055 — code-gen-url-signer
 
-**Categorie** : edit
-**Difficulte** : medium
-**Artefact(s) lie(s)** :
-**Type de scoring** : `edit_quality`
+**Catégorie** : code_generation
+**Difficulté** : hard
+**Artefact(s) lié(s)** : —
+**Type de scoring** : `contains_all`
 
-## Prompt (envoye a l'agent)
+## Prompt (envoyé à l'agent)
 
-> Insere une nouvelle fonction `validate_invoice_total(invoice: dict) -> bool` juste apres la fonction `calculate_invoice` dans `apps/api/services/billing.py`. La fonction doit verifier que invoice["total"] > 0 et retourner True/False.
+> Implémente `sign_url(url: str, secret: str, expires_in: int = 3600) -> str` et `verify_signed_url(signed_url: str, secret: str) -> bool` dans `packages/utils/url_signer.py`. La signature = HMAC-SHA256 de `url + exp_timestamp`, ajoutée en query param `?sig=<hex>&exp=<int>`. `verify_signed_url` doit : (1) parser les params, (2) vérifier `exp > now()`, (3) recalculer et comparer la sig avec `hmac.compare_digest`.
 
 ## Réponse attendue
 
 ```json
 {
-  "must_contain": [
-    "validate_invoice_total",
-    "calculate_invoice",
-    "total"
+  "expected_tokens": [
+    "def sign_url",
+    "def verify_signed_url",
+    "urllib.parse",
+    "hmac",
+    "sha256",
+    "compare_digest",
+    "exp",
+    "sig",
+    "packages/utils/url_signer.py"
   ]
 }
 ```
 
 ## Scoring
 
-- **2** : fonction inseree au bon endroit (apres calculate_invoice, ligne ~47) avec le bon contenu
-- **1** : fonction inseree mais position ou contenu incorrect
-- **0** : pas d'insertion
+- **2** : ≥ 7/9 tokens
+- **1** : 4-6/9
+- **0** : < 4/9
 
 ## Notes pour le juge
 
-Teste `insert_near_symbol` avec disallowed Edit/Write. calculate_invoice est aux lignes 14-46.
+Piège : signer l'URL après avoir ajouté `sig` (récursif) ou comparer les sigs avec `==` (timing attack).

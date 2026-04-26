@@ -1,30 +1,40 @@
-# TASK-031 — infra-consistency
+# TASK-031 — explain-function-flow
 
-**Catégorie** : infra
-**Difficulté** : hard
+**Catégorie** : explanation
+**Difficulté** : medium
 **Artefact(s) lié(s)** : —
-**Type de scoring** : `boolean_with_evidence`
+**Type de scoring** : `llm_judge`
 
 ## Prompt (envoyé à l'agent)
 
-> Toutes les variables d'environnement référencées dans les manifests Kubernetes (`infra/k8s/`) sont-elles bien déclarées dans `config/.env.example` ?
+> Explique en détail ce que fait la fonction `apply_discount` dans `apps/api/services/billing.py` : ses entrées, son effet de bord principal, ses dépendances externes (DB, logging, config), et les cas non couverts actuellement. Structure ta réponse : (1) signature + rôle, (2) effet de bord, (3) deps, (4) gaps de validation.
 
 ## Réponse attendue
 
 ```json
 {
-  "k8s_env_refs_found": [],
-  "note": "les manifests k8s générés ne référencent aucune env var — trivialement cohérent",
-  "expected_answer": "Aucune env var référencée dans k8s/, donc cohérent par vacuité."
+  "rubric": {
+    "score_2_criteria": [
+      "Identifie la signature `apply_discount(payload: dict, user_id: int = 0)` ET mentionne qu'elle retourne un dict `{ok, op, user}`",
+      "Mentionne au moins 2 dépendances parmi : `_billing_admin_db()` / `supabase_admin` / `info()` logging / `settings`",
+      "Identifie au moins 2 gaps : pas de validation du pourcentage de remise, pas de lecture réelle du payload, pas de persistence DB"
+    ],
+    "score_1_criteria": [
+      "Identifie la signature + au moins 1 dep OU 1 gap, mais rate le reste"
+    ],
+    "score_0_criteria": [
+      "Ne trouve pas la fonction OU donne une réponse générique sans citer le code"
+    ]
+  }
 }
 ```
 
 ## Scoring
 
-- **2** : oui/non correct ET citation des fichiers/symboles en preuve
-- **1** : oui/non correct sans preuve concrète
-- **0** : réponse incorrecte
+- **2** : les 3 critères score_2 remplis (juge Haiku)
+- **1** : réponse partielle selon rubric
+- **0** : miss complet
 
 ## Notes pour le juge
 
-Tâche piège : les k8s YAML générés n'ont pas de env refs. La bonne réponse est 'aucun problème, rien à vérifier'. Hallucination = 0.
+Réponse attendue riche — teste la capacité à lire du code avec padding synthétique et en extraire le vrai comportement. LLM-judge pondère sur la présence des éléments clés sans exiger des mots exacts.

@@ -6,6 +6,7 @@ import { EmptyState } from '../../components/EmptyState';
 import { ErrorBanner } from '../../components/ErrorBanner';
 import { LoadingSpinner } from '../../components/LoadingSpinner';
 import { Pagination } from '../../components/Pagination';
+import { DEFAULT_PAGE_SIZE } from '../../lib/constants';
 
 interface LoginPageState {
   page: number;
@@ -18,7 +19,7 @@ interface LoginPageState {
 
 const INITIAL_STATE: LoginPageState = {
   page: 1,
-  pageSize: 20,
+  pageSize: DEFAULT_PAGE_SIZE,
   search: '',
   loading: false,
   error: null,

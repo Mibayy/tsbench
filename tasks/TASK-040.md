@@ -1,30 +1,30 @@
-# TASK-040 — config-consistency
+# TASK-040 -- git-status
 
-**Catégorie** : cross-language
-**Difficulté** : hard
-**Artefact(s) lié(s)** : —
-**Type de scoring** : `boolean_with_evidence`
+**Categorie** : git
+**Difficulte** : easy
+**Artefact(s) lie(s)** :
+**Type de scoring** : `contains_all`
 
-## Prompt (envoyé à l'agent)
+## Prompt (envoye a l'agent)
 
-> Les champs déclarés dans `config/app.config.yaml` (app.name, features.billing, pagination.default, etc.) sont-ils tous effectivement consommés quelque part dans le code ?
+> Donne le status git du projet : branche courante, fichiers modifies, fichiers staged, fichiers non-tracked. Utilise l'outil dedie au git status.
 
 ## Réponse attendue
 
 ```json
 {
-  "config_file": "config/app.config.yaml",
-  "expected_answer": "Aucun champ du YAML n'est effectivement lu par le code généré — le fichier existe mais n'est parsé nulle part.",
-  "note": "tâche piège : le fichier YAML est un leurre, seules les env vars sont lues"
+  "must_contain": [
+    "branch"
+  ]
 }
 ```
 
 ## Scoring
 
-- **2** : oui/non correct ET citation des fichiers/symboles en preuve
-- **1** : oui/non correct sans preuve concrète
-- **0** : réponse incorrecte
+- **2** : branche + status complet (staged, unstaged, untracked)
+- **1** : branche identifiee mais status partiel
+- **0** : echec
 
 ## Notes pour le juge
 
-Hallucination test : un agent qui invente un loader YAML = 0.
+Teste `get_git_status`. Equivalent structure de `git status` avec parsing JSON.

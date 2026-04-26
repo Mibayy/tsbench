@@ -1,5 +1,6 @@
 import { apiClient } from '../lib/apiClient';
 import { fetcher } from '../lib/fetcher';
+import { DEFAULT_PAGE_SIZE } from '../lib/constants';
 
 export interface WebhooksQuery {
   page?: number;
@@ -12,7 +13,7 @@ export interface WebhooksQuery {
 
 const DEFAULT_QUERY: WebhooksQuery = {
   page: 1,
-  pageSize: 20,
+  pageSize: DEFAULT_PAGE_SIZE,
   sortDir: 'asc',
 };
 

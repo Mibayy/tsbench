@@ -1,32 +1,30 @@
-# TASK-016 — test-impact
+# TASK-016 — bug-pagination
 
-**Catégorie** : impact
+**Catégorie** : debug
 **Difficulté** : medium
-**Artefact(s) lié(s)** : BREAK-001
-**Type de scoring** : `set_match_loose`
+**Artefact(s) lié(s)** : BUG-001
+**Type de scoring** : `exact_match`
 
 ## Prompt (envoyé à l'agent)
 
-> Je viens de modifier la fonction `calculate_invoice` dans `apps/api/services/billing.py`. Quels fichiers de test devrais-je rejouer en priorité ?
+> Un utilisateur signale que notre pagination retourne 11 résultats par page au lieu de 10. Où est le bug ?
 
 ## Réponse attendue
 
 ```json
 {
-  "source_symbol": "calculate_invoice",
-  "source_file": "apps/api/services/billing.py",
-  "expected_test_files": [
-    "tests/test_billing.py"
-  ]
+  "file": "apps/api/utils/buggy_pagination.py",
+  "symbol": "buggy_paginate",
+  "bug_hint": "end = start + page_size + 1"
 }
 ```
 
 ## Scoring
 
-- **2** : la réponse contient au moins N éléments corrects parmi ceux attendus
-- **1** : au moins la moitié des éléments attendus sont cités
-- **0** : aucun élément correct
+- **2** : fichier + symbole + ligne (±3) corrects
+- **1** : fichier + symbole corrects, ligne hors tolérance
+- **0** : symbole incorrect ou non trouvé
 
 ## Notes pour le juge
 
-Un seul test file couvre billing dans la suite générée.
+BUG-001 : off-by-one dans `buggy_paginate`, end index = start + page_size + 1.

@@ -1,30 +1,33 @@
-# TASK-034 — bug-pagination
+# TASK-034 — pr-risk
 
-**Catégorie** : debug
-**Difficulté** : medium
-**Artefact(s) lié(s)** : BUG-001
-**Type de scoring** : `exact_match`
+**Catégorie** : review
+**Difficulté** : hard
+**Artefact(s) lié(s)** : BREAK-001, BREAK-002, BREAK-003, BREAK-004, BREAK-005, BREAK-006
+**Type de scoring** : `set_match_loose`
 
 ## Prompt (envoyé à l'agent)
 
-> Un utilisateur signale que notre pagination retourne 11 résultats par page au lieu de 10. Où est le bug ?
+> Parmi les changements entre v1 et v2, lesquels sont les plus risqués et méritent une review attentive avant merge ? Classe-les par criticité.
 
 ## Réponse attendue
 
 ```json
 {
-  "file": "apps/api/utils/buggy_pagination.py",
-  "symbol": "buggy_paginate",
-  "bug_hint": "end = start + page_size + 1"
+  "high_risk_expected": [
+    "authenticate_user",
+    "bulk_import_members",
+    "delete_webhooks"
+  ],
+  "rationale": "signature/remove/route removal = breaking pour consumers externes (BREAK-002 authenticate_user signature, BREAK-003 bulk_import_members removed, BREAK-005 DELETE /api/webhooks route removed)"
 }
 ```
 
 ## Scoring
 
-- **2** : fichier + symbole + ligne (±3) corrects
-- **1** : fichier + symbole corrects, ligne hors tolérance
-- **0** : symbole incorrect ou non trouvé
+- **2** : la réponse contient au moins N éléments corrects parmi ceux attendus
+- **1** : au moins la moitié des éléments attendus sont cités
+- **0** : aucun élément correct
 
 ## Notes pour le juge
 
-BUG-001 : off-by-one dans `buggy_paginate`, end index = start + page_size + 1.
+Subjectif mais BREAK-002/003/005 sont objectivement les plus cassants (API contract).

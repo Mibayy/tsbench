@@ -1,35 +1,31 @@
-# TASK-012 — chain-beta
+# TASK-012 — add-field
 
-**Catégorie** : call_chain
+**Catégorie** : edit
 **Difficulté** : medium
-**Artefact(s) lié(s)** : CHAIN-002
-**Type de scoring** : `chain_match`
+**Artefact(s) lié(s)** : —
+**Type de scoring** : `edit_quality`
 
 ## Prompt (envoyé à l'agent)
 
-> À partir de la fonction `beta_entry`, retrace la chaîne d'appels complète jusqu'à la fonction feuille (celle qui ne délègue plus à personne).
+> Ajoute un champ optionnel `archivedAt: DateTime?` au modèle `Member` dans `packages/db/schema.prisma`, puis propage-le aux types TypeScript correspondants dans `apps/web/types/member.ts`.
 
 ## Réponse attendue
 
 ```json
 {
-  "chain": [
-    "beta_entry",
-    "beta_middle",
-    "beta_inner",
-    "beta_leaf"
-  ],
-  "file": "apps/api/chains/beta.py",
-  "depth": 4
+  "schema_file": "packages/db/schema.prisma",
+  "model": "Member",
+  "new_field": "archivedAt: DateTime?",
+  "ts_file": "apps/web/types/member.ts"
 }
 ```
 
 ## Scoring
 
-- **2** : chaîne complète dans le bon ordre
-- **1** : tous les nœuds corrects mais ordre partiellement faux, ou un nœud manquant
-- **0** : chaîne incorrecte ou incomplète (> 1 manquant)
+- **2** : diff applicable, build/typecheck propre, tous les call sites mis à jour
+- **1** : diff applicable mais un call site oublié ou un import cassé
+- **0** : diff incorrect, ne compile pas, ou effet de bord non demandé
 
 ## Notes pour le juge
 
-Chaîne à 4 niveaux dans apps/api/chains/beta.py. Ordre important.
+Édition multi-fichier Python/SQL + TS. Validation : diff propre, type TS inclut archivedAt.

@@ -1,34 +1,33 @@
-# TASK-029 — secret-detection
+# TASK-029 -- call-chain-deep
 
-**Catégorie** : config
-**Difficulté** : medium
-**Artefact(s) lié(s)** : SECRET-001, SECRET-002, SECRET-003
-**Type de scoring** : `set_match_strict`
+**Categorie** : call_chain
+**Difficulte** : hard
+**Artefact(s) lie(s)** : CHAIN-001
+**Type de scoring** : `chain_match`
 
-## Prompt (envoyé à l'agent)
+## Prompt (envoye a l'agent)
 
-> Y a-t-il des secrets (clés API, tokens, credentials) exposés dans les fichiers du dossier `config/` ?
+> Donne le chemin d'appel exact entre `alpha_entry` et `alpha_leaf` -- pas leurs dependances directes, le chemin complet. Utilise exclusivement get_call_chain pour trouver la chaine.
 
 ## Réponse attendue
 
 ```json
 {
-  "expected_secrets": [
-    "STRIPE_API_KEY",
-    "STRIPE_WEBHOOK_SECRET",
-    "AWS_SECRET_ACCESS_KEY"
-  ],
-  "file": "config/.env.staging",
-  "count": 3
+  "chain": [
+    "alpha_entry",
+    "alpha_middle",
+    "alpha_inner",
+    "alpha_leaf"
+  ]
 }
 ```
 
 ## Scoring
 
-- **2** : liste exactement égale à la liste attendue (F1 = 1.0)
-- **1** : F1 ≥ 0.75 (un ou deux éléments manquants ou en trop)
-- **0** : F1 < 0.75
+- **2** : chaine exacte alpha_entry -> alpha_middle -> alpha_inner -> alpha_leaf
+- **1** : chaine partielle (>=2 maillons corrects)
+- **0** : pas de chaine ou chaine incorrecte
 
 ## Notes pour le juge
 
-3 secrets plantés dans .env.staging (valeurs obfusquées en placeholders pour GitHub push protection — la détection se fait par nom de variable).
+Teste `get_call_chain` avec disallowed get_dependencies/get_dependents pour forcer le BFS natif plutot que navigation manuelle du graphe.

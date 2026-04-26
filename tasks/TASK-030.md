@@ -1,40 +1,31 @@
-# TASK-030 — dockerfile-audit
+# TASK-030 -- backward-slice
 
-**Catégorie** : infra
-**Difficulté** : easy
-**Artefact(s) lié(s)** : DOCKER-001, DOCKER-002
-**Type de scoring** : `set_match_strict`
+**Categorie** : navigation
+**Difficulte** : hard
+**Artefact(s) lie(s)** : HOTSPOT-001
+**Type de scoring** : `contains_all`
 
-## Prompt (envoyé à l'agent)
+## Prompt (envoye a l'agent)
 
-> Review les Dockerfiles dans `infra/docker/`. Quels sont les problèmes que tu vois ?
+> Calcule le backward slice de la fonction `reconcile_payments` dans `apps/api/services/complex_billing.py`. Quels symboles influencent directement ou transitivement cette fonction ?
 
 ## Réponse attendue
 
 ```json
 {
-  "expected_issues": [
-    {
-      "id": "DOCKER-001",
-      "file": "infra/docker/worker.Dockerfile",
-      "issue": "uses python:latest base image"
-    },
-    {
-      "id": "DOCKER-002",
-      "file": "infra/docker/web.Dockerfile",
-      "issue": "exposes unused ports 9229 and 6666"
-    }
-  ],
-  "count": 2
+  "must_contain": [
+    "reconcile_payments",
+    "complex_billing.py"
+  ]
 }
 ```
 
 ## Scoring
 
-- **2** : liste exactement égale à la liste attendue (F1 = 1.0)
-- **1** : F1 ≥ 0.75 (un ou deux éléments manquants ou en trop)
-- **0** : F1 < 0.75
+- **2** : backward slice complet avec symboles influencants
+- **1** : fonction identifiee + quelques dependances
+- **0** : echec
 
 ## Notes pour le juge
 
-3 Dockerfiles : api (propre), worker (latest tag), web (ports debug exposés).
+Teste `get_backward_slice`. Fonction a complexite cyclomatique 14 (HOTSPOT-001). L'analyse de flux de donnees est difficile sans outil structure.

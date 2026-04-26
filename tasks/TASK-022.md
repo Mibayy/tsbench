@@ -1,33 +1,40 @@
-# TASK-022 — pr-risk
+# TASK-022 — module-overview
 
-**Catégorie** : review
-**Difficulté** : hard
-**Artefact(s) lié(s)** : BREAK-001, BREAK-002, BREAK-003, BREAK-004, BREAK-005, BREAK-006
-**Type de scoring** : `set_match_loose`
+**Catégorie** : onboarding
+**Difficulté** : medium
+**Artefact(s) lié(s)** : —
+**Type de scoring** : `free_form_rubric`
 
 ## Prompt (envoyé à l'agent)
 
-> Parmi les changements entre v1 et v2, lesquels sont les plus risqués et méritent une review attentive avant merge ? Classe-les par criticité.
+> Explique l'architecture du module `apps/api/services/billing.py` : quelles sont ses responsabilités, ses fonctions principales, et ses dépendances ?
 
 ## Réponse attendue
 
 ```json
 {
-  "high_risk_expected": [
-    "authenticate_user",
-    "bulk_import_members",
-    "delete_webhooks"
+  "module": "apps/api/services/billing.py",
+  "key_functions": [
+    "calculate_invoice",
+    "apply_discount",
+    "charge_customer",
+    "refund_payment"
   ],
-  "rationale": "signature/remove/route removal = breaking pour consumers externes (BREAK-002 authenticate_user signature, BREAK-003 bulk_import_members removed, BREAK-005 DELETE /api/webhooks route removed)"
+  "dependencies": [
+    "apps/api/db",
+    "apps/api/models/billing",
+    "apps/api/config",
+    "apps/api/utils/logging"
+  ]
 }
 ```
 
 ## Scoring
 
-- **2** : la réponse contient au moins N éléments corrects parmi ceux attendus
-- **1** : au moins la moitié des éléments attendus sont cités
-- **0** : aucun élément correct
+- **2** : couvre tous les points clés demandés, sans invention
+- **1** : couvre la majorité des points mais en oublie ou invente un détail secondaire
+- **0** : réponse incorrecte, très incomplète, ou hallucinations majeures
 
 ## Notes pour le juge
 
-Subjectif mais BREAK-002/003/005 sont objectivement les plus cassants (API contract).
+Réponse correcte mentionne les fonctions principales et les imports (calculate_invoice a été renommé depuis compute_invoice via BREAK-001).

@@ -1,21 +1,21 @@
-# TASK-003 — find-env-usage
+# TASK-003 — find-schema-field
 
 **Catégorie** : localisation
 **Difficulté** : easy
-**Artefact(s) lié(s)** : UNDECL-001
+**Artefact(s) lié(s)** : —
 **Type de scoring** : `exact_match`
 
 ## Prompt (envoyé à l'agent)
 
-> Où est utilisée la variable d'environnement `SECRET_UNDECLARED_TOKEN` dans le code ? Donne-moi le fichier et la fonction.
+> Dans quelle table et quelle colonne est stocké le rôle d'un membre d'association ? Donne le fichier de schéma.
 
 ## Réponse attendue
 
 ```json
 {
-  "env_var": "SECRET_UNDECLARED_TOKEN",
-  "file": "apps/api/utils/secret_reader.py",
-  "function": "get_secret_config"
+  "file": "packages/db/schema.prisma",
+  "table": "Member",
+  "column": "role"
 }
 ```
 
@@ -27,4 +27,4 @@
 
 ## Notes pour le juge
 
-Cette variable est lue mais pas déclarée dans .env.example (UNDECL). Une seule référence dans le code.
+Schéma Prisma unique : packages/db/schema.prisma, model Member, champ role String.

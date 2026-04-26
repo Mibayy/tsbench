@@ -1,30 +1,32 @@
-# TASK-019 — extract-constant
+# TASK-019 -- fix-buggy-paginate
 
-**Catégorie** : edit
-**Difficulté** : medium
-**Artefact(s) lié(s)** : BREAK-006
+**Categorie** : edit
+**Difficulte** : medium
+**Artefact(s) lie(s)** : BUG-001
 **Type de scoring** : `edit_quality`
 
-## Prompt (envoyé à l'agent)
+## Prompt (envoye a l'agent)
 
-> Plusieurs modules utilisent le nombre magique `20` comme taille de page par défaut. Extrais-le dans une constante `DEFAULT_PAGE_SIZE` centralisée et mets à jour tous les usages.
+> La fonction `buggy_paginate` dans `apps/api/utils/buggy_pagination.py` contient un off-by-one : elle retourne 11 items au lieu de 10. Le bug est dans le calcul de `end`. Corrige-la en utilisant replace_symbol_source. Inclus le nom exact de la fonction et du fichier dans ta reponse finale.
 
 ## Réponse attendue
 
 ```json
 {
-  "magic_number": 20,
-  "constant_name": "DEFAULT_PAGE_SIZE",
-  "min_files_touched": 2
+  "must_contain": [
+    "buggy_paginate",
+    "buggy_pagination.py",
+    "end"
+  ]
 }
 ```
 
 ## Scoring
 
-- **2** : diff applicable, build/typecheck propre, tous les call sites mis à jour
-- **1** : diff applicable mais un call site oublié ou un import cassé
-- **0** : diff incorrect, ne compile pas, ou effet de bord non demandé
+- **2** : bug corrige correctement (end = start + page_size, sans le +1)
+- **1** : tentative correcte mais code modifie au-dela du necessaire
+- **0** : echec ou pas de modification
 
 ## Notes pour le juge
 
-Concerne apps/api/config.py et apps/api/utils/pagination.py au minimum.
+Teste `replace_symbol_source` avec disallowed Edit/Write. Le bug reel (BUG-001) : `end = start + page_size + 1` devrait etre `end = start + page_size`.

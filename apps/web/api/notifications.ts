@@ -1,5 +1,6 @@
 import { apiClient } from '../lib/apiClient';
 import { fetcher } from '../lib/fetcher';
+import { DEFAULT_PAGE_SIZE } from '../lib/constants';
 
 export interface NotificationsQuery {
   page?: number;
@@ -12,7 +13,7 @@ export interface NotificationsQuery {
 
 const DEFAULT_QUERY: NotificationsQuery = {
   page: 1,
-  pageSize: 20,
+  pageSize: DEFAULT_PAGE_SIZE,
   sortDir: 'asc',
 };
 

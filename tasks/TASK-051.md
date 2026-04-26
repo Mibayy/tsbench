@@ -1,31 +1,38 @@
-# TASK-051 -- entry-points
+# TASK-051 — code-gen-webhook-sender
 
-**Categorie** : navigation
-**Difficulte** : medium
-**Artefact(s) lie(s)** :
+**Catégorie** : code_generation
+**Difficulté** : medium
+**Artefact(s) lié(s)** : —
 **Type de scoring** : `contains_all`
 
-## Prompt (envoye a l'agent)
+## Prompt (envoyé à l'agent)
 
-> Quels sont les points d'entree du projet tsbench ? Identifie les fonctions qui sont des racines du graphe d'appels (appelees mais n'ayant pas d'appelant dans le code).
+> Implémente `send_webhook(url: str, payload: dict, *, secret: str, timeout: float = 5.0) -> dict` dans `packages/utils/webhook.py`. Utilise `requests` (import en haut). Le payload JSON doit être signé HMAC-SHA256 avec `secret`, signature envoyée dans header `X-Signature: sha256=<hex>`. Retourne `{"status": int, "body": str, "error": str | None}`. Capture les `requests.RequestException` → retourne status=0, error=str(e).
 
 ## Réponse attendue
 
 ```json
 {
-  "must_contain": [
-    "main",
-    "create_app"
+  "expected_tokens": [
+    "import requests",
+    "def send_webhook",
+    "hmac.new",
+    "hexdigest",
+    "X-Signature",
+    "sha256=",
+    "timeout",
+    "RequestException",
+    "packages/utils/webhook.py"
   ]
 }
 ```
 
 ## Scoring
 
-- **2** : entry points principaux identifies correctement
-- **1** : >=1 entry point identifie
-- **0** : aucun
+- **2** : ≥ 7/9 tokens
+- **1** : 4-6/9
+- **0** : < 4/9
 
 ## Notes pour le juge
 
-Teste `get_entry_points`. Identification des racines du graphe d'appels du projet.
+Signature = `hmac.new(secret.encode(), json_body, hashlib.sha256).hexdigest()`. Piège : ne pas signer le body sérialisé tel qu'envoyé.

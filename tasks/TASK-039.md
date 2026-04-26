@@ -1,31 +1,30 @@
-# TASK-039 — ts-py-type-mapping
+# TASK-039 — infra-consistency
 
-**Catégorie** : cross-language
+**Catégorie** : infra
 **Difficulté** : hard
 **Artefact(s) lié(s)** : —
-**Type de scoring** : `exact_match`
+**Type de scoring** : `boolean_with_evidence`
 
 ## Prompt (envoyé à l'agent)
 
-> Le type TypeScript `Members` déclaré dans `packages/shared-types/members.ts` correspond à quel modèle Python dans le backend ? Donne le fichier et le nom de la classe.
+> Toutes les variables d'environnement référencées dans les manifests Kubernetes (`infra/k8s/`) sont-elles bien déclarées dans `config/.env.example` ?
 
 ## Réponse attendue
 
 ```json
 {
-  "ts_type": "Members",
-  "ts_file": "packages/shared-types/members.ts",
-  "py_class": "Member",
-  "py_file": "apps/api/models/members.py"
+  "k8s_env_refs_found": [],
+  "note": "les manifests k8s générés ne référencent aucune env var — trivialement cohérent",
+  "expected_answer": "Aucune env var référencée dans k8s/, donc cohérent par vacuité."
 }
 ```
 
 ## Scoring
 
-- **2** : fichier + symbole + ligne (±3) corrects
-- **1** : fichier + symbole corrects, ligne hors tolérance
-- **0** : symbole incorrect ou non trouvé
+- **2** : oui/non correct ET citation des fichiers/symboles en preuve
+- **1** : oui/non correct sans preuve concrète
+- **0** : réponse incorrecte
 
 ## Notes pour le juge
 
-Cross-langage : Token Savior ne suit pas les liens cross-langage, la correspondance est par convention de nom.
+Tâche piège : les k8s YAML générés n'ont pas de env refs. La bonne réponse est 'aucun problème, rien à vérifier'. Hallucination = 0.

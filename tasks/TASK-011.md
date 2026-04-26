@@ -1,35 +1,31 @@
-# TASK-011 — chain-alpha
+# TASK-011 — rename-symbol
 
-**Catégorie** : call_chain
-**Difficulté** : medium
-**Artefact(s) lié(s)** : CHAIN-001
-**Type de scoring** : `chain_match`
+**Catégorie** : edit
+**Difficulté** : hard
+**Artefact(s) lié(s)** : AMBIG-001
+**Type de scoring** : `edit_quality`
 
 ## Prompt (envoyé à l'agent)
 
-> À partir de la fonction `alpha_entry`, retrace la chaîne d'appels complète jusqu'à la fonction feuille (celle qui ne délègue plus à personne).
+> Renomme la fonction `create_user` définie dans `apps/api/ambig/mod1.py` en `create_regular_user`, en mettant à jour tous ses call sites. Attention : une autre fonction du même nom existe dans `apps/api/ambig/mod2.py` — elle ne doit PAS être touchée.
 
 ## Réponse attendue
 
 ```json
 {
-  "chain": [
-    "alpha_entry",
-    "alpha_middle",
-    "alpha_inner",
-    "alpha_leaf"
-  ],
-  "file": "apps/api/chains/alpha.py",
-  "depth": 4
+  "target_file": "apps/api/ambig/mod1.py",
+  "before_symbol": "create_user",
+  "after_symbol": "create_regular_user",
+  "must_not_touch": "apps/api/ambig/mod2.py"
 }
 ```
 
 ## Scoring
 
-- **2** : chaîne complète dans le bon ordre
-- **1** : tous les nœuds corrects mais ordre partiellement faux, ou un nœud manquant
-- **0** : chaîne incorrecte ou incomplète (> 1 manquant)
+- **2** : diff applicable, build/typecheck propre, tous les call sites mis à jour
+- **1** : diff applicable mais un call site oublié ou un import cassé
+- **0** : diff incorrect, ne compile pas, ou effet de bord non demandé
 
 ## Notes pour le juge
 
-Chaîne à 4 niveaux dans apps/api/chains/alpha.py. Ordre important.
+Test de précision sur symbole ambigu. Renommer mod2 est une erreur éliminatoire.

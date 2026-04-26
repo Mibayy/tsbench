@@ -1,31 +1,52 @@
-# TASK-032 — test-selection-unit
+# TASK-032 — breaking-signature
 
-**Catégorie** : testing
-**Difficulté** : easy
-**Artefact(s) lié(s)** : —
-**Type de scoring** : `set_match_strict`
+**Catégorie** : impact
+**Difficulté** : hard
+**Artefact(s) lié(s)** : CALLER-004
+**Type de scoring** : `impact_set`
 
 ## Prompt (envoyé à l'agent)
 
-> Quels fichiers de test couvrent le module `apps/api/services/billing` ?
+> Je compte changer la signature de la fonction `hub_util` dans `packages/utils/targeted.py` pour qu'elle prenne un seul argument `context: dict` au lieu de `payload: dict`. Liste exhaustivement ce qui casse ailleurs dans le projet.
 
 ## Réponse attendue
 
 ```json
 {
-  "expected_test_files": [
-    "tests/test_billing.py"
+  "symbol": "hub_util",
+  "file": "packages/utils/targeted.py",
+  "affected_files": [
+    "apps/api/callers/caller_hub_util_00.py",
+    "apps/api/callers/caller_hub_util_01.py",
+    "apps/api/callers/caller_hub_util_02.py",
+    "apps/api/callers/caller_hub_util_03.py",
+    "apps/api/callers/caller_hub_util_04.py",
+    "apps/api/callers/caller_hub_util_05.py",
+    "apps/api/callers/caller_hub_util_06.py",
+    "apps/api/callers/caller_hub_util_07.py",
+    "apps/api/callers/caller_hub_util_08.py",
+    "apps/api/callers/caller_hub_util_09.py",
+    "apps/api/callers/caller_hub_util_10.py",
+    "apps/api/callers/caller_hub_util_11.py",
+    "apps/api/callers/caller_hub_util_12.py",
+    "apps/api/callers/caller_hub_util_13.py",
+    "apps/api/callers/caller_hub_util_14.py",
+    "apps/api/callers/caller_hub_util_15.py",
+    "apps/api/callers/caller_hub_util_16.py",
+    "apps/api/callers/caller_hub_util_17.py",
+    "apps/api/callers/caller_hub_util_18.py",
+    "apps/api/callers/caller_hub_util_19.py"
   ],
-  "source_module": "apps/api/services/billing.py"
+  "affected_count": 20
 }
 ```
 
 ## Scoring
 
-- **2** : liste exactement égale à la liste attendue (F1 = 1.0)
-- **1** : F1 ≥ 0.75 (un ou deux éléments manquants ou en trop)
-- **0** : F1 < 0.75
+- **2** : liste exhaustive des dépendants (précision + rappel = 1.0)
+- **1** : rappel ≥ 0.75 (quelques oublis tolérés)
+- **0** : rappel < 0.75
 
 ## Notes pour le juge
 
-Un seul test file correspond.
+20 callers — test stress de l'analyse d'impact transitive. Aucun call site ne doit être oublié.

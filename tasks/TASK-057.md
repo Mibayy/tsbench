@@ -1,30 +1,38 @@
-# TASK-057 -- impacted-tests
+# TASK-057 — code-gen-json-diff
 
-**Categorie** : testing
-**Difficulte** : medium
-**Artefact(s) lie(s)** : HEAVY-READ-045
-**Type de scoring** : `set_match_loose`
+**Catégorie** : code_generation
+**Difficulté** : hard
+**Artefact(s) lié(s)** : —
+**Type de scoring** : `contains_all`
 
-## Prompt (envoye a l'agent)
+## Prompt (envoyé à l'agent)
 
-> Quels fichiers de tests seraient impactes si on modifie la fonction `authenticate_user` dans `apps/api/services/auth.py` ? Liste les fichiers de test concernes.
+> Implémente `json_diff(a: dict, b: dict) -> dict` dans `packages/utils/json_diff.py`. Le résultat contient 3 clés : `added` (dans b pas dans a), `removed` (dans a pas dans b), `changed` (présent dans les deux avec valeurs différentes, listé comme `{key: {"before": ..., "after": ...}}`). Supporte la récursion sur dicts imbriqués : si a[k] et b[k] sont tous deux dicts, diff récursif. Les paths imbriqués sont représentés par une clé dotted (ex `"user.name"`).
 
 ## Réponse attendue
 
 ```json
 {
-  "items": [
-    "tests/test_auth.py"
+  "expected_tokens": [
+    "def json_diff",
+    "added",
+    "removed",
+    "changed",
+    "isinstance",
+    "dict",
+    "before",
+    "after",
+    "packages/utils/json_diff.py"
   ]
 }
 ```
 
 ## Scoring
 
-- **2** : test_auth.py identifie
-- **1** : fichier de test lie a auth mentionne
-- **0** : aucun
+- **2** : ≥ 7/9 tokens
+- **1** : 4-6/9
+- **0** : < 4/9
 
 ## Notes pour le juge
 
-Teste `find_impacted_test_files`. D'apres HEAVY-READ-045, `apps/api/routers/auth.py` et `tests/test_auth.py` importent le service auth.
+Récursion sur dict → flattening avec clé dotted. Piège : ne pas traiter le cas `list` (bonus si c'est fait proprement).

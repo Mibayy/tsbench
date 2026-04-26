@@ -1,35 +1,31 @@
-# TASK-041 — explain-billing-module
+# TASK-041 -- changed-symbols-since-ref
 
-**Catégorie** : heavy_read
-**Difficulté** : hard
-**Artefact(s) lié(s)** :
+**Categorie** : git
+**Difficulte** : medium
+**Artefact(s) lie(s)** :
 **Type de scoring** : `contains_all`
 
-## Prompt (envoyé à l'agent)
+## Prompt (envoye a l'agent)
 
-> Explique l'implémentation complète du module `apps/api/services/billing.py`. Liste les fonctions publiques principales (calculate_invoice, apply_discount, charge_customer, refund_payment, list_invoices, void_invoice) avec une phrase sur le rôle de chacune.
+> Quels symboles ont change depuis le commit initial du projet (HEAD~1 ou le premier commit) ? Donne un resume par symbole des changements (ajouts, modifications, suppressions).
 
 ## Réponse attendue
 
 ```json
 {
   "must_contain": [
-    "calculate_invoice",
-    "apply_discount",
-    "charge_customer",
-    "refund_payment",
-    "list_invoices",
-    "void_invoice"
+    "modifi",
+    "fonction"
   ]
 }
 ```
 
 ## Scoring
 
-- **2** : toutes les 6 fonctions publiques mentionnées
-- **1** : ≥3 fonctions mentionnées
-- **0** : <3
+- **2** : liste de symboles changes avec type de changement (added/modified/removed)
+- **1** : quelques symboles mentionnes sans classification
+- **0** : echec
 
 ## Notes pour le juge
 
-Fichier de 648 lignes. Le baseline doit lire le fichier entier via Read ; TS peut utiliser `get_functions` ou `get_file_structure` pour obtenir juste les signatures.
+Teste `get_changed_symbols` ou `get_changed_symbols_since_ref`. Resume symbol-level des changements git.

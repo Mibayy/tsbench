@@ -1,32 +1,32 @@
-# TASK-015 — file-impact
+# TASK-015 -- insert-near-symbol
 
-**Catégorie** : impact
-**Difficulté** : medium
-**Artefact(s) lié(s)** : CYCLE-001
-**Type de scoring** : `set_match_loose`
+**Categorie** : edit
+**Difficulte** : medium
+**Artefact(s) lie(s)** :
+**Type de scoring** : `edit_quality`
 
-## Prompt (envoyé à l'agent)
+## Prompt (envoye a l'agent)
 
-> Je m'apprête à modifier `apps/api/cycles/mod_a.py`. Quels fichiers du projet sont susceptibles d'être affectés en aval (directement ou transitivement) ?
+> Insere une nouvelle fonction `validate_invoice_total(invoice: dict) -> bool` juste apres la fonction `calculate_invoice` dans `apps/api/services/billing.py`. La fonction doit verifier que invoice["total"] > 0 et retourner True/False.
 
 ## Réponse attendue
 
 ```json
 {
-  "source": "apps/api/cycles/mod_a.py",
-  "min_expected_downstream": [
-    "apps/api/cycles/mod_b.py"
-  ],
-  "hint": "cycle présent entre mod_a et mod_b"
+  "must_contain": [
+    "validate_invoice_total",
+    "calculate_invoice",
+    "total"
+  ]
 }
 ```
 
 ## Scoring
 
-- **2** : la réponse contient au moins N éléments corrects parmi ceux attendus
-- **1** : au moins la moitié des éléments attendus sont cités
-- **0** : aucun élément correct
+- **2** : fonction inseree au bon endroit (apres calculate_invoice, ligne ~47) avec le bon contenu
+- **1** : fonction inseree mais position ou contenu incorrect
+- **0** : pas d'insertion
 
 ## Notes pour le juge
 
-Cycle planté : mod_a ↔ mod_b. Le bon agent détecte l'impact circulaire.
+Teste `insert_near_symbol` avec disallowed Edit/Write. calculate_invoice est aux lignes 14-46.

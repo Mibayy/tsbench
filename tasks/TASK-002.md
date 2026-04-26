@@ -1,34 +1,31 @@
-# TASK-002 — find-callers
+# TASK-002 — find-route
 
 **Catégorie** : localisation
-**Difficulté** : medium
-**Artefact(s) lié(s)** : CALLER-002
-**Type de scoring** : `set_match_strict`
+**Difficulté** : easy
+**Artefact(s) lié(s)** : —
+**Type de scoring** : `exact_match`
 
 ## Prompt (envoyé à l'agent)
 
-> Liste tous les endroits qui appellent `small_util`. Je veux une liste exhaustive de fichiers.
+> Quel fichier handle la route `POST /api/billing` dans le backend ?
 
 ## Réponse attendue
 
 ```json
 {
-  "symbol": "small_util",
-  "expected_files": [
-    "apps/api/callers/caller_small_util_00.py",
-    "apps/api/callers/caller_small_util_01.py",
-    "apps/api/callers/caller_small_util_02.py"
-  ],
-  "count": 3
+  "file": "apps/api/routers/billing.py",
+  "handler": "create_billing",
+  "method": "POST",
+  "path": "/api/billing"
 }
 ```
 
 ## Scoring
 
-- **2** : liste exactement égale à la liste attendue (F1 = 1.0)
-- **1** : F1 ≥ 0.75 (un ou deux éléments manquants ou en trop)
-- **0** : F1 < 0.75
+- **2** : fichier + symbole + ligne (±3) corrects
+- **1** : fichier + symbole corrects, ligne hors tolérance
+- **0** : symbole incorrect ou non trouvé
 
 ## Notes pour le juge
 
-3 callers exactement dans apps/api/callers/caller_small_util_*.py. Pas de faux positifs attendus.
+Routes définies dans routers/billing.py via ROUTES.append tuples. Handler 'create_billing'.

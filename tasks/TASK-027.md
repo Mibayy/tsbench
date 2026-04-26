@@ -1,34 +1,31 @@
-# TASK-027 — orphan-env
+# TASK-027 — auth-importers
 
-**Catégorie** : config
-**Difficulté** : easy
-**Artefact(s) lié(s)** : ORPHAN-001, ORPHAN-002, ORPHAN-003, ORPHAN-004
-**Type de scoring** : `set_match_strict`
+**Catégorie** : heavy_read
+**Difficulté** : medium
+**Artefact(s) lié(s)** :
+**Type de scoring** : `list_f1`
 
 ## Prompt (envoyé à l'agent)
 
-> Liste les variables d'environnement déclarées dans les fichiers `.env.example` mais qui ne sont jamais lues dans le code.
+> Quels fichiers Python du projet importent quelque chose depuis `apps.api.services.auth` ? Donne la liste complète des fichiers importateurs.
 
 ## Réponse attendue
 
 ```json
 {
-  "expected_orphans": [
-    "LEGACY_SMTP_HOST",
-    "LEGACY_SMTP_PORT",
-    "UNUSED_FEATURE_FLAG",
-    "OLD_ANALYTICS_TOKEN"
-  ],
-  "count": 4
+  "expected_files": [
+    "apps/api/routers/auth.py",
+    "tests/test_auth.py"
+  ]
 }
 ```
 
 ## Scoring
 
-- **2** : liste exactement égale à la liste attendue (F1 = 1.0)
-- **1** : F1 ≥ 0.75 (un ou deux éléments manquants ou en trop)
-- **0** : F1 < 0.75
+- **2** : les 2 fichiers importateurs cités (recall ≥ 0.95)
+- **1** : 1 fichier sur 2 (recall = 0.5)
+- **0** : aucun fichier correct
 
 ## Notes pour le juge
 
-4 orphans plantés : LEGACY_SMTP_HOST, LEGACY_SMTP_PORT, UNUSED_FEATURE_FLAG, OLD_ANALYTICS_TOKEN
+Vérité-terrain vérifiée par grep sur la fixture : deux fichiers importent `from apps.api.services import auth`. NB : `apps/api/models/__init__.py` importe `from .auth` mais cible `apps/api/models/auth.py` — pas le service — et doit être exclu. Baseline : grep récursif. TS : `get_file_dependents` sur `apps/api/services/auth.py`.

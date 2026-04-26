@@ -1,34 +1,43 @@
-# TASK-008 — callers-exhaustive-3
+# TASK-008 — dead-code-audit
 
-**Catégorie** : dépendants
-**Difficulté** : easy
-**Artefact(s) lié(s)** : CALLER-002
-**Type de scoring** : `set_match_strict`
+**Catégorie** : audit
+**Difficulté** : medium
+**Artefact(s) lié(s)** : DEAD-001, DEAD-002, DEAD-003, DEAD-004, DEAD-005, DEAD-006, DEAD-007, DEAD-008, DEAD-009, DEAD-010, DEAD-011, DEAD-012
+**Type de scoring** : `set_match_loose`
 
 ## Prompt (envoyé à l'agent)
 
-> Donne-moi la liste complète et exhaustive des fichiers qui appellent la fonction `small_util`. Je veux tous les call sites, pas un échantillon.
+> Donne-moi 5 fonctions exportées qui ne sont jamais appelées nulle part dans le projet.
 
 ## Réponse attendue
 
 ```json
 {
-  "symbol": "small_util",
-  "count": 3,
-  "expected_files": [
-    "apps/api/callers/caller_small_util_00.py",
-    "apps/api/callers/caller_small_util_01.py",
-    "apps/api/callers/caller_small_util_02.py"
-  ]
+  "min_count_requested": 5,
+  "all_dead_symbols": [
+    "calculate_legacy_discount",
+    "compute_legacy_tax",
+    "format_legacy_invoice_id",
+    "migrate_v1_session",
+    "deprecated_webhook_signer",
+    "old_csv_exporter",
+    "unused_hash_helper",
+    "unused_validator",
+    "unused_formatter",
+    "legacy_reaper",
+    "orphan_cleaner",
+    "stale_cache_purger"
+  ],
+  "scoring": "au moins 5 symboles parmi all_dead_symbols, 0 faux positif"
 }
 ```
 
 ## Scoring
 
-- **2** : liste exactement égale à la liste attendue (F1 = 1.0)
-- **1** : F1 ≥ 0.75 (un ou deux éléments manquants ou en trop)
-- **0** : F1 < 0.75
+- **2** : la réponse contient au moins N éléments corrects parmi ceux attendus
+- **1** : au moins la moitié des éléments attendus sont cités
+- **0** : aucun élément correct
 
 ## Notes pour le juge
 
-Exactement 3 callers plantés. Test d'exhaustivité — un oubli = F1 < 1.
+12 candidats au total. Liste complète: calculate_legacy_discount, compute_legacy_tax, format_legacy_invoice_id, migrate_v1_session, deprecated_webhook_signer, old_csv_exporter, unused_hash_helper, unused_validator, unused_formatter, legacy_reaper, orphan_cleaner, stale_cache_purger

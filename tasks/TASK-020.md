@@ -1,30 +1,40 @@
-# TASK-020 — move-module
+# TASK-020 — bug-fix-discount-validation
 
-**Catégorie** : edit
-**Difficulté** : hard
-**Artefact(s) lié(s)** : DUP-002
-**Type de scoring** : `edit_quality`
+**Catégorie** : bug_fixing
+**Difficulté** : medium
+**Artefact(s) lié(s)** : —
+**Type de scoring** : `contains_all`
 
 ## Prompt (envoyé à l'agent)
 
-> La fonction `slugify` dans `apps/api/utils/strings.py` devrait logiquement vivre dans `packages/utils/` pour pouvoir être réutilisée. Déplace-la là-bas et corrige tous les imports.
+> La fonction `apply_discount` dans `apps/api/services/billing.py` reçoit un `payload` qui contient (entre autres) une clé `discount_percent` (float). Aujourd'hui elle n'effectue aucune validation sur cette valeur — ce qui laisse passer des pourcentages négatifs ou supérieurs à 100.
+>
+> 1. Identifie le problème précis (quelle valeur n'est pas validée)
+> 2. Écris le bloc de validation à insérer au tout début de la fonction (après la docstring, avant les x_0...)
+> 3. La validation doit lever une `ValidationError` (déjà importée en haut du fichier) si le pourcentage est absent, < 0 ou > 100
+> 4. Indique la ligne d'insertion
 
 ## Réponse attendue
 
 ```json
 {
-  "from_file": "apps/api/utils/strings.py",
-  "to_file": "packages/utils/strings.py",
-  "symbol": "slugify"
+  "expected_tokens": [
+    "discount_percent",
+    "ValidationError",
+    "payload.get",
+    "< 0",
+    "> 100",
+    "apps/api/services/billing.py"
+  ]
 }
 ```
 
 ## Scoring
 
-- **2** : diff applicable, build/typecheck propre, tous les call sites mis à jour
-- **1** : diff applicable mais un call site oublié ou un import cassé
-- **0** : diff incorrect, ne compile pas, ou effet de bord non demandé
+- **2** : ≥ 5/6 tokens présents (bug identifié + fix complet + localisation)
+- **1** : 3-4/6 (bug identifié mais fix partiel)
+- **0** : < 3/6
 
 ## Notes pour le juge
 
-Lié à DUP-002 : il existe déjà un `to_slug` dupliqué dans packages/utils/slug_copy.py — l'agent peut optionnellement le consolider.
+Bug-fix classique nécessitant : lecture de la fonction, compréhension du contrat implicite (discount_percent doit être 0-100), écriture d'une garde. Le prompt donne volontairement un gros indice (le nom `discount_percent`) pour que le vrai test porte sur la précision de la réponse, pas sur la découverte du nom.

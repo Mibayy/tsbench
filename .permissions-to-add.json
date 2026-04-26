@@ -1,0 +1,32 @@
+À coller dans /root/.claude/settings.local.json
+
+Ouvre le fichier :
+  nano /root/.claude/settings.local.json
+
+Trouve la dernière ligne du tableau "allow", qui est :
+  "WebFetch(domain:improvence-theatre.fr)"
+
+Ajoute une virgule à la fin et colle ces lignes juste après (avant le ] fermant) :
+
+      "Bash(bash scripts/smoke_test.sh)",
+      "Bash(bash scripts/smoke_test.sh:*)",
+      "Bash(bash /root/projects/tsbench/scripts/:*)",
+      "Bash(cd /root/projects/tsbench && python3 bench.py:*)",
+      "Bash(cd /root/projects/tsbench && bash:*)",
+      "Bash(python3 bench.py:*)",
+      "Bash(python3 /root/projects/tsbench/bench.py:*)",
+      "Bash(python3 /root/projects/tsbench/:*)",
+      "Bash(tail:*)",
+      "Bash(wc -l /root/projects/tsbench/results/:*)",
+      "Bash(ls /root/projects/tsbench/results/:*)",
+      "Bash(cat /root/projects/tsbench/results/:*)",
+      "Bash(jq:*)"
+
+Sauvegarde (Ctrl+O, Enter, Ctrl+X).
+
+Effet :
+- lancer bench.py et smoke_test.sh sans prompt
+- monitorer les logs (tail, ls, cat, wc) sans prompt
+- parser JSON résultats avec jq sans prompt
+
+Le subprocess interne `claude -p` tourne déjà en --permission-mode bypassPermissions (bench.py:227), donc aucun prompt interne possible côté bench.
